@@ -1,0 +1,17 @@
+---
+const { heading = 'Ready to plan your Kansas City deck project?', text = 'Request a free estimate and ask about project options for your space, material preferences, and timeline.' } = Astro.props;
+---
+
+<section class="section bg-moss text-white">
+  <div class="container grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+    <div>
+      <p class="eyebrow text-stone">DecksRXKC</p>
+      <h2 class="mt-3 font-display text-3xl font-semibold sm:text-4xl">{heading}</h2>
+      <p class="mt-3 max-w-2xl text-white/75">{text}</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a class="btn btn-primary" href="/contact/">Request a Free Deck Estimate</a>
+      <a class="btn btn-secondary" href="/gallery/">View Gallery</a>
+    </div>
+  </div>
+</section>

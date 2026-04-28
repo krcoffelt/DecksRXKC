@@ -1,0 +1,56 @@
+---
+import { gallery } from '../data/site';
+---
+
+<div class="gallery-slideshow overflow-hidden rounded-[1.25rem] bg-charcoal shadow-soft" data-gallery-slideshow>
+  <div class="relative aspect-[16/10] min-h-[320px] bg-charcoal sm:min-h-[520px]">
+    {gallery.map((image, index) => (
+      <figure class:list={['gallery-slide absolute inset-0 transition duration-500', index === 0 ? 'opacity-100' : 'pointer-events-none opacity-0']} data-gallery-slide>
+        <img
+          class="h-full w-full object-cover"
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          loading={index === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+        <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-5 text-sm font-extrabold text-white sm:p-7 sm:text-base">
+          {image.caption}
+        </figcaption>
+      </figure>
+    ))}
+    <div class="absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between">
+      <button class="gallery-prev grid h-11 w-11 place-items-center rounded-full bg-black/70 text-2xl font-bold text-white transition hover:bg-moss" type="button" aria-label="Previous project photo" data-gallery-prev>‹</button>
+      <button class="gallery-next grid h-11 w-11 place-items-center rounded-full bg-black/70 text-2xl font-bold text-white transition hover:bg-moss" type="button" aria-label="Next project photo" data-gallery-next>›</button>
+    </div>
+  </div>
+  <div class="flex items-center justify-between gap-4 bg-white px-5 py-4">
+    <span class="gallery-count text-sm font-extrabold text-charcoal" data-gallery-count>1 / {gallery.length}</span>
+    <a class="text-sm font-extrabold text-moss hover:text-timber" href="/gallery/">View full gallery</a>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-gallery-slideshow]').forEach((slideshow) => {
+    const slides = Array.from(slideshow.querySelectorAll('[data-gallery-slide]'));
+    const count = slideshow.querySelector('[data-gallery-count]');
+    const prev = slideshow.querySelector('[data-gallery-prev]');
+    const next = slideshow.querySelector('[data-gallery-next]');
+    let active = 0;
+
+    const show = (index) => {
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === active;
+        slide.classList.toggle('opacity-100', isActive);
+        slide.classList.toggle('opacity-0', !isActive);
+        slide.classList.toggle('pointer-events-none', !isActive);
+      });
+      if (count) count.textContent = `${active + 1} / ${slides.length}`;
+    };
+
+    prev?.addEventListener('click', () => show(active - 1));
+    next?.addEventListener('click', () => show(active + 1));
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import CTASection from '../../components/CTASection.astro';
+import { areas } from '../../data/areas';
+import { services } from '../../data/services';
+import { breadcrumbSchema } from '../../data/schema';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Service Areas', href: '/service-areas/' }];
+---
+
+<BaseLayout title="Kansas City Deck Builder Service Areas | DecksRXKC" description="DecksRXKC serves Kansas City, Overland Park, Olathe, Lenexa, Shawnee, Leawood, Lee’s Summit, Blue Springs, Liberty, Parkville, and nearby areas." schemas={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="section bg-cream pt-8">
+    <div class="container">
+      <p class="eyebrow">Service Areas</p>
+      <h1 class="section-title mt-3">Deck builder serving Kansas City and surrounding areas.</h1>
+      <p class="lead mt-5 max-w-3xl">Custom deck building, repair, and replacement throughout the Kansas City metro.</p>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {areas.map((area) => <a class="rounded-2xl bg-white p-6 shadow-soft transition hover:-translate-y-1" href={`/service-areas/${area.slug}/`}><h2 class="font-display text-2xl font-semibold text-charcoal">{area.name}</h2></a>)}
+      </div>
+    </div>
+  </section>
+  <section class="section bg-white">
+    <div class="container">
+      <p class="eyebrow">Available Services</p>
+      <h2 class="section-title mt-3">Deck services near you.</h2>
+      <div class="mt-8 flex flex-wrap gap-3">{services.map((service) => <a class="rounded-full bg-cream px-5 py-3 font-bold hover:text-timber" href={`/services/${service.slug}/`}>{service.name}</a>)}</div>
+    </div>
+  </section>
+  <LeadForm />
+  <CTASection />
+</BaseLayout>

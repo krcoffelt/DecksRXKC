@@ -1,0 +1,51 @@
+---
+import { business } from '../data/site';
+import { services } from '../data/services';
+import { areas } from '../data/areas';
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-charcoal text-white">
+  <div class="container grid gap-10 py-14 lg:grid-cols-[1.2fr_2fr]">
+    <div>
+      <a href="/" class="block max-w-[220px]" aria-label="DecksRXKC home">
+        <img src={business.logo} alt="DecksRXKC" width="1222" height="390" loading="lazy" decoding="async" />
+      </a>
+      <p class="mt-4 max-w-md text-white/70">Kansas City deck builder for custom decks, deck replacement, composite decking, wood decks, repairs, railings, stairs, and outdoor living upgrades.</p>
+      <address class="mt-6 not-italic text-white/80">
+        {business.address}<br />
+        <a class="hover:text-white" href={business.phoneHref}>{business.phone}</a><br />
+        <a class="hover:text-white" href={`mailto:${business.email}`}>{business.email}</a>
+      </address>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div>
+        <h2 class="text-sm font-extrabold uppercase tracking-widest text-white">Services</h2>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+          {services.map((service) => <li><a class="hover:text-white" href={`/services/${service.slug}/`}>{service.shortName}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-sm font-extrabold uppercase tracking-widest text-white">Service Areas</h2>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+          {areas.slice(0, 8).map((area) => <li><a class="hover:text-white" href={`/service-areas/${area.slug}/`}>{area.name}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-sm font-extrabold uppercase tracking-widest text-white">Quick Links</h2>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+          <li><a class="hover:text-white" href="/about/">About</a></li>
+          <li><a class="hover:text-white" href="/gallery/">Gallery</a></li>
+          <li><a class="hover:text-white" href="/contact/">Contact</a></li>
+          <li><a class="hover:text-white" href="/privacy-policy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-5">
+    <div class="container flex flex-col gap-2 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {year} DecksRXKC. All rights reserved.</p>
+      <p>Placeholder business details should be verified before launch.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Inter;
+  src: local("Inter");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --header-height: 76px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-ink antialiased;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze;
+}
+
+.container {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+}
+
+.eyebrow {
+  @apply text-sm font-extrabold uppercase tracking-[0.14em] text-moss;
+}
+
+.eyebrow-on-dark {
+  @apply inline-flex rounded-full bg-moss px-3 py-1.5 text-white shadow-sm;
+}
+
+.btn {
+  @apply inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-extrabold transition;
+}
+
+.btn-primary {
+  @apply bg-bronze text-white shadow-lg shadow-bronze/20 hover:bg-timber;
+}
+
+.btn-secondary {
+  @apply border border-moss bg-moss text-white shadow-lg shadow-moss/20 hover:border-white hover:bg-white hover:text-charcoal;
+}
+
+.btn-outline {
+  @apply border border-charcoal/15 bg-white text-charcoal hover:border-bronze hover:text-timber;
+}
+
+.section {
+  @apply py-16 sm:py-20 lg:py-24;
+}
+
+.section-title {
+  @apply font-display text-3xl font-black leading-tight text-charcoal sm:text-4xl lg:text-5xl;
+}
+
+.lead {
+  @apply text-lg leading-8 text-ink/75;
+}
+
+.prose-copy p {
+  @apply mb-5 leading-8 text-ink/75;
+}
+
+.mobile-panel {
+  transform: translateY(-120%);
+  transition: transform 180ms ease;
+}
+
+.menu-open .mobile-panel {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

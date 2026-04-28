@@ -1,0 +1,13 @@
+---
+import { gallery } from '../data/site';
+const { limit = gallery.length } = Astro.props;
+---
+
+<div class="grid gap-5 md:grid-cols-2">
+  {gallery.slice(0, limit).map((image, index) => (
+    <figure class="group overflow-hidden rounded-2xl bg-white shadow-soft">
+      <img class="aspect-[4/3] w-full object-cover transition duration-300 group-hover:scale-[1.03]" src={image.src} alt={image.alt} width={image.width} height={image.height} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+      <figcaption class="px-5 py-4 text-sm font-bold text-charcoal">{image.caption}</figcaption>
+    </figure>
+  ))}
+</div>

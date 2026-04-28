@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTASection from '../components/CTASection.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { breadcrumbSchema } from '../data/schema';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'About', href: '/about/' }];
+---
+
+<BaseLayout title="About DecksRXKC | Kansas City Deck Builder" description="Learn about DecksRXKC, a Kansas City deck builder focused on custom deck construction, replacement, repair, composite decks, wood decks, railings, and stairs." schemas={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="section bg-cream pt-8">
+    <div class="container grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="eyebrow">About DecksRXKC</p>
+        <h1 class="section-title mt-3">A Kansas City deck contractor focused on practical, well-built outdoor spaces.</h1>
+        <p class="lead mt-5">DecksRXKC builds, replaces, and repairs decks across Kansas City with clear estimates and practical material guidance.</p>
+      </div>
+      <div class="rounded-2xl bg-white p-8 shadow-soft">
+        <img class="mx-auto max-h-[420px] w-full object-contain" src="/images/decksrxkc-full-logo-transparent.png" alt="DecksRXKC full deck builder logo" width="1226" height="971" loading="eager" decoding="async" />
+      </div>
+    </div>
+  </section>
+  <section class="section bg-white">
+    <div class="container grid gap-8 md:grid-cols-3">
+      {['Local knowledge', 'Material clarity', 'Construction details'].map((item) => <div><h2 class="font-display text-3xl font-semibold text-charcoal">{item}</h2></div>)}
+    </div>
+  </section>
+  <LeadForm />
+  <CTASection />
+</BaseLayout>

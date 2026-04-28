@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { business } from '../data/site';
+import { breadcrumbSchema } from '../data/schema';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact/' }];
+---
+
+<BaseLayout title="Contact DecksRXKC | Free Deck Estimate in Kansas City" description="Contact DecksRXKC for a free deck estimate in Kansas City. Request pricing for custom decks, composite decks, wood decks, deck repair, and deck replacement." schemas={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="section bg-cream pt-8">
+    <div class="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1 class="section-title mt-3">Request a free deck estimate in Kansas City.</h1>
+        <p class="lead mt-5">Share a few details about your project and DecksRXKC will follow up about next steps.</p>
+        <div class="mt-8 rounded-2xl bg-white p-6 shadow-soft">
+          <p class="font-bold">DecksRXKC</p>
+          <p class="mt-2 text-ink/70">{business.address}</p>
+          <p><a class="font-bold text-timber" href={business.phoneHref}>{business.phone}</a></p>
+          <p><a class="font-bold text-timber" href={`mailto:${business.email}`}>{business.email}</a></p>
+        </div>
+      </div>
+      <LeadForm compact heading="Tell us about your deck project" />
+    </div>
+  </section>
+</BaseLayout>

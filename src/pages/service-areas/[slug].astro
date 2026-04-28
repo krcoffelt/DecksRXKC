@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import FAQ from '../../components/FAQ.astro';
+import GalleryGrid from '../../components/GalleryGrid.astro';
+import CTASection from '../../components/CTASection.astro';
+import { areas } from '../../data/areas';
+import { services } from '../../data/services';
+import { faqSchema, breadcrumbSchema } from '../../data/schema';
+
+export function getStaticPaths() {
+  return areas.map((area) => ({ params: { slug: area.slug }, props: { area } }));
+}
+
+const { area } = Astro.props;
+const nearby = areas.filter((item) => item.slug !== area.slug).slice(0, 6);
+const faqs = [
+  [`Do you build decks in ${area.name}?`, `Yes. DecksRXKC serves ${area.name} with custom deck building, composite decking, wood decks, repairs, replacement, railings, and stairs.`],
+  [`What deck services are common in ${area.name}?`, `Common requests include replacement decks, composite upgrades, railing improvements, stair changes, and repairs to aging wood deck surfaces.`],
+  [`Do permits apply in ${area.name}?`, `Permit requirements vary by city and project scope. Homeowners should verify local rules or review likely requirements during the estimate process.`],
+  [`Can I compare composite and wood options?`, `Yes. DecksRXKC can discuss upfront cost, maintenance, appearance, and durability considerations for both composite and wood decking.`]
+];
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Service Areas', href: '/service-areas/' }, { label: area.name, href: `/service-areas/${area.slug}/` }];
+---
+
+<BaseLayout title={area.title} description={area.description} schemas={[faqSchema(faqs), breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="relative overflow-hidden bg-charcoal text-white">
+    <img class="absolute inset-0 h-full w-full object-cover opacity-35" src="/images/kansas-city-deck-stairs-railing-skirt.jpg" alt={`Deck builder project serving ${area.name}`} width="1440" height="1080" />
+    <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/30"></div>
+    <div class="container relative py-20 lg:py-28">
+      <p class="eyebrow eyebrow-on-dark">Local Deck Contractor</p>
+      <h1 class="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight sm:text-6xl">{area.h1}</h1>
+      <p class="mt-6 max-w-2xl text-xl leading-8 text-white/80">{area.focus}.</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a class="btn btn-primary" href="#estimate">Request a Free Deck Estimate</a><a class="btn btn-secondary" href="/services/">View Deck Services</a></div>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div>
+        <p class="eyebrow">Decks in {area.name}</p>
+        <h2 class="section-title mt-3">Deck work suited to {area.name} homes.</h2>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {services.slice(0, 4).map((service) => <a class="rounded-2xl bg-cream p-5 hover:text-timber" href={`/services/${service.slug}/`}><h3 class="font-bold text-charcoal">{service.name}</h3></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container grid gap-10 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Why Homeowners Choose DecksRXKC</p>
+        <h2 class="section-title mt-3">Local guidance without pressure.</h2>
+      </div>
+      <div class="prose-copy">
+        <p>Ask about repair versus replacement, composite versus wood, stair placement, railing styles, and project options.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container">
+      <p class="eyebrow">Gallery Preview</p>
+      <h2 class="section-title mt-3">Deck project inspiration near {area.name}.</h2>
+      <div class="mt-10"><GalleryGrid limit={4} /></div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div><p class="eyebrow">FAQ</p><h2 class="section-title mt-3">{area.name} deck questions.</h2></div>
+      <FAQ faqs={faqs} />
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container">
+      <p class="eyebrow">Nearby Areas</p>
+      <h2 class="section-title mt-3">Deck services across the metro.</h2>
+      <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{nearby.map((near) => <a class="rounded-xl bg-cream px-4 py-3 font-bold hover:text-timber" href={`/service-areas/${near.slug}/`}>{near.name}</a>)}</div>
+    </div>
+  </section>
+
+  <LeadForm heading={`Request a Free Deck Estimate in ${area.name}`} />
+  <CTASection heading={`Planning a deck project in ${area.name}?`} />
+</BaseLayout>

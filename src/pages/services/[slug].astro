@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import GalleryGrid from '../../components/GalleryGrid.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services } from '../../data/services';
+import { areas } from '../../data/areas';
+import { serviceSchema, faqSchema, breadcrumbSchema } from '../../data/schema';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props;
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }, { label: service.name, href: `/services/${service.slug}/` }];
+---
+
+<BaseLayout title={service.title} description={service.description} schemas={[serviceSchema(service), faqSchema(service.faq), breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="relative overflow-hidden bg-charcoal text-white">
+    <img class="absolute inset-0 h-full w-full object-cover opacity-40" src="/images/kansas-city-custom-wood-deck-railing-project.jpg" alt={`${service.name} project by Kansas City deck contractor DecksRXKC`} width="1440" height="1080" />
+    <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40"></div>
+    <div class="container relative py-20 lg:py-28">
+      <p class="eyebrow eyebrow-on-dark">Kansas City Deck Contractor</p>
+      <h1 class="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight sm:text-6xl">{service.h1}</h1>
+      <p class="mt-6 max-w-2xl text-xl leading-8 text-white/80">{service.description}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a class="btn btn-primary" href="#estimate">Request a Free Deck Estimate</a><a class="btn btn-secondary" href="/gallery/">View Deck Gallery</a></div>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div><p class="eyebrow">Local Service</p><h2 class="section-title mt-3">{service.name} for Kansas City homes.</h2></div>
+      <div class="grid gap-4 sm:grid-cols-2">{service.benefits.map((benefit) => <div class="rounded-2xl bg-cream p-5"><h3 class="font-bold text-charcoal">{benefit}</h3></div>)}</div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container grid gap-10 lg:grid-cols-2">
+      <div><p class="eyebrow">What’s Included</p><h2 class="section-title mt-3">A defined scope before work begins.</h2></div>
+      <ul class="grid gap-3">{service.includes.map((item) => <li class="rounded-xl bg-white px-5 py-4 font-bold text-charcoal shadow-sm">{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container">
+      <p class="eyebrow">Project Preview</p>
+      <h2 class="section-title mt-3">Deck inspiration for Kansas City projects.</h2>
+      <div class="mt-10"><GalleryGrid limit={4} /></div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div><p class="eyebrow">FAQ</p><h2 class="section-title mt-3">{service.name} questions.</h2></div>
+      <FAQ faqs={service.faq} />
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container">
+      <p class="eyebrow">Related Areas</p>
+      <h2 class="section-title mt-3">Available across the Kansas City metro.</h2>
+      <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">{areas.slice(0, 10).map((area) => <a class="rounded-xl bg-cream px-4 py-3 font-bold hover:text-timber" href={`/service-areas/${area.slug}/`}>{area.name}</a>)}</div>
+    </div>
+  </section>
+
+  <LeadForm heading={`Request a Free ${service.shortName} Estimate`} />
+  <CTASection heading={`Compare options for your ${service.shortName.toLowerCase()} project.`} />
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { breadcrumbSchema } from '../data/schema';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Gallery', href: '/gallery/' }];
+---
+
+<BaseLayout title="Deck Gallery Kansas City | DecksRXKC" description="View recent DecksRXKC deck project photos, including custom decks, composite decking, wood railing, deck stairs, screened porches, cable railing, and covered outdoor living upgrades." schemas={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="section bg-cream pt-8">
+    <div class="container">
+      <p class="eyebrow">Gallery</p>
+      <h1 class="section-title mt-3">Kansas City deck project gallery.</h1>
+      <p class="lead mt-5 max-w-3xl">Recent DecksRXKC decks, railings, stairs, screened porches, and outdoor living upgrades.</p>
+      <div class="mt-10"><GalleryGrid /></div>
+    </div>
+  </section>
+  <LeadForm heading="Want a deck like this? Request a Free Estimate" />
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services } from '../../data/services';
+import { breadcrumbSchema } from '../../data/schema';
+---
+
+<BaseLayout title="Deck Services in Kansas City | DecksRXKC" description="Explore custom deck building, composite decks, wood decks, deck repair, and deck replacement services from DecksRXKC in Kansas City." schemas={[breadcrumbSchema([{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }])]}>
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }]} />
+  <section class="section bg-cream pt-8">
+    <div class="container">
+      <p class="eyebrow">Deck Services</p>
+      <h1 class="section-title mt-3">Kansas City deck services built around your home.</h1>
+      <p class="lead mt-5 max-w-3xl">Custom decks, composite decks, wood decks, repairs, replacements, railings, and stairs across Kansas City.</p>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service) => (
+          <a class="rounded-2xl bg-white p-7 shadow-soft transition hover:-translate-y-1" href={`/services/${service.slug}/`}>
+            <h2 class="font-display text-3xl font-semibold text-charcoal">{service.name}</h2>
+            <p class="mt-4 leading-7 text-ink/70">{service.description}</p>
+            <span class="mt-5 inline-block font-extrabold text-timber">Learn more</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <LeadForm />
+  <CTASection />
+</BaseLayout>

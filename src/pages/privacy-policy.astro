@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { business } from '../data/site';
+import { breadcrumbSchema } from '../data/schema';
+const crumbs = [{ label: 'Home', href: '/' }, { label: 'Privacy Policy', href: '/privacy-policy/' }];
+---
+
+<BaseLayout title="Privacy Policy | DecksRXKC" description="Privacy policy for the DecksRXKC website and estimate request forms." schemas={[breadcrumbSchema(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="section bg-cream pt-8">
+    <div class="container max-w-3xl">
+      <p class="eyebrow">Privacy</p>
+      <h1 class="section-title mt-3">Privacy Policy</h1>
+      <div class="prose-copy mt-8 rounded-2xl bg-white p-7 shadow-soft">
+        <p>DecksRXKC collects information you submit through website forms, including name, phone, email, city, project type, timeline, and message details.</p>
+        <p>This information is used to respond to estimate requests, discuss deck projects, and provide customer communication. DecksRXKC does not sell personal information.</p>
+        <p>Form submissions may be processed by Netlify Forms as part of website hosting and form handling. Standard hosting logs may collect technical information such as IP address, browser type, and pages visited.</p>
+        <p>To request updates or removal of submitted information, contact <a class="font-bold text-timber" href={`mailto:${business.email}`}>{business.email}</a>.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

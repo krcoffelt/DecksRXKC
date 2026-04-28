@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.playwright-mcp/
+
+.DS_Store
+*.log
+
+# Local design review screenshots/artifacts
+/decksrxkc-*.png
+/DecksRX_01.jpg

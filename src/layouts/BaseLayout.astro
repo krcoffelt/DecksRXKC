@@ -1,0 +1,54 @@
+---
+import '../styles.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business } from '../data/site';
+import { localBusinessSchema } from '../data/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  schemas?: unknown[];
+}
+
+const { title, description, canonical = Astro.url.pathname, image = business.image, schemas = [] } = Astro.props;
+const canonicalUrl = new URL(canonical, business.url).toString();
+const imageUrl = new URL(image, business.url).toString();
+const schemaList = [localBusinessSchema(), ...schemas];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="theme-color" content="#161513" />
+    <link rel="icon" type="image/png" href={business.badgeLogo} />
+    <link rel="apple-touch-icon" href={business.badgeLogo} />
+    <link rel="preload" as="image" href={business.image} />
+    {schemaList.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-5 focus:py-3 focus:font-bold focus:text-charcoal">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <a href={business.phoneHref} class="fixed bottom-4 left-4 right-4 z-40 flex min-h-12 items-center justify-center rounded-full bg-charcoal px-5 text-sm font-extrabold text-white shadow-soft sm:hidden">Call {business.phone}</a>
+  </body>
+</html>

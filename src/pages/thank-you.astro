@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { business } from '../data/site';
+---
+
+<BaseLayout title="Thank You | DecksRXKC" description="Thank you for contacting DecksRXKC.">
+  <section class="section bg-cream">
+    <div class="container max-w-3xl text-center">
+      <p class="eyebrow">Request Received</p>
+      <h1 class="section-title mt-3">Thank you for reaching out.</h1>
+      <p class="lead mt-5">DecksRXKC has received your estimate request. We’ll review your project details and follow up about the next step.</p>
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <a class="btn btn-primary" href={business.phoneHref}>Call {business.phone}</a>
+        <a class="btn btn-outline" href="/services/">View Services</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

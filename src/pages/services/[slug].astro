@@ -19,12 +19,12 @@ const crumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/servi
 
 <BaseLayout title={service.title} description={service.description} schemas={[serviceSchema(service), faqSchema(service.faq), breadcrumbSchema(crumbs)]}>
   <Breadcrumbs items={crumbs} />
-  <section class="relative overflow-hidden bg-charcoal text-white">
-    <img class="absolute inset-0 h-full w-full object-cover opacity-40" src="/images/kansas-city-custom-wood-deck-railing-project.jpg" alt={`${service.name} project by Kansas City deck contractor DecksRXKC`} width="1440" height="1080" />
-    <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40"></div>
-    <div class="container relative py-20 lg:py-28">
+  <section class="page-hero">
+    <img class="page-hero-media" src="/images/kansas-city-custom-wood-deck-railing-project.jpg" alt={`${service.name} project by Kansas City deck contractor DecksRXKC`} width="1440" height="1080" />
+    <div class="page-hero-shade"></div>
+    <div class="page-hero-inner">
       <p class="eyebrow eyebrow-on-dark">Kansas City Deck Contractor</p>
-      <h1 class="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight sm:text-6xl">{service.h1}</h1>
+      <h1 class="page-title">{service.h1}</h1>
       <p class="mt-6 max-w-2xl text-xl leading-8 text-white/80">{service.description}</p>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a class="btn btn-primary" href="#estimate">Request a Free Deck Estimate</a><a class="btn btn-secondary" href="/gallery/">View Deck Gallery</a></div>
     </div>
@@ -33,14 +33,14 @@ const crumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/servi
   <section class="section bg-white">
     <div class="container grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
       <div><p class="eyebrow">Local Service</p><h2 class="section-title mt-3">{service.name} for Kansas City homes.</h2></div>
-      <div class="grid gap-4 sm:grid-cols-2">{service.benefits.map((benefit) => <div class="rounded-2xl bg-cream p-5"><h3 class="font-bold text-charcoal">{benefit}</h3></div>)}</div>
+      <div class="grid gap-x-8 border-y border-charcoal/10 sm:grid-cols-2">{service.benefits.map((benefit) => <div class="border-b border-charcoal/10 py-5 last:border-b-0 sm:even:border-b sm:last:border-b"><h3 class="font-bold text-charcoal">{benefit}</h3></div>)}</div>
     </div>
   </section>
 
   <section class="section bg-cream">
     <div class="container grid gap-10 lg:grid-cols-2">
       <div><p class="eyebrow">What’s Included</p><h2 class="section-title mt-3">A defined scope before work begins.</h2></div>
-      <ul class="grid gap-3">{service.includes.map((item) => <li class="rounded-xl bg-white px-5 py-4 font-bold text-charcoal shadow-sm">{item}</li>)}</ul>
+      <ul class="divide-y divide-charcoal/10 border-y border-charcoal/10">{service.includes.map((item) => <li class="py-4 font-bold text-charcoal">{item}</li>)}</ul>
     </div>
   </section>
 
@@ -63,7 +63,7 @@ const crumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/servi
     <div class="container">
       <p class="eyebrow">Related Areas</p>
       <h2 class="section-title mt-3">Available across the Kansas City metro.</h2>
-      <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">{areas.slice(0, 10).map((area) => <a class="rounded-xl bg-cream px-4 py-3 font-bold hover:text-timber" href={`/service-areas/${area.slug}/`}>{area.name}</a>)}</div>
+      <div class="mt-8 flex flex-wrap gap-2">{areas.slice(0, 10).map((area) => <a class="rounded-full border border-charcoal/10 px-4 py-2 text-sm font-bold hover:border-moss hover:bg-moss hover:text-white" href={`/service-areas/${area.slug}/`}>{area.name}</a>)}</div>
     </div>
   </section>
 

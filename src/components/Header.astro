@@ -2,9 +2,9 @@
 import { business, nav } from '../data/site';
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/10 bg-black text-white">
+<header class="sticky top-0 z-50 border-b border-white/10 bg-charcoal text-white">
   <div class="container flex h-[var(--header-height)] items-center justify-between">
-    <a href="/" class="flex h-14 w-[190px] items-center" aria-label="DecksRXKC home">
+    <a href="/" class="flex h-14 w-[200px] items-center" aria-label="DecksRXKC home">
       <img class="h-auto w-full" src={business.logo} alt="DecksRXKC" width="1222" height="390" decoding="async" />
     </a>
     <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
@@ -18,7 +18,7 @@ import { business, nav } from '../data/site';
       <span class="h-0.5 w-5 bg-white before:block before:h-0.5 before:w-5 before:-translate-y-2 before:bg-white before:content-[''] after:block after:h-0.5 after:w-5 after:translate-y-[6px] after:bg-white after:content-['']"></span>
     </button>
   </div>
-  <div class="mobile-panel fixed inset-x-0 top-[var(--header-height)] z-40 border-t border-white/10 bg-black px-5 pb-7 pt-4 lg:hidden">
+  <div class="mobile-panel fixed inset-x-0 top-[var(--header-height)] z-40 border-t border-white/10 bg-charcoal px-5 pb-7 pt-4 lg:hidden">
     <nav class="grid gap-1" aria-label="Mobile navigation">
       {nav.map((item) => <a class="rounded-xl px-3 py-3 text-base font-bold text-white/90 hover:bg-white/10" href={item.href}>{item.label}</a>)}
     </nav>

@@ -37,33 +37,39 @@ const processSteps = [
 
 <BaseLayout title="Deck Builder Kansas City | Custom Decks, Repair & Replacement | DecksRXKC" description="DecksRXKC is a Kansas City deck builder for custom decks, composite decking, wood decks, deck repair, deck replacement, railings, stairs, and outdoor living upgrades." schemas={[faqSchema(faqs), breadcrumbSchema([{ label: 'Home', href: '/' }])]}>
   <section class="relative min-h-[calc(100svh-var(--header-height))] overflow-hidden bg-charcoal text-white">
-    <img class="absolute inset-0 h-full w-full object-cover opacity-55" src="/images/kansas-city-large-backyard-deck-build.jpg" alt="Large backyard deck built by DecksRXKC in the Kansas City area" width="1440" height="1080" decoding="async" />
-    <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/75 to-charcoal/15"></div>
-    <div class="container relative flex min-h-[calc(100svh-var(--header-height))] items-center py-20">
-      <div class="max-w-3xl">
+    <img class="absolute inset-0 h-full w-full object-cover opacity-70" src="/images/kansas-city-large-backyard-deck-build.jpg" alt="Large backyard deck built by DecksRXKC in the Kansas City area" width="1440" height="1080" decoding="async" />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,6,0.98)_0%,rgba(8,8,6,0.86)_38%,rgba(8,8,6,0.34)_72%,rgba(8,8,6,0.1)_100%)]"></div>
+    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-charcoal to-transparent"></div>
+    <div class="container relative flex min-h-[calc(100svh-var(--header-height))] items-center py-16 sm:py-20">
+      <div class="max-w-4xl">
         <p class="eyebrow eyebrow-on-dark">Kansas City Deck Contractor</p>
-        <h1 class="mt-5 font-display text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">DecksRXKC</h1>
-        <p class="mt-6 max-w-2xl text-xl leading-8 text-white/80">Custom decks, replacement, repair, railings, stairs, and outdoor living upgrades in Kansas City.</p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <h1 class="mt-5 max-w-3xl font-display text-6xl font-black leading-[0.95] text-white sm:text-7xl lg:text-8xl">DecksRXKC</h1>
+        <p class="mt-6 max-w-2xl text-2xl font-semibold leading-9 text-white">Custom decks, replacement, repairs, railings, and stairs built around Kansas City homes.</p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
           <a class="btn btn-primary" href="#estimate">Request a Free Deck Estimate</a>
           <a class="btn btn-secondary" href="/services/">View Our Deck Services</a>
+        </div>
+        <div class="mt-10 grid max-w-2xl gap-4 border-y border-white/15 py-5 text-sm font-bold text-white/75 sm:grid-cols-3">
+          <span>Composite + wood</span>
+          <span>Repair or replacement</span>
+          <span>KC metro service</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-white py-5">
-    <div class="container grid gap-3 text-sm font-extrabold text-charcoal sm:grid-cols-2 lg:grid-cols-4">
-      {['Kansas City owned', 'Free estimates', 'Custom deck design', 'Quality craftsmanship'].map((item) => <div class="rounded-full bg-cream px-5 py-3 text-center">{item}</div>)}
+  <section class="bg-charcoal py-7 text-white">
+    <div class="container grid gap-5 text-sm font-extrabold uppercase tracking-[0.12em] text-white/75 sm:grid-cols-2 lg:grid-cols-4">
+      {['Kansas City owned', 'Free estimates', 'Custom deck design', 'Quality craftsmanship'].map((item) => <div class="border-l-2 border-bronze pl-4">{item}</div>)}
     </div>
   </section>
 
-  <section class="section bg-cream">
+  <section class="section bg-charcoal text-white">
     <div class="container">
-      <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
-        <div class="overflow-hidden rounded-[1.25rem] bg-charcoal shadow-soft">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+        <div class="relative overflow-hidden rounded-[1.25rem] bg-black">
           <img
-            class="h-full min-h-[420px] w-full object-cover opacity-90"
+            class="h-full min-h-[520px] w-full object-cover opacity-90"
             src="/images/kansas-city-composite-deck-cable-railing-stairs.jpg"
             alt="Composite deck stairs and cable railing project by DecksRXKC"
             width="1600"
@@ -71,59 +77,70 @@ const processSteps = [
             loading="lazy"
             decoding="async"
           />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-7">
+            <p class="text-sm font-extrabold uppercase tracking-[0.14em] text-white/75">Real project details</p>
+            <p class="mt-2 max-w-md text-lg font-bold">Decking, railing, stairs, and structure planned together.</p>
+          </div>
         </div>
         <div class="flex flex-col justify-center">
-          <p class="eyebrow">Deck Services</p>
-          <h2 class="section-title mt-3">Built, repaired, and replaced with the right details.</h2>
-          <div class="mt-8 divide-y divide-charcoal/10 border-y border-charcoal/10">
+          <p class="eyebrow text-stone">Deck Services</p>
+          <h2 class="mt-3 max-w-xl font-display text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl">Built, repaired, and replaced with the right details.</h2>
+          <div class="mt-9 divide-y divide-white/10 border-y border-white/10">
             {services.map((service, index) => (
               <a class="group grid gap-3 py-5 transition hover:pl-2 sm:grid-cols-[1fr_auto] sm:items-center" href={`/services/${service.slug}/`}>
                 <span>
-                  <span class="block font-display text-2xl font-semibold text-charcoal group-hover:text-moss">{service.name}</span>
-                  <span class="mt-1 block text-sm leading-6 text-ink/65">{serviceNotes[index]}</span>
+                  <span class="block font-display text-2xl font-black text-white group-hover:text-stone">{service.name}</span>
+                  <span class="mt-1 block text-sm leading-6 text-white/60">{serviceNotes[index]}</span>
                 </span>
-                <span class="hidden rounded-full border border-charcoal/10 px-4 py-2 text-sm font-extrabold text-charcoal transition group-hover:border-moss group-hover:bg-moss group-hover:text-white sm:inline-flex">View</span>
+                <span class="hidden rounded-full border border-white/15 px-4 py-2 text-sm font-extrabold text-white transition group-hover:border-bronze group-hover:bg-bronze sm:inline-flex">View</span>
               </a>
             ))}
           </div>
           <div class="mt-7 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/services/">View All Services</a>
-            <a class="btn btn-outline" href="#estimate">Free Estimate</a>
+            <a class="btn border border-white/20 bg-white/10 text-white hover:bg-white hover:text-charcoal" href="#estimate">Free Estimate</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section bg-white">
-    <div class="container grid gap-12 lg:grid-cols-2 lg:items-center">
+  <section class="section bg-cream">
+    <div class="container grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <div>
         <p class="eyebrow">Why Choose DecksRXKC</p>
-        <h2 class="section-title mt-3">Clear guidance before construction starts.</h2>
-        <p class="lead mt-5">We help you compare layout, materials, stairs, railings, and repair-versus-replacement options.</p>
+        <h2 class="section-title mt-3">Clear scope before construction starts.</h2>
+        <p class="lead mt-5">A better deck starts with layout, access, materials, stairs, and railings planned as one project.</p>
       </div>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {['Local estimates', 'Composite and wood', 'Repair or replacement', 'Railings and stairs'].map((item) => <div class="rounded-2xl border border-charcoal/10 p-5"><h3 class="font-bold text-charcoal">{item}</h3></div>)}
+      <div class="grid gap-8 border-y border-charcoal/10 py-8 sm:grid-cols-2">
+        {[
+          ['Local estimates', 'Kansas City access, grade, and existing conditions reviewed up front.'],
+          ['Composite and wood', 'Material tradeoffs explained in plain language.'],
+          ['Repair or replacement', 'Practical guidance when an older deck needs attention.'],
+          ['Railings and stairs', 'Safety-minded details built into the overall plan.']
+        ].map(([item, note]) => <div><h3 class="font-display text-2xl font-black text-charcoal">{item}</h3><p class="mt-2 text-sm leading-6 text-ink/65">{note}</p></div>)}
       </div>
     </div>
   </section>
 
-  <section class="section bg-cream">
-    <div class="container">
-      <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p class="eyebrow">Project Gallery</p>
-          <h2 class="section-title mt-3">Recent project photos.</h2>
+  <section class="section bg-white">
+    <div class="container grid gap-10 lg:grid-cols-[0.38fr_0.62fr] lg:items-start">
+      <div class="lg:sticky lg:top-28">
+        <p class="eyebrow">Project Gallery</p>
+        <h2 class="section-title mt-3">Finished work, not stock imagery.</h2>
+        <p class="lead mt-5">Real DecksRXKC projects give the page its visual weight and help homeowners picture the finished space.</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="/gallery/">View Gallery</a>
+          <a class="btn btn-outline" href="#estimate">Start Estimate</a>
         </div>
       </div>
       <GallerySlideshow />
     </div>
   </section>
 
-  <section class="section bg-white">
-    <div class="container">
-      <div class="grid overflow-hidden rounded-[1.25rem] bg-charcoal shadow-soft lg:grid-cols-[0.95fr_1.05fr]">
-        <div class="relative min-h-[360px]">
+  <section class="section bg-moss text-white">
+    <div class="container grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div class="relative min-h-[460px] overflow-hidden rounded-[1.25rem]">
           <img
             class="absolute inset-0 h-full w-full object-cover opacity-70"
             src="/images/kansas-city-black-railing-deck-stairs-backyard.jpg"
@@ -136,44 +153,46 @@ const processSteps = [
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           <div class="absolute bottom-0 left-0 p-7 text-white sm:p-9">
             <p class="eyebrow eyebrow-on-dark">Service Areas</p>
-            <h2 class="mt-3 max-w-lg font-display text-4xl font-semibold leading-tight sm:text-5xl">Deck builder serving the Kansas City metro.</h2>
+            <h2 class="mt-3 max-w-lg font-display text-4xl font-black leading-[1.05] sm:text-5xl">Kansas City metro coverage.</h2>
           </div>
         </div>
-        <div class="bg-white p-6 sm:p-8 lg:p-10">
-          <div class="grid gap-3 sm:grid-cols-2">
+        <div>
+          <p class="eyebrow text-stone">Where We Work</p>
+          <h2 class="mt-3 max-w-xl font-display text-4xl font-black leading-[1.05] text-white sm:text-5xl">Deck work across both sides of the state line.</h2>
+          <div class="grid gap-x-6 sm:grid-cols-2">
             {areas.slice(0, 6).map((area) => (
-              <a class="group rounded-xl border border-charcoal/10 px-4 py-4 transition hover:border-moss hover:bg-cream" href={`/service-areas/${area.slug}/`}>
-                <span class="block font-bold text-charcoal group-hover:text-moss">{area.name}</span>
-                <span class="mt-1 block text-xs font-bold uppercase tracking-widest text-ink/45">Deck services</span>
+              <a class="group border-b border-white/15 px-1 py-4 transition hover:pl-2" href={`/service-areas/${area.slug}/`}>
+                <span class="block font-bold text-white">{area.name}</span>
+                <span class="mt-1 block text-xs font-bold uppercase tracking-widest text-white/45">Deck services</span>
               </a>
             ))}
           </div>
-          <div class="mt-6 border-t border-charcoal/10 pt-6">
-            <p class="text-sm font-extrabold uppercase tracking-widest text-moss">Also serving</p>
+          <div class="mt-6 border-t border-white/15 pt-6">
+            <p class="text-sm font-extrabold uppercase tracking-widest text-stone">Also serving</p>
             <div class="mt-4 flex flex-wrap gap-2">
               {areas.slice(6).map((area) => (
-                <a class="rounded-full bg-cream px-4 py-2 text-sm font-bold text-charcoal transition hover:bg-moss hover:text-white" href={`/service-areas/${area.slug}/`}>{area.name}</a>
+                <a class="rounded-full border border-white/20 px-4 py-2 text-sm font-bold text-white transition hover:border-bronze hover:bg-bronze" href={`/service-areas/${area.slug}/`}>{area.name}</a>
               ))}
             </div>
           </div>
           <div class="mt-7 flex flex-wrap gap-3">
             <a class="btn btn-primary" href="/service-areas/">All Service Areas</a>
-            <a class="btn btn-outline" href="/contact/">Check My Area</a>
+            <a class="btn border border-white/25 bg-white/10 text-white hover:bg-white hover:text-charcoal" href="/contact/">Check My Area</a>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
-  <section class="section bg-[#090908] text-white">
+  <section class="section bg-charcoal text-white">
     <div class="container">
-      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div class="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
         <div>
           <p class="eyebrow eyebrow-on-dark">Process</p>
-          <h2 class="mt-3 max-w-xl font-display text-4xl font-semibold leading-tight sm:text-5xl">From estimate to final walkthrough.</h2>
-          <div class="mt-8 overflow-hidden rounded-[1.25rem]">
+          <h2 class="mt-3 max-w-xl font-display text-4xl font-black leading-[1.05] sm:text-5xl">From estimate to final walkthrough.</h2>
+          <p class="mt-5 max-w-xl text-lg leading-8 text-white/65">A simple sequence keeps the project moving without burying homeowners in construction jargon.</p>
+          <div class="mt-8 overflow-hidden rounded-[1.25rem] border border-white/10 lg:mt-10">
             <img
-              class="aspect-[4/3] w-full object-cover"
+              class="aspect-[16/10] w-full object-cover"
               src="/images/kansas-city-covered-deck-framing-addition.jpg"
               alt="Covered deck addition framing during the DecksRXKC build process"
               width="1272"
@@ -184,10 +203,10 @@ const processSteps = [
           </div>
         </div>
         <div class="relative">
-          <div class="overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/20">
-            <ol class="divide-y divide-white/10">
+          <div class="border-y border-white/10">
+            <ol class="grid gap-x-8 sm:grid-cols-2">
               {processSteps.map(([step, note], index) => (
-                <li class="grid gap-4 p-5 sm:grid-cols-[2rem_1fr] sm:items-start">
+                <li class="grid gap-4 border-b border-white/10 py-6 last:border-b-0 sm:grid-cols-[2rem_1fr] sm:items-start">
                   <span class="mt-0.5 grid h-8 w-8 place-items-center rounded-full bg-moss text-sm font-black text-white">{index + 1}</span>
                   <span>
                     <span class="block text-xl font-extrabold text-white">{step}</span>
@@ -206,20 +225,22 @@ const processSteps = [
     </div>
   </section>
 
-  <section class="section bg-white">
-    <div class="container">
-      <p class="eyebrow">Homeowner Feedback</p>
-      <h2 class="section-title mt-3">What homeowners value.</h2>
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
-        {['The estimate was clear and helped us understand composite vs wood before choosing.', 'DecksRXKC gave practical advice on our old deck and helped us decide replacement made more sense.', 'The new stairs and railing made the deck feel cleaner, safer, and easier to use.'].map((quote) => <blockquote class="rounded-2xl bg-cream p-6"><p class="leading-7 text-ink/75">“{quote}”</p><cite class="mt-4 block text-sm font-bold not-italic text-charcoal">Kansas City homeowner</cite></blockquote>)}
-      </div>
-    </div>
-  </section>
-
   <section class="section bg-cream">
-    <div class="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-      <div><p class="eyebrow">FAQ</p><h2 class="section-title mt-3">Deck questions Kansas City homeowners ask first.</h2></div>
-      <FAQ faqs={faqs} />
+    <div class="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+      <div>
+        <p class="eyebrow">Homeowner Feedback</p>
+        <h2 class="section-title mt-3">Straight answers before the build.</h2>
+        <div class="mt-8 grid gap-6 border-y border-charcoal/10 py-6">
+          {['Clear estimate and practical material guidance.', 'Helpful repair versus replacement advice.', 'Cleaner stairs, railings, and everyday access.'].map((quote) => <blockquote><p class="font-display text-2xl font-black leading-tight text-charcoal">“{quote}”</p><cite class="mt-4 block text-sm font-bold not-italic text-ink/55">Kansas City homeowner</cite></blockquote>)}
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2 class="section-title mt-3">Deck questions Kansas City homeowners ask first.</h2>
+        <div class="mt-8">
+          <FAQ faqs={faqs} />
+        </div>
+      </div>
     </div>
   </section>
 

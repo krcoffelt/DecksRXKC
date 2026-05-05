@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  @apply bg-cream text-ink antialiased;
+  @apply bg-white text-ink antialiased;
 }
 
 body.menu-open {
@@ -46,31 +46,64 @@ textarea {
 }
 
 .btn {
-  @apply inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-extrabold transition;
+  @apply inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-extrabold transition duration-200;
 }
 
 .btn-primary {
-  @apply bg-bronze text-white shadow-lg shadow-bronze/20 hover:bg-timber;
+  @apply bg-bronze text-white shadow-lg shadow-bronze/20 hover:-translate-y-0.5 hover:bg-timber;
 }
 
 .btn-secondary {
-  @apply border border-moss bg-moss text-white shadow-lg shadow-moss/20 hover:border-white hover:bg-white hover:text-charcoal;
+  @apply border border-white/20 bg-moss text-white shadow-lg shadow-moss/20 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-charcoal;
 }
 
 .btn-outline {
-  @apply border border-charcoal/15 bg-white text-charcoal hover:border-bronze hover:text-timber;
+  @apply border border-charcoal/15 bg-white text-charcoal hover:-translate-y-0.5 hover:border-bronze hover:text-timber;
 }
 
 .section {
-  @apply py-16 sm:py-20 lg:py-24;
+  @apply py-16 sm:py-20 lg:py-28;
 }
 
 .section-title {
-  @apply font-display text-3xl font-black leading-tight text-charcoal sm:text-4xl lg:text-5xl;
+  @apply font-display text-3xl font-black leading-[1.05] text-charcoal sm:text-4xl lg:text-5xl;
 }
 
 .lead {
   @apply text-lg leading-8 text-ink/75;
+}
+
+.page-hero {
+  @apply relative overflow-hidden bg-charcoal text-white;
+}
+
+.page-hero-media {
+  @apply absolute inset-0 h-full w-full object-cover opacity-45;
+}
+
+.page-hero-shade {
+  @apply absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/25;
+}
+
+.page-hero-inner {
+  @apply container relative py-16 sm:py-20 lg:py-24;
+}
+
+.page-title {
+  @apply mt-4 max-w-4xl font-display text-4xl font-black leading-[1.04] sm:text-5xl lg:text-6xl;
+}
+
+.text-link-list {
+  @apply divide-y divide-charcoal/10 border-y border-charcoal/10;
+}
+
+.text-link-list > a,
+.text-link-list > li {
+  @apply py-4;
+}
+
+.quiet-panel {
+  @apply border-y border-charcoal/10 py-6;
 }
 
 .prose-copy p {

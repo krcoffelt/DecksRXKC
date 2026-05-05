@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        charcoal: '#161513',
+        charcoal: '#080806',
         ink: '#25221e',
         timber: '#9a6235',
-        bronze: '#b37a3f',
-        moss: '#233f63',
-        cream: '#f7f3ec',
+        bronze: '#bd7d38',
+        moss: '#17365d',
+        cream: '#f4eee5',
         stone: '#e8dfd2'
       },
       fontFamily: {

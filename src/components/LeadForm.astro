@@ -5,17 +5,17 @@ const { heading = 'Request a Free Deck Estimate', compact = false } = Astro.prop
 
 <section class={compact ? '' : 'section bg-white'} id="estimate">
   <div class={compact ? '' : 'container'}>
-    <div class="grid gap-8 rounded-[1.5rem] bg-charcoal p-6 text-white shadow-soft sm:p-8 lg:grid-cols-[0.9fr_1.4fr] lg:p-10">
+    <div class="grid gap-8 rounded-[1.25rem] bg-charcoal p-6 text-white shadow-soft ring-1 ring-black/5 sm:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
       <div>
         <p class="eyebrow text-stone">Free Estimate</p>
-        <h2 class="mt-3 font-display text-3xl font-semibold leading-tight sm:text-4xl">{heading}</h2>
-        <p class="mt-4 text-white/70">Tell us what you want built, repaired, or replaced.</p>
-        <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5">
-          <h3 class="font-bold">What happens next?</h3>
-          <ol class="mt-3 space-y-2 text-sm text-white/70">
-            <li>1. We review your project.</li>
-            <li>2. We schedule an estimate.</li>
-            <li>3. You get clear options.</li>
+        <h2 class="mt-3 font-display text-3xl font-black leading-[1.05] sm:text-4xl">{heading}</h2>
+        <p class="mt-4 max-w-md text-white/70">Tell us what you want built, repaired, or replaced.</p>
+        <div class="mt-8 border-y border-white/10 py-5">
+          <h3 class="text-sm font-extrabold uppercase tracking-[0.14em] text-stone">What happens next?</h3>
+          <ol class="mt-4 grid gap-3 text-sm text-white/70">
+            <li><span class="font-bold text-white">Review.</span> We read the project details.</li>
+            <li><span class="font-bold text-white">Schedule.</span> We set up the estimate.</li>
+            <li><span class="font-bold text-white">Options.</span> You get a clear path forward.</li>
           </ol>
           <a class="mt-4 inline-block font-extrabold text-white hover:text-stone" href={business.phoneHref}>Prefer to call? {business.phone}</a>
         </div>
@@ -24,17 +24,17 @@ const { heading = 'Request a Free Deck Estimate', compact = false } = Astro.prop
         <input type="hidden" name="form-name" value="deck-estimate" />
         <p class="hidden"><label>Do not fill this out <input name="bot-field" /></label></p>
         <div class="grid gap-4 sm:grid-cols-2">
-          <label class="grid gap-2 text-sm font-bold">Name<input class="rounded-xl border border-white/15 bg-white px-4 py-3 text-charcoal" name="name" autocomplete="name" required /></label>
-          <label class="grid gap-2 text-sm font-bold">Phone<input class="rounded-xl border border-white/15 bg-white px-4 py-3 text-charcoal" name="phone" type="tel" autocomplete="tel" required /></label>
-          <label class="grid gap-2 text-sm font-bold">Email<input class="rounded-xl border border-white/15 bg-white px-4 py-3 text-charcoal" name="email" type="email" autocomplete="email" required /></label>
-          <label class="grid gap-2 text-sm font-bold">City<input class="rounded-xl border border-white/15 bg-white px-4 py-3 text-charcoal" name="city" autocomplete="address-level2" required /></label>
+          <label class="grid gap-2 text-sm font-bold">Name<input class="rounded-md border border-white/15 bg-white px-4 py-3 text-charcoal" name="name" autocomplete="name" required /></label>
+          <label class="grid gap-2 text-sm font-bold">Phone<input class="rounded-md border border-white/15 bg-white px-4 py-3 text-charcoal" name="phone" type="tel" autocomplete="tel" required /></label>
+          <label class="grid gap-2 text-sm font-bold">Email<input class="rounded-md border border-white/15 bg-white px-4 py-3 text-charcoal" name="email" type="email" autocomplete="email" required /></label>
+          <label class="grid gap-2 text-sm font-bold">City<input class="rounded-md border border-white/15 bg-white px-4 py-3 text-charcoal" name="city" autocomplete="address-level2" required /></label>
         </div>
         <div class="grid gap-4 sm:grid-cols-2">
-          <label class="grid gap-2 text-sm font-bold">Project type<select class="rounded-xl border border-white/15 bg-white px-4 py-3 text-charcoal" name="projectType" required><option value="">Select one</option>{projectTypes.map((type) => <option>{type}</option>)}</select></label>
-          <label class="grid gap-2 text-sm font-bold">Approximate timeline<select class="rounded-xl border border-white/15 bg-white px-4 py-3 text-charcoal" name="timeline" required><option value="">Select one</option>{timelines.map((timeline) => <option>{timeline}</option>)}</select></label>
+          <label class="grid gap-2 text-sm font-bold">Project type<select class="rounded-md border border-white/15 bg-white px-4 py-3 text-charcoal" name="projectType" required><option value="">Select one</option>{projectTypes.map((type) => <option>{type}</option>)}</select></label>
+          <label class="grid gap-2 text-sm font-bold">Approximate timeline<select class="rounded-md border border-white/15 bg-white px-4 py-3 text-charcoal" name="timeline" required><option value="">Select one</option>{timelines.map((timeline) => <option>{timeline}</option>)}</select></label>
         </div>
-        <label class="grid gap-2 text-sm font-bold">Message<textarea class="min-h-32 rounded-xl border border-white/15 bg-white px-4 py-3 text-charcoal" name="message" required></textarea></label>
-        <button class="btn btn-primary w-full sm:w-auto" type="submit">Request a Free Deck Estimate</button>
+        <label class="grid gap-2 text-sm font-bold">Message<textarea class="min-h-32 rounded-md border border-white/15 bg-white px-4 py-3 text-charcoal" name="message" required></textarea></label>
+        <button class="btn btn-primary w-full" type="submit">Request a Free Deck Estimate</button>
       </form>
     </div>
   </div>

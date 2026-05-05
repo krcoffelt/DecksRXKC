@@ -2,9 +2,9 @@
 const { faqs = [] } = Astro.props;
 ---
 
-<div class="divide-y divide-charcoal/10 rounded-2xl bg-white shadow-soft">
+<div class="divide-y divide-charcoal/10 border-y border-charcoal/10">
   {faqs.map(([question, answer]) => (
-    <details class="group p-5 open:bg-white sm:p-6">
+    <details class="group py-5 sm:py-6">
       <summary class="flex cursor-pointer list-none items-center justify-between gap-5 font-bold text-charcoal">
         {question}
         <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-cream text-lg text-timber transition group-open:rotate-45">+</span>

@@ -1,11 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LeadForm from '../components/LeadForm.astro';
-import GallerySlideshow from '../components/GallerySlideshow.astro';
 import FAQ from '../components/FAQ.astro';
 import CTASection from '../components/CTASection.astro';
-import { business } from '../data/site';
-import { services } from '../data/services';
+import { gallery } from '../data/site';
 import { areas } from '../data/areas';
 import { faqSchema, breadcrumbSchema } from '../data/schema';
 
@@ -18,225 +16,308 @@ const faqs = [
   ['What areas around Kansas City do you serve?', 'DecksRXKC serves Kansas City and surrounding areas including Overland Park, Olathe, Lenexa, Shawnee, Leawood, Lee’s Summit, Blue Springs, Liberty, Parkville, and nearby communities.']
 ];
 
-const serviceNotes = [
-  'New builds planned around layout, access, and materials.',
-  'Low-maintenance boards with clean railing details.',
-  'Natural warmth, classic finish, practical value.',
-  'Focused fixes for boards, stairs, and railings.',
-  'Upgrade an aging deck with a better layout.'
+const proofStats = [
+  ['Custom', 'Deck builds'],
+  ['Composite', 'And wood options'],
+  ['Covered', 'And screened options'],
+  ['KC Metro', 'Local service']
+];
+
+const advantages = [
+  ['Complete planning', 'Layout, material, stairs, railings, access, and replacement scope are handled together.'],
+  ['Clear process', 'You know the next step before work begins, from estimate through final walkthrough.'],
+  ['Material guidance', 'Composite and wood options are explained around budget, maintenance, sun, and style.'],
+  ['Repair judgment', 'Focused help deciding when a repair makes sense and when replacement is the better value.'],
+  ['Local fit', 'Deck plans account for Kansas City homes, grades, yards, and neighborhood conditions.'],
+  ['Built for use', 'Details are planned around grilling, seating, traffic flow, stairs, and everyday outdoor living.']
 ];
 
 const processSteps = [
-  ['Request estimate', 'Send the basics.'],
-  ['Site visit', 'We look at access, layout, and existing conditions.'],
-  ['Plan materials', 'Choose deck boards, railing, stairs, and scope.'],
-  ['Build', 'Construction starts with the approved plan.'],
-  ['Walkthrough', 'Review the finished deck together.']
+  ['Request estimate', 'Share your city, project type, timeline, and the deck issues or goals you want reviewed.'],
+  ['On-site consultation', 'We look at access, layout, grade, existing structure, material preferences, and scope.'],
+  ['Plan the build', 'Deck boards, railing, stairs, replacement needs, and final details are organized before work starts.'],
+  ['Build and walkthrough', 'The finished deck is reviewed with you so the project closes with clear expectations.']
+];
+
+const screenedBenefits = [
+  ['Keep Bugs Out', 'Screened spaces help make evenings more comfortable when mosquitoes and insects are active.'],
+  ['Add Usable Space', 'Covered and screened decks create a more flexible outdoor room for relaxing, dining, and hosting.'],
+  ['Built to Match Your Home', 'Posts, trim, railing, stairs, and deck boards are planned around the architecture of the house.']
+];
+
+const buildPaths = [
+  {
+    number: '01',
+    title: 'New Deck Builds',
+    href: '/services/custom-deck-building/',
+    text: 'Custom layouts for composite or wood decks, planned around doors, grade, stairs, railings, and how the backyard actually gets used.'
+  },
+  {
+    number: '02',
+    title: 'Replacement Decks',
+    href: '/services/deck-replacement/',
+    text: 'A cleaner path when the existing deck is aging, undersized, unsafe, or ready for a better material and railing package.'
+  },
+  {
+    number: '03',
+    title: 'Covered Decks',
+    href: '/services/covered-decks/',
+    text: 'Shade, roof coverage, posts, trim, lighting discussions, and deck details coordinated into one outdoor living space.'
+  },
+  {
+    number: '04',
+    title: 'Screened Porches',
+    href: '/services/screened-in-porches/',
+    text: 'Protected outdoor rooms with screening, black railing, warm wood trim, and structure designed to match the home.'
+  }
+];
+
+const secondaryBuilds = [
+  ['Composite Decks', '/services/composite-decks/'],
+  ['Wood Decks', '/services/wood-decks/'],
+  ['Deck Repair', '/services/deck-repair/'],
+  ['Pergolas', '/services/pergolas/'],
+  ['Railings + Stairs', '/services/railings-stairs/'],
+  ['Outdoor Living Upgrades', '/services/outdoor-living-upgrades/']
+];
+
+const testimonials = [
+  ['DecksRXKC helped us understand what could be repaired and what needed to be replaced. The new railing and stairs made the deck feel finished again.', 'Overland Park homeowner'],
+  ['The estimate process was clear, and the composite options were explained without pressure. We finally have a deck that fits the backyard.', 'Kansas City homeowner'],
+  ['They planned the stairs, landing, and railing details together instead of treating them like add-ons. That made a big difference.', 'Shawnee homeowner'],
+  ['We wanted a practical wood deck with a cleaner layout. The project came together exactly the way we hoped.', 'Lee’s Summit homeowner'],
+  ['The team gave us a realistic path for replacing an aging deck and improving the flow from the kitchen to the yard.', 'Olathe homeowner']
 ];
 ---
 
 <BaseLayout title="Deck Builder Kansas City | Custom Decks, Repair & Replacement | DecksRXKC" description="DecksRXKC is a Kansas City deck builder for custom decks, composite decking, wood decks, deck repair, deck replacement, railings, stairs, and outdoor living upgrades." schemas={[faqSchema(faqs), breadcrumbSchema([{ label: 'Home', href: '/' }])]}>
   <section class="relative min-h-[calc(100svh-var(--header-height))] overflow-hidden bg-charcoal text-white">
-    <img class="absolute inset-0 h-full w-full object-cover opacity-70" src="/images/kansas-city-large-backyard-deck-build.jpg" alt="Large backyard deck built by DecksRXKC in the Kansas City area" width="1440" height="1080" decoding="async" />
-    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,6,0.98)_0%,rgba(8,8,6,0.86)_38%,rgba(8,8,6,0.34)_72%,rgba(8,8,6,0.1)_100%)]"></div>
-    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-charcoal to-transparent"></div>
-    <div class="container relative flex min-h-[calc(100svh-var(--header-height))] items-center py-16 sm:py-20">
-      <div class="max-w-4xl">
+    <img class="absolute inset-0 h-full w-full object-cover" src="/images/kansas-city-composite-covered-deck-railing-detail.png" alt="Composite covered deck with black aluminum railing built by DecksRXKC in Kansas City" width="1728" height="1696" decoding="async" />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,12,28,0.92)_0%,rgba(20,28,62,0.66)_42%,rgba(8,9,14,0.18)_100%)]"></div>
+    <div class="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-charcoal to-transparent"></div>
+    <div class="container relative flex min-h-[calc(100svh-var(--header-height))] items-end pb-28 pt-16 sm:pb-16 lg:pb-20">
+      <div class="max-w-5xl animate-[heroIn_700ms_ease-out_both]">
         <p class="eyebrow eyebrow-on-dark">Kansas City Deck Contractor</p>
-        <h1 class="mt-5 max-w-3xl font-display text-6xl font-black leading-[0.95] text-white sm:text-7xl lg:text-8xl">DecksRXKC</h1>
-        <p class="mt-6 max-w-2xl text-2xl font-semibold leading-9 text-white">Custom decks, replacement, repairs, railings, and stairs built around Kansas City homes.</p>
-        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-          <a class="btn btn-primary" href="#estimate">Request a Free Deck Estimate</a>
-          <a class="btn btn-secondary" href="/services/">View Our Deck Services</a>
-        </div>
-        <div class="mt-10 grid max-w-2xl gap-4 border-y border-white/15 py-5 text-sm font-bold text-white/75 sm:grid-cols-3">
-          <span>Composite + wood</span>
-          <span>Repair or replacement</span>
-          <span>KC metro service</span>
+        <h1 class="mt-5 max-w-4xl font-display text-5xl font-black leading-[0.94] text-white sm:text-7xl lg:text-8xl">DecksRXKC</h1>
+        <p class="mt-5 max-w-3xl font-display text-3xl font-black leading-[1.06] text-white sm:text-5xl lg:text-6xl">Repair. Replace. Rebuild. Relax.</p>
+        <p class="mt-6 max-w-2xl text-lg font-semibold leading-8 text-white/80 sm:text-xl">Custom decks, covered decks, screened-in porches, pergolas, railings, stairs, and outdoor living upgrades built for Kansas City homeowners.</p>
+        <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+          <a class="btn btn-primary min-w-64" href="#estimate">Request a Free Deck Estimate</a>
+          <a class="btn btn-secondary min-w-56" href="/gallery/">View Our Work</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-charcoal py-7 text-white">
-    <div class="container grid gap-5 text-sm font-extrabold uppercase tracking-[0.12em] text-white/75 sm:grid-cols-2 lg:grid-cols-4">
-      {['Kansas City owned', 'Free estimates', 'Custom deck design', 'Quality craftsmanship'].map((item) => <div class="border-l-2 border-bronze pl-4">{item}</div>)}
+  <section class="bg-white py-12 sm:py-16">
+    <div class="container grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+      {proofStats.map(([value, label]) => (
+        <div class="border-moss/10 sm:border-l first:border-l-0">
+          <p class="font-display text-3xl font-black leading-none text-moss sm:text-4xl">{value}</p>
+          <p class="mt-2 text-sm font-extrabold uppercase tracking-[0.12em] text-ink/55">{label}</p>
+        </div>
+      ))}
     </div>
   </section>
 
-  <section class="section bg-charcoal text-white">
+  <section class="overflow-hidden bg-cream pt-16 sm:pt-20 lg:pt-24">
+    <div class="container text-center">
+      <p class="eyebrow">About DecksRXKC</p>
+      <h2 class="section-title mx-auto mt-3 max-w-3xl">Who we are</h2>
+      <div class="white-panel mx-auto mt-10 max-w-5xl px-6 py-10 sm:px-10 lg:px-16">
+        <p class="mx-auto max-w-3xl text-xl leading-9 text-ink/80">DecksRXKC helps Kansas City homeowners turn aging, undersized, or unfinished deck spaces into outdoor areas that are easier to use and better matched to the home.</p>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-ink/70">The work starts with practical planning: structure, traffic flow, stairs, railing, materials, and the level of maintenance you want after the project is complete.</p>
+      </div>
+    </div>
+    <div class="mt-12 flex gap-5 overflow-hidden pb-6">
+      {[...gallery.slice(0, 7), ...gallery.slice(0, 3)].map((image, index) => (
+        <figure class="shrink-0 overflow-hidden rounded-lg bg-white shadow-soft" style={`width: ${index % 3 === 0 ? '330px' : '285px'}`}>
+          <img class="aspect-[16/10] w-full object-cover" src={image.src} alt={image.alt} width={image.width} height={image.height} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-charcoal py-20 text-white sm:py-24 lg:py-32">
+    <img class="absolute inset-0 h-full w-full object-cover opacity-62" src="/images/kansas-city-elevated-composite-deck-cable-railing-stairs.png" alt="Elevated composite deck with cable railing and stairs by DecksRXKC" width="1662" height="1246" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,21,34,0.48),rgba(16,21,34,0.92))]"></div>
+    <div class="container relative text-center">
+      <p class="eyebrow eyebrow-on-dark">Why Choose Us</p>
+      <h2 class="mx-auto mt-4 max-w-4xl font-display text-3xl font-black leading-[1.06] text-white sm:text-4xl lg:text-5xl">What sets our deck projects apart</h2>
+      <div class="mx-auto mt-10 grid max-w-6xl overflow-hidden rounded-lg border border-white/20 bg-moss/70 text-left shadow-glow backdrop-blur md:grid-cols-2 lg:grid-cols-3">
+        {advantages.map(([title, text]) => (
+          <div class="border-b border-white/20 p-6 text-center md:border-r lg:min-h-56">
+            <div class="mx-auto grid h-12 w-12 place-items-center rounded-full border-2 border-white/75 text-xl font-black text-white">+</div>
+            <h3 class="mt-5 font-display text-xl font-black leading-tight text-white sm:text-2xl">{title}</h3>
+            <p class="mt-3 text-sm leading-7 text-white/70">{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section scroll-mt-[var(--header-height)] bg-white" id="what-we-build">
     <div class="container">
-      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-        <div class="relative overflow-hidden rounded-[1.25rem] bg-black">
+      <div class="max-w-4xl">
+        <p class="eyebrow">What We Build</p>
+        <h2 class="section-title mt-3">A focused path to the right outdoor space.</h2>
+        <p class="lead mt-5 max-w-3xl">Choose the kind of project you are really planning. The estimate process can handle the details underneath it: materials, stairs, railings, coverage, screens, repairs, and timing.</p>
+      </div>
+
+      <div class="mt-12 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
+        <figure class="group relative min-h-[520px] overflow-hidden rounded-lg bg-charcoal shadow-soft">
           <img
-            class="h-full min-h-[520px] w-full object-cover opacity-90"
-            src="/images/kansas-city-composite-deck-cable-railing-stairs.jpg"
-            alt="Composite deck stairs and cable railing project by DecksRXKC"
-            width="1600"
-            height="1215"
+            class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
+            src="/images/kansas-city-elevated-composite-deck-cable-railing-stairs.png"
+            alt="Elevated composite deck with stairs and black railing by DecksRXKC"
+            width="1662"
+            height="1246"
             loading="lazy"
             decoding="async"
           />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-7">
-            <p class="text-sm font-extrabold uppercase tracking-[0.14em] text-white/75">Real project details</p>
-            <p class="mt-2 max-w-md text-lg font-bold">Decking, railing, stairs, and structure planned together.</p>
-          </div>
-        </div>
-        <div class="flex flex-col justify-center">
-          <p class="eyebrow text-stone">Deck Services</p>
-          <h2 class="mt-3 max-w-xl font-display text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl">Built, repaired, and replaced with the right details.</h2>
-          <div class="mt-9 divide-y divide-white/10 border-y border-white/10">
-            {services.map((service, index) => (
-              <a class="group grid gap-3 py-5 transition hover:pl-2 sm:grid-cols-[1fr_auto] sm:items-center" href={`/services/${service.slug}/`}>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/82 via-black/18 to-transparent"></div>
+          <figcaption class="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+            <p class="text-xs font-black uppercase tracking-[0.22em] text-white/60">Project planning</p>
+            <p class="mt-3 max-w-lg font-display text-2xl font-black leading-tight text-white sm:text-3xl">Decking, stairs, railings, and coverage planned as one system.</p>
+          </figcaption>
+        </figure>
+
+        <div class="flex flex-col justify-between">
+          <div class="divide-y divide-moss/10 border-y border-moss/10">
+            {buildPaths.map((item) => (
+              <a class="group grid gap-5 py-7 transition hover:bg-cream/70 sm:grid-cols-[4.5rem_1fr_auto] sm:px-4" href={item.href}>
+                <span class="font-display text-2xl font-black text-bronze">{item.number}</span>
                 <span>
-                  <span class="block font-display text-2xl font-black text-white group-hover:text-stone">{service.name}</span>
-                  <span class="mt-1 block text-sm leading-6 text-white/60">{serviceNotes[index]}</span>
+                  <span class="block font-display text-2xl font-black leading-tight text-moss sm:text-3xl">{item.title}</span>
+                  <span class="mt-2 block max-w-2xl text-sm leading-6 text-ink/64">{item.text}</span>
                 </span>
-                <span class="hidden rounded-full border border-white/15 px-4 py-2 text-sm font-extrabold text-white transition group-hover:border-bronze group-hover:bg-bronze sm:inline-flex">View</span>
+                <span class="hidden self-center text-sm font-black uppercase tracking-[0.14em] text-moss/45 transition group-hover:text-moss lg:block">View</span>
               </a>
             ))}
           </div>
-          <div class="mt-7 flex flex-wrap gap-3">
+
+          <div class="mt-8 grid gap-6 border-b border-moss/10 pb-1 sm:grid-cols-[10rem_1fr]">
+            <p class="text-xs font-black uppercase tracking-[0.22em] text-ink/42">Also plan</p>
+            <div class="flex flex-wrap gap-x-5 gap-y-3">
+              {secondaryBuilds.map(([label, href]) => (
+                <a class="text-sm font-black text-moss underline-offset-4 transition hover:text-bronze hover:underline" href={href}>{label}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
             <a class="btn btn-primary" href="/services/">View All Services</a>
-            <a class="btn border border-white/20 bg-white/10 text-white hover:bg-white hover:text-charcoal" href="#estimate">Free Estimate</a>
+            <a class="btn btn-outline" href="#estimate">Request Estimate</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section bg-cream">
-    <div class="container grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-      <div>
-        <p class="eyebrow">Why Choose DecksRXKC</p>
-        <h2 class="section-title mt-3">Clear scope before construction starts.</h2>
-        <p class="lead mt-5">A better deck starts with layout, access, materials, stairs, and railings planned as one project.</p>
+  <section class="relative overflow-hidden bg-charcoal text-white">
+    <div class="grid min-h-[680px] lg:grid-cols-[0.56fr_0.44fr]">
+      <div class="relative min-h-[360px]">
+        <img class="absolute inset-0 h-full w-full object-cover" src="/images/kansas-city-screened-porch-wood-trim-black-screen.png" alt="Screened porch with wood trim and black screen panels built by DecksRXKC" width="1584" height="1258" loading="lazy" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
       </div>
-      <div class="grid gap-8 border-y border-charcoal/10 py-8 sm:grid-cols-2">
-        {[
-          ['Local estimates', 'Kansas City access, grade, and existing conditions reviewed up front.'],
-          ['Composite and wood', 'Material tradeoffs explained in plain language.'],
-          ['Repair or replacement', 'Practical guidance when an older deck needs attention.'],
-          ['Railings and stairs', 'Safety-minded details built into the overall plan.']
-        ].map(([item, note]) => <div><h3 class="font-display text-2xl font-black text-charcoal">{item}</h3><p class="mt-2 text-sm leading-6 text-ink/65">{note}</p></div>)}
+      <div class="relative flex items-center bg-[radial-gradient(circle_at_20%_10%,rgba(193,138,69,0.2),transparent_32%),#050609] px-5 py-16 sm:px-8 lg:px-14">
+        <div class="mx-auto max-w-xl">
+          <p class="eyebrow text-bronze">Covered + Screened</p>
+          <h2 class="mt-4 font-display text-3xl font-black leading-[1.06] text-white sm:text-4xl lg:text-5xl">Screened-in porches built for real outdoor living.</h2>
+          <p class="mt-5 text-lg leading-8 text-white/70">Turn a deck into a more protected outdoor room with screening, coverage, railing, trim, and access planned together.</p>
+          <div class="mt-9 divide-y divide-white/10 border-y border-white/10">
+            {screenedBenefits.map(([title, text], index) => (
+              <div class="grid gap-4 py-5 sm:grid-cols-[3rem_1fr]">
+                <span class="font-display text-3xl font-black text-bronze">0{index + 1}</span>
+                <span>
+                  <span class="block text-xl font-black text-white">{title}</span>
+                  <span class="mt-1 block text-sm leading-6 text-white/60">{text}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a class="btn bg-bronze text-charcoal hover:-translate-y-0.5 hover:bg-stone" href="/services/screened-in-porches/">Explore Screened Porches</a>
+            <a class="btn btn-secondary" href="/contact/">Book a Free Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-[radial-gradient(circle_at_center,rgba(62,84,154,0.38),#1b244f_45%,#101522_100%)] text-white" id="process">
+    <div class="container">
+      <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div>
+          <p class="eyebrow eyebrow-on-dark">Our Process</p>
+          <h2 class="mt-4 max-w-3xl font-display text-3xl font-black leading-[1.06] text-white sm:text-4xl lg:text-5xl">A clear path from estimate to finished deck.</h2>
+          <p class="mt-5 max-w-xl text-lg leading-8 text-white/70">The process is built to reduce guesswork before construction starts and keep the project focused once it does.</p>
+        </div>
+        <ol class="grid gap-4">
+          {processSteps.map(([step, text], index) => (
+            <li class="grid gap-4 rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur sm:grid-cols-[3rem_1fr]">
+              <span class="grid h-12 w-12 place-items-center rounded-full bg-white text-lg font-black text-moss">{index + 1}</span>
+              <span>
+                <span class="block font-display text-xl font-black text-white sm:text-2xl">{step}</span>
+                <span class="mt-1 block text-sm leading-6 text-white/70">{text}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16 sm:py-20 lg:py-24">
+    <div class="container grid gap-10 lg:grid-cols-[0.36fr_0.64fr] lg:items-start">
+      <div>
+        <p class="eyebrow">Portfolio</p>
+        <h2 class="section-title mt-3">Project photos carry the story.</h2>
+        <p class="lead mt-5">The gallery preview uses deck work with railing, stairs, composite details, screened porches, and replacement-style projects.</p>
+        <a class="btn btn-primary mt-8" href="/gallery/">Open Gallery</a>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {gallery.slice(0, 4).map((image, index) => (
+          <figure class:list={['group relative overflow-hidden rounded-lg bg-charcoal shadow-soft', index === 0 ? 'sm:row-span-2' : '']}>
+            <img class:list={['w-full object-cover transition duration-500 group-hover:scale-[1.03]', index === 0 ? 'h-full min-h-[460px]' : 'aspect-[4/3]']} src={image.src} alt={image.alt} width={image.width} height={image.height} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+            <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-5 pb-5 pt-16 text-sm font-black text-white">{image.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-moss text-white">
+    <div class="container text-center">
+      <p class="eyebrow eyebrow-on-dark">What Homeowners Say</p>
+      <h2 class="mx-auto mt-4 max-w-4xl font-display text-3xl font-black leading-[1.06] text-white sm:text-4xl lg:text-5xl">Kansas City projects should feel personal.</h2>
+      <div class="mt-12 columns-1 gap-6 md:columns-2 lg:columns-3">
+        {testimonials.map(([quote, source], index) => (
+          <blockquote class="mb-6 break-inside-avoid rounded-lg bg-white p-7 text-left text-ink shadow-soft">
+            <p class="text-bronze" aria-label="5 star review">★★★★★</p>
+            <p class="mt-5 text-lg leading-8">"{quote}"</p>
+            <cite class="mt-5 block text-sm font-black not-italic text-moss">{source}</cite>
+          </blockquote>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="section bg-white">
-    <div class="container grid gap-10 lg:grid-cols-[0.38fr_0.62fr] lg:items-start">
-      <div class="lg:sticky lg:top-28">
-        <p class="eyebrow">Project Gallery</p>
-        <h2 class="section-title mt-3">Finished work, not stock imagery.</h2>
-        <p class="lead mt-5">Real DecksRXKC projects give the page its visual weight and help homeowners picture the finished space.</p>
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a class="btn btn-primary" href="/gallery/">View Gallery</a>
-          <a class="btn btn-outline" href="#estimate">Start Estimate</a>
-        </div>
-      </div>
-      <GallerySlideshow />
-    </div>
-  </section>
-
-  <section class="section bg-moss text-white">
-    <div class="container grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-        <div class="relative min-h-[460px] overflow-hidden rounded-[1.25rem]">
-          <img
-            class="absolute inset-0 h-full w-full object-cover opacity-70"
-            src="/images/kansas-city-black-railing-deck-stairs-backyard.jpg"
-            alt="DecksRXKC deck project serving the Kansas City metro"
-            width="1600"
-            height="1159"
-            loading="lazy"
-            decoding="async"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-7 text-white sm:p-9">
-            <p class="eyebrow eyebrow-on-dark">Service Areas</p>
-            <h2 class="mt-3 max-w-lg font-display text-4xl font-black leading-[1.05] sm:text-5xl">Kansas City metro coverage.</h2>
-          </div>
-        </div>
-        <div>
-          <p class="eyebrow text-stone">Where We Work</p>
-          <h2 class="mt-3 max-w-xl font-display text-4xl font-black leading-[1.05] text-white sm:text-5xl">Deck work across both sides of the state line.</h2>
-          <div class="grid gap-x-6 sm:grid-cols-2">
-            {areas.slice(0, 6).map((area) => (
-              <a class="group border-b border-white/15 px-1 py-4 transition hover:pl-2" href={`/service-areas/${area.slug}/`}>
-                <span class="block font-bold text-white">{area.name}</span>
-                <span class="mt-1 block text-xs font-bold uppercase tracking-widest text-white/45">Deck services</span>
-              </a>
-            ))}
-          </div>
-          <div class="mt-6 border-t border-white/15 pt-6">
-            <p class="text-sm font-extrabold uppercase tracking-widest text-stone">Also serving</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              {areas.slice(6).map((area) => (
-                <a class="rounded-full border border-white/20 px-4 py-2 text-sm font-bold text-white transition hover:border-bronze hover:bg-bronze" href={`/service-areas/${area.slug}/`}>{area.name}</a>
-              ))}
-            </div>
-          </div>
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="/service-areas/">All Service Areas</a>
-            <a class="btn border border-white/25 bg-white/10 text-white hover:bg-white hover:text-charcoal" href="/contact/">Check My Area</a>
-          </div>
-        </div>
-    </div>
-  </section>
-
-  <section class="section bg-charcoal text-white">
-    <div class="container">
-      <div class="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-        <div>
-          <p class="eyebrow eyebrow-on-dark">Process</p>
-          <h2 class="mt-3 max-w-xl font-display text-4xl font-black leading-[1.05] sm:text-5xl">From estimate to final walkthrough.</h2>
-          <p class="mt-5 max-w-xl text-lg leading-8 text-white/65">A simple sequence keeps the project moving without burying homeowners in construction jargon.</p>
-          <div class="mt-8 overflow-hidden rounded-[1.25rem] border border-white/10 lg:mt-10">
-            <img
-              class="aspect-[16/10] w-full object-cover"
-              src="/images/kansas-city-covered-deck-framing-addition.jpg"
-              alt="Covered deck addition framing during the DecksRXKC build process"
-              width="1272"
-              height="1236"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
-        <div class="relative">
-          <div class="border-y border-white/10">
-            <ol class="grid gap-x-8 sm:grid-cols-2">
-              {processSteps.map(([step, note], index) => (
-                <li class="grid gap-4 border-b border-white/10 py-6 last:border-b-0 sm:grid-cols-[2rem_1fr] sm:items-start">
-                  <span class="mt-0.5 grid h-8 w-8 place-items-center rounded-full bg-moss text-sm font-black text-white">{index + 1}</span>
-                  <span>
-                    <span class="block text-xl font-extrabold text-white">{step}</span>
-                    <span class="mt-1 block text-sm leading-6 text-white/65">{note}</span>
-                  </span>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a class="btn btn-primary" href="#estimate">Start Your Estimate</a>
-            <a class="btn btn-secondary" href="/gallery/">See Finished Work</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section bg-cream">
-    <div class="container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+    <div class="container grid gap-12 lg:grid-cols-[0.42fr_0.58fr] lg:items-start">
       <div>
-        <p class="eyebrow">Homeowner Feedback</p>
-        <h2 class="section-title mt-3">Straight answers before the build.</h2>
-        <div class="mt-8 grid gap-6 border-y border-charcoal/10 py-6">
-          {['Clear estimate and practical material guidance.', 'Helpful repair versus replacement advice.', 'Cleaner stairs, railings, and everyday access.'].map((quote) => <blockquote><p class="font-display text-2xl font-black leading-tight text-charcoal">“{quote}”</p><cite class="mt-4 block text-sm font-bold not-italic text-ink/55">Kansas City homeowner</cite></blockquote>)}
+        <p class="eyebrow">Service Areas</p>
+        <h2 class="section-title mt-3">Serving both sides of the Kansas City metro.</h2>
+        <p class="lead mt-5">DecksRXKC works with homeowners in Kansas City and surrounding communities.</p>
+        <div class="mt-8 flex flex-wrap gap-2">
+          {areas.map((area) => (
+            <a class="rounded-lg border border-moss/10 px-4 py-2 text-sm font-bold text-moss transition hover:bg-moss hover:text-white" href={`/service-areas/${area.slug}/`}>{area.name}</a>
+          ))}
         </div>
       </div>
       <div>
         <p class="eyebrow">FAQ</p>
-        <h2 class="section-title mt-3">Deck questions Kansas City homeowners ask first.</h2>
+        <h2 class="section-title mt-3">What homeowners ask first.</h2>
         <div class="mt-8">
           <FAQ faqs={faqs} />
         </div>

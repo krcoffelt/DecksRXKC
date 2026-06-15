@@ -2,27 +2,27 @@
 import { business, nav } from '../data/site';
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/10 bg-charcoal text-white">
+<header class="sticky top-0 z-50 bg-black text-white shadow-[0_14px_45px_rgba(0,0,0,0.28)]">
   <div class="container flex h-[var(--header-height)] items-center justify-between">
-    <a href="/" class="flex h-14 w-[200px] items-center" aria-label="DecksRXKC home">
+    <a href="/" class="flex h-14 w-[210px] items-center" aria-label="DecksRXKC home">
       <img class="h-auto w-full" src={business.logo} alt="DecksRXKC" width="1222" height="390" decoding="async" />
     </a>
-    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
-      {nav.map((item) => <a class="text-sm font-semibold text-white/80 transition hover:text-white" href={item.href}>{item.label}</a>)}
+    <nav class="hidden items-center gap-3 lg:flex" aria-label="Primary navigation">
+      {nav.map((item) => <a class="nav-pill" href={item.href}>{item.label}</a>)}
     </nav>
-    <div class="hidden items-center gap-3 lg:flex">
-      <a class="text-sm font-bold text-white/85 hover:text-white" href={business.phoneHref}>{business.phone}</a>
-      <a class="btn btn-primary" href="/contact/">Free Estimate</a>
+    <div class="hidden items-center gap-4 lg:flex">
+      <a class="text-sm font-extrabold text-white/80 hover:text-white" href={business.phoneHref}>{business.phone}</a>
+      <a class="rounded-lg bg-white px-6 py-3 text-sm font-black text-moss shadow-sm transition hover:-translate-y-0.5 hover:bg-stone" href="/contact/">Get Started</a>
     </div>
-    <button class="menu-toggle inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 lg:hidden" aria-label="Open menu" aria-expanded="false">
+    <button class="menu-toggle inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/25 lg:hidden" aria-label="Open menu" aria-expanded="false">
       <span class="h-0.5 w-5 bg-white before:block before:h-0.5 before:w-5 before:-translate-y-2 before:bg-white before:content-[''] after:block after:h-0.5 after:w-5 after:translate-y-[6px] after:bg-white after:content-['']"></span>
     </button>
   </div>
-  <div class="mobile-panel fixed inset-x-0 top-[var(--header-height)] z-40 border-t border-white/10 bg-charcoal px-5 pb-7 pt-4 lg:hidden">
+  <div class="mobile-panel fixed inset-x-0 top-[var(--header-height)] z-40 border-t border-white/10 bg-black px-5 pb-7 pt-4 lg:hidden">
     <nav class="grid gap-1" aria-label="Mobile navigation">
-      {nav.map((item) => <a class="rounded-xl px-3 py-3 text-base font-bold text-white/90 hover:bg-white/10" href={item.href}>{item.label}</a>)}
+      {nav.map((item) => <a class="px-1 py-3 text-base font-bold text-white transition hover:text-bronze" href={item.href}>{item.label}</a>)}
     </nav>
-    <a class="btn btn-primary mt-4 w-full" href="/contact/">Request a Free Deck Estimate</a>
+    <a class="mt-4 flex min-h-12 items-center justify-center rounded-lg bg-white px-6 text-sm font-black text-moss" href="/contact/">Get Started</a>
   </div>
 </header>
 

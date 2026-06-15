@@ -41,6 +41,27 @@ export function serviceSchema(service: { name: string; description: string }) {
   };
 }
 
+export function areaServiceSchema(area: { name: string; h1: string; description: string; keywordFocus?: string[] }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: area.h1,
+    description: area.description,
+    provider: {
+      '@type': ['LocalBusiness', 'HomeAndConstructionBusiness', 'Contractor'],
+      name: business.name,
+      telephone: business.phone,
+      url: business.url
+    },
+    areaServed: {
+      '@type': 'City',
+      name: area.name
+    },
+    serviceType: ['Deck building', 'Deck repair', 'Deck replacement', 'Composite decking', 'Covered decks', 'Screened porches'],
+    keywords: area.keywordFocus?.join(', ')
+  };
+}
+
 export function faqSchema(faqs: string[][]) {
   return {
     '@context': 'https://schema.org',

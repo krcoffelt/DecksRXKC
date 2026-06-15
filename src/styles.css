@@ -10,7 +10,7 @@
 
 :root {
   color-scheme: light;
-  --header-height: 76px;
+  --header-height: 84px;
 }
 
 html {
@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  @apply bg-white text-ink antialiased;
+  @apply bg-cream text-ink antialiased;
 }
 
 body.menu-open {
@@ -38,27 +38,27 @@ textarea {
 }
 
 .eyebrow {
-  @apply text-sm font-extrabold uppercase tracking-[0.14em] text-moss;
+  @apply text-sm font-extrabold uppercase tracking-[0.28em] text-moss;
 }
 
 .eyebrow-on-dark {
-  @apply inline-flex rounded-full bg-moss px-3 py-1.5 text-white shadow-sm;
+  @apply inline-flex rounded-full bg-white/10 px-3 py-1.5 text-white shadow-sm ring-1 ring-white/20;
 }
 
 .btn {
-  @apply inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-extrabold transition duration-200;
+  @apply inline-flex min-h-12 items-center justify-center rounded-lg px-7 text-sm font-extrabold transition duration-200;
 }
 
 .btn-primary {
-  @apply bg-bronze text-white shadow-lg shadow-bronze/20 hover:-translate-y-0.5 hover:bg-timber;
+  @apply bg-moss text-white shadow-lg shadow-moss/20 hover:-translate-y-0.5 hover:bg-navy;
 }
 
 .btn-secondary {
-  @apply border border-white/20 bg-moss text-white shadow-lg shadow-moss/20 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-charcoal;
+  @apply border-2 border-white/70 bg-black/20 text-white shadow-lg shadow-black/10 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-charcoal;
 }
 
 .btn-outline {
-  @apply border border-charcoal/15 bg-white text-charcoal hover:-translate-y-0.5 hover:border-bronze hover:text-timber;
+  @apply border-2 border-moss bg-white text-moss hover:-translate-y-0.5 hover:bg-moss hover:text-white;
 }
 
 .section {
@@ -66,11 +66,11 @@ textarea {
 }
 
 .section-title {
-  @apply font-display text-3xl font-black leading-[1.05] text-charcoal sm:text-4xl lg:text-5xl;
+  @apply font-display text-3xl font-black leading-[1.06] text-moss sm:text-4xl lg:text-5xl;
 }
 
 .lead {
-  @apply text-lg leading-8 text-ink/75;
+  @apply text-base leading-7 text-ink/70 sm:text-lg sm:leading-8;
 }
 
 .page-hero {
@@ -82,7 +82,7 @@ textarea {
 }
 
 .page-hero-shade {
-  @apply absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/25;
+  @apply absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/25;
 }
 
 .page-hero-inner {
@@ -90,7 +90,43 @@ textarea {
 }
 
 .page-title {
-  @apply mt-4 max-w-4xl font-display text-4xl font-black leading-[1.04] sm:text-5xl lg:text-6xl;
+  @apply mt-4 max-w-4xl font-display text-3xl font-black leading-[1.06] sm:text-5xl lg:text-6xl;
+}
+
+h1,
+h2,
+h3,
+.section-title,
+.page-title {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.nav-pill {
+  @apply px-2 py-3 text-sm font-extrabold text-white transition hover:text-bronze;
+}
+
+.white-panel {
+  @apply rounded-lg bg-white text-ink shadow-glow ring-1 ring-black/5;
+}
+
+.image-veil {
+  @apply absolute inset-0 bg-[linear-gradient(180deg,rgba(12,18,35,0.34)_0%,rgba(12,18,35,0.18)_35%,rgba(9,11,17,0.82)_100%)];
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .text-link-list {

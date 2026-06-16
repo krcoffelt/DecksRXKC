@@ -1,9 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
+  AlertCircle,
   ArrowUpRight,
+  CheckCircle,
   Hammer,
   Home,
+  LoaderCircle,
   Menu,
   MessageSquare,
   ShieldCheck,
@@ -11,7 +14,9 @@ import {
   Trees,
   X,
 } from 'lucide-react'
+import type { FormEvent } from 'react'
 import { useState } from 'react'
+import { isSupabaseConfigured, supabase } from '../lib/supabase'
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
@@ -88,6 +93,40 @@ const values = [
   },
 ]
 
+const projectTypes = [
+  'Not sure yet',
+  'Custom deck build',
+  'Composite deck',
+  'Wood deck',
+  'Covered deck',
+  'Screened-in deck',
+  'Deck repair',
+  'Deck replacement',
+  'Railings or stairs',
+  'Outdoor living space',
+]
+
+const timelines = [
+  'Flexible',
+  'As soon as possible',
+  'Within 1-3 months',
+  'Within 3-6 months',
+  'Planning for later this year',
+]
+
+const initialLeadForm = {
+  name: '',
+  phone: '',
+  email: '',
+  city: '',
+  projectType: projectTypes[0],
+  timeline: timelines[0],
+  message: '',
+}
+
+type LeadFormState = typeof initialLeadForm
+type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 },
@@ -101,6 +140,11 @@ const compactLightButton =
 
 const outlineButton =
   'inline-flex min-h-14 items-center justify-center rounded-full border border-white/55 px-8 text-base font-black text-white transition hover:border-white hover:bg-white hover:text-charcoal'
+
+const fieldClass =
+  'mt-2 min-h-12 w-full rounded-2xl border border-white/12 bg-white px-4 text-base font-semibold text-charcoal shadow-none outline-none transition placeholder:text-charcoal/45 focus:border-soft-beige focus:ring-4 focus:ring-soft-beige/25'
+
+const labelClass = 'text-xs font-black uppercase tracking-[0.14em] text-soft-beige'
 
 function LandingPage() {
   return (
@@ -132,11 +176,12 @@ function Hero() {
         transition={{ duration: 0.65, ease: 'easeOut' }}
         className="relative z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8"
       >
-        <a href="#top" className="flex items-center gap-3" aria-label="DecksRXKC home">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-soft-beige/70 text-soft-beige">
-            <Home className="h-5 w-5" aria-hidden="true" />
-          </span>
-          <span className="text-xl font-black tracking-tight sm:text-2xl">DecksRXKC</span>
+        <a href="#top" className="flex shrink-0 items-center" aria-label="DecksRXKC home">
+          <img
+            className="h-11 w-auto max-w-[180px] object-contain sm:h-14 sm:max-w-[220px]"
+            src="/images/decksrxkc-header-logo-cropped.png"
+            alt="DecksRXKC"
+          />
         </a>
 
         <nav className="hidden items-center gap-7 text-sm font-bold text-white/85 lg:flex" aria-label="Primary navigation">
@@ -481,23 +526,204 @@ function Testimonials() {
                 Tell us about your project and we will help you understand the best options
                 for your space, budget, and timeline.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <a className={lightButton} href="tel:+19132056531">
-                  Get a Free Quote
-                  <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
-                </a>
-                <p className="text-sm font-bold text-white/62">Serving Kansas City and surrounding areas.</p>
-              </div>
+              <p className="mt-8 text-sm font-bold text-white/62">
+                Serving Kansas City and surrounding areas.
+              </p>
             </div>
-            <img
-              className="h-72 w-full object-cover lg:h-full"
-              src="/images/kansas-city-elevated-composite-deck-cable-railing-stairs.png"
-              alt="Kansas City composite deck with stairs and railings"
-            />
+            <LeadForm />
           </div>
         </motion.div>
       </div>
     </section>
+  )
+}
+
+function LeadForm() {
+  const [form, setForm] = useState<LeadFormState>(initialLeadForm)
+  const [submitState, setSubmitState] = useState<SubmitState>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  function updateField<Field extends keyof LeadFormState>(field: Field, value: LeadFormState[Field]) {
+    setForm((current) => ({ ...current, [field]: value }))
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setErrorMessage('')
+
+    if (!isSupabaseConfigured || !supabase) {
+      setSubmitState('error')
+      setErrorMessage('Supabase is not configured yet. Add the VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.')
+      return
+    }
+
+    setSubmitState('submitting')
+
+    const { error } = await supabase.from('quote_requests').insert({
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim() || null,
+      city: form.city.trim(),
+      project_type: form.projectType,
+      timeline: form.timeline,
+      message: form.message.trim() || null,
+      source: 'decksrxkc-landing-page',
+      user_agent: typeof navigator === 'undefined' ? null : navigator.userAgent,
+      page_path: typeof window === 'undefined' ? '/' : window.location.pathname,
+    })
+
+    if (error) {
+      setSubmitState('error')
+      setErrorMessage(error.message)
+      return
+    }
+
+    setForm(initialLeadForm)
+    setSubmitState('success')
+  }
+
+  return (
+    <form
+      className="border-t border-white/12 bg-black/18 p-6 sm:p-8 lg:border-l lg:border-t-0 lg:p-10"
+      onSubmit={handleSubmit}
+    >
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label>
+          <span className={labelClass}>Name</span>
+          <input
+            className={fieldClass}
+            name="name"
+            value={form.name}
+            onChange={(event) => updateField('name', event.target.value)}
+            placeholder="Your name"
+            autoComplete="name"
+            required
+          />
+        </label>
+
+        <label>
+          <span className={labelClass}>Phone</span>
+          <input
+            className={fieldClass}
+            name="phone"
+            type="tel"
+            value={form.phone}
+            onChange={(event) => updateField('phone', event.target.value)}
+            placeholder="(913) 555-0123"
+            autoComplete="tel"
+            required
+          />
+        </label>
+
+        <label>
+          <span className={labelClass}>Email</span>
+          <input
+            className={fieldClass}
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={(event) => updateField('email', event.target.value)}
+            placeholder="you@example.com"
+            autoComplete="email"
+          />
+        </label>
+
+        <label>
+          <span className={labelClass}>City</span>
+          <input
+            className={fieldClass}
+            name="city"
+            value={form.city}
+            onChange={(event) => updateField('city', event.target.value)}
+            placeholder="Kansas City"
+            autoComplete="address-level2"
+            required
+          />
+        </label>
+
+        <label>
+          <span className={labelClass}>Project Type</span>
+          <select
+            className={`${fieldClass} appearance-none`}
+            name="projectType"
+            value={form.projectType}
+            onChange={(event) => updateField('projectType', event.target.value)}
+            required
+          >
+            {projectTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          <span className={labelClass}>Timeline</span>
+          <select
+            className={`${fieldClass} appearance-none`}
+            name="timeline"
+            value={form.timeline}
+            onChange={(event) => updateField('timeline', event.target.value)}
+            required
+          >
+            {timelines.map((timeline) => (
+              <option key={timeline} value={timeline}>
+                {timeline}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="sm:col-span-2">
+          <span className={labelClass}>Project Notes</span>
+          <textarea
+            className={`${fieldClass} min-h-32 py-3 leading-7`}
+            name="message"
+            value={form.message}
+            onChange={(event) => updateField('message', event.target.value)}
+            placeholder="Tell us what you want to build, repair, replace, or screen in."
+          />
+        </label>
+      </div>
+
+      {submitState === 'success' ? (
+        <div className="mt-5 flex items-start gap-3 rounded-2xl border border-white/14 bg-white/10 p-4 text-sm font-bold leading-6 text-white">
+          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-soft-beige" aria-hidden="true" />
+          Your request was sent. We will follow up shortly.
+        </div>
+      ) : null}
+
+      {submitState === 'error' ? (
+        <div className="mt-5 flex items-start gap-3 rounded-2xl border border-red-200/30 bg-red-500/10 p-4 text-sm font-bold leading-6 text-red-100">
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+          {errorMessage || 'Something went wrong. Please call us or try again.'}
+        </div>
+      ) : null}
+
+      <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <button
+          className="inline-flex min-h-14 items-center justify-center rounded-full bg-soft-beige px-8 text-base font-black text-charcoal shadow-soft transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-70"
+          type="submit"
+          disabled={submitState === 'submitting'}
+        >
+          {submitState === 'submitting' ? (
+            <>
+              <LoaderCircle className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />
+              Sending
+            </>
+          ) : (
+            <>
+              Request Free Quote
+              <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
+            </>
+          )}
+        </button>
+        <a className="text-sm font-black text-soft-beige transition hover:text-white" href="tel:+19132056531">
+          Or call (913) 205-6531
+        </a>
+      </div>
+    </form>
   )
 }
 

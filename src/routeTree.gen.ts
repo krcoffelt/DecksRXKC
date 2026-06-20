@@ -9,38 +9,77 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServiceAreasRouteImport } from './routes/service-areas'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServiceAreasIndexRouteImport } from './routes/service-areas.index'
+import { Route as ServiceAreasSlugRouteImport } from './routes/service-areas.$slug'
 
+const ServiceAreasRoute = ServiceAreasRouteImport.update({
+  id: '/service-areas',
+  path: '/service-areas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServiceAreasIndexRoute = ServiceAreasIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServiceAreasRoute,
+} as any)
+const ServiceAreasSlugRoute = ServiceAreasSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ServiceAreasRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/service-areas': typeof ServiceAreasRouteWithChildren
+  '/service-areas/$slug': typeof ServiceAreasSlugRoute
+  '/service-areas/': typeof ServiceAreasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/service-areas/$slug': typeof ServiceAreasSlugRoute
+  '/service-areas': typeof ServiceAreasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/service-areas': typeof ServiceAreasRouteWithChildren
+  '/service-areas/$slug': typeof ServiceAreasSlugRoute
+  '/service-areas/': typeof ServiceAreasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/service-areas' | '/service-areas/$slug' | '/service-areas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/service-areas/$slug' | '/service-areas'
+  id:
+    | '__root__'
+    | '/'
+    | '/service-areas'
+    | '/service-areas/$slug'
+    | '/service-areas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ServiceAreasRoute: typeof ServiceAreasRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/service-areas': {
+      id: '/service-areas'
+      path: '/service-areas'
+      fullPath: '/service-areas'
+      preLoaderRoute: typeof ServiceAreasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +87,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/service-areas/': {
+      id: '/service-areas/'
+      path: '/'
+      fullPath: '/service-areas/'
+      preLoaderRoute: typeof ServiceAreasIndexRouteImport
+      parentRoute: typeof ServiceAreasRoute
+    }
+    '/service-areas/$slug': {
+      id: '/service-areas/$slug'
+      path: '/$slug'
+      fullPath: '/service-areas/$slug'
+      preLoaderRoute: typeof ServiceAreasSlugRouteImport
+      parentRoute: typeof ServiceAreasRoute
+    }
   }
 }
 
+interface ServiceAreasRouteChildren {
+  ServiceAreasSlugRoute: typeof ServiceAreasSlugRoute
+  ServiceAreasIndexRoute: typeof ServiceAreasIndexRoute
+}
+
+const ServiceAreasRouteChildren: ServiceAreasRouteChildren = {
+  ServiceAreasSlugRoute: ServiceAreasSlugRoute,
+  ServiceAreasIndexRoute: ServiceAreasIndexRoute,
+}
+
+const ServiceAreasRouteWithChildren = ServiceAreasRoute._addFileChildren(
+  ServiceAreasRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ServiceAreasRoute: ServiceAreasRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

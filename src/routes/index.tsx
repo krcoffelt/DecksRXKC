@@ -7,8 +7,8 @@ import {
   Hammer,
   Home,
   LoaderCircle,
+  MapPin,
   Menu,
-  MessageSquare,
   ShieldCheck,
   Sun,
   Trees,
@@ -16,13 +16,15 @@ import {
 } from 'lucide-react'
 import type { FormEvent } from 'react'
 import { useState } from 'react'
+import { SiteFooter } from '../components/SiteFooter'
+import { featuredServiceAreas, getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
 import { isSupabaseConfigured, supabase } from '../lib/supabase'
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
 })
 
-const navItems = ['Decks', 'Screened-In Decks', 'Covered Decks', 'Our Work', 'Contact']
+const navItems = ['Decks', 'Screened-In Decks', 'Covered Decks', 'Service Areas', 'Our Work', 'Contact']
 
 const trustPoints = [
   { label: 'Composite & Wood Decks', copy: 'Built for Kansas City weather', icon: Hammer },
@@ -75,24 +77,6 @@ const projects = [
   },
 ]
 
-const values = [
-  {
-    title: 'Clear quoting',
-    copy: 'Know what you are getting before the project starts.',
-    icon: MessageSquare,
-  },
-  {
-    title: 'Built to last',
-    copy: 'Durable materials, solid framing, and clean craftsmanship.',
-    icon: ShieldCheck,
-  },
-  {
-    title: 'Designed for real life',
-    copy: 'Perfect for hosting, relaxing, pets, kids, and everyday use.',
-    icon: Trees,
-  },
-]
-
 const projectTypes = [
   'Not sure yet',
   'Custom deck build',
@@ -112,6 +96,93 @@ const timelines = [
   'Within 1-3 months',
   'Within 3-6 months',
   'Planning for later this year',
+]
+
+const googleReviews = [
+  {
+    name: 'DecksRXKC customer',
+    meta: 'Google review',
+    date: 'Recent review',
+    review:
+      'DecksRX KC did an amazing job building my deck. They faced some major challenges, especially a lot of concrete that had to be broken up and removed. They also finished much quicker than I had imagined. They really pay attention to the details and the final result is absolutely beautiful!',
+  },
+  {
+    name: 'Mark Dixon',
+    meta: '7 reviews - 3 photos',
+    date: '6 weeks ago',
+    review:
+      'Great work on our staining project. Flexible and responsive. Good communication and easy to work with.',
+  },
+  {
+    name: 'Christopher Hinken',
+    meta: '5 reviews - 3 photos',
+    date: '6 weeks ago',
+    review:
+      'From taking the old deck out and rebuilding from the ground up DecksRx did a fabulous job. The work site was cleaned up...',
+  },
+  {
+    name: 'Matt Panuco',
+    meta: '1 review - 0 photos',
+    date: '7 weeks ago',
+    review:
+      'This was a great experience using Charlie. He was right on with his vision and plans. He did everything he said he would do. I would recommend him for your next outdoor environment project.',
+  },
+  {
+    name: 'Ben Hammes',
+    meta: '9 reviews - 1 photo',
+    date: '7 weeks ago',
+    review:
+      'DecksRX KC build a deck for us last month. They did an excellent job. Got it done in one day and it turned out better...',
+  },
+  {
+    name: 'Kylee Beyea',
+    meta: '4 reviews - 5 photos',
+    date: '8 weeks ago',
+    review:
+      'Charlie with DecksRx built a 6-foot privacy fence for me and did such a good job, I had him come back to do more! He also built us an awesome new deck extending off an existing patio. His workmanship is great, communication is timely, and I would recommend him to anyone.',
+  },
+  {
+    name: 'Sunny Y.',
+    meta: 'Local Guide - 13 reviews - 19 photos',
+    date: '8 weeks ago',
+    review:
+      'Charlie did such a great job with a repair on part of my deck. I would use him again for any woodwork!',
+  },
+  {
+    name: 'Mike Dunn',
+    meta: '13 reviews - 1 photo',
+    date: '8 weeks ago',
+    review:
+      'We had a small fence/ gate replacement. DecksRX KC did a great job replacing the existing structure along with adding one to our neighbors house. I would highly recommend this company.',
+  },
+  {
+    name: 'Laura Heitshusen',
+    meta: '2 reviews - 1 photo',
+    date: '8 weeks ago',
+    review:
+      'This Company did a great job on our upper deck! They were prompt, considerate and worked hard to meet deadlines. They also had great suggestions and judgement as far as the appropriate choices to make our deck long lasting and durable!!!',
+  },
+  {
+    name: 'lucas castanien',
+    meta: '1 review - 4 photos',
+    date: '8 weeks ago',
+    review:
+      'Charlie and Ryan were great to work with and did an amazing job in a time efficient manner. I would hire them again or recommend to anyone!',
+  },
+  {
+    name: 'Brandy Sansone',
+    meta: '10 reviews - 7 photos',
+    date: '8 weeks ago',
+    review:
+      'Charlie is incredible! Very skilled at his craft, responsive, and truly cares about excellent craftsmanship. We appreciate and love our new big deck energy!! Cannot wait to get it all stained',
+  },
+  {
+    name: 'Michelle Petersen',
+    meta: '8 reviews - 3 photos',
+    date: '8 weeks ago',
+    review:
+      'Charlie and his crew were the best! They replaced our front porch, back deck, built new stairs off the deck and off our...',
+  },
 ]
 
 const initialLeadForm = {
@@ -152,7 +223,9 @@ function LandingPage() {
       <Hero />
       <Services />
       <ProjectShowcase />
+      <ServiceAreas />
       <Testimonials />
+      <SiteFooter />
     </main>
   )
 }
@@ -455,87 +528,260 @@ function ProjectShowcase() {
   )
 }
 
-function Testimonials() {
+function ServiceAreas() {
   return (
-    <section id="contact" className="bg-warm-white px-5 py-20 sm:px-8 lg:py-28">
+    <section id="service-areas" className="bg-warm-white px-5 py-20 sm:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.65 }}
-          className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"
-        >
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Testimonials</p>
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.65 }}
+          >
+            <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Service Areas</p>
             <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
-              Trusted by homeowners across Kansas City
+              Deck builders for the Kansas City metro
             </h2>
-            <blockquote className="mt-8 border-l-4 border-muted-green pl-6 text-2xl font-semibold leading-snug text-charcoal sm:text-3xl">
-              "DecksRXKC made the entire process easy. They helped us understand our options,
-              gave us a clear quote, and built a deck that feels like it should have always
-              been part of our home."
-            </blockquote>
-            <p className="mt-5 text-base font-black text-muted-green">Homeowner in the Kansas City Metro</p>
-          </div>
-
-          <div className="grid gap-4">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
-                className="rounded-[1.5rem] bg-white p-6 shadow-soft"
-              >
-                <div className="flex items-start gap-4">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-muted-green text-white">
-                    <value.icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-black text-charcoal">{value.title}</h3>
-                    <p className="mt-2 leading-7 text-ink/70">{value.copy}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.65 }}
-          className="mt-16 overflow-hidden rounded-[2rem] bg-charcoal text-white shadow-image"
-        >
-          <div className="grid lg:grid-cols-[1fr_0.8fr]">
-            <div className="p-7 sm:p-10 lg:p-12">
-              <div className="flex items-center gap-2 text-soft-beige">
-                <Sun className="h-5 w-5" aria-hidden="true" />
-                <p className="text-sm font-black uppercase tracking-[0.16em]">Free Quote</p>
+            <p className="mt-5 text-lg leading-8 text-ink/72">
+              DecksRXKC serves homeowners across both sides of the state line with custom decks,
+              screened-in decks, covered decks, stairs, railings, and outdoor living upgrades.
+            </p>
+            <div className="mt-8 grid gap-4 border-y border-charcoal/12 py-6 sm:grid-cols-3">
+              <div>
+                <p className="text-4xl font-black text-charcoal">{serviceAreas.length}</p>
+                <p className="mt-1 text-sm font-bold text-ink/62">Metro service areas</p>
               </div>
-              <h2 className="mt-5 max-w-3xl text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl">
-                Ready to build the deck your home has been missing?
-              </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/72">
-                Tell us about your project and we will help you understand the best options
-                for your space, budget, and timeline.
-              </p>
-              <p className="mt-8 text-sm font-bold text-white/62">
-                Serving Kansas City and surrounding areas.
-              </p>
+              <div>
+                <p className="text-4xl font-black text-charcoal">KS + MO</p>
+                <p className="mt-1 text-sm font-bold text-ink/62">Both sides of KC</p>
+              </div>
+              <div>
+                <p className="text-4xl font-black text-charcoal">3</p>
+                <p className="mt-1 text-sm font-bold text-ink/62">Core deck services</p>
+              </div>
             </div>
-            <LeadForm />
-          </div>
-        </motion.div>
+            <a className="mt-8 inline-flex items-center text-sm font-black uppercase tracking-[0.14em] text-muted-green transition hover:text-charcoal" href="/service-areas">
+              View every service area
+              <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.65, delay: 0.1 }}
+            className="grid gap-px overflow-hidden rounded-[2rem] border border-charcoal/10 bg-charcoal/10 shadow-soft sm:grid-cols-2 xl:grid-cols-3"
+          >
+            {featuredServiceAreas.map((area) => (
+              <a
+                key={area.slug}
+                className="group bg-white p-6 transition hover:bg-charcoal hover:text-white"
+                href={getServiceAreaPath(area)}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-warm-white text-muted-green transition group-hover:bg-soft-beige group-hover:text-charcoal">
+                    <MapPin className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 text-wood transition group-hover:text-soft-beige" aria-hidden="true" />
+                </div>
+                <h3 className="mt-6 text-2xl font-black text-charcoal transition group-hover:text-white">
+                  {getServiceAreaLabel(area)}
+                </h3>
+                <p className="mt-3 text-sm font-semibold leading-6 text-ink/64 transition group-hover:text-white/68">
+                  {area.projectTypes.slice(0, 2).join(' and ')} for homeowners in {area.county}.
+                </p>
+              </a>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )
+}
+
+function Testimonials() {
+  return (
+    <>
+      <section id="reviews" className="bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.65 }}
+            className="text-center"
+          >
+            <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Google Reviews</p>
+            <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-black leading-[1.02] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
+              The kind of deck work homeowners recommend
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-ink/68">
+              Real Google feedback from customers who trusted DecksRXKC with decks, fences,
+              repairs, staining, stairs, and outdoor living projects.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.65, delay: 0.1 }}
+            className="mt-14 flex flex-col gap-6 border-y border-charcoal/10 py-8 lg:flex-row lg:items-center lg:justify-between"
+          >
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="flex items-center gap-3">
+                <GoogleGLogo className="h-12 w-12" />
+                <span className="text-3xl font-semibold text-charcoal">Google Rating</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-4xl font-black text-charcoal">5.0</span>
+                <RatingStars className="text-3xl" />
+                <span className="text-base font-bold text-ink/52">{googleReviews.length} recent reviews</span>
+              </div>
+            </div>
+            <a
+              className="inline-flex min-h-14 items-center justify-center rounded-full bg-charcoal px-8 text-base font-black text-white shadow-soft transition hover:bg-muted-green"
+              href="https://www.google.com/search?q=DecksRX+KC+Google+reviews"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Write a Review
+              <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
+            </a>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65, delay: 0.16 }}
+            className="mt-12 flex snap-x gap-6 overflow-x-auto pb-4"
+            aria-label="DecksRXKC Google review cards"
+          >
+            {googleReviews.map((review) => (
+              <ReviewCard key={`${review.name}-${review.date}`} review={review} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="contact" className="bg-warm-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.65 }}
+            className="overflow-hidden rounded-[2rem] bg-charcoal text-white shadow-image"
+          >
+            <div className="grid lg:grid-cols-[1fr_0.8fr]">
+              <div className="p-7 sm:p-10 lg:p-12">
+                <div className="flex items-center gap-2 text-soft-beige">
+                  <Sun className="h-5 w-5" aria-hidden="true" />
+                  <p className="text-sm font-black uppercase tracking-[0.16em]">Free Quote</p>
+                </div>
+                <h2 className="mt-5 max-w-3xl text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl">
+                  Ready to build the deck your home has been missing?
+                </h2>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-white/72">
+                  Tell us about your project and we will help you understand the best options
+                  for your space, budget, and timeline.
+                </p>
+                <p className="mt-8 text-sm font-bold text-white/62">
+                  Serving Kansas City and surrounding areas.
+                </p>
+              </div>
+              <LeadForm />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  )
+}
+
+function ReviewCard({ review }: Readonly<{ review: (typeof googleReviews)[number] }>) {
+  return (
+    <article className="flex h-[430px] w-[86vw] shrink-0 snap-start flex-col justify-between rounded-[1.5rem] border border-charcoal/10 bg-warm-white p-6 shadow-soft sm:w-[420px]">
+      <div>
+        <div className="flex items-start gap-4">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-charcoal text-xl font-black text-soft-beige">
+            {getInitials(review.name)}
+          </div>
+          <div className="min-w-0">
+            <h3 className="text-xl font-black text-charcoal">{review.name}</h3>
+            <p className="mt-1 text-sm font-bold text-ink/48">{review.meta}</p>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <RatingStars className="text-xl" />
+              <span className="text-sm font-bold text-ink/50">{review.date}</span>
+            </div>
+          </div>
+        </div>
+        <p className="mt-6 overflow-hidden text-xl font-semibold leading-8 text-charcoal [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:5]">
+          "{review.review}"
+        </p>
+        <p className="mt-3 text-base font-bold text-ink/42">Read more</p>
+      </div>
+      <div className="mt-8 flex items-center gap-3">
+        <GoogleGLogo className="h-9 w-9" />
+        <div className="text-sm leading-5">
+          <p className="font-bold text-ink/52">Posted on</p>
+          <p className="font-black text-[#4285f4]">Google</p>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function RatingStars({ className = '' }: Readonly<{ className?: string }>) {
+  return (
+    <span className={`inline-flex items-center gap-0.5 text-[#fbbc04] ${className}`} aria-label="5 star rating">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <span key={index} aria-hidden="true">★</span>
+      ))}
+    </span>
+  )
+}
+
+function GoogleGLogo({ className = '' }: Readonly<{ className?: string }>) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-label="Google" role="img">
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"
+      />
+    </svg>
+  )
+}
+
+function getInitials(name: string) {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase()
 }
 
 function LeadForm() {

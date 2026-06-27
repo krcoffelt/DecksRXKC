@@ -1,6 +1,6 @@
-# DecksRXKC Landing Page
+# DecksRXKC Website
 
-Single-page TanStack Start v1 landing page for DecksRXKC, a Kansas City deck contractor. Built with React 19, TypeScript, Tailwind CSS v4, Framer Motion, lucide-react, and local project photography.
+TanStack Start v1 website for DecksRXKC, a Kansas City deck contractor. Built with React 19, TypeScript, Tailwind CSS v4, lucide-react, local project photography, SEO-focused service pages, and Supabase lead capture.
 
 ## Setup
 
@@ -14,16 +14,24 @@ Local dev server runs at `http://127.0.0.1:4321/`.
 ## Build
 
 ```bash
+npm run typecheck
 npm run build
 npm run preview
 ```
 
 The production build outputs client assets to `dist/client` and the server bundle to `dist/server`.
 
+`npm run build` runs `npm run generate:sitemap` before bundling so `public/sitemap.xml` stays in sync with service and service-area data.
+
 ## Project Structure
 
-- `src/routes/index.tsx` contains the landing page sections: Hero, Services, ProjectShowcase, Testimonials.
+- `src/routes/index.tsx` composes the homepage and homepage structured data.
+- `src/components/home/` contains focused homepage sections.
+- `src/routes/services.index.tsx` and `src/routes/services.$slug.tsx` contain dedicated service pages.
+- `src/routes/service-areas.index.tsx` and `src/routes/service-areas.$slug.tsx` contain location pages.
 - `src/routes/__root.tsx` contains the document shell and SEO meta tags.
+- `src/data/servicePages.ts` and `src/data/serviceAreas.ts` define crawlable service and location pages.
+- `scripts/generate-sitemap.mjs` generates `public/sitemap.xml`.
 - `src/styles.css` defines the Tailwind v4 theme tokens and global styles.
 - `public/images/` contains the local DecksRXKC project photography used throughout the page.
 - `supabase/schema.sql` creates the lead capture table and row-level security policies.

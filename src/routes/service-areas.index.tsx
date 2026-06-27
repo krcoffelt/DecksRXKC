@@ -1,6 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { ArrowUpRight, MapPin } from 'lucide-react'
+import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
+import { ButtonLink, SectionIntro } from '../components/ui'
 import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
 import { defaultSeoImagePath, getSeoHead } from '../lib/seo'
 
@@ -21,41 +23,30 @@ export const Route = createFileRoute('/service-areas/')({
 function ServiceAreasIndex() {
   return (
     <main className="min-h-screen bg-warm-white text-ink">
-      <header className="bg-charcoal px-5 py-5 text-white sm:px-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6">
-          <a href="/" className="flex shrink-0 items-center" aria-label="DecksRXKC home">
-            <img
-              className="h-11 w-auto max-w-[180px] object-contain sm:h-14 sm:max-w-[220px]"
-              src="/images/decksrxkc-header-logo-cropped.png"
-              alt="DecksRXKC"
-              width="330"
-              height="84"
-              loading="eager"
-              decoding="async"
-            />
-          </a>
-          <a className="hidden text-sm font-black uppercase tracking-[0.14em] text-soft-beige transition hover:text-white sm:inline-flex" href="/#contact">
-            Free Quote
-            <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="px-5 py-16 sm:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="max-w-4xl">
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Kansas City Metro</p>
-            <h1 className="mt-4 text-5xl font-black leading-[0.98] tracking-tight text-charcoal sm:text-6xl lg:text-7xl">
-              Deck builders serving both sides of Kansas City
-            </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/72">
-              DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings,
-              and outdoor living spaces across Johnson County, Jackson County, Clay County,
-              Platte County, Cass County, Wyandotte County, and nearby communities.
-            </p>
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Kansas City Metro</p>
+              <h1 className="mt-4 text-5xl font-black leading-[0.98] tracking-tight text-charcoal sm:text-6xl lg:text-7xl">
+                Deck builders serving both sides of Kansas City
+              </h1>
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/72">
+                DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings,
+                and outdoor living spaces across Kansas and Missouri communities.
+              </p>
+            </div>
+            <div className="border-y border-charcoal/12 py-6">
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-muted-green">Local coverage</p>
+              <p className="mt-3 text-2xl font-black leading-tight text-charcoal">
+                Johnson County, Jackson County, Clay County, Platte County, Cass County, Wyandotte County, and nearby communities.
+              </p>
+            </div>
           </div>
 
-          <div className="mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-charcoal/10 bg-charcoal/10 shadow-soft md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-12 grid gap-px bg-charcoal/12 md:grid-cols-2 xl:grid-cols-3">
             {serviceAreas.map((area) => (
               <a
                 key={area.slug}
@@ -77,6 +68,19 @@ function ServiceAreasIndex() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+      <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.55fr] lg:items-center">
+          <SectionIntro
+            eyebrow="Ready to Plan"
+            title="A cleaner deck starts with a clear quote"
+            copy="Tell DecksRXKC what you want to build, replace, cover, or screen in."
+            tone="dark"
+          />
+          <ButtonLink className="lg:justify-self-end" href="/#contact" variant="light">
+            Request a Free Quote
+          </ButtonLink>
         </div>
       </section>
       <SiteFooter />

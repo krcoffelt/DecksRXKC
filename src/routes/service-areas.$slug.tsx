@@ -1,6 +1,8 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { ArrowUpRight, CheckCircle, Hammer, MapPin, ShieldCheck, Trees } from 'lucide-react'
+import { CheckCircle, Hammer, MapPin, ShieldCheck, Trees } from 'lucide-react'
+import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
+import { ButtonLink } from '../components/ui'
 import {
   getServiceArea,
   getServiceAreaLabel,
@@ -8,6 +10,7 @@ import {
   serviceAreas,
   type ServiceArea,
 } from '../data/serviceAreas'
+import { getServicePagePath, servicePages } from '../data/servicePages'
 import { absoluteUrl, defaultSeoImagePath, getSeoHead } from '../lib/seo'
 
 export const Route = createFileRoute('/service-areas/$slug')({
@@ -80,30 +83,7 @@ function ServiceAreaPage() {
       />
 
       <main className="min-h-screen bg-warm-white text-ink">
-      <header className="bg-charcoal px-5 py-5 text-white sm:px-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6">
-          <a href="/" className="flex shrink-0 items-center" aria-label="DecksRXKC home">
-            <img
-              className="h-11 w-auto max-w-[180px] object-contain sm:h-14 sm:max-w-[220px]"
-              src="/images/decksrxkc-header-logo-cropped.png"
-              alt="DecksRXKC"
-              width="330"
-              height="84"
-              loading="eager"
-              decoding="async"
-            />
-          </a>
-          <nav className="hidden items-center gap-6 text-sm font-bold text-white/82 lg:flex" aria-label="Service area navigation">
-            <a className="transition hover:text-soft-beige" href="/#decks">Services</a>
-            <a className="transition hover:text-soft-beige" href="/#our-work">Our Work</a>
-            <a className="transition hover:text-soft-beige" href="/service-areas">Service Areas</a>
-            <a className="transition hover:text-soft-beige" href="/#contact">Contact</a>
-          </nav>
-          <a className="hidden min-h-11 items-center justify-center rounded-full bg-soft-beige px-6 text-sm font-black text-charcoal shadow-soft transition hover:bg-white lg:inline-flex" href="/#contact">
-            Free Quote
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="relative overflow-hidden bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
         <img
@@ -131,13 +111,12 @@ function ServiceAreaPage() {
               living spaces for homeowners in {label}.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a className="inline-flex min-h-14 items-center justify-center rounded-full bg-soft-beige px-8 text-base font-black text-charcoal shadow-soft transition hover:bg-white" href="/#contact">
+              <ButtonLink href="/#contact" variant="light">
                 Request a Free Quote
-                <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
-              </a>
-              <a className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/55 px-8 text-base font-black text-white transition hover:border-white hover:bg-white hover:text-charcoal" href="/service-areas">
+              </ButtonLink>
+              <ButtonLink href="/service-areas" variant="outline">
                 View Service Areas
-              </a>
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -160,7 +139,7 @@ function ServiceAreaPage() {
             </div>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-[2rem] border border-charcoal/10 bg-charcoal/10 shadow-soft">
+          <div className="grid gap-px bg-charcoal/12">
             {services.map((service) => (
               <article key={service.title} className="bg-white p-6 sm:p-8">
                 <div className="flex items-start gap-4">
@@ -191,7 +170,7 @@ function ServiceAreaPage() {
                 screened-in decks, covered decks, stairs, and railing projects.
               </p>
             </div>
-            <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-charcoal/10 bg-charcoal/10 sm:grid-cols-2">
+            <div className="grid gap-px bg-charcoal/12 sm:grid-cols-2">
               {relatedAreas.map((relatedArea) => (
                 <a
                   key={relatedArea.slug}
@@ -204,6 +183,30 @@ function ServiceAreaPage() {
                   <p className="mt-2 text-sm font-semibold leading-6 text-ink/60 transition group-hover:text-white/68">
                     {relatedArea.projectTypes.slice(0, 2).join(' and ')} in {relatedArea.county}.
                   </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-16 sm:px-8 lg:pb-24">
+        <div className="mx-auto max-w-7xl border-y border-charcoal/12 py-10">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Deck Services</p>
+              <h2 className="mt-4 text-3xl font-black leading-tight text-charcoal sm:text-4xl">
+                Services available in {area.city}
+              </h2>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {servicePages.map((service) => (
+                <a
+                  key={service.slug}
+                  className="border border-charcoal/10 bg-white p-4 text-sm font-black text-charcoal transition hover:border-charcoal hover:bg-charcoal hover:text-white"
+                  href={getServicePagePath(service)}
+                >
+                  {service.shortTitle}
                 </a>
               ))}
             </div>
@@ -237,7 +240,7 @@ function ServiceAreaPage() {
 
       <section className="px-5 py-16 sm:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="overflow-hidden rounded-[2rem] bg-white shadow-soft">
+          <div className="overflow-hidden border border-charcoal/10 bg-white">
             <div className="grid lg:grid-cols-[1fr_0.75fr]">
               <div className="p-7 sm:p-10 lg:p-12">
                 <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Free Quote</p>
@@ -249,10 +252,9 @@ function ServiceAreaPage() {
                   you understand practical options for your space, budget, and timeline.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <a className="inline-flex min-h-14 items-center justify-center rounded-full bg-charcoal px-8 text-base font-black text-white shadow-soft transition hover:bg-muted-green" href="/#contact">
+                  <ButtonLink href="/#contact">
                     Start Your Quote
-                    <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
-                  </a>
+                  </ButtonLink>
                   <a className="inline-flex min-h-14 items-center justify-center rounded-full border border-charcoal/18 px-8 text-base font-black text-charcoal transition hover:bg-warm-white" href="tel:+19132056531">
                     Call (913) 205-6531
                   </a>

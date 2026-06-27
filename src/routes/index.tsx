@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { AnimatePresence, motion } from 'framer-motion'
 import {
   AlertCircle,
   ArrowUpRight,
@@ -14,15 +13,74 @@ import {
   Trees,
   X,
 } from 'lucide-react'
-import type { FormEvent } from 'react'
-import { useState } from 'react'
+import { createElement, useState } from 'react'
+import type { FormEvent, ReactNode } from 'react'
 import { SiteFooter } from '../components/SiteFooter'
 import { featuredServiceAreas, getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
 import { isSupabaseConfigured, supabase } from '../lib/supabase'
+import { defaultSeoDescription, defaultSeoImage, defaultSeoImagePath, defaultSeoTitle, getSeoHead, siteUrl } from '../lib/seo'
+
+const homepageTitle = defaultSeoTitle
+const homepageDescription = defaultSeoDescription
+const homepageImage = defaultSeoImage
 
 export const Route = createFileRoute('/')({
+  head: () => {
+    const seo = getSeoHead({
+      title: homepageTitle,
+      description: homepageDescription,
+      path: '/',
+      image: defaultSeoImagePath,
+    })
+
+    return {
+      ...seo,
+      links: [
+        ...seo.links,
+        {
+          rel: 'preload',
+          as: 'image',
+          href: defaultSeoImagePath,
+        },
+      ],
+    }
+  },
   component: LandingPage,
 })
+
+type StaticMotionProps = {
+  children?: ReactNode
+  [key: string]: unknown
+}
+
+function createStaticElement(tag: string) {
+  return function StaticElement({
+    initial: _initial,
+    animate: _animate,
+    exit: _exit,
+    variants: _variants,
+    transition: _transition,
+    whileInView: _whileInView,
+    viewport: _viewport,
+    children,
+    ...props
+  }: StaticMotionProps) {
+    return createElement(tag, props, children)
+  }
+}
+
+const Static = {
+  article: createStaticElement('article'),
+  div: createStaticElement('div'),
+  h1: createStaticElement('h1'),
+  header: createStaticElement('header'),
+  nav: createStaticElement('nav'),
+  p: createStaticElement('p'),
+}
+
+function AnimatePresence({ children }: Readonly<{ children: ReactNode }>) {
+  return <>{children}</>
+}
 
 const navItems = ['Decks', 'Screened-In Decks', 'Covered Decks', 'Service Areas', 'Our Work', 'Contact']
 
@@ -37,7 +95,7 @@ const services = [
     title: 'Custom Deck Builds',
     description:
       'New decks, rebuilds, stairs, framing, decking, and railing options built to fit your home and budget.',
-    image: '/images/kansas-city-elevated-composite-deck-cable-railing-stairs.png',
+    image: '/images/optimized/kansas-city-elevated-composite-deck-cable-railing-stairs.jpg',
     icon: Hammer,
     tags: ['Composite decking', 'Pressure-treated wood', 'Aluminum railing', 'Stair access'],
   },
@@ -45,7 +103,7 @@ const services = [
     title: 'Screened-In Decks',
     description:
       'Enjoy your backyard without bugs, harsh sun, or constant maintenance. Great for second-story decks, covered patios, and outdoor rooms.',
-    image: '/images/kansas-city-screened-porch-wood-trim-black-screen.png',
+    image: '/images/optimized/kansas-city-screened-porch-wood-trim-black-screen.jpg',
     icon: ShieldCheck,
     tags: ['Pet-proof screen options', 'Screen doors', 'Screen systems', 'Covered layouts'],
   },
@@ -53,7 +111,7 @@ const services = [
     title: 'Covered Decks & Outdoor Rooms',
     description:
       'Add a roof, ceiling finish, lights, fan, gutters, and other upgrades to make your deck feel like a true extension of your home.',
-    image: '/images/kansas-city-covered-screened-porch-addition.png',
+    image: '/images/optimized/kansas-city-covered-screened-porch-addition.jpg',
     icon: Home,
     tags: ['Shed roofs', 'Gable roofs', 'Shiplap ceilings', 'Lighting & fans'],
   },
@@ -63,17 +121,17 @@ const projects = [
   {
     title: 'Second-Story Deck Rebuild',
     details: 'Composite decking, black aluminum railing, stairs, and upgraded framing.',
-    image: '/images/kansas-city-elevated-screened-deck-wood-stairs.png',
+    image: '/images/optimized/kansas-city-elevated-screened-deck-wood-stairs.jpg',
   },
   {
     title: 'Screened-In Outdoor Room',
     details: 'Pet-proof screening, screen door, covered roof, and finished ceiling.',
-    image: '/images/kansas-city-elevated-screened-porch-black-railing.png',
+    image: '/images/optimized/kansas-city-elevated-screened-porch-black-railing.jpg',
   },
   {
     title: 'Covered Deck Upgrade',
     details: 'Roof structure, shiplap ceiling, lighting, fan, and weather protection.',
-    image: '/images/kansas-city-composite-covered-deck-railing-detail.png',
+    image: '/images/optimized/kansas-city-composite-covered-deck-railing-detail.jpg',
   },
 ]
 
@@ -219,14 +277,62 @@ const labelClass = 'text-xs font-black uppercase tracking-[0.14em] text-soft-bei
 
 function LandingPage() {
   return (
-    <main className="overflow-hidden bg-warm-white text-ink">
-      <Hero />
-      <Services />
-      <ProjectShowcase />
-      <ServiceAreas />
-      <Testimonials />
-      <SiteFooter />
-    </main>
+    <>
+      <HomepageStructuredData />
+      <main className="overflow-hidden bg-warm-white text-ink">
+        <Hero />
+        <Services />
+        <ProjectShowcase />
+        <ServiceAreas />
+        <Testimonials />
+        <SiteFooter />
+      </main>
+    </>
+  )
+}
+
+function HomepageStructuredData() {
+  const serviceNames = ['Custom deck builder', 'Screened-in deck builder', 'Covered deck builder']
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'HomeAndConstructionBusiness',
+          '@id': `${siteUrl}/#business`,
+          name: 'DecksRXKC',
+          url: siteUrl,
+          image: homepageImage,
+          telephone: '+1-913-205-6531',
+          description: homepageDescription,
+          areaServed: [
+            {
+              '@type': 'AdministrativeArea',
+              name: 'Kansas City metropolitan area',
+            },
+            ...serviceAreas.map((area) => ({
+              '@type': 'City',
+              name: getServiceAreaLabel(area),
+            })),
+          ],
+          serviceType: serviceNames,
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'DecksRXKC deck services',
+            itemListElement: serviceNames.map((serviceName) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: serviceName,
+                areaServed: 'Kansas City metropolitan area',
+              },
+            })),
+          },
+        }),
+      }}
+    />
   )
 }
 
@@ -237,13 +343,18 @@ function Hero() {
     <section id="top" className="relative min-h-screen overflow-hidden bg-charcoal text-white">
       <img
         className="absolute inset-0 h-full w-full object-cover"
-        src="/images/kansas-city-composite-covered-deck-railing-detail.png"
+        src={defaultSeoImagePath}
         alt="Finished Kansas City covered deck with composite railing detail"
+        width="1728"
+        height="1696"
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_0_0_/_0.62),rgb(0_0_0_/_0.24)_48%,rgb(0_0_0_/_0.1))]" />
 
-      <motion.header
+      <Static.header
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.65, ease: 'easeOut' }}
@@ -254,6 +365,10 @@ function Hero() {
             className="h-11 w-auto max-w-[180px] object-contain sm:h-14 sm:max-w-[220px]"
             src="/images/decksrxkc-header-logo-cropped.png"
             alt="DecksRXKC"
+            width="330"
+            height="84"
+            loading="eager"
+            decoding="async"
           />
         </a>
 
@@ -283,11 +398,11 @@ function Hero() {
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
-      </motion.header>
+      </Static.header>
 
       <AnimatePresence>
         {menuOpen ? (
-          <motion.nav
+          <Static.nav
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
@@ -311,13 +426,13 @@ function Hero() {
             >
               Free Quote
             </a>
-          </motion.nav>
+          </Static.nav>
         ) : null}
       </AnimatePresence>
 
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-88px)] w-full max-w-7xl flex-col justify-center px-5 pb-8 pt-12 sm:px-8 sm:pb-28 lg:pb-36">
         <div className="max-w-4xl">
-          <motion.p
+          <Static.p
             variants={fadeUp}
             initial="hidden"
             animate="visible"
@@ -326,8 +441,8 @@ function Hero() {
           >
             <span className="h-px w-12 bg-soft-beige" aria-hidden="true" />
             <span>Kansas City deck contractor</span>
-          </motion.p>
-          <motion.h1
+          </Static.p>
+          <Static.h1
             variants={fadeUp}
             initial="hidden"
             animate="visible"
@@ -335,8 +450,8 @@ function Hero() {
             className="max-w-5xl text-5xl font-black leading-[0.96] tracking-tight sm:text-6xl lg:text-8xl"
           >
             Custom Decks Built for Kansas City Homes
-          </motion.h1>
-          <motion.p
+          </Static.h1>
+          <Static.p
             variants={fadeUp}
             initial="hidden"
             animate="visible"
@@ -344,8 +459,8 @@ function Hero() {
             className="mt-6 max-w-3xl text-2xl font-semibold leading-tight text-soft-beige sm:text-3xl"
           >
             Designed for summer nights, family dinners, and every season in between.
-          </motion.p>
-          <motion.p
+          </Static.p>
+          <Static.p
             variants={fadeUp}
             initial="hidden"
             animate="visible"
@@ -355,8 +470,8 @@ function Hero() {
             DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings,
             and outdoor living spaces across the Kansas City metro. Whether you are replacing
             an old deck or starting from scratch, we make the process simple from quote to completion.
-          </motion.p>
-          <motion.div
+          </Static.p>
+          <Static.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.58 }}
@@ -369,11 +484,11 @@ function Hero() {
             <a className={outlineButton} href="#our-work">
               View Our Work
             </a>
-          </motion.div>
+          </Static.div>
         </div>
       </div>
 
-      <motion.div
+      <Static.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.65, delay: 0.78 }}
@@ -390,7 +505,7 @@ function Hero() {
             <p className="mt-2 max-w-xs text-sm leading-6 text-white/68">{copy}</p>
           </div>
         ))}
-      </motion.div>
+      </Static.div>
     </section>
   )
 }
@@ -399,7 +514,7 @@ function Services() {
   return (
     <section id="decks" className="bg-warm-white px-5 py-20 sm:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
-        <motion.div
+        <Static.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -415,11 +530,11 @@ function Services() {
             From a simple deck replacement to a fully covered and screened-in space, DecksRXKC
             helps homeowners create outdoor areas that are comfortable, durable, and made for everyday use.
           </p>
-        </motion.div>
+        </Static.div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {services.map((service, index) => (
-            <motion.article
+            <Static.article
               key={service.title}
               variants={fadeUp}
               initial="hidden"
@@ -430,7 +545,15 @@ function Services() {
               id={index === 1 ? 'screened-in-decks' : index === 2 ? 'covered-decks' : undefined}
             >
               <div className="relative h-72 overflow-hidden">
-                <img className="h-full w-full object-cover transition duration-700 group-hover:scale-105" src={service.image} alt={`${service.title} by DecksRXKC`} />
+                <img
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  src={service.image}
+                  alt={`${service.title} by DecksRXKC`}
+                  width="1600"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/52 to-transparent" />
                 <div className="absolute bottom-5 left-5 flex h-12 w-12 items-center justify-center rounded-full bg-white text-charcoal">
                   <service.icon className="h-5 w-5" aria-hidden="true" />
@@ -447,7 +570,7 @@ function Services() {
                   ))}
                 </div>
               </div>
-            </motion.article>
+            </Static.article>
           ))}
         </div>
       </div>
@@ -460,7 +583,7 @@ function ProjectShowcase() {
     <section id="our-work" className="bg-charcoal px-5 py-20 text-white sm:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <motion.div
+          <Static.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -471,8 +594,8 @@ function ProjectShowcase() {
             <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl lg:text-6xl">
               From old deck to favorite room of the house
             </h2>
-          </motion.div>
-          <motion.p
+          </Static.div>
+          <Static.p
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -482,12 +605,12 @@ function ProjectShowcase() {
           >
             Whether your current deck is worn out, too small, unsafe, or unusable in the
             summer heat, DecksRXKC can help you turn it into a space your family actually wants to use.
-          </motion.p>
+          </Static.p>
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {projects.map((project, index) => (
-            <motion.article
+            <Static.article
               key={project.title}
               variants={fadeUp}
               initial="hidden"
@@ -496,17 +619,25 @@ function ProjectShowcase() {
               transition={{ duration: 0.65, delay: index * 0.1 }}
               className="group relative min-h-[430px] overflow-hidden rounded-[2rem] shadow-image"
             >
-              <img className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" src={project.image} alt={project.title} />
+              <img
+                className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                src={project.image}
+                alt={project.title}
+                width="1600"
+                height="1200"
+                loading="lazy"
+                decoding="async"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/28 to-black/5" />
               <div className="absolute inset-x-0 bottom-0 p-6">
                 <h3 className="text-2xl font-black">{project.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/78">{project.details}</p>
               </div>
-            </motion.article>
+            </Static.article>
           ))}
         </div>
 
-        <motion.div
+        <Static.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -522,7 +653,7 @@ function ProjectShowcase() {
             <p className="text-xs font-black uppercase tracking-[0.16em] text-muted-green">After</p>
             <p className="mt-2 text-xl font-black">Shaded, Screened, Comfortable</p>
           </div>
-        </motion.div>
+        </Static.div>
       </div>
     </section>
   )
@@ -533,7 +664,7 @@ function ServiceAreas() {
     <section id="service-areas" className="bg-warm-white px-5 py-20 sm:px-8 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <motion.div
+          <Static.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -566,9 +697,9 @@ function ServiceAreas() {
               View every service area
               <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </a>
-          </motion.div>
+          </Static.div>
 
-          <motion.div
+          <Static.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -596,7 +727,7 @@ function ServiceAreas() {
                 </p>
               </a>
             ))}
-          </motion.div>
+          </Static.div>
         </div>
       </div>
     </section>
@@ -608,7 +739,7 @@ function Testimonials() {
     <>
       <section id="reviews" className="bg-white px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
-          <motion.div
+          <Static.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -624,9 +755,9 @@ function Testimonials() {
               Real Google feedback from customers who trusted DecksRXKC with decks, fences,
               repairs, staining, stairs, and outdoor living projects.
             </p>
-          </motion.div>
+          </Static.div>
 
-          <motion.div
+          <Static.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -654,9 +785,9 @@ function Testimonials() {
               Write a Review
               <ArrowUpRight className="ml-2 h-5 w-5" aria-hidden="true" />
             </a>
-          </motion.div>
+          </Static.div>
 
-          <motion.div
+          <Static.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -668,13 +799,13 @@ function Testimonials() {
             {googleReviews.map((review) => (
               <ReviewCard key={`${review.name}-${review.date}`} review={review} />
             ))}
-          </motion.div>
+          </Static.div>
         </div>
       </section>
 
       <section id="contact" className="bg-warm-white px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
-          <motion.div
+          <Static.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -701,7 +832,7 @@ function Testimonials() {
               </div>
               <LeadForm />
             </div>
-          </motion.div>
+          </Static.div>
         </div>
       </section>
     </>

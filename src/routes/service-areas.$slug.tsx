@@ -8,6 +8,7 @@ import {
   serviceAreas,
   type ServiceArea,
 } from '../data/serviceAreas'
+import { absoluteUrl, defaultSeoImagePath, getSeoHead } from '../lib/seo'
 
 export const Route = createFileRoute('/service-areas/$slug')({
   loader: ({ params }) => {
@@ -22,32 +23,15 @@ export const Route = createFileRoute('/service-areas/$slug')({
   head: ({ loaderData }) => {
     const area = loaderData as ServiceArea
     const label = getServiceAreaLabel(area)
+    const title = `Deck Builder in ${label} | DecksRXKC`
+    const description = getServiceAreaDescription(label)
 
-    return {
-      meta: [
-        {
-          title: `Deck Builder in ${label} | DecksRXKC`,
-        },
-        {
-          name: 'description',
-          content: `DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, and railings for homeowners in ${label} and nearby ${area.county} communities.`,
-        },
-        {
-          property: 'og:title',
-          content: `Deck Builder in ${label} | DecksRXKC`,
-        },
-        {
-          property: 'og:description',
-          content: `Custom decks, screened-in decks, covered decks, stairs, railings, and outdoor living spaces in ${label}.`,
-        },
-      ],
-      links: [
-        {
-          rel: 'canonical',
-          href: `https://decksrxkc.com${getServiceAreaPath(area)}`,
-        },
-      ],
-    }
+    return getSeoHead({
+      title,
+      description,
+      path: getServiceAreaPath(area),
+      image: area.image || defaultSeoImagePath,
+    })
   },
   component: ServiceAreaPage,
 })
@@ -73,6 +57,7 @@ const services = [
 function ServiceAreaPage() {
   const area = Route.useLoaderData()
   const label = getServiceAreaLabel(area)
+  const relatedAreas = getRelatedServiceAreas(area)
 
   return (
     <>
@@ -88,8 +73,8 @@ function ServiceAreaPage() {
               name: label,
             },
             serviceType: ['Deck builder', 'Screened-in deck builder', 'Covered deck builder'],
-            url: `https://decksrxkc.com${getServiceAreaPath(area)}`,
-            image: `https://decksrxkc.com${area.image}`,
+            url: absoluteUrl(getServiceAreaPath(area)),
+            image: absoluteUrl(area.image),
           }),
         }}
       />
@@ -102,6 +87,10 @@ function ServiceAreaPage() {
               className="h-11 w-auto max-w-[180px] object-contain sm:h-14 sm:max-w-[220px]"
               src="/images/decksrxkc-header-logo-cropped.png"
               alt="DecksRXKC"
+              width="330"
+              height="84"
+              loading="eager"
+              decoding="async"
             />
           </a>
           <nav className="hidden items-center gap-6 text-sm font-bold text-white/82 lg:flex" aria-label="Service area navigation">
@@ -121,6 +110,11 @@ function ServiceAreaPage() {
           className="absolute inset-0 h-full w-full object-cover opacity-42"
           src={area.image}
           alt={`${label} deck project by DecksRXKC`}
+          width="1600"
+          height="1200"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_0_0_/_0.78),rgb(0_0_0_/_0.42)_56%,rgb(0_0_0_/_0.25))]" />
         <div className="relative mx-auto max-w-7xl">
@@ -184,6 +178,39 @@ function ServiceAreaPage() {
         </div>
       </section>
 
+      <section className="bg-warm-white px-5 py-16 sm:px-8 lg:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 border-y border-charcoal/12 py-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Nearby Service Areas</p>
+              <h2 className="mt-4 text-3xl font-black leading-tight text-charcoal sm:text-4xl">
+                Deck builders near {area.city}
+              </h2>
+              <p className="mt-4 text-base leading-7 text-ink/66">
+                DecksRXKC also serves nearby Kansas City metro communities with custom decks,
+                screened-in decks, covered decks, stairs, and railing projects.
+              </p>
+            </div>
+            <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-charcoal/10 bg-charcoal/10 sm:grid-cols-2">
+              {relatedAreas.map((relatedArea) => (
+                <a
+                  key={relatedArea.slug}
+                  className="group bg-white p-5 transition hover:bg-charcoal hover:text-white"
+                  href={getServiceAreaPath(relatedArea)}
+                >
+                  <p className="text-xl font-black text-charcoal transition group-hover:text-white">
+                    {getServiceAreaLabel(relatedArea)}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold leading-6 text-ink/60 transition group-hover:text-white/68">
+                    {relatedArea.projectTypes.slice(0, 2).join(' and ')} in {relatedArea.county}.
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
           <div>
@@ -233,8 +260,12 @@ function ServiceAreaPage() {
               </div>
               <img
                 className="h-72 w-full object-cover lg:h-full"
-                src="/images/kansas-city-screened-porch-wood-trim-black-screen.png"
+                src="/images/optimized/kansas-city-screened-porch-wood-trim-black-screen.jpg"
                 alt="Screened-in deck built by DecksRXKC"
+                width="1584"
+                height="1258"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -244,6 +275,17 @@ function ServiceAreaPage() {
       </main>
     </>
   )
+}
+
+function getServiceAreaDescription(label: string) {
+  return `Custom decks, screened-in decks, covered decks, stairs, and railing by DecksRXKC in ${label} and nearby Kansas City suburbs.`
+}
+
+function getRelatedServiceAreas(area: ServiceArea) {
+  const sameStateAreas = serviceAreas.filter((candidate) => candidate.slug !== area.slug && candidate.state === area.state)
+  const otherAreas = serviceAreas.filter((candidate) => candidate.slug !== area.slug && candidate.state !== area.state)
+
+  return [...sameStateAreas, ...otherAreas].slice(0, 4)
 }
 
 export function getStaticPaths() {

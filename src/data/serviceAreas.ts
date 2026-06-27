@@ -180,7 +180,7 @@ export const serviceAreas: ServiceArea[] = [
     state: 'MO',
     slug: 'gladstone-mo',
     county: 'Clay County',
-    image: '/images/kansas-city-covered-screened-porch-addition.png',
+    image: '/images/optimized/kansas-city-covered-screened-porch-addition.jpg',
     nearby: ['North Kansas City', 'Oakview', 'Antioch Acres'],
     localNote:
       'Gladstone projects often focus on making existing outdoor space more usable with shade, screening, and lower-maintenance materials.',
@@ -191,7 +191,7 @@ export const serviceAreas: ServiceArea[] = [
     state: 'MO',
     slug: 'raymore-mo',
     county: 'Cass County',
-    image: '/images/kansas-city-elevated-composite-deck-cable-railing-stairs.png',
+    image: '/images/optimized/kansas-city-elevated-composite-deck-cable-railing-stairs.jpg',
     nearby: ['Belton', 'Peculiar', 'Creekmoor'],
     localNote:
       'Raymore homes often have room for outdoor living upgrades that connect patios, walkout basements, and backyard entertaining zones.',

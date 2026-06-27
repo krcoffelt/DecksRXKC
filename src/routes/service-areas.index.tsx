@@ -2,34 +2,18 @@ import { createFileRoute } from '@tanstack/react-router'
 import { ArrowUpRight, MapPin } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
+import { defaultSeoImagePath, getSeoHead } from '../lib/seo'
+
+const serviceAreasTitle = 'DecksRXKC Service Areas | Kansas City Deck Builders'
+const serviceAreasDescription =
+  "Find DecksRXKC deck builders serving Overland Park, Lee's Summit, Shawnee, Olathe, Leawood, Kansas City, and nearby suburbs."
 
 export const Route = createFileRoute('/service-areas/')({
-  head: () => ({
-    meta: [
-      {
-        title: 'DecksRXKC Service Areas | Kansas City Deck Builders',
-      },
-      {
-        name: 'description',
-        content:
-          "See the Kansas City metro service areas for DecksRXKC, including deck builders in Overland Park, Lee's Summit, Shawnee, Olathe, Leawood, and nearby communities.",
-      },
-      {
-        property: 'og:title',
-        content: 'DecksRXKC Service Areas | Kansas City Deck Builders',
-      },
-      {
-        property: 'og:description',
-        content:
-          'DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings, and outdoor living spaces across the Kansas City metro.',
-      },
-    ],
-    links: [
-      {
-        rel: 'canonical',
-        href: 'https://decksrxkc.com/service-areas',
-      },
-    ],
+  head: () => getSeoHead({
+    title: serviceAreasTitle,
+    description: serviceAreasDescription,
+    path: '/service-areas',
+    image: defaultSeoImagePath,
   }),
   component: ServiceAreasIndex,
 })
@@ -44,6 +28,10 @@ function ServiceAreasIndex() {
               className="h-11 w-auto max-w-[180px] object-contain sm:h-14 sm:max-w-[220px]"
               src="/images/decksrxkc-header-logo-cropped.png"
               alt="DecksRXKC"
+              width="330"
+              height="84"
+              loading="eager"
+              decoding="async"
             />
           </a>
           <a className="hidden text-sm font-black uppercase tracking-[0.14em] text-soft-beige transition hover:text-white sm:inline-flex" href="/#contact">

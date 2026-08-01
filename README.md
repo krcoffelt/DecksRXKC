@@ -16,6 +16,7 @@ Local dev server runs at `http://127.0.0.1:4321/`.
 ```bash
 npm run typecheck
 npm run build
+npm run check:seo
 npm run preview
 ```
 
@@ -23,9 +24,15 @@ The production build outputs client assets to `dist/client` and the server bundl
 
 `npm run build` runs `npm run generate:sitemap` before bundling so `public/sitemap.xml` stays in sync with service and service-area data.
 
+`npm run check:seo` renders every sitemap URL through the built server entry and verifies status, title, description, canonical, robots metadata, H1 count, main content, and homepage SEO signals. To check a deployed environment instead, set `SEO_BASE_URL`, for example `SEO_BASE_URL=https://decksrxkc.com npm run check:seo`.
+
+Optional GA4 measurement uses `VITE_GA_MEASUREMENT_ID`. When configured, the site records `quote_cta_click`, `click_to_call`, and `generate_lead`; when omitted, analytics safely remains inactive.
+
 ## Project Structure
 
 - `src/routes/index.tsx` composes the homepage and homepage structured data.
+- `src/data/servicePages.ts`, `src/data/projects.ts`, and `src/data/guides.ts` hold typed SEO content used to generate service, project, and guide routes.
+- `src/data/business.ts` is the source of truth for the business entity used in structured data and contact links.
 - `src/components/home/` contains focused homepage sections.
 - `src/routes/services.index.tsx` and `src/routes/services.$slug.tsx` contain dedicated service pages.
 - `src/routes/service-areas.index.tsx` and `src/routes/service-areas.$slug.tsx` contain location pages.

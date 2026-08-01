@@ -23,7 +23,7 @@ export function ServiceAreasPreview() {
                 <p className="mt-1 text-sm font-bold text-ink/62">Both sides of KC</p>
               </div>
               <div>
-                <p className="text-4xl font-black text-charcoal">6</p>
+                <p className="text-4xl font-black text-charcoal">7</p>
                 <p className="mt-1 text-sm font-bold text-ink/62">Dedicated service pages</p>
               </div>
             </div>

@@ -9,6 +9,7 @@ import { ServiceAreasPreview } from '../components/home/ServiceAreasPreview'
 import { ServicesOverview } from '../components/home/ServicesOverview'
 import { getServiceAreaLabel, serviceAreas } from '../data/serviceAreas'
 import { servicePages } from '../data/servicePages'
+import { getBusinessSchema } from '../data/business'
 import { defaultSeoDescription, defaultSeoImage, defaultSeoImagePath, defaultSeoTitle, getSeoHead, siteUrl } from '../lib/seo'
 
 const homepageTitle = defaultSeoTitle
@@ -64,13 +65,8 @@ function HomepageStructuredData() {
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           '@context': 'https://schema.org',
-          '@type': 'HomeAndConstructionBusiness',
-          '@id': `${siteUrl}/#business`,
-          name: 'DecksRXKC',
-          url: siteUrl,
+          ...getBusinessSchema(),
           image: homepageImage,
-          telephone: '+1-913-205-6531',
-          description: homepageDescription,
           areaServed: [
             {
               '@type': 'AdministrativeArea',

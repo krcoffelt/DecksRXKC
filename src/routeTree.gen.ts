@@ -10,15 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServiceAreasRouteImport } from './routes/service-areas'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as GuidesRouteImport } from './routes/guides'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServiceAreasIndexRouteImport } from './routes/service-areas.index'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as ServiceAreasSlugRouteImport } from './routes/service-areas.$slug'
+import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 
 const ServiceAreasRoute = ServiceAreasRouteImport.update({
   id: '/service-areas',
   path: '/service-areas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesRoute = GuidesRouteImport.update({
+  id: '/guides',
+  path: '/guides',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -36,6 +64,16 @@ const ServiceAreasIndexRoute = ServiceAreasIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ServiceAreasRoute,
 } as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GuidesRoute,
+} as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
@@ -46,28 +84,60 @@ const ServiceAreasSlugRoute = ServiceAreasSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ServiceAreasRoute,
 } as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => GuidesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/guides': typeof GuidesRouteWithChildren
+  '/projects': typeof ProjectsRouteWithChildren
   '/service-areas': typeof ServiceAreasRouteWithChildren
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/service-areas/$slug': typeof ServiceAreasSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/service-areas/': typeof ServiceAreasIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/service-areas/$slug': typeof ServiceAreasSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/guides': typeof GuidesIndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/service-areas': typeof ServiceAreasIndexRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/guides': typeof GuidesRouteWithChildren
+  '/projects': typeof ProjectsRouteWithChildren
   '/service-areas': typeof ServiceAreasRouteWithChildren
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/service-areas/$slug': typeof ServiceAreasSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/service-areas/': typeof ServiceAreasIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
@@ -75,30 +145,56 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/contact'
+    | '/guides'
+    | '/projects'
     | '/service-areas'
+    | '/guides/$slug'
+    | '/projects/$slug'
     | '/service-areas/$slug'
     | '/services/$slug'
+    | '/guides/'
+    | '/projects/'
     | '/service-areas/'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/contact'
+    | '/guides/$slug'
+    | '/projects/$slug'
     | '/service-areas/$slug'
     | '/services/$slug'
+    | '/guides'
+    | '/projects'
     | '/service-areas'
     | '/services'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/contact'
+    | '/guides'
+    | '/projects'
     | '/service-areas'
+    | '/guides/$slug'
+    | '/projects/$slug'
     | '/service-areas/$slug'
     | '/services/$slug'
+    | '/guides/'
+    | '/projects/'
     | '/service-areas/'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  GuidesRoute: typeof GuidesRouteWithChildren
+  ProjectsRoute: typeof ProjectsRouteWithChildren
   ServiceAreasRoute: typeof ServiceAreasRouteWithChildren
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
@@ -111,6 +207,34 @@ declare module '@tanstack/react-router' {
       path: '/service-areas'
       fullPath: '/service-areas'
       preLoaderRoute: typeof ServiceAreasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides': {
+      id: '/guides'
+      path: '/guides'
+      fullPath: '/guides'
+      preLoaderRoute: typeof GuidesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -134,6 +258,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServiceAreasIndexRouteImport
       parentRoute: typeof ServiceAreasRoute
     }
+    '/projects/': {
+      id: '/projects/'
+      path: '/'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/guides/': {
+      id: '/guides/'
+      path: '/'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof GuidesRoute
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/services/$slug'
@@ -148,8 +286,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServiceAreasSlugRouteImport
       parentRoute: typeof ServiceAreasRoute
     }
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
+      parentRoute: typeof GuidesRoute
+    }
   }
 }
+
+interface GuidesRouteChildren {
+  GuidesSlugRoute: typeof GuidesSlugRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
+}
+
+const GuidesRouteChildren: GuidesRouteChildren = {
+  GuidesSlugRoute: GuidesSlugRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
+}
+
+const GuidesRouteWithChildren =
+  GuidesRoute._addFileChildren(GuidesRouteChildren)
+
+interface ProjectsRouteChildren {
+  ProjectsSlugRoute: typeof ProjectsSlugRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
+}
+
+const ProjectsRouteChildren: ProjectsRouteChildren = {
+  ProjectsSlugRoute: ProjectsSlugRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
+}
+
+const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
+  ProjectsRouteChildren,
+)
 
 interface ServiceAreasRouteChildren {
   ServiceAreasSlugRoute: typeof ServiceAreasSlugRoute
@@ -167,6 +346,10 @@ const ServiceAreasRouteWithChildren = ServiceAreasRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  GuidesRoute: GuidesRouteWithChildren,
+  ProjectsRoute: ProjectsRouteWithChildren,
   ServiceAreasRoute: ServiceAreasRouteWithChildren,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesIndexRoute: ServicesIndexRoute,

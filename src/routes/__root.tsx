@@ -6,6 +6,7 @@ import {
   createRootRoute,
 } from '@tanstack/react-router'
 import { defaultSeoDescription, defaultSeoImagePath, defaultSeoTitle, getSeoHead } from '../lib/seo'
+import { gaMeasurementId } from '../lib/analytics'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -48,6 +49,12 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html lang="en">
       <head>
         <HeadContent />
+        {gaMeasurementId ? (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} />
+            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config','${gaMeasurementId}',{anonymize_ip:true});` }} />
+          </>
+        ) : null}
       </head>
       <body>
         {children}

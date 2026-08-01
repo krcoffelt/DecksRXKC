@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev --host 127.0.0.1 --port 4321",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "check:seo": "node scripts/check-rendered-seo.mjs",
     "typecheck": "tsc --noEmit",
     "build": "npm run generate:sitemap && vite build",
     "start": "node dist/server/server.js",

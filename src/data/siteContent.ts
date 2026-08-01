@@ -1,12 +1,12 @@
 import { Hammer, Home, ShieldCheck, Trees, Wrench } from 'lucide-react'
 
 export const navItems = [
-  { label: 'Decks', href: '/#decks' },
-  { label: 'Screened-In Decks', href: '/services/screened-in-decks' },
-  { label: 'Covered Decks', href: '/services/covered-decks' },
+  { label: 'Services', href: '/services' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Guides', href: '/guides' },
   { label: 'Service Areas', href: '/service-areas' },
-  { label: 'Our Work', href: '/#our-work' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export const trustPoints = [
@@ -21,7 +21,7 @@ export const homeServices = [
     description: 'New decks, rebuilds, stairs, framing, decking, and railing systems planned around your home.',
     image: '/images/optimized/kansas-city-elevated-composite-deck-cable-railing-stairs.jpg',
     icon: Hammer,
-    href: '/services/composite-decks',
+    href: '/services/custom-decks',
     proof: 'Composite and wood options',
   },
   {
@@ -39,24 +39,6 @@ export const homeServices = [
     icon: Home,
     href: '/services/covered-decks',
     proof: 'Shade, weather cover, and finished ceilings',
-  },
-]
-
-export const projects = [
-  {
-    title: 'Second-story deck rebuild',
-    details: 'Composite decking, black aluminum railing, stairs, and upgraded framing.',
-    image: '/images/optimized/kansas-city-elevated-screened-deck-wood-stairs.jpg',
-  },
-  {
-    title: 'Screened outdoor room',
-    details: 'Pet-proof screening, screen door, covered roof, and finished ceiling.',
-    image: '/images/optimized/kansas-city-elevated-screened-porch-black-railing.jpg',
-  },
-  {
-    title: 'Covered deck upgrade',
-    details: 'Roof structure, lighting, fan, and weather protection.',
-    image: '/images/optimized/kansas-city-composite-covered-deck-railing-detail.jpg',
   },
 ]
 

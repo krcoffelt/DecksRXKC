@@ -15,6 +15,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -22,6 +23,7 @@ body {
   background: #f7f3ed;
   color: #2c2925;
   font-family: var(--font-sans);
+  overflow-x: clip;
 }
 
 * {
@@ -35,6 +37,38 @@ img {
 
 a {
   text-decoration: none;
+}
+
+@keyframes deck-fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes deck-image-settle {
+  from {
+    opacity: 0.72;
+    transform: scale(1.025);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main h1 {
+    animation: deck-fade-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  main > section:first-of-type img {
+    animation: deck-image-settle 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 }
 
 button,

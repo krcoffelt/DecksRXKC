@@ -2,7 +2,8 @@ import { AlertCircle, ArrowUpRight, CheckCircle, LoaderCircle } from 'lucide-rea
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { projectTypes, timelines } from '../data/siteContent'
-import { isSupabaseConfigured, supabase } from '../lib/supabase'
+import { getSupabaseClient, isSupabaseConfigured } from '../lib/supabase'
+import { trackEvent } from '../lib/analytics'
 
 const initialLeadForm = {
   name: '',
@@ -35,6 +36,8 @@ export function LeadForm() {
     event.preventDefault()
     setErrorMessage('')
 
+    const supabase = getSupabaseClient()
+
     if (!isSupabaseConfigured || !supabase) {
       setSubmitState('error')
       setErrorMessage('Supabase is not configured yet. Add the VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.')
@@ -64,6 +67,10 @@ export function LeadForm() {
 
     setForm(initialLeadForm)
     setSubmitState('success')
+    trackEvent('generate_lead', {
+      project_type: form.projectType,
+      city: form.city.trim(),
+    })
   }
 
   return (
@@ -200,7 +207,7 @@ export function LeadForm() {
             </>
           )}
         </button>
-        <a className="text-sm font-black text-charcoal transition hover:text-wood" href="tel:+19132056531">
+        <a className="text-sm font-black text-charcoal transition hover:text-wood" href="tel:+19132056531" onClick={() => trackEvent('click_to_call', { page_path: typeof window === 'undefined' ? '/' : window.location.pathname })}>
           Or call (913) 205-6531
         </a>
       </div>

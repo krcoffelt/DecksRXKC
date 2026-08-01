@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { trackEvent } from '../lib/analytics'
 
 type ButtonLinkProps = ComponentPropsWithoutRef<'a'> & {
   variant?: 'dark' | 'light' | 'outline' | 'ghost'
@@ -12,6 +13,7 @@ export function ButtonLink({
   children,
   className = '',
   showArrow = true,
+  onClick,
   ...props
 }: ButtonLinkProps) {
   const variants = {
@@ -24,6 +26,16 @@ export function ButtonLink({
   return (
     <a
       className={`inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-black transition ${variants[variant]} ${className}`}
+      onClick={(event) => {
+        if (typeof props.href === 'string') {
+          if (props.href.startsWith('tel:')) {
+            trackEvent('click_to_call', { destination: props.href })
+          } else if (props.href.includes('contact') || props.href.includes('#contact')) {
+            trackEvent('quote_cta_click', { destination: props.href })
+          }
+        }
+        onClick?.(event)
+      }}
       {...props}
     >
       {children}

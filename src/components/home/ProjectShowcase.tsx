@@ -1,8 +1,8 @@
-import { projects } from '../../data/siteContent'
+import { getProjectPagePath, projectPages } from '../../data/projects'
 import { SectionIntro } from '../ui'
 
 export function ProjectShowcase() {
-  const [featuredProject, ...supportingProjects] = projects
+  const [featuredProject, ...supportingProjects] = projectPages.slice(0, 3)
 
   return (
     <section id="our-work" className="bg-charcoal px-5 py-20 text-white sm:px-8 lg:py-28">
@@ -23,11 +23,11 @@ export function ProjectShowcase() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <article className="relative min-h-[560px] overflow-hidden bg-black">
+          <a className="group relative min-h-[560px] overflow-hidden bg-black" href={getProjectPagePath(featuredProject)}>
             <img
               className="absolute inset-0 h-full w-full object-cover"
-              src={featuredProject.image}
-              alt={featuredProject.title}
+              src={featuredProject.heroImage}
+              alt={featuredProject.shortTitle}
               width="1600"
               height="1200"
               loading="lazy"
@@ -36,16 +36,16 @@ export function ProjectShowcase() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/86 via-black/20 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
               <h3 className="text-4xl font-black leading-tight">{featuredProject.title}</h3>
-              <p className="mt-3 max-w-xl text-base leading-7 text-white/76">{featuredProject.details}</p>
+              <p className="mt-3 max-w-xl text-base leading-7 text-white/76">{featuredProject.summary}</p>
             </div>
-          </article>
+          </a>
 
           <div className="grid gap-6">
             {supportingProjects.map((project) => (
-              <article key={project.title} className="grid gap-4 border-b border-white/14 pb-6 last:border-b-0 last:pb-0 sm:grid-cols-[0.9fr_1.1fr] lg:grid-cols-1 xl:grid-cols-[0.9fr_1.1fr]">
+              <a key={project.title} href={getProjectPagePath(project)} className="group grid gap-4 border-b border-white/14 pb-6 last:border-b-0 last:pb-0 sm:grid-cols-[0.9fr_1.1fr] lg:grid-cols-1 xl:grid-cols-[0.9fr_1.1fr]">
                 <img
                   className="h-48 w-full object-cover"
-                  src={project.image}
+                  src={project.heroImage}
                   alt={project.title}
                   width="1600"
                   height="1200"
@@ -53,10 +53,10 @@ export function ProjectShowcase() {
                   decoding="async"
                 />
                 <div>
-                  <h3 className="text-2xl font-black leading-tight">{project.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/68">{project.details}</p>
+                  <h3 className="text-2xl font-black leading-tight transition group-hover:text-soft-beige">{project.shortTitle}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/68">{project.summary}</p>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         </div>

@@ -35,7 +35,7 @@ export function SiteHeader({ variant = 'solid' }: SiteHeaderProps) {
         </nav>
 
         <div className="hidden lg:block">
-          <ButtonLink href="/#contact" variant="light" showArrow={false}>
+          <ButtonLink href="/contact" variant="light" showArrow={false}>
             Free Quote
           </ButtonLink>
         </div>
@@ -66,7 +66,7 @@ export function SiteHeader({ variant = 'solid' }: SiteHeaderProps) {
               {item.label}
             </a>
           ))}
-          <ButtonLink className="mt-3 w-full" href="/#contact" variant="light" onClick={() => setMenuOpen(false)}>
+          <ButtonLink className="mt-3 w-full" href="/contact" variant="light" onClick={() => setMenuOpen(false)}>
             Free Quote
           </ButtonLink>
         </nav>

@@ -1,5 +1,7 @@
 import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
 import { getServicePagePath, servicePages } from '../data/servicePages'
+import { business } from '../data/business'
+import { trackEvent } from '../lib/analytics'
 
 export function SiteFooter() {
   return (
@@ -19,11 +21,11 @@ export function SiteFooter() {
             <p className="mt-5 max-w-md text-sm font-semibold leading-6 text-white/58">
               Custom decks, screened-in decks, covered decks, stairs, and railings across the Kansas City metro.
             </p>
-            <a className="mt-5 inline-flex text-sm font-black text-soft-beige transition hover:text-white" href="tel:+19132056531">
-              (913) 205-6531
+            <a className="mt-5 inline-flex text-sm font-black text-soft-beige transition hover:text-white" href={`tel:${business.phone}`} onClick={() => trackEvent('click_to_call', { page_path: typeof window === 'undefined' ? '/' : window.location.pathname })}>
+              {business.phoneDisplay}
             </a>
           </div>
-          <div className="grid gap-8 md:grid-cols-[0.65fr_1.35fr]">
+          <div className="grid gap-8 md:grid-cols-[0.55fr_0.55fr_1.4fr]">
             <nav aria-label="Footer services">
               <p className="text-xs font-black uppercase tracking-[0.16em] text-soft-beige">Services</p>
               <div className="mt-4 grid gap-3 text-sm font-bold text-white/66">
@@ -32,6 +34,15 @@ export function SiteFooter() {
                     {service.shortTitle}
                   </a>
                 ))}
+              </div>
+            </nav>
+            <nav aria-label="Footer resources">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-soft-beige">Explore</p>
+              <div className="mt-4 grid gap-3 text-sm font-bold text-white/66">
+                <a className="transition hover:text-soft-beige" href="/projects">Projects</a>
+                <a className="transition hover:text-soft-beige" href="/guides">Guides</a>
+                <a className="transition hover:text-soft-beige" href="/about">About</a>
+                <a className="transition hover:text-soft-beige" href="/contact">Contact</a>
               </div>
             </nav>
             <nav aria-label="Footer service areas">

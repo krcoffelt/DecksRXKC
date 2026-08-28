@@ -24,6 +24,13 @@ export type ServicePage = {
   sections: ServiceSection[]
   process: Array<{ title: string; description: string }>
   decisionPoints: Array<{ title: string; description: string }>
+  areaSpotlight?: {
+    eyebrow: string
+    title: string
+    body: string
+    image: string
+    areaSlugs: string[]
+  }
   faqs: Array<{ question: string; answer: string }>
   relatedServiceSlugs: string[]
   relatedProjectSlugs: string[]
@@ -90,7 +97,7 @@ export const servicePages: ServicePage[] = [
     ],
     relatedServiceSlugs: ['composite-decks', 'covered-decks', 'stairs-and-railings'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs', 'covered-deck-outdoor-room'],
-    relatedGuideSlugs: ['composite-vs-wood-decking-kansas-city'],
+    relatedGuideSlugs: ['choose-deck-builder-kansas-city', 'composite-vs-wood-decking-kansas-city'],
     publishedAt: contentDate,
     updatedAt: contentDate,
   },
@@ -138,18 +145,27 @@ export const servicePages: ServicePage[] = [
       { title: 'Door location', description: 'Protect furniture space and create a natural path to stairs or the yard.' },
       { title: 'Future use', description: 'Consider fans, lighting, privacy, and seasonal furniture before finalizing openings.' },
     ],
+    areaSpotlight: {
+      eyebrow: 'Leawood Screened Decks',
+      title: 'Plan the enclosure as part of the home—not a box on the deck',
+      body:
+        'For Leawood homes, a screened deck often succeeds or fails in the transitions: how the roofline meets the house, how screen bays preserve important views, where the door lands, and how trim, railing, ceiling, fans, and lighting relate to the exterior. Existing framing and roof conditions should be evaluated before finish selections begin. The Leawood service-area guide brings those local layout and detailing decisions together without creating a duplicate service page.',
+      image: '/images/kansas-city-screened-porch-black-railing.jpg',
+      areaSlugs: ['leawood-ks'],
+    },
     faqs: [
       { question: 'Can you screen in an existing deck?', answer: 'Often, yes. DecksRXKC can evaluate framing, roof conditions, railings, and layout to determine what should be added or rebuilt.' },
       { question: 'Do screened-in decks still feel open?', answer: 'A good screen layout preserves airflow and views while reducing bugs, direct sun, and wind exposure.' },
       { question: 'Can a screened deck include a ceiling fan and lighting?', answer: 'Yes, when electrical and ceiling locations are included in the project plan.' },
       { question: 'Are screened rooms useful with pets?', answer: 'They can be. Screen type, lower panels, door hardware, and traffic paths should be selected with the pets and household in mind.' },
       { question: 'Does the deck need a roof before it can be screened?', answer: 'A screened room needs overhead protection. If no suitable cover exists, the roof structure becomes part of the project.' },
+      { question: 'Does DecksRXKC build screened-in decks in Leawood?', answer: 'Yes. DecksRXKC serves Leawood and the Kansas City metro with screened-in decks, covered outdoor rooms, custom decks, repairs, replacements, stairs, and railings.' },
     ],
     relatedServiceSlugs: ['covered-decks', 'custom-decks', 'deck-replacement'],
     relatedProjectSlugs: ['screened-in-deck-addition', 'covered-deck-outdoor-room'],
-    relatedGuideSlugs: [],
+    relatedGuideSlugs: ['can-you-screen-in-an-existing-deck'],
     publishedAt: contentDate,
-    updatedAt: contentDate,
+    updatedAt: '2026-08-16',
   },
   {
     slug: 'covered-decks',
@@ -206,7 +222,7 @@ export const servicePages: ServicePage[] = [
     ],
     relatedServiceSlugs: ['screened-in-decks', 'custom-decks', 'composite-decks'],
     relatedProjectSlugs: ['covered-deck-outdoor-room', 'screened-in-deck-addition'],
-    relatedGuideSlugs: [],
+    relatedGuideSlugs: ['add-roof-over-existing-deck'],
     publishedAt: contentDate,
     updatedAt: contentDate,
   },
@@ -265,7 +281,7 @@ export const servicePages: ServicePage[] = [
     ],
     relatedServiceSlugs: ['custom-decks', 'deck-replacement', 'stairs-and-railings'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs', 'covered-deck-outdoor-room'],
-    relatedGuideSlugs: ['composite-vs-wood-decking-kansas-city'],
+    relatedGuideSlugs: ['composite-deck-cost-kansas-city', 'trex-vs-timbertech-kansas-city', 'composite-vs-wood-decking-kansas-city'],
     publishedAt: contentDate,
     updatedAt: contentDate,
   },
@@ -321,12 +337,13 @@ export const servicePages: ServicePage[] = [
       { question: 'Can part of the old frame be reused?', answer: 'Possibly, but only after its condition, layout, spacing, and suitability for the new material package have been assessed.' },
       { question: 'Can replacement include new stair placement?', answer: 'Yes. Replacement is a good time to reconsider how the deck connects to patios, gates, doors, and the yard.' },
       { question: 'What happens when demolition reveals another issue?', answer: 'The relevant condition should be documented and discussed before work beyond the agreed scope proceeds.' },
+      { question: 'Where does DecksRXKC provide deck replacement?', answer: 'DecksRXKC replaces decks across the Kansas City metro, including Leawood, Prairie Village, Overland Park, Lenexa, Olathe, Shawnee, and nearby Missouri communities.' },
     ],
     relatedServiceSlugs: ['deck-repair', 'composite-decks', 'stairs-and-railings'],
     relatedProjectSlugs: ['ground-up-deck-replacement', 'elevated-composite-deck-and-stairs'],
     relatedGuideSlugs: ['repair-or-replace-your-deck', 'composite-vs-wood-decking-kansas-city'],
     publishedAt: contentDate,
-    updatedAt: contentDate,
+    updatedAt: '2026-08-12',
   },
   {
     slug: 'deck-repair',
@@ -334,7 +351,7 @@ export const servicePages: ServicePage[] = [
     shortTitle: 'Deck Repair',
     metaTitle: 'Deck Repair Kansas City | DecksRXKC',
     metaDescription:
-      'DecksRXKC evaluates Kansas City deck repairs involving boards, stairs, railings, framing, connections, and practical safety improvements.',
+      'DecksRXKC evaluates deck repairs across Kansas City involving boards, stairs, railings, framing, connections, and practical safety improvements.',
     eyebrow: 'Fix the right problem',
     heroCopy:
       'Address worn, loose, or difficult-to-use deck components with clear guidance about what can be repaired and when replacement makes more sense.',
@@ -378,12 +395,13 @@ export const servicePages: ServicePage[] = [
       { question: 'Can loose railings be repaired?', answer: 'In some cases. The railing and the deck components supporting it should both be reviewed before deciding on repair or replacement.' },
       { question: 'What if the deck needs more than repair?', answer: 'If a focused repair is unlikely to provide a durable result, DecksRXKC can compare phased improvements with full replacement.' },
       { question: 'How should I prepare for a repair assessment?', answer: 'Note where the concern appears, when it started, whether it changes with weather, and any previous repair work. Photos can also help begin the conversation.' },
+      { question: 'Where does DecksRXKC provide deck repair?', answer: 'DecksRXKC serves homeowners across the Kansas City metro, including Prairie Village, Leawood, Overland Park, Lenexa, Olathe, Shawnee, and nearby Missouri communities.' },
     ],
     relatedServiceSlugs: ['deck-replacement', 'stairs-and-railings', 'composite-decks'],
     relatedProjectSlugs: ['deck-stair-and-railing-upgrade', 'ground-up-deck-replacement'],
     relatedGuideSlugs: ['repair-or-replace-your-deck'],
     publishedAt: contentDate,
-    updatedAt: contentDate,
+    updatedAt: '2026-08-12',
   },
   {
     slug: 'stairs-and-railings',
@@ -418,6 +436,13 @@ export const servicePages: ServicePage[] = [
           'A tread, stringer, landing, rail, and the deck support each affect the others. A focused repair can make sense when the concern is isolated; broader wear or an awkward layout may make a rebuilt run the better choice.',
       },
       {
+        eyebrow: 'Replacement Scope',
+        title: 'When full deck stair replacement is the better path',
+        body:
+          'Complete replacement is worth comparing when movement or deterioration affects multiple stair components, the landing no longer provides a dependable transition, or the existing run creates awkward access. Rebuilding the system allows the stringers, treads, landing, handrails, guards, and deck connection to be planned together.',
+        items: ['Repeated tread or stringer repairs', 'Loose rails across the stair run', 'Unstable or poorly placed landing', 'A route that conflicts with patios, gates, or yard use'],
+      },
+      {
         eyebrow: 'Design',
         title: 'Use placement to improve the whole yard',
         body:
@@ -444,12 +469,13 @@ export const servicePages: ServicePage[] = [
       { question: 'What railing styles are available?', answer: 'DecksRXKC can discuss dark metal, cable-style, and wood options based on the deck, views, maintenance goals, and complete project.' },
       { question: 'Can lighting be included with new stairs?', answer: 'Yes. Lighting locations are easiest to coordinate while the stair layout and finish details are being planned.' },
       { question: 'Do new stairs require a new landing?', answer: 'The appropriate landing depends on the layout, grade, existing conditions, and project requirements. It should be considered as part of the complete stair plan.' },
+      { question: 'Does DecksRXKC replace complete deck stair systems?', answer: 'Yes. DecksRXKC can replace the full stair run and coordinate stringers, treads, landings, handrails, guards, railing transitions, and the connection to the supporting deck.' },
     ],
     relatedServiceSlugs: ['deck-repair', 'deck-replacement', 'custom-decks'],
     relatedProjectSlugs: ['deck-stair-and-railing-upgrade', 'elevated-composite-deck-and-stairs'],
     relatedGuideSlugs: ['repair-or-replace-your-deck'],
     publishedAt: contentDate,
-    updatedAt: contentDate,
+    updatedAt: '2026-08-12',
   },
 ]
 

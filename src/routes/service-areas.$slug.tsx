@@ -4,6 +4,7 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ButtonLink } from '../components/ui'
 import { business } from '../data/business'
+import { getGuidePagePath, getGuidesBySlugs } from '../data/guides'
 import { getProjectPagePath, getProjectsBySlugs } from '../data/projects'
 import { getServiceArea, getServiceAreaLabel, getServiceAreaPath, serviceAreas, type ServiceArea } from '../data/serviceAreas'
 import { getServicePage, getServicePagePath, servicePages } from '../data/servicePages'
@@ -19,8 +20,8 @@ export const Route = createFileRoute('/service-areas/$slug')({
     const area = loaderData as ServiceArea
     const label = getServiceAreaLabel(area)
     return getSeoHead({
-      title: `Deck Builder in ${label} | DecksRXKC`,
-      description: getServiceAreaDescription(label),
+      title: area.metaTitle ?? `Deck Builder in ${label} | DecksRXKC`,
+      description: area.metaDescription ?? getServiceAreaDescription(label),
       path: getServiceAreaPath(area),
       image: area.image || defaultSeoImagePath,
     })
@@ -40,6 +41,7 @@ function ServiceAreaPage() {
   const relatedAreas = getRelatedServiceAreas(area)
   const focus = area.priorityContent?.serviceFocus ?? defaultFocus
   const projects = getProjectsBySlugs(area.priorityContent?.projectSlugs ?? [])
+  const guides = getGuidesBySlugs(area.priorityContent?.guideSlugs ?? [])
   const faqs = area.priorityContent?.faqs ?? [
     { question: `What deck services are available in ${area.city}?`, answer: `DecksRXKC serves ${label} with custom decks, repair, replacement, composite and wood options, covers, screened rooms, stairs, and railings.` },
     { question: `Does DecksRXKC provide deck quotes in ${area.city}?`, answer: `Yes. Share the project type, location, current deck condition, and timing to start a practical conversation about the next step.` },
@@ -55,6 +57,13 @@ function ServiceAreaPage() {
           <img className="absolute inset-0 h-full w-full object-cover opacity-42" src={area.image} alt={`${label} deck project by DecksRXKC`} width="1600" height="1200" loading="eager" decoding="async" fetchPriority="high" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_0_0_/_0.8),rgb(0_0_0_/_0.44)_56%,rgb(0_0_0_/_0.25))]" />
           <div className="relative mx-auto max-w-7xl"><div className="max-w-4xl">
+            <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-2 text-xs font-bold text-white/66">
+              <a className="transition hover:text-soft-beige" href="/">Home</a>
+              <span aria-hidden="true">/</span>
+              <a className="transition hover:text-soft-beige" href="/service-areas">Service Areas</a>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page" className="text-white">{label}</span>
+            </nav>
             <p className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.18em] text-soft-beige"><MapPin className="h-4 w-4" aria-hidden="true" />{label} service area</p>
             <h1 className="mt-5 text-5xl font-black leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">Deck builder in {label}</h1>
             <p className="mt-6 max-w-3xl text-xl font-semibold leading-8 text-white/82">Custom decks, screened-in decks, covered decks, repairs, replacements, stairs, and railings for homeowners in {label}.</p>
@@ -87,6 +96,35 @@ function ServiceAreaPage() {
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
               <div><p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Planning Priorities</p><h2 className="mt-4 text-4xl font-black leading-tight sm:text-5xl">Decisions that shape a better {area.city} deck</h2></div>
               <div className="divide-y divide-white/14 border-y border-white/14">{area.priorityContent.planningNotes.map((note) => <p key={note} className="flex gap-4 py-6 text-lg font-bold leading-8 text-white/78"><CheckCircle className="mt-1 h-5 w-5 shrink-0 text-soft-beige" aria-hidden="true" />{note}</p>)}</div>
+            </div>
+          </section>
+        ) : null}
+
+        {area.priorityContent?.decisionGuide ? (
+          <section className="px-5 py-16 sm:px-8 lg:py-24">
+            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">{area.priorityContent.decisionGuide.eyebrow}</p>
+                <h2 className="mt-4 text-4xl font-black leading-[1.04] tracking-tight text-charcoal sm:text-5xl">{area.priorityContent.decisionGuide.title}</h2>
+              </div>
+              <div>
+                <p className="text-lg leading-8 text-ink/72">{area.priorityContent.decisionGuide.body}</p>
+                <div className="mt-8 grid border-y border-charcoal/12 sm:grid-cols-2">
+                  {area.priorityContent.decisionGuide.points.map((point) => (
+                    <p key={point} className="border-b border-charcoal/12 py-5 pr-5 text-base font-black leading-7 text-charcoal sm:odd:border-r sm:even:pl-5 sm:nth-last-[-n+2]:border-b-0">{point}</p>
+                  ))}
+                </div>
+                {guides.length > 0 ? (
+                  <div className="mt-8 divide-y divide-charcoal/12 border-y border-charcoal/12">
+                    {guides.map((guide) => (
+                      <a key={guide.slug} href={getGuidePagePath(guide)} className="flex items-center justify-between gap-5 py-5 text-base font-black text-muted-green transition hover:text-wood">
+                        Read the guide: {guide.shortTitle}
+                        <ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
             </div>
           </section>
         ) : null}

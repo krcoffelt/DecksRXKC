@@ -24,7 +24,7 @@ The production build outputs client assets to `dist/client` and the server bundl
 
 `npm run build` runs `npm run generate:sitemap` before bundling so `public/sitemap.xml` stays in sync with service and service-area data.
 
-`npm run check:seo` renders every sitemap URL through the built server entry and verifies status, title, description, canonical, robots metadata, H1 count, main content, and homepage SEO signals. To check a deployed environment instead, set `SEO_BASE_URL`, for example `SEO_BASE_URL=https://decksrxkc.com npm run check:seo`.
+`npm run check:seo` renders every sitemap URL through the built server entry and verifies status, unique titles and descriptions, canonicals, robots metadata, H1 count, main content, JSON-LD validity, internal sitemap links, orphan pages, guide citations, homepage SEO signals, and answer terms for the priority-query map. To check a deployed environment instead, set `SEO_BASE_URL`, for example `SEO_BASE_URL=https://decksrxkc.com npm run check:seo`.
 
 Optional GA4 measurement uses `VITE_GA_MEASUREMENT_ID`. When configured, the site records `quote_cta_click`, `click_to_call`, and `generate_lead`; when omitted, analytics safely remains inactive.
 

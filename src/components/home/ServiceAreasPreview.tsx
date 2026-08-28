@@ -16,15 +16,15 @@ export function ServiceAreasPreview() {
             <div className="mt-8 grid gap-4 border-y border-charcoal/12 py-6 sm:grid-cols-3">
               <div>
                 <p className="text-4xl font-black text-charcoal">{serviceAreas.length}</p>
-                <p className="mt-1 text-sm font-bold text-ink/62">Metro service areas</p>
+                <p className="mt-1 text-sm font-bold text-ink/70">Metro service areas</p>
               </div>
               <div>
                 <p className="text-4xl font-black text-charcoal">KS + MO</p>
-                <p className="mt-1 text-sm font-bold text-ink/62">Both sides of KC</p>
+                <p className="mt-1 text-sm font-bold text-ink/70">Both sides of KC</p>
               </div>
               <div>
                 <p className="text-4xl font-black text-charcoal">7</p>
-                <p className="mt-1 text-sm font-bold text-ink/62">Dedicated service pages</p>
+                <p className="mt-1 text-sm font-bold text-ink/70">Dedicated service pages</p>
               </div>
             </div>
             <ButtonLink className="mt-8" href="/service-areas">
@@ -43,7 +43,7 @@ export function ServiceAreasPreview() {
                     <h3 className="text-xl font-black text-charcoal transition group-hover:text-white">
                       {getServiceAreaLabel(area)}
                     </h3>
-                    <p className="mt-2 text-sm font-semibold leading-6 text-ink/62 transition group-hover:text-white/68">
+                    <p className="mt-2 text-sm font-semibold leading-6 text-ink/70 transition group-hover:text-white/74">
                       {area.projectTypes.slice(0, 2).join(' and ')} in {area.county}.
                     </p>
                   </div>

@@ -22,7 +22,7 @@ export function ReviewsSection() {
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-4xl font-black text-charcoal">5.0</span>
               <RatingStars className="text-3xl" />
-              <span className="text-base font-bold text-ink/52">{googleReviews.length} recent reviews</span>
+              <span className="text-base font-bold text-ink/70">{googleReviews.length} recent reviews</span>
             </div>
           </div>
           <a
@@ -31,7 +31,7 @@ export function ReviewsSection() {
             target="_blank"
             rel="noreferrer"
           >
-            Write a Review
+            View Reviews on Google
             <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </a>
         </div>
@@ -56,10 +56,10 @@ function ReviewCard({ review }: Readonly<{ review: (typeof googleReviews)[number
           </div>
           <div className="min-w-0">
             <h3 className="text-lg font-black text-charcoal">{review.name}</h3>
-            <p className="mt-1 text-sm font-bold text-ink/48">{review.meta}</p>
+            <p className="mt-1 text-sm font-bold text-ink/70">{review.meta}</p>
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <RatingStars className="text-lg" />
-              <span className="text-sm font-bold text-ink/50">{review.date}</span>
+              <span className="text-sm font-bold text-ink/70">{review.date}</span>
             </div>
           </div>
         </div>
@@ -70,8 +70,8 @@ function ReviewCard({ review }: Readonly<{ review: (typeof googleReviews)[number
       <div className="mt-6 flex items-center gap-3">
         <GoogleGLogo className="h-8 w-8" />
         <div className="text-sm leading-5">
-          <p className="font-bold text-ink/52">Posted on</p>
-          <p className="font-black text-[#4285f4]">Google</p>
+          <p className="font-bold text-ink/70">Posted on</p>
+          <p className="font-black text-[#185abc]">Google</p>
         </div>
       </div>
     </article>

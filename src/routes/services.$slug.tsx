@@ -46,7 +46,9 @@ function ServiceDetailPage() {
   const relatedServices = getServicesBySlugs(service.relatedServiceSlugs)
   const relatedProjects = getProjectsBySlugs(service.relatedProjectSlugs)
   const relatedGuides = getGuidesBySlugs(service.relatedGuideSlugs)
-  const featuredAreas = ['lenexa-ks', 'overland-park-ks', 'olathe-ks', 'shawnee-ks']
+  const spotlightAreas = service.areaSpotlight?.areaSlugs
+    .flatMap((slug) => serviceAreas.filter((area) => area.slug === slug)) ?? []
+  const featuredAreas = ['leawood-ks', 'prairie-village-ks', 'lenexa-ks', 'overland-park-ks', 'olathe-ks', 'shawnee-ks']
     .flatMap((slug) => serviceAreas.filter((area) => area.slug === slug))
 
   return (
@@ -68,6 +70,13 @@ function ServiceDetailPage() {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_0_0_/_0.84),rgb(0_0_0_/_0.48)_58%,rgb(0_0_0_/_0.2))]" />
           <div className="relative mx-auto max-w-7xl">
             <div className="max-w-4xl">
+              <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-2 text-xs font-bold text-white/66">
+                <a className="transition hover:text-soft-beige" href="/">Home</a>
+                <span aria-hidden="true">/</span>
+                <a className="transition hover:text-soft-beige" href="/services">Services</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page" className="text-white">{service.shortTitle}</span>
+              </nav>
               <p className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.18em] text-soft-beige">
                 <Icon className="h-4 w-4" aria-hidden="true" />
                 {service.eyebrow}
@@ -174,6 +183,35 @@ function ServiceDetailPage() {
           </div>
         </section>
 
+        {service.areaSpotlight && spotlightAreas.length > 0 ? (
+          <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
+            <div className="mx-auto grid max-w-7xl overflow-hidden lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+              <img
+                className="h-80 w-full object-cover lg:h-full lg:min-h-[520px]"
+                src={service.areaSpotlight.image}
+                alt={`${service.shortTitle} planning details for ${spotlightAreas.map((area) => getServiceAreaLabel(area)).join(' and ')}`}
+                width="1200"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="bg-white/6 p-7 sm:p-10 lg:p-14">
+                <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">{service.areaSpotlight.eyebrow}</p>
+                <h2 className="mt-4 text-4xl font-black leading-[1.04] tracking-tight sm:text-5xl">{service.areaSpotlight.title}</h2>
+                <p className="mt-6 text-lg leading-8 text-white/74">{service.areaSpotlight.body}</p>
+                <div className="mt-8 divide-y divide-white/14 border-y border-white/14">
+                  {spotlightAreas.map((area) => (
+                    <a key={area.slug} href={getServiceAreaPath(area)} className="flex items-center justify-between gap-5 py-5 text-lg font-black text-white transition hover:text-soft-beige">
+                      Plan {service.shortTitle.toLowerCase()} in {getServiceAreaLabel(area)}
+                      <ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        ) : null}
+
         {relatedProjects.length > 0 ? (
           <section className="bg-white px-5 py-16 sm:px-8 lg:py-24">
             <div className="mx-auto max-w-7xl">
@@ -237,11 +275,11 @@ function ServiceDetailPage() {
               </div>
             </div>
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Johnson County Focus</p>
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Priority Service Areas</p>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {featuredAreas.map((area) => (
                   <a key={area.slug} className="border border-white/14 p-4 text-sm font-black text-white/76 transition hover:border-soft-beige hover:text-soft-beige" href={getServiceAreaPath(area)}>
-                    {getServiceAreaLabel(area)}
+                    {service.shortTitle} in {getServiceAreaLabel(area)}
                   </a>
                 ))}
               </div>

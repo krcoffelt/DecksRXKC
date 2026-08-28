@@ -101,7 +101,7 @@ export function GoogleGLogo({ className = '' }: Readonly<{ className?: string }>
 
 export function RatingStars({ className = '' }: Readonly<{ className?: string }>) {
   return (
-    <span className={`inline-flex items-center gap-0.5 text-[#fbbc04] ${className}`} aria-label="5 star rating">
+    <span className={`inline-flex items-center gap-0.5 text-[#fbbc04] ${className}`} aria-label="5 star rating" role="img">
       {Array.from({ length: 5 }).map((_, index) => (
         <span key={index} aria-hidden="true">★</span>
       ))}

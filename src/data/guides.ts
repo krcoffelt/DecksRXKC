@@ -651,6 +651,154 @@ export const guidePages: GuidePage[] = [
     publishedAt: '2026-08-28',
     updatedAt: '2026-08-28',
   },
+  {
+    slug: 'build-deck-in-fall-kansas-city',
+    title: 'Can You Build a Deck in Fall in Kansas City?',
+    shortTitle: 'Build a Deck in Fall',
+    metaTitle: 'Build a Deck in Fall in Kansas City? | DecksRXKC',
+    metaDescription:
+      'Learn how fall weather, design, permits, materials, and contractor scheduling affect Kansas City deck projects—and when to start planning for spring.',
+    eyebrow: 'Seasonal deck planning guide',
+    intro:
+      'Early fall can be a practical time to build or begin planning a Kansas City deck, but the calendar alone does not determine whether a project is ready to start.',
+    answer:
+      'Yes, a deck can often be built during fall in Kansas City. Whether construction should begin now depends on the design, permit requirements, footing and site conditions, product instructions, weather, and builder availability. Even when immediate construction is impractical, fall is a useful time to assess the property and prepare a complete spring project.',
+    heroImage: '/images/kansas-city-large-backyard-deck-build.jpg',
+    sections: [
+      {
+        heading: 'Fall can work, but project readiness matters more than the month',
+        body:
+          'A September or October start is not automatically too late. Deck work can move forward when the design is resolved, required approvals are available, the site can be accessed safely, materials are ready, and forecast conditions suit the work being performed. The same season can be a good construction window for one project and a planning window for another.',
+        paragraphs: [
+          'A straightforward open deck on a clear site may have fewer preconstruction decisions than a roofed or screened outdoor room. Replacing an existing deck can also reveal framing, footing, attachment, concrete, or access conditions that were not visible during the first conversation. Those variables matter more than a generic claim that fall is always faster or easier.',
+          'The useful question is not simply “Can a deck be built this fall?” It is “Can this deck be designed, approved, supplied, and built responsibly within the available conditions?” A project-specific answer protects the homeowner from a schedule based on wishful assumptions.',
+        ],
+      },
+      {
+        heading: 'Kansas City fall weather is workable and changeable',
+        body:
+          'Kansas City normally moves from warm early-September days toward cooler October and November conditions. The National Weather Service climate normals show the seasonal decline in average temperatures as well as continuing precipitation, while historical records show that individual days can fall well outside the average.',
+        paragraphs: [
+          'A normal monthly temperature is planning context, not a construction guarantee. Rain can affect excavation, concrete work, material handling, yard access, and inspection timing. Heat can still influence early-fall work, while shorter daylight and colder overnight temperatures become more relevant later in the season.',
+          'A responsible schedule includes weather flexibility. Homeowners should ask which activities are most sensitive to rain, temperature, wet soil, or frozen ground; how the crew protects exposed work and stored materials; and how delays will be communicated. Avoid any promise that a particular fall week will behave like the historical average.',
+        ],
+        points: ['Review the forecast around weather-sensitive work', 'Protect stored materials according to product requirements', 'Plan access when soil or turf is wet', 'Allow flexibility for inspections and weather delays'],
+        sourceIds: ['nws-fall-normals'],
+      },
+      {
+        heading: 'Decide whether to build now or prepare for spring',
+        body:
+          'Building this fall may be practical when the scope is clear, the site has been assessed, selections are settled, approvals can be obtained, and the required products and trades fit the schedule. Starting now should mean the project is ready—not that decisions will be improvised after demolition.',
+        paragraphs: [
+          'Planning now for a spring build is often the stronger choice when the footprint is unresolved, an existing structure needs deeper evaluation, multiple material packages are being compared, or the project includes a roof, screens, electrical work, drainage, or major site coordination. Those decisions benefit from time and should not be compressed only to meet a seasonal target.',
+          'Fall planning can include a site visit, furniture and circulation layout, stair-direction study, physical material samples, preliminary scope, permit research, and budget alignment. Completing that work before peak outdoor-living season gives the homeowner a more developed project rather than merely an earlier place in a queue.',
+        ],
+        points: ['Build now: scope, site, approvals, products, and schedule are aligned', 'Plan now: major layout, structural, material, or outdoor-room decisions remain', 'Either path: document assumptions and weather contingencies in writing'],
+      },
+      {
+        heading: 'Material choices still require product-specific planning',
+        body:
+          'Wood and composite decks can both be built during cooler parts of the year when site conditions and manufacturer requirements are respected. The important details are the exact products, how they are stored and handled, the framing layout, fastening, spacing, drainage, and the weather during each installation step.',
+        paragraphs: [
+          'Composite boards change dimension with temperature, and each manufacturer publishes installation requirements for its products. The selected Trex or TimberTech collection should be planned from current instructions rather than a generic rule remembered from another brand or season. Board direction, seams, breaker boards, picture framing, fascia, stairs, and fasteners should be resolved as part of the complete system.',
+          'Wood decking introduces its own moisture and finishing considerations. The construction schedule and the staining or sealing schedule may not be the same. Product condition, weather, exposure, and the chosen finish manufacturer’s instructions should determine when finishing is appropriate instead of a fixed calendar promise.',
+        ],
+        sourceIds: ['trex-fall-installation', 'timbertech-fall-installation'],
+      },
+      {
+        heading: 'Permits and jurisdiction can shape the start date',
+        body:
+          'The Kansas City metro includes many cities and counties with different application, plan, survey, setback, licensing, and inspection requirements. A timeline based on Kansas City, Missouri, should not automatically be applied to Overland Park, Lenexa, Olathe, Lee’s Summit, or another jurisdiction.',
+        paragraphs: [
+          'Kansas City, Missouri, states that permits are required for most building work and lists limited exceptions, including certain low open decks. A roof, enclosure, structural alteration, electrical scope, property condition, or different location can change what is required. The authority serving the exact property should answer the final question.',
+          'Before setting a construction date, confirm who identifies the jurisdiction, prepares drawings or site information, submits the application, responds to review comments, schedules inspections, and keeps the final records. Permit work should be part of the project plan rather than an administrative detail discovered after materials arrive.',
+        ],
+        sourceIds: ['kcmo-fall-permits'],
+      },
+      {
+        heading: 'Use fall to solve the layout before construction',
+        body:
+          'A strong deck plan begins with how the household moves between the home, deck, stairs, patio, gates, and yard. Measure dining and conversation furniture, protect clear walking routes, and decide where grilling belongs before choosing the final footprint.',
+        paragraphs: [
+          'Fall can also reveal comfort issues that summer planning overlooks. Lower sun angles, leaf drop, wind exposure, drainage patterns, privacy, and the view from interior rooms can influence railing, stair, roof, and screen decisions. Observe the yard at the times of day the deck will be used most.',
+          'If a future cover or screened room is likely, discuss it while the structure and layout are still flexible. Roof supports, post locations, openings, drainage, ceiling height, lighting, fans, doors, and furniture circulation are easier to coordinate before the base deck is built.',
+        ],
+        points: ['Furniture dimensions and walking clearances', 'Doors, stairs, gates, patios, and grade', 'Sun, shade, wind, drainage, and privacy', 'Possible future roof, screens, lighting, or fan'],
+      },
+      {
+        heading: 'Ask how the builder handles a seasonal schedule',
+        body:
+          'A useful fall proposal explains more than a hoped-for completion date. Ask which milestones depend on design approval, permits, material availability, weather, inspections, or other trades. Understand what happens if work begins in fall and conditions delay part of the project.',
+        paragraphs: [
+          'The written scope should name retained and new structural components, decking, railing, stairs, fascia, demolition, site access, cleanup, products or allowances, exclusions, and the process for concealed conditions or homeowner-requested changes. Clarify how the yard, patio, doors, and stored materials will be protected throughout the work.',
+          'DecksRXKC can assess whether a fall build is practical for the actual property or use the season to prepare a clear spring project. The best next step is a site-specific conversation about the deck, not a commitment based only on the date.',
+        ],
+        points: ['Which milestones are weather-sensitive?', 'How are delays and schedule changes communicated?', 'How will materials and the property be protected?', 'What must happen before construction can begin?', 'What remains if the project crosses into colder weather?'],
+      },
+    ],
+    sources: [
+      {
+        id: 'nws-fall-normals',
+        title: 'Kansas City Climate Normals',
+        publisher: 'National Weather Service',
+        url: 'https://www.weather.gov/eax/eaxclinormals',
+      },
+      {
+        id: 'kcmo-fall-permits',
+        title: 'Building Permit Exempt Work',
+        publisher: 'City of Kansas City, Missouri',
+        url: 'https://www.kcmo.gov/city-hall/departments/city-planning-development/building-permit-exempt-work',
+      },
+      {
+        id: 'trex-fall-installation',
+        title: 'Trex Installation Resources',
+        publisher: 'Trex',
+        url: 'https://www.trex.com/academy/literature-and-faqs/',
+      },
+      {
+        id: 'timbertech-fall-installation',
+        title: 'TimberTech Installation Help',
+        publisher: 'TimberTech',
+        url: 'https://www.timbertech.com/resources/installation-guides/',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is fall a good time to build a deck in Kansas City?',
+        answer:
+          'It can be. A fall build is most practical when the design, approvals, products, site conditions, weather plan, and builder schedule are aligned. The answer should be based on the actual project rather than the month alone.',
+      },
+      {
+        question: 'How cold is too cold to build a deck?',
+        answer:
+          'There is no single temperature for every deck activity or product. Excavation, concrete, adhesives, finishes, composite installation, and worker safety have different requirements. Follow the project design, current product instructions, forecast, and local requirements.',
+      },
+      {
+        question: 'Can deck footings be installed during winter?',
+        answer:
+          'Sometimes, depending on ground conditions, design, concrete requirements, weather, access, and local inspection rules. Frozen or saturated conditions can change the approach and schedule, so footing work needs project-specific planning.',
+      },
+      {
+        question: 'Can composite decking be installed in cold weather?',
+        answer:
+          'Composite decking can often be installed in cooler weather when the exact manufacturer’s temperature-related spacing, fastening, storage, and handling instructions are followed. Confirm the current guidance for the selected product line.',
+      },
+      {
+        question: 'Should I contact a deck builder in fall for a spring project?',
+        answer:
+          'Yes. Fall planning creates time to assess the site, compare layouts and materials, resolve roof or screen options, research approvals, and develop a complete written scope before the desired construction window.',
+      },
+      {
+        question: 'Do Kansas City deck projects require permits?',
+        answer:
+          'Many do, but requirements depend on the exact jurisdiction, deck height and location, structural scope, roof or enclosure, electrical work, and other property conditions. Confirm current requirements with the city or county serving the property.',
+      },
+    ],
+    relatedServiceSlugs: ['custom-decks', 'composite-decks', 'covered-decks'],
+    relatedProjectSlugs: ['ground-up-deck-replacement', 'covered-deck-outdoor-room'],
+    publishedAt: '2026-09-03',
+    updatedAt: '2026-09-03',
+  },
 ]
 
 export function getGuidePage(slug: string) {

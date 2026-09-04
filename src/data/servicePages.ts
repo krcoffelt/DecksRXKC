@@ -97,7 +97,7 @@ export const servicePages: ServicePage[] = [
     ],
     relatedServiceSlugs: ['composite-decks', 'covered-decks', 'stairs-and-railings'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs', 'covered-deck-outdoor-room'],
-    relatedGuideSlugs: ['choose-deck-builder-kansas-city', 'composite-vs-wood-decking-kansas-city'],
+    relatedGuideSlugs: ['build-deck-in-fall-kansas-city', 'choose-deck-builder-kansas-city', 'composite-vs-wood-decking-kansas-city'],
     publishedAt: contentDate,
     updatedAt: contentDate,
   },

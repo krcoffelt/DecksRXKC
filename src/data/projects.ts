@@ -74,17 +74,17 @@ export const projectPages: ProjectPage[] = [
     relatedServiceSlugs: ['screened-in-decks', 'composite-decks'],
     summary:
       'A roofed deck turns an exposed platform into a defined outdoor room with more dependable shade and weather protection.',
-    heroImage: '/images/optimized/kansas-city-covered-screened-porch-addition.jpg',
+    heroImage: '/images/optimized/kansas-city-covered-composite-deck-pool-view.jpg',
     gallery: [
       {
-        src: '/images/kansas-city-covered-deck-framing-addition.jpg',
-        alt: 'Covered deck roof structure being integrated with a Kansas City home',
-        caption: 'Roof structure, house connection, headroom, and drainage are considered before finish selections begin.',
+        src: '/images/optimized/kansas-city-covered-composite-deck-wide-view.jpg',
+        alt: 'Wide view of a covered composite deck overlooking a backyard pool',
+        caption: 'The broad covered footprint creates flexible room for seating while preserving an open view across the backyard.',
       },
       {
-        src: '/images/optimized/kansas-city-composite-covered-deck-railing-detail.jpg',
-        alt: 'Finished covered deck with composite surface and dark railing',
-        caption: 'A coordinated ceiling, deck surface, and railing palette gives the outdoor room a finished feel.',
+        src: '/images/optimized/kansas-city-composite-deck-cable-railing-stairs-detail.jpg',
+        alt: 'Composite deck stairs with black cable railing beside a Kansas City home',
+        caption: 'Composite stair treads and a dark cable-railing system carry the deck details down to the yard.',
       },
     ],
     goal:
@@ -94,11 +94,11 @@ export const projectPages: ProjectPage[] = [
       'Drainage, gutters, ceiling height, lighting, and fan locations should be planned as one system.',
       'Future screening is easier when openings and circulation are considered early.',
     ],
-    features: ['Integrated roof structure', 'Weather protection', 'Finished ceiling potential', 'Lighting and fan planning'],
+    features: ['Integrated roof structure', 'Composite deck surface', 'Cable railing and stairs', 'Backyard pool view'],
     result:
       'The covered layout creates a more dependable place for dining, conversation, and daily outdoor use across more of the year.',
     publishedAt: '2026-07-31',
-    updatedAt: '2026-07-31',
+    updatedAt: '2026-09-25',
   },
   {
     slug: 'deck-stair-and-railing-upgrade',

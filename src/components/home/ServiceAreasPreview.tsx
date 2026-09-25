@@ -1,5 +1,5 @@
 import { MapPin } from 'lucide-react'
-import { featuredServiceAreas, getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../../data/serviceAreas'
+import { featuredServiceAreaSummaries, getServiceAreaLinkLabel, getServiceAreaLinkPath, serviceAreaLinks } from '../../data/serviceAreaLinks'
 import { ButtonLink, SectionIntro } from '../ui'
 
 export function ServiceAreasPreview() {
@@ -15,7 +15,7 @@ export function ServiceAreasPreview() {
             />
             <div className="mt-8 grid gap-4 border-y border-charcoal/12 py-6 sm:grid-cols-3">
               <div>
-                <p className="text-4xl font-black text-charcoal">{serviceAreas.length}</p>
+                <p className="text-4xl font-black text-charcoal">{serviceAreaLinks.length}</p>
                 <p className="mt-1 text-sm font-bold text-ink/70">Metro service areas</p>
               </div>
               <div>
@@ -33,15 +33,15 @@ export function ServiceAreasPreview() {
           </div>
 
           <div className="grid gap-px bg-charcoal/12 sm:grid-cols-2">
-            {featuredServiceAreas.map((area) => (
-              <a key={area.slug} className="group bg-white p-5 transition hover:bg-charcoal hover:text-white sm:p-6" href={getServiceAreaPath(area)}>
+            {featuredServiceAreaSummaries.map((area) => (
+              <a key={area.slug} className="group bg-white p-5 transition hover:bg-charcoal hover:text-white sm:p-6" href={getServiceAreaLinkPath(area)}>
                 <div className="flex items-start gap-4">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-warm-white text-muted-green transition group-hover:bg-soft-beige group-hover:text-charcoal">
                     <MapPin className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <div>
                     <h3 className="text-xl font-black text-charcoal transition group-hover:text-white">
-                      {getServiceAreaLabel(area)}
+                      {getServiceAreaLinkLabel(area)}
                     </h3>
                     <p className="mt-2 text-sm font-semibold leading-6 text-ink/70 transition group-hover:text-white/74">
                       {area.projectTypes.slice(0, 2).join(' and ')} in {area.county}.

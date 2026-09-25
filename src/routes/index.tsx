@@ -7,10 +7,10 @@ import { ProjectShowcase } from '../components/home/ProjectShowcase'
 import { ReviewsSection } from '../components/home/ReviewsSection'
 import { ServiceAreasPreview } from '../components/home/ServiceAreasPreview'
 import { ServicesOverview } from '../components/home/ServicesOverview'
-import { getServiceAreaLabel, serviceAreas } from '../data/serviceAreas'
 import { servicePages } from '../data/servicePages'
 import { getBusinessSchema } from '../data/business'
 import { defaultSeoDescription, defaultSeoImage, defaultSeoImagePath, defaultSeoTitle, getSeoHead, siteUrl } from '../lib/seo'
+import { getOptimizedImagePath } from '../lib/images'
 
 const homepageTitle = defaultSeoTitle
 const homepageDescription = defaultSeoDescription
@@ -32,7 +32,9 @@ export const Route = createFileRoute('/')({
         {
           rel: 'preload',
           as: 'image',
-          href: defaultSeoImagePath,
+          href: getOptimizedImagePath(defaultSeoImagePath),
+          type: 'image/webp',
+          fetchPriority: 'high',
         },
       ],
     }
@@ -67,16 +69,6 @@ function HomepageStructuredData() {
           '@context': 'https://schema.org',
           ...getBusinessSchema(),
           image: homepageImage,
-          areaServed: [
-            {
-              '@type': 'AdministrativeArea',
-              name: 'Kansas City metropolitan area',
-            },
-            ...serviceAreas.map((area) => ({
-              '@type': 'City',
-              name: getServiceAreaLabel(area),
-            })),
-          ],
           serviceType: servicePages.map((service) => service.shortTitle),
           hasOfferCatalog: {
             '@type': 'OfferCatalog',

@@ -1,4 +1,5 @@
 import { getProjectPagePath, projectPages } from '../../data/projects'
+import { getResponsiveImageProps } from '../../lib/images'
 import { SectionIntro } from '../ui'
 
 export function ProjectShowcase() {
@@ -26,7 +27,7 @@ export function ProjectShowcase() {
           <a className="group relative min-h-[560px] overflow-hidden bg-black" href={getProjectPagePath(featuredProject)}>
             <img
               className="absolute inset-0 h-full w-full object-cover"
-              src={featuredProject.heroImage}
+              {...getResponsiveImageProps(featuredProject.heroImage, '(min-width: 1024px) 62vw, 100vw')}
               alt={featuredProject.shortTitle}
               width="1600"
               height="1200"
@@ -45,7 +46,7 @@ export function ProjectShowcase() {
               <a key={project.title} href={getProjectPagePath(project)} className="group grid gap-4 border-b border-white/14 pb-6 last:border-b-0 last:pb-0 sm:grid-cols-[0.9fr_1.1fr] lg:grid-cols-1 xl:grid-cols-[0.9fr_1.1fr]">
                 <img
                   className="h-48 w-full object-cover"
-                  src={project.heroImage}
+                  {...getResponsiveImageProps(project.heroImage, '(min-width: 1280px) 16vw, (min-width: 640px) 42vw, 100vw')}
                   alt={project.title}
                   width="1600"
                   height="1200"

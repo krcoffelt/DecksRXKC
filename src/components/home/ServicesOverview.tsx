@@ -1,4 +1,5 @@
 import { homeServices } from '../../data/siteContent'
+import { getResponsiveImageProps } from '../../lib/images'
 import { ButtonLink, SectionIntro } from '../ui'
 
 export function ServicesOverview() {
@@ -29,7 +30,7 @@ export function ServicesOverview() {
           <a className="group relative min-h-[520px] overflow-hidden bg-charcoal text-white" href={featured.href}>
             <img
               className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-              src={featured.image}
+              {...getResponsiveImageProps(featured.image, '(min-width: 1024px) 58vw, 100vw')}
               alt={`${featured.title} by DecksRXKC`}
               width="1600"
               height="1200"

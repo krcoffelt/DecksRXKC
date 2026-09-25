@@ -8,6 +8,7 @@ import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/s
 import { getServicePagePath, servicePages } from '../data/servicePages'
 import { googleReviews } from '../data/siteContent'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
+import { getResponsiveImageProps } from '../lib/images'
 
 const aboutDescription = 'Meet DecksRXKC and learn how the team plans custom decks, repairs, replacements, screened rooms, stairs, and railings across the Kansas City metro.'
 
@@ -53,7 +54,7 @@ function AboutPage() {
               <p className="mt-6 text-xl leading-9 text-ink/72">DecksRXKC builds and improves outdoor spaces across the Kansas City metro with responsive communication, useful options, and close attention to the parts homeowners see and use every day.</p>
             </div>
             <figure>
-              <img className="aspect-[4/3] w-full object-cover" src="/images/kansas-city-custom-wood-deck-railing-project.jpg" alt="Custom wood deck and dark railing built by DecksRXKC" width="1200" height="900" loading="eager" decoding="async" fetchPriority="high" />
+              <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps('/images/kansas-city-custom-wood-deck-railing-project.jpg', '(min-width: 1024px) 55vw, 100vw')} alt="Custom wood deck and dark railing built by DecksRXKC" width="1200" height="900" loading="eager" decoding="async" fetchPriority="high" />
               <figcaption className="border-b border-charcoal/12 py-4 text-sm font-semibold leading-6 text-ink/62">Surface, railing, stairs, and finished edges are considered as one outdoor space.</figcaption>
             </figure>
           </div>
@@ -103,11 +104,11 @@ function AboutPage() {
             </div>
             <div className="mt-10 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
               <figure>
-                <img className="aspect-[4/3] w-full object-cover" src="/images/kansas-city-covered-deck-framing-addition.jpg" alt="Covered deck framing connected to a Kansas City home" width="1200" height="900" loading="lazy" decoding="async" />
+                <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps('/images/kansas-city-covered-deck-framing-addition.jpg', '(min-width: 1024px) 55vw, 100vw')} alt="Covered deck framing connected to a Kansas City home" width="1200" height="900" loading="lazy" decoding="async" />
                 <figcaption className="border-b border-charcoal/12 py-4 text-sm font-semibold leading-6 text-ink/62">Framing, headroom, roof connection, and drainage set up the finish work that follows.</figcaption>
               </figure>
               <figure className="lg:pt-24">
-                <img className="aspect-[4/3] w-full object-cover" src="/images/optimized/kansas-city-composite-covered-deck-railing-detail.jpg" alt="Finished composite deck surface and dark railing detail" width="1200" height="900" loading="lazy" decoding="async" />
+                <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps('/images/optimized/kansas-city-composite-covered-deck-railing-detail.jpg', '(min-width: 1024px) 45vw, 100vw')} alt="Finished composite deck surface and dark railing detail" width="1200" height="900" loading="lazy" decoding="async" />
                 <figcaption className="border-b border-charcoal/12 py-4 text-sm font-semibold leading-6 text-ink/62">Decking, railing, fascia, and transitions create the finished view homeowners live with.</figcaption>
               </figure>
             </div>

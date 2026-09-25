@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import { googleReviews } from '../../data/siteContent'
+import { business } from '../../data/business'
 import { GoogleGLogo, RatingStars, SectionIntro } from '../ui'
 
 export function ReviewsSection() {
@@ -22,16 +23,16 @@ export function ReviewsSection() {
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-4xl font-black text-charcoal">5.0</span>
               <RatingStars className="text-3xl" />
-              <span className="text-base font-bold text-ink/70">{googleReviews.length} recent reviews</span>
+              <span className="text-base font-bold text-ink/70">{business.googleReviewCount} reviews on Google</span>
             </div>
           </div>
           <a
             className="inline-flex min-h-12 items-center justify-center rounded-full bg-charcoal px-7 text-sm font-black text-white transition hover:bg-muted-green"
-            href="https://www.google.com/search?q=DecksRX+KC+Google+reviews"
+            href={business.googleMapsUrl}
             target="_blank"
             rel="noreferrer"
           >
-            View Reviews on Google
+            Read Reviews on Google
             <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </a>
         </div>

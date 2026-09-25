@@ -330,10 +330,42 @@ export const serviceAreas: ServiceArea[] = [
     slug: 'mission-hills-ks',
     county: 'Johnson County',
     image: '/images/kansas-city-screened-porch-black-railing.jpg',
+    metaTitle: 'Screened-In & Custom Decks Mission Hills KS | DecksRXKC',
+    metaDescription: 'Plan a custom, covered, or screened-in deck in Mission Hills with careful roofline, material, railing, landscape, and outdoor-room decisions.',
     nearby: ['Fairway', 'Westwood', 'Country Club District'],
     localNote:
       'Mission Hills outdoor spaces call for careful design decisions, understated materials, and craftsmanship that supports the home architecture.',
     projectTypes: ['screened-in decks', 'custom decks', 'covered outdoor spaces'],
+    priorityContent: {
+      intro:
+        'Mission Hills deck projects often need to complement established architecture and mature landscaping without competing with either one. The plan should begin with the home exterior, important views, existing doors, shade, grade, and the way people move between indoor rooms, the deck, and the yard. Rooflines, railings, stairs, trim, and surface colors then become parts of one restrained outdoor composition rather than a collection of separate upgrades.',
+      serviceFocus: [
+        { serviceSlug: 'screened-in-decks', title: 'Screened-in deck planning', copy: 'Coordinate screen bays, doors, roof, trim, airflow, lighting, and furniture so the enclosure feels related to the home and stays open to the landscape.' },
+        { serviceSlug: 'custom-decks', title: 'Custom deck building', copy: 'Shape the footprint around doors, established landscaping, views, dining, conversation, and a clear route through the outdoor space.' },
+        { serviceSlug: 'covered-decks', title: 'Covered outdoor rooms', copy: 'Study rooflines, headroom, posts, ceiling details, drainage, fans, and lighting before finish selections narrow the structural options.' },
+      ],
+      planningNotes: [
+        'Review decking, railing, trim, and ceiling samples beside the home exterior in both sun and shade.',
+        'Protect important views and landscaping while locating posts, stairs, landings, and screen doors.',
+        'Identify the applicable approval and permit path for the property before finalizing the construction schedule.',
+        'Plan drainage, lighting, fans, and future screening while the roof and structure are still flexible.',
+      ],
+      decisionGuide: {
+        eyebrow: 'Architectural Fit',
+        title: 'Make the addition feel deliberate from every view',
+        body:
+          'A deck can look appropriate from the yard yet feel disconnected where it meets the home. Compare roof pitch, trim depth, post placement, railing rhythm, finished edges, and material color from the street-facing approach, the main indoor rooms, and the backyard. The strongest plan is usually the one that solves circulation and comfort while staying visually quiet beside the existing architecture.',
+        points: ['Home connection and roof geometry', 'Views from inside and outside', 'Material and trim relationships', 'Landscape, drainage, and access'],
+      },
+      faqs: [
+        { question: 'Does DecksRXKC build decks in Mission Hills, KS?', answer: 'Yes. DecksRXKC serves Mission Hills with custom decks, covered and screened-in spaces, repair, replacement, stairs, railings, and wood or composite options.' },
+        { question: 'Can a new deck be designed around mature landscaping?', answer: 'Often, yes. The footprint, stairs, posts, landings, access, and construction approach can be studied together to reduce conflicts with established outdoor features.' },
+        { question: 'Can a Mission Hills deck be covered or screened?', answer: 'Yes, when the home connection, structure, roofline, drainage, openings, and circulation support the proposed outdoor room.' },
+        { question: 'Who confirms permit or property approval requirements?', answer: 'The project scope should identify the authority serving the property and clarify responsibility for approvals, submittals, inspections, and any property-specific requirements before work begins.' },
+      ],
+      projectSlugs: ['screened-in-deck-addition', 'covered-deck-outdoor-room'],
+      guideSlugs: ['can-you-screen-in-an-existing-deck', 'add-roof-over-existing-deck'],
+    },
   },
   {
     city: 'Merriam',
@@ -341,10 +373,42 @@ export const serviceAreas: ServiceArea[] = [
     slug: 'merriam-ks',
     county: 'Johnson County',
     image: '/images/kansas-city-deck-stairs-railing-skirt.jpg',
+    metaTitle: 'Deck Replacement & Stairs Merriam KS | DecksRXKC',
+    metaDescription: 'Compare deck repair, replacement, stairs, railings, wood, and composite options for Merriam homes with practical access and condition guidance.',
     nearby: ['Antioch', 'Turkey Creek', 'Downtown Merriam'],
     localNote:
       'Merriam deck projects often involve replacing aging structures with safer stairs, cleaner rails, and better everyday access to the yard.',
     projectTypes: ['deck replacement', 'stairs', 'railing upgrades'],
+    priorityContent: {
+      intro:
+        'Merriam deck work often begins with an existing structure that no longer feels solid, easy to reach, or well connected to the yard. A useful assessment looks beyond one worn board to the framing, visible connections, stair run, landing, guards, handrails, drainage, and the way the current footprint fits daily use. That broader view helps separate a focused repair from a replacement that solves several problems at once.',
+      serviceFocus: [
+        { serviceSlug: 'deck-replacement', title: 'Deck replacement', copy: 'Use a rebuild to address an aging structure while reconsidering the footprint, surface, stairs, railings, and everyday backyard access.' },
+        { serviceSlug: 'deck-repair', title: 'Deck repair', copy: 'Define the boundary of a practical repair after reviewing the visible concern and the supporting components around it.' },
+        { serviceSlug: 'stairs-and-railings', title: 'Stairs and railing upgrades', copy: 'Plan the stair run, landing, handrail, guard, gate, and deck connection as one route between the house and yard.' },
+      ],
+      planningNotes: [
+        'Check movement, soft areas, prior repairs, stairs, railings, and visible connections before choosing the scope.',
+        'Set the stair direction around doors, patios, gates, utilities, grade, and normal backyard traffic.',
+        'Compare the remaining value of the current frame with the benefits of a new layout and material package.',
+        'Confirm the applicable Merriam or property-specific review and permit path before scheduling work.',
+      ],
+      decisionGuide: {
+        eyebrow: 'Repair or Replace',
+        title: 'Choose a scope that addresses the full pattern',
+        body:
+          'A focused repair may be appropriate when the concern is isolated and the surrounding deck remains suitable for continued use. Replacement deserves a direct comparison when deterioration, movement, loose rails, unstable stairs, repeated fixes, or an unsuccessful layout affect several parts of the deck. The proposal should state what changes, what remains, and how hidden conditions discovered during removal will be handled.',
+        points: ['Extent of visible deterioration', 'Stability of stairs and railings', 'History of recurring repairs', 'Value of changing access or materials'],
+      },
+      faqs: [
+        { question: 'Does DecksRXKC replace decks in Merriam, KS?', answer: 'Yes. DecksRXKC serves Merriam with deck replacement, repair, custom builds, stairs, railings, and wood or composite surface options.' },
+        { question: 'Can deck stairs be replaced without rebuilding the whole deck?', answer: 'Sometimes. The existing deck, stair connection, landing area, supporting components, and railing transitions should be assessed before a focused stair scope is confirmed.' },
+        { question: 'When should a Merriam deck be replaced instead of repaired?', answer: 'Replacement is worth comparing when concerns affect several major components, repairs are recurring, or the existing footprint and access no longer work well.' },
+        { question: 'Can replacement change the stair direction or deck footprint?', answer: 'Often, yes. The property, grade, doors, utilities, approvals, and budget determine which layout changes are practical.' },
+      ],
+      projectSlugs: ['ground-up-deck-replacement', 'deck-stair-and-railing-upgrade'],
+      guideSlugs: ['repair-or-replace-your-deck', 'choose-deck-builder-kansas-city'],
+    },
   },
   {
     city: "Lee's Summit",
@@ -352,10 +416,42 @@ export const serviceAreas: ServiceArea[] = [
     slug: 'lees-summit-mo',
     county: 'Jackson and Cass Counties',
     image: '/images/lees-summit-wood-deck-replacement.jpg',
+    metaTitle: "Deck Replacement & Covered Decks Lee's Summit | DecksRXKC",
+    metaDescription: "Plan a wood or composite deck replacement, covered deck, or screened outdoor room in Lee's Summit with practical lake-area and backyard guidance.",
     nearby: ['Raintree Lake', 'Lakewood', "Downtown Lee's Summit"],
     localNote:
       "Lee's Summit homes often have great backyard potential, from lake-area decks to covered spaces built for hosting and family time.",
     projectTypes: ['wood deck replacement', 'covered decks', 'screened-in decks'],
+    priorityContent: {
+      intro:
+        "Lee's Summit properties range from established neighborhoods to larger lake-area and suburban lots, so the right deck plan depends on exposure, grade, views, access, and the way the backyard is already used. A replacement can preserve a successful footprint or correct limited gathering space and awkward stairs. A cover or screen room adds another layer of roof, drainage, airflow, door, and furniture decisions that should be coordinated from the start.",
+      serviceFocus: [
+        { serviceSlug: 'deck-replacement', title: 'Wood or composite deck replacement', copy: 'Compare the condition and layout of the existing deck with a rebuild that improves surface, stairs, railings, yard access, and long-term maintenance.' },
+        { serviceSlug: 'covered-decks', title: 'Covered decks', copy: 'Coordinate roof connection, posts, ceiling, gutters, downspouts, fans, lighting, and open-deck space around the home and view.' },
+        { serviceSlug: 'screened-in-decks', title: 'Screened-in outdoor rooms', copy: 'Plan screen bays, doors, airflow, trim, furniture, pets, and the route between the house, enclosure, stairs, and yard.' },
+      ],
+      planningNotes: [
+        'Protect useful views while placing railings, posts, stairs, and screen doors where they support normal circulation.',
+        'Compare wood and composite as complete installed systems, including surface, fascia, rails, stairs, cleaning, and maintenance.',
+        "Identify whether the property follows Lee's Summit or another authority's approval and inspection process before final scheduling.",
+        'Plan roof drainage and downspout discharge so added protection does not create water problems near patios, stairs, or foundations.',
+      ],
+      decisionGuide: {
+        eyebrow: 'Open, Covered, or Screened',
+        title: 'Match weather protection to the way the yard is used',
+        body:
+          'An open deck keeps broad views and direct sun. A roof creates more dependable shade and rain protection. Screening reduces bugs and adds a defined room, but it also affects airflow, doors, views, trim, and circulation. Many homes benefit from a combination: a protected dining or conversation zone connected to an open area for grilling, sun, or larger gatherings.',
+        points: ['Sun, wind, rain, and view exposure', 'Open-deck and protected-room balance', 'Doors, stairs, and furniture circulation', 'Roof, ceiling, drainage, and electrical needs'],
+      },
+      faqs: [
+        { question: "Does DecksRXKC replace decks in Lee's Summit?", answer: "Yes. DecksRXKC serves Lee's Summit with wood and composite deck replacement, custom decks, covered and screened spaces, repair, stairs, and railings." },
+        { question: "Can a Lee's Summit deck include both covered and open areas?", answer: 'Yes. A coordinated plan can create dependable shade while keeping an open section for grilling, sun, views, or larger gatherings.' },
+        { question: 'Can an existing deck be screened in?', answer: 'Sometimes. The framing, roof conditions, connections, rail layout, access, and visible condition should be evaluated before an enclosure is planned.' },
+        { question: 'Does DecksRXKC build with wood, Trex, and TimberTech?', answer: 'Yes. The team can compare wood with available Trex and TimberTech options around appearance, exposure, maintenance, and the complete project plan.' },
+      ],
+      projectSlugs: ['ground-up-deck-replacement', 'covered-deck-outdoor-room', 'screened-in-deck-addition'],
+      guideSlugs: ['composite-vs-wood-decking-kansas-city', 'add-roof-over-existing-deck'],
+    },
   },
   {
     city: 'Blue Springs',
@@ -405,10 +501,42 @@ export const serviceAreas: ServiceArea[] = [
     slug: 'independence-mo',
     county: 'Jackson County',
     image: '/images/kansas-city-elevated-deck-stairs-black-railing.jpg',
+    metaTitle: 'Deck Repair, Rebuilds & Stairs Independence MO | DecksRXKC',
+    metaDescription: 'Plan deck repair, replacement, stairs, railings, and better backyard access for Independence homes with clear condition and scope guidance.',
     nearby: ['Englewood', 'Sugar Creek', 'Blue Ridge'],
     localNote:
       'Independence homes often need practical deck rebuilds, safer stairs, and outdoor spaces that make older yards easier to use.',
     projectTypes: ['deck rebuilds', 'stairs', 'deck repairs'],
+    priorityContent: {
+      intro:
+        'Independence deck projects often start with an older outdoor structure, a difficult stair route, or a backyard that is harder to use than it should be. The first decision is not the board color; it is whether the visible concern is isolated or part of a larger pattern involving framing, connections, rails, stairs, drainage, or the original layout. A clear assessment creates a better basis for repair, resurfacing, or a complete rebuild.',
+      serviceFocus: [
+        { serviceSlug: 'deck-repair', title: 'Deck repair', copy: 'Assess the visible concern and the components around it so the repair boundary, limitations, and unchanged areas are clear.' },
+        { serviceSlug: 'deck-replacement', title: 'Deck rebuilds and replacement', copy: 'Replace an aging deck while improving the footprint, material, finished edges, stairs, railings, and connection to the yard.' },
+        { serviceSlug: 'stairs-and-railings', title: 'Deck stairs and railings', copy: 'Coordinate the stair run, landing, handrail, guard, and transitions around grade, patios, doors, gates, and daily traffic.' },
+      ],
+      planningNotes: [
+        'Document soft areas, movement, loose guards, stair concerns, drainage patterns, and previous repairs before narrowing the scope.',
+        'Compare a focused repair with replacement when several components are aging or the current layout is unsuccessful.',
+        'Use the stair and landing plan to create a direct, comfortable route between the house, deck, patio, and yard.',
+        'Confirm the authority and permit path serving the property before construction dates are committed.',
+      ],
+      decisionGuide: {
+        eyebrow: 'Existing Deck Assessment',
+        title: 'Solve the cause, not only the visible symptom',
+        body:
+          'A worn board, loose rail, or unstable stair may be a focused problem, but repeated or widespread symptoms can point to a larger scope. Review how water moves, where movement occurs, how stairs connect, which components have already been repaired, and whether the footprint still serves the home. The recommended scope should explain both the work being completed and the parts of the existing deck that will remain.',
+        points: ['Pattern and extent of deterioration', 'Movement and visible connections', 'Stair, landing, and railing condition', 'Layout and remaining useful life'],
+      },
+      faqs: [
+        { question: 'Does DecksRXKC repair decks in Independence, MO?', answer: 'Yes. DecksRXKC serves Independence with focused deck repair, replacement, custom decks, stairs, railings, and wood or composite options.' },
+        { question: 'Can old deck stairs be rebuilt?', answer: 'Often, yes. The stair run, stringers, treads, landing, rails, and connection to the existing deck should be evaluated together before the scope is set.' },
+        { question: 'How do I compare repair with replacement?', answer: 'Compare the extent of deterioration, movement, previous repairs, the condition of major components, and whether the existing footprint and access still meet the household’s needs.' },
+        { question: 'Can a replacement deck use a lower-maintenance surface?', answer: 'Yes. Wood, Trex, and TimberTech options can be compared alongside framing, railings, stairs, fascia, exposure, cleaning, and long-term maintenance goals.' },
+      ],
+      projectSlugs: ['ground-up-deck-replacement', 'deck-stair-and-railing-upgrade'],
+      guideSlugs: ['repair-or-replace-your-deck', 'composite-vs-wood-decking-kansas-city'],
+    },
   },
   {
     city: 'Liberty',
@@ -457,10 +585,42 @@ export const serviceAreas: ServiceArea[] = [
     slug: 'parkville-mo',
     county: 'Platte County',
     image: '/images/kansas-city-covered-deck-framing-addition.jpg',
+    metaTitle: 'Elevated & Covered Deck Builder Parkville MO | DecksRXKC',
+    metaDescription: 'Plan an elevated, covered, or custom deck in Parkville with thoughtful grade, view, stair, framing, drainage, and outdoor-room decisions.',
     nearby: ['Riss Lake', 'Weatherby Lake', 'Downtown Parkville'],
     localNote:
       'Parkville lots can include slopes and views, so elevated decks, stairs, and covered structures need thoughtful layout and solid framing.',
     projectTypes: ['elevated decks', 'covered deck framing', 'stairs'],
+    priorityContent: {
+      intro:
+        'Parkville properties can introduce meaningful grade changes, elevated living areas, wooded edges, and long backyard views. Those conditions make stair direction, landing space, post placement, framing, drainage, and the view from below as important as the surface above. A covered deck adds roof connection, headroom, gutter, downspout, ceiling, lighting, and wind-exposure decisions that should be resolved as part of the structure.',
+      serviceFocus: [
+        { serviceSlug: 'custom-decks', title: 'Elevated custom decks', copy: 'Shape the upper deck, support layout, finished underside, railings, and yard connection around grade, doors, views, and everyday use.' },
+        { serviceSlug: 'covered-decks', title: 'Covered deck framing', copy: 'Coordinate the roofline, posts, headroom, ceiling, gutters, downspouts, fans, lighting, and open view before construction starts.' },
+        { serviceSlug: 'stairs-and-railings', title: 'Long stair runs and railings', copy: 'Plan stair direction, landings, guards, handrails, and transitions so elevated access feels direct and preserves useful yard space.' },
+      ],
+      planningNotes: [
+        'Study the deck from the yard as well as from the house because elevated framing and finished edges remain highly visible.',
+        'Set stair direction and landing locations around slope, patios, doors, gates, drainage, and the preferred backyard route.',
+        'Plan roof water discharge carefully so gutters and downspouts do not create problems near supports, stairs, or foundations.',
+        'Identify the authority serving the property and confirm permit, plan, and inspection responsibilities before scheduling.',
+      ],
+      decisionGuide: {
+        eyebrow: 'Elevated Deck Planning',
+        title: 'Connect the upper room to the ground-level yard',
+        body:
+          'An elevated deck can provide a strong view and direct access from the main living level, but the lower perspective and trip to the yard matter just as much. Compare stair length, intermediate landings, railing rhythm, post locations, patio relationships, storage or usable space below, and how the structure will look after fascia and trim are complete. A cover should be integrated into that same vertical composition.',
+        points: ['Grade and full stair route', 'Views above and appearance below', 'Post, landing, and patio relationships', 'Roof connection and water management'],
+      },
+      faqs: [
+        { question: 'Does DecksRXKC build elevated decks in Parkville, MO?', answer: 'Yes. DecksRXKC serves Parkville with elevated custom decks, covered decks, repair, replacement, stairs, railings, and wood or composite options.' },
+        { question: 'Can an elevated deck include a roof?', answer: 'Yes, when the home connection, structure, headroom, posts, drainage, and desired deck footprint support a covered plan.' },
+        { question: 'How should stairs be planned on a sloped lot?', answer: 'The stair run, landings, grade, drainage, patios, gates, utilities, and normal walking route should be studied together before the direction is finalized.' },
+        { question: 'Can the space below an elevated deck remain useful?', answer: 'Often, yes. Post placement, stair location, headroom, drainage, surfacing, lighting, and the intended ground-level use should be included in the early layout.' },
+      ],
+      projectSlugs: ['elevated-composite-deck-and-stairs', 'covered-deck-outdoor-room'],
+      guideSlugs: ['add-roof-over-existing-deck', 'choose-deck-builder-kansas-city'],
+    },
   },
   {
     city: 'Gladstone',
@@ -468,10 +628,42 @@ export const serviceAreas: ServiceArea[] = [
     slug: 'gladstone-mo',
     county: 'Clay County',
     image: '/images/optimized/kansas-city-covered-screened-porch-addition.jpg',
+    metaTitle: 'Covered & Screened Decks Gladstone MO | DecksRXKC',
+    metaDescription: 'Plan a covered, screened, replacement, or lower-maintenance deck in Gladstone with coordinated shade, airflow, access, and drainage.',
     nearby: ['North Kansas City', 'Oakview', 'Antioch Acres'],
     localNote:
       'Gladstone projects often focus on making existing outdoor space more usable with shade, screening, and lower-maintenance materials.',
     projectTypes: ['covered decks', 'screened-in decks', 'deck replacement'],
+    priorityContent: {
+      intro:
+        'Gladstone homeowners often want an existing outdoor area to work through more of the day and more of the year. That may mean dependable shade, fewer bugs, a lower-maintenance surface, safer access, or a replacement layout that supports real furniture and circulation. The best plan coordinates the deck structure with the cover, screens, doors, drainage, stairs, railings, lighting, and open yard instead of layering features onto a footprint that was never designed for them.',
+      serviceFocus: [
+        { serviceSlug: 'covered-decks', title: 'Covered decks', copy: 'Plan the roof connection, posts, ceiling, drainage, fans, lighting, shade, and relationship to any open deck area as one system.' },
+        { serviceSlug: 'screened-in-decks', title: 'Screened-in decks', copy: 'Coordinate screen type, bay layout, doors, airflow, views, pets, trim, furniture, and the route to stairs and the yard.' },
+        { serviceSlug: 'deck-replacement', title: 'Deck replacement', copy: 'Use a rebuild to improve structure, footprint, access, material maintenance, railings, and readiness for a cover or enclosure.' },
+      ],
+      planningNotes: [
+        'Track direct sun, wind, rain, and the hours the deck is normally used before choosing open, covered, or screened space.',
+        'Place doors, stairs, posts, fans, and lighting around furniture zones and everyday walking paths.',
+        'Compare wood and composite with the full surface, fascia, rail, stair, cleaning, and maintenance plan in view.',
+        'Confirm the applicable Gladstone-area approval and inspection requirements before final scheduling.',
+      ],
+      decisionGuide: {
+        eyebrow: 'More Usable Outdoor Space',
+        title: 'Choose protection without closing off the yard',
+        body:
+          'A roof can create dependable shade while leaving the deck open to breeze and views. Screening adds a more defined room and reduces bugs, but it changes doors, panel layout, trim, and circulation. Replacement may be the better starting point when the existing structure, footprint, or stairs are not suited to the desired cover or enclosure. A combined plan can preserve an open zone for grilling or sun beside the protected room.',
+        points: ['Shade and rain protection needed', 'Airflow, screens, pets, and views', 'Existing structure and replacement scope', 'Doors, stairs, furniture, and drainage'],
+      },
+      faqs: [
+        { question: 'Does DecksRXKC build covered decks in Gladstone, MO?', answer: 'Yes. DecksRXKC serves Gladstone with covered and screened-in decks, custom builds, repair, replacement, stairs, railings, and wood or composite options.' },
+        { question: 'Can an existing Gladstone deck be screened in?', answer: 'Sometimes. The existing framing, roof conditions, connections, railings, access, and visible condition should be assessed before an enclosure is designed.' },
+        { question: 'Can a covered deck include ceiling fans and lighting?', answer: 'Yes. Fan, light, switching, ceiling, and electrical locations should be planned while the roof structure and furniture layout are being developed.' },
+        { question: 'Should an older deck be replaced before adding a cover?', answer: 'Possibly. The existing deck and its supports should be evaluated for the added plan; replacement is worth comparing when condition, layout, or access would limit the finished outdoor room.' },
+      ],
+      projectSlugs: ['covered-deck-outdoor-room', 'screened-in-deck-addition'],
+      guideSlugs: ['can-you-screen-in-an-existing-deck', 'add-roof-over-existing-deck'],
+    },
   },
   {
     city: 'Raymore',
@@ -517,8 +709,6 @@ export const serviceAreas: ServiceArea[] = [
     },
   },
 ]
-
-export const featuredServiceAreas = serviceAreas.slice(0, 9)
 
 export function getServiceArea(slug: string) {
   return serviceAreas.find((area) => area.slug === slug)

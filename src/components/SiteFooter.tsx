@@ -1,4 +1,5 @@
-import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
+import { ArrowUpRight } from 'lucide-react'
+import { getServiceAreaLinkLabel, getServiceAreaLinkPath, serviceAreaLinks } from '../data/serviceAreaLinks'
 import { getServicePagePath, servicePages } from '../data/servicePages'
 import { business } from '../data/business'
 import { trackEvent } from '../lib/analytics'
@@ -24,6 +25,15 @@ export function SiteFooter() {
             <a className="mt-5 inline-flex text-sm font-black text-soft-beige transition hover:text-white" href={`tel:${business.phone}`} onClick={() => trackEvent('click_to_call', { page_path: typeof window === 'undefined' ? '/' : window.location.pathname })}>
               {business.phoneDisplay}
             </a>
+            <a
+              className="mt-3 flex w-fit items-center gap-2 text-sm font-black text-white/70 transition hover:text-soft-beige"
+              href={business.googleMapsUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Google Business Profile
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
           <div className="grid gap-8 md:grid-cols-[0.55fr_0.55fr_1.4fr]">
             <nav aria-label="Footer services">
@@ -48,9 +58,9 @@ export function SiteFooter() {
             <nav aria-label="Footer service areas">
               <p className="text-xs font-black uppercase tracking-[0.16em] text-soft-beige">Service Areas</p>
               <div className="mt-4 grid gap-3 text-sm font-bold text-white/66 sm:grid-cols-2 lg:grid-cols-3">
-                {serviceAreas.map((area) => (
-                  <a key={area.slug} className="transition hover:text-soft-beige" href={getServiceAreaPath(area)}>
-                    {getServiceAreaLabel(area)}
+                {serviceAreaLinks.map((area) => (
+                  <a key={area.slug} className="transition hover:text-soft-beige" href={getServiceAreaLinkPath(area)}>
+                    {getServiceAreaLinkLabel(area)}
                   </a>
                 ))}
               </div>

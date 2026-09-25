@@ -1,4 +1,5 @@
 import { defaultSeoImagePath } from '../../lib/seo'
+import { getResponsiveImageProps } from '../../lib/images'
 import { trustPoints } from '../../data/siteContent'
 import { SiteHeader } from '../SiteHeader'
 import { ButtonLink } from '../ui'
@@ -8,7 +9,7 @@ export function Hero() {
     <section id="top" className="relative min-h-[100svh] overflow-hidden bg-charcoal text-white">
       <img
         className="absolute inset-0 h-full w-full object-cover"
-        src={defaultSeoImagePath}
+        {...getResponsiveImageProps(defaultSeoImagePath, '100vw')}
         alt="Finished Kansas City covered deck with composite railing detail"
         width="1728"
         height="1696"

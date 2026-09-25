@@ -16,6 +16,7 @@ import {
   type ServicePage,
 } from '../data/servicePages'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
+import { getResponsiveImageProps } from '../lib/images'
 
 export const Route = createFileRoute('/services/$slug')({
   loader: ({ params }) => {
@@ -59,7 +60,7 @@ function ServiceDetailPage() {
         <section className="relative overflow-hidden bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
           <img
             className="absolute inset-0 h-full w-full object-cover opacity-42"
-            src={service.image}
+            {...getResponsiveImageProps(service.image, '100vw')}
             alt={`${service.shortTitle} by DecksRXKC`}
             width="1600"
             height="1200"
@@ -188,7 +189,7 @@ function ServiceDetailPage() {
             <div className="mx-auto grid max-w-7xl overflow-hidden lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
               <img
                 className="h-80 w-full object-cover lg:h-full lg:min-h-[520px]"
-                src={service.areaSpotlight.image}
+                {...getResponsiveImageProps(service.areaSpotlight.image, '(min-width: 1024px) 46vw, 100vw')}
                 alt={`${service.shortTitle} planning details for ${spotlightAreas.map((area) => getServiceAreaLabel(area)).join(' and ')}`}
                 width="1200"
                 height="900"
@@ -225,7 +226,7 @@ function ServiceDetailPage() {
               <div className="mt-8 grid gap-8 lg:grid-cols-2">
                 {relatedProjects.map((project) => (
                   <a key={project.slug} className="group grid gap-5 sm:grid-cols-[0.9fr_1.1fr]" href={getProjectPagePath(project)}>
-                    <img className="h-64 w-full object-cover" src={project.heroImage} alt={project.shortTitle} width="800" height="700" loading="lazy" decoding="async" />
+                    <img className="h-64 w-full object-cover" {...getResponsiveImageProps(project.heroImage, '(min-width: 1024px) 32vw, 100vw')} alt={project.shortTitle} width="800" height="700" loading="lazy" decoding="async" />
                     <div className="self-end border-b border-charcoal/12 pb-5">
                       <p className="text-xs font-black uppercase tracking-[0.16em] text-muted-green">{project.location}</p>
                       <h3 className="mt-3 text-2xl font-black leading-tight text-charcoal group-hover:text-wood">{project.shortTitle}</h3>

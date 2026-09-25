@@ -7,6 +7,7 @@ import { business } from '../data/business'
 import { getProjectPagePath, projectPages } from '../data/projects'
 import { getServicePage, getServicePagePath } from '../data/servicePages'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
+import { getResponsiveImageProps } from '../lib/images'
 
 const projectsDescription = 'Explore Kansas City deck projects with composite surfaces, covered and screened rooms, replacements, stairs, railings, and the planning decisions behind the work.'
 const stairProject = projectPages.find((project) => project.slug === 'deck-stair-and-railing-upgrade')
@@ -52,7 +53,7 @@ function ProjectsIndexPage() {
         <section className="px-5 pb-16 sm:px-8 lg:pb-24">
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.2fr_0.8fr]">
             <a className="group relative min-h-[560px] overflow-hidden bg-charcoal text-white" href={getProjectPagePath(featured)}>
-              <img className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" src={featured.heroImage} alt={featured.shortTitle} width="1400" height="1100" loading="eager" decoding="async" fetchPriority="high" />
+              <img className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" {...getResponsiveImageProps(featured.heroImage, '(min-width: 1024px) 62vw, 100vw')} alt={featured.shortTitle} width="1400" height="1100" loading="eager" decoding="async" fetchPriority="high" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/26 to-black/8" />
               <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10">
                 <p className="text-xs font-black uppercase tracking-[0.16em] text-soft-beige">Featured project · {featured.location}</p>
@@ -67,7 +68,7 @@ function ProjectsIndexPage() {
                 const service = getServicePage(project.primaryServiceSlug)
                 return (
                   <a key={project.slug} className="group grid gap-5 py-6 sm:grid-cols-[0.8fr_1.2fr] lg:grid-cols-1 xl:grid-cols-[0.8fr_1.2fr]" href={getProjectPagePath(project)}>
-                    <img className="h-44 w-full object-cover" src={project.heroImage} alt={project.shortTitle} width="650" height="520" loading="lazy" decoding="async" />
+                    <img className="h-44 w-full object-cover" {...getResponsiveImageProps(project.heroImage, '(min-width: 1280px) 16vw, (min-width: 640px) 40vw, 100vw')} alt={project.shortTitle} width="650" height="520" loading="lazy" decoding="async" />
                     <div>
                       <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-green">{service?.shortTitle ?? 'Deck project'} · {project.location}</p>
                       <h2 className="mt-2 text-2xl font-black leading-tight text-charcoal transition group-hover:text-wood">{project.shortTitle}</h2>
@@ -84,7 +85,7 @@ function ProjectsIndexPage() {
         {stairProject && stairService ? (
           <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.94fr_1.06fr] lg:items-center">
-              <img className="aspect-[4/3] w-full object-cover" src={stairProject.heroImage} alt="Deck stair replacement and dark railing project in the Kansas City metro" width="1200" height="900" loading="lazy" decoding="async" />
+              <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps(stairProject.heroImage, '(min-width: 1024px) 47vw, 100vw')} alt="Deck stair replacement and dark railing project in the Kansas City metro" width="1200" height="900" loading="lazy" decoding="async" />
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Deck Stairs + Railings</p>
                 <h2 className="mt-4 text-4xl font-black leading-[1.04] tracking-tight sm:text-5xl">Backyard access is part of the whole deck</h2>

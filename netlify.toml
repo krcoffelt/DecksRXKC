@@ -6,6 +6,18 @@
   NODE_VERSION = "20"
 
 [[redirects]]
+  from = "http://www.decksrxkc.com/*"
+  to = "https://decksrxkc.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.decksrxkc.com/*"
+  to = "https://decksrxkc.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/thank-you"
   to = "/thank-you/"
   status = 301

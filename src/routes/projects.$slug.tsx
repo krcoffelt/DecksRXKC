@@ -7,6 +7,7 @@ import { business } from '../data/business'
 import { getProjectPage, getProjectPagePath, projectPages, type ProjectPage } from '../data/projects'
 import { getServicePage, getServicePagePath } from '../data/servicePages'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
+import { getResponsiveImageProps } from '../lib/images'
 
 export const Route = createFileRoute('/projects/$slug')({
   loader: ({ params }) => {
@@ -35,7 +36,7 @@ function ProjectDetailPage() {
       <main className="min-h-screen bg-warm-white text-ink">
         <SiteHeader />
         <section className="relative min-h-[72svh] overflow-hidden bg-charcoal text-white">
-          <img className="absolute inset-0 h-full w-full object-cover" src={project.heroImage} alt={project.shortTitle} width="1600" height="1200" loading="eager" decoding="async" fetchPriority="high" />
+          <img className="absolute inset-0 h-full w-full object-cover" {...getResponsiveImageProps(project.heroImage, '100vw')} alt={project.shortTitle} width="1600" height="1200" loading="eager" decoding="async" fetchPriority="high" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/44 to-black/20" />
           <div className="relative mx-auto flex min-h-[72svh] max-w-7xl items-end px-5 py-14 sm:px-8 lg:py-20">
             <div className="max-w-5xl">
@@ -68,7 +69,7 @@ function ProjectDetailPage() {
             <div className="grid gap-6 lg:grid-cols-2">
               {project.gallery.map((image) => (
                 <figure key={image.src}>
-                  <img className="aspect-[4/3] w-full object-cover" src={image.src} alt={image.alt} width="1200" height="900" loading="lazy" decoding="async" />
+                  <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps(image.src, '(min-width: 1024px) 50vw, 100vw')} alt={image.alt} width="1200" height="900" loading="lazy" decoding="async" />
                   <figcaption className="border-b border-charcoal/12 py-4 text-sm font-semibold leading-6 text-ink/64">{image.caption}</figcaption>
                 </figure>
               ))}

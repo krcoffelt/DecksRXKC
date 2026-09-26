@@ -169,3 +169,11 @@ export const serviceIconMap = {
   trees: Trees,
   wrench: Wrench,
 }
+
+export const processSteps = [
+  { title: 'Listen first', copy: 'Start with what feels limited, worn, awkward, exposed, or difficult to use — and what the finished space needs to make easier.' },
+  { title: 'Read the whole space', copy: 'Consider the house, existing deck, visible condition, grade, doors, patios, yard access, furniture, views, sun, and shade together.' },
+  { title: 'Compare practical paths', copy: 'Talk through repair, replacement, footprint, surface, stairs, railings, coverage, screening, and future upgrades before narrowing the scope.' },
+  { title: 'Define the work', copy: 'Connect the chosen direction to a clear project scope, material decisions, visible details, and the sequence needed to complete the work.' },
+  { title: 'Finish the system', copy: 'Treat framing, decking, rails, stairs, landings, fascia, trim, and outdoor-room details as parts of one finished space.' },
+]

@@ -152,7 +152,7 @@ function auditSitewide(results) {
       const linkedPath = normalizePath(new URL(href, productionOrigin).pathname)
       if (sitemapPaths.has(linkedPath)) {
         incomingLinks.set(linkedPath, (incomingLinks.get(linkedPath) || 0) + 1)
-      } else if (!linkedPath.startsWith('/images/') && !linkedPath.startsWith('/assets/')) {
+      } else if (!linkedPath.startsWith('/images/') && !linkedPath.startsWith('/assets/') && !linkedPath.startsWith('/fonts/')) {
         errors.push(`${result.path} links to internal URL missing from sitemap: ${linkedPath}`)
       }
     }

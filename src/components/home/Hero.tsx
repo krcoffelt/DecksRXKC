@@ -1,65 +1,188 @@
-import { defaultSeoImagePath } from '../../lib/seo'
+import { ArrowUpRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { business } from '../../data/business'
 import { getResponsiveImageProps } from '../../lib/images'
-import { trustPoints } from '../../data/siteContent'
 import { SiteHeader } from '../SiteHeader'
-import { ButtonLink } from '../ui'
+import { ButtonLink, GoogleGLogo, RatingStars } from '../ui'
+
+export const heroImagePath = '/images/kansas-city-custom-wood-deck-railing-project.jpg'
+
+const slides = [
+  {
+    src: heroImagePath,
+    alt: 'Custom cedar deck with dark railings and a wide stair on a Kansas City home at dusk',
+    caption: 'Cedar deck, black rail, wide stair',
+    position: 'object-[60%_55%]',
+  },
+  {
+    src: '/images/optimized/kansas-city-covered-composite-deck-wide-view.jpg',
+    alt: 'Covered composite deck with seating overlooking a backyard pool',
+    caption: 'Covered composite deck over the pool',
+    position: 'object-[50%_60%]',
+  },
+  {
+    src: '/images/optimized/kansas-city-elevated-screened-porch-black-railing.jpg',
+    alt: 'Elevated screened porch with black railing on a Kansas City home',
+    caption: 'Elevated screened porch',
+    position: 'object-[50%_35%]',
+  },
+  {
+    src: '/images/optimized/kansas-city-elevated-composite-deck-cable-railing-stairs.jpg',
+    alt: 'Elevated composite deck with black cable railing and a long stair run',
+    caption: 'Elevated composite deck, cable rail',
+    position: 'object-[40%_50%]',
+  },
+]
+
+const SLIDE_MS = 6500
+const boards = Array.from({ length: 9 })
 
 export function Hero() {
-  return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden bg-charcoal text-white">
-      <img
-        className="absolute inset-0 h-full w-full object-cover"
-        {...getResponsiveImageProps(defaultSeoImagePath, '100vw')}
-        alt="Finished Kansas City covered deck with composite railing detail"
-        width="1728"
-        height="1696"
-        loading="eager"
-        decoding="async"
-        fetchPriority="high"
-      />
-      <div className="absolute inset-0 bg-black/45" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_0_0_/_0.76),rgb(0_0_0_/_0.36)_52%,rgb(0_0_0_/_0.12))]" />
+  const [active, setActive] = useState(0)
+  const [previous, setPrevious] = useState<number | null>(null)
+  const [playing, setPlaying] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
 
+  const go = (index: number) => {
+    if (index === active) return
+    setPrevious(active)
+    setActive(index)
+  }
+
+  // Autoplay only while the hero is on screen, the tab is visible, and motion is welcome.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const section = sectionRef.current
+    if (!section) return
+    let onScreen = true
+    const sync = () => setPlaying(onScreen && document.visibilityState === 'visible')
+    const observer = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting
+      sync()
+    })
+    observer.observe(section)
+    document.addEventListener('visibilitychange', sync)
+    sync()
+    return () => {
+      observer.disconnect()
+      document.removeEventListener('visibilitychange', sync)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!playing) return
+    const timer = window.setTimeout(() => {
+      setPrevious(active)
+      setActive((active + 1) % slides.length)
+    }, SLIDE_MS)
+    return () => window.clearTimeout(timer)
+  }, [active, playing])
+
+  return (
+    <section ref={sectionRef} className="grain relative isolate flex h-[100svh] min-h-[40rem] flex-col overflow-clip bg-night text-bone">
       <SiteHeader variant="overlay" />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col justify-end px-5 pb-8 pt-28 sm:px-8 lg:pb-10">
-        <div className="max-w-4xl pb-8 lg:pb-16">
-          <p className="mb-5 flex items-center gap-3 text-xs font-black uppercase tracking-[0.18em] text-soft-beige">
-            <span className="h-px w-12 bg-soft-beige" aria-hidden="true" />
-            Kansas City deck contractor
-          </p>
-          <h1 className="max-w-5xl text-5xl font-black leading-[0.96] tracking-tight sm:text-6xl lg:text-8xl">
-            Custom Decks Built for Kansas City Homes
+      {/* Rotating project photography */}
+      <div className="absolute inset-0 -z-20" data-hero-media>
+        {slides.map((slide, index) => {
+          const state = index === active ? 'is-active z-20' : index === previous ? 'is-previous z-10' : 'is-idle z-0'
+          return (
+            <div key={slide.src} className={`hero-slide absolute inset-0 overflow-hidden ${state}`} aria-hidden={index !== active}>
+              <img
+                className={`hero-slide-img h-full w-full object-cover ${slide.position} ${index === 0 ? "hero-media" : ""}`}
+                {...getResponsiveImageProps(slide.src, '100vw')}
+                alt={slide.alt}
+                width="1600"
+                height="1200"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={index === 0 ? 'high' : 'low'}
+              />
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Deck boards slide away to reveal the first photo */}
+      <div className="hero-boards pointer-events-none absolute inset-0 -z-10 flex-col" aria-hidden="true">
+        {boards.map((_, index) => (
+          <span key={index} className="block bg-night" style={{ ['--i' as string]: index }} />
+        ))}
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(17_16_14/0.55)_0%,transparent_22%,transparent_40%,rgb(17_16_14/0.9)_100%)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(17_16_14/0.5)_0%,transparent_60%)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-night/25" aria-hidden="true" />
+
+      <div className="shell relative flex flex-1 flex-col justify-end pt-28 pb-5 lg:pb-7">
+        <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,25rem)] lg:items-end lg:gap-12">
+          <h1 className="hero-lines hero-title">
+            <span className="line-mask" style={{ ['--i' as string]: 0 }}><span>Custom Decks</span></span>
+            <span className="line-mask" style={{ ['--i' as string]: 1 }}><span><em className="pr-[0.06em] text-soft-beige">built for</em> Kansas</span></span>
+            <span className="line-mask" style={{ ['--i' as string]: 2 }}><span>City Homes</span></span>
           </h1>
-          <p className="mt-6 max-w-3xl text-xl font-semibold leading-tight text-soft-beige sm:text-3xl">
-            Designed for summer nights, family dinners, and every season in between.
-          </p>
-          <p className="mt-6 max-w-3xl text-base leading-8 text-white/82 sm:text-lg">
-            DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings,
-            and outdoor living spaces across the Kansas City metro.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="#contact" variant="light">
-              Get a Free Quote
-            </ButtonLink>
-            <ButtonLink href="#our-work" variant="outline">
-              View Our Work
-            </ButtonLink>
+          <div className="lg:pb-3">
+            <p className="hero-fade text-[1.02rem] leading-7 text-bone/80" style={{ ['--i' as string]: 1 }}>
+              DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings, and outdoor living
+              spaces across the Kansas City metro — planned for summer nights, family dinners, and every season in between.
+            </p>
+            <div className="hero-fade mt-7 flex flex-wrap items-center gap-3" style={{ ['--i' as string]: 2 }}>
+              <ButtonLink href="#contact" variant="bronze">Get a free quote</ButtonLink>
+              <ButtonLink href="#our-work" variant="outline">View our work</ButtonLink>
+            </div>
           </div>
         </div>
 
-        <div className="grid gap-4 border-t border-white/18 pt-5 sm:grid-cols-3">
-          {trustPoints.map(({ label, copy, icon: Icon }) => (
-            <div key={label} className="text-white">
-              <div className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-soft-beige text-charcoal">
-                  <Icon className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <p className="text-sm font-black">{label}</p>
-              </div>
-              <p className="mt-2 max-w-xs text-sm leading-6 text-white/68">{copy}</p>
+        <div className="hero-fade mt-10 flex items-center justify-between gap-6 border-t border-bone/15 pt-5 lg:mt-12" style={{ ['--i' as string]: 3 }}>
+          <a href={business.googleMapsUrl} target="_blank" rel="noreferrer" className="group flex items-center gap-3 sm:gap-4">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-bone">
+              <GoogleGLogo className="h-5 w-5" />
+            </span>
+            <span className="flex flex-col">
+              <span className="flex items-center gap-2">
+                <span className="font-display text-xl leading-none">5.0</span>
+                <RatingStars className="text-[0.8rem]" />
+              </span>
+              <span className="mt-1 text-[0.82rem] text-bone/65 transition-colors group-hover:text-bone">{business.googleReviewCount} reviews on Google</span>
+            </span>
+            <ArrowUpRight className="hidden h-4 w-4 text-bone/50 transition-transform duration-500 group-hover:rotate-45 group-hover:text-bone sm:block" aria-hidden="true" />
+          </a>
+
+          <div className="flex items-center gap-6">
+            <div className="hidden md:grid">
+              {slides.map((slide, index) => (
+                <p
+                  key={slide.src}
+                  className={`[grid-area:1/1] text-right text-[0.9rem] whitespace-nowrap text-bone/80 transition-all duration-700 ease-[var(--ease-out-expo)] ${index === active ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
+                  aria-hidden={index !== active}
+                >
+                  {slide.caption}
+                </p>
+              ))}
             </div>
-          ))}
+            <div className="flex gap-1.5">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.src}
+                  type="button"
+                  className="group flex h-8 items-center"
+                  aria-label={`Show ${slide.caption}`}
+                  aria-pressed={index === active}
+                  onClick={() => go(index)}
+                >
+                  <span className="relative block h-0.5 w-7 overflow-hidden bg-bone/25 transition-colors group-hover:bg-bone/45 sm:w-10">
+                    {index === active ? (
+                      <span
+                        key={`${active}-${playing}`}
+                        className={`hero-progress absolute inset-0 origin-left bg-soft-beige ${playing ? 'is-playing' : ''}`}
+                        style={{ ['--slide-ms' as string]: `${SLIDE_MS}ms` }}
+                      />
+                    ) : null}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

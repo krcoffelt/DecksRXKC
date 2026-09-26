@@ -1,8 +1,8 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { CheckCircle, MapPin, Quote } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
-import { ButtonLink } from '../components/ui'
+import { ArrowRow, ButtonLink, Figure, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
 import { getProjectPage, getProjectPagePath, projectPages, type ProjectPage } from '../data/projects'
 import { getServicePage, getServicePagePath } from '../data/servicePages'
@@ -29,92 +29,111 @@ function ProjectDetailPage() {
       const service = getServicePage(slug)
       return service ? [service] : []
     })
+  const projectIndex = projectPages.findIndex((candidate) => candidate.slug === project.slug)
+  const nextProject = projectPages[(projectIndex + 1) % projectPages.length]
 
   return (
     <>
       <ProjectStructuredData project={project} />
-      <main className="min-h-screen bg-warm-white text-ink">
+      <main className="min-h-screen bg-bone text-ink">
         <SiteHeader />
-        <section className="relative min-h-[72svh] overflow-hidden bg-charcoal text-white">
-          <img className="absolute inset-0 h-full w-full object-cover" {...getResponsiveImageProps(project.heroImage, '100vw')} alt={project.shortTitle} width="1600" height="1200" loading="eager" decoding="async" fetchPriority="high" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/44 to-black/20" />
-          <div className="relative mx-auto flex min-h-[72svh] max-w-7xl items-end px-5 py-14 sm:px-8 lg:py-20">
-            <div className="max-w-5xl">
-              <p className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-soft-beige"><MapPin className="h-4 w-4" aria-hidden="true" /> {project.location}</p>
-              <h1 className="mt-5 text-5xl font-black leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">{project.title}</h1>
-              <p className="mt-6 max-w-3xl text-xl font-semibold leading-8 text-white/78">{project.summary}</p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title={project.title}
+          intro={project.summary}
+          image={project.heroImage}
+          imageAlt={project.shortTitle}
+          breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: project.shortTitle }]}
+          meta={[
+            { label: 'Primary service', value: services[0]?.shortTitle ?? 'Deck project' },
+            { label: 'Location', value: project.location },
+            { label: 'Key features', value: `${project.features.length} finished details` },
+            { label: 'Published', value: new Date(`${project.publishedAt}T12:00:00`).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) },
+          ]}
+        />
 
-        <section className="px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+        <section className="bg-bone">
+          <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
+            <SectionIntro title={<>Start with the problem the space <em className="text-wood">needs to solve</em></>} />
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Project Goal</p>
-              <h2 className="mt-4 text-4xl font-black leading-tight text-charcoal">Start with the problem the space needs to solve</h2>
-            </div>
-            <div>
-              <p className="text-xl font-semibold leading-9 text-charcoal">{project.goal}</p>
-              <div className="mt-8 divide-y divide-charcoal/12 border-y border-charcoal/12">
-                {project.considerations.map((item) => (
-                  <div key={item} className="flex gap-4 py-5"><CheckCircle className="mt-1 h-5 w-5 shrink-0 text-muted-green" aria-hidden="true" /><p className="leading-7 text-ink/70">{item}</p></div>
+              <p className="font-medium text-[clamp(1.7rem,2.6vw,2.5rem)] leading-[1.15] tracking-[-0.03em]" data-reveal="up">{project.goal}</p>
+              <ul className="mt-12 border-t hairline">
+                {project.considerations.map((item, index) => (
+                  <li key={item} className="border-b hairline py-6" data-reveal="up" style={{ ['--d' as string]: index }}>
+                    <p className="text-base leading-7 text-ink/72 sm:text-lg sm:leading-8">{item}</p>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </section>
 
-        <section className="bg-white px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid gap-6 lg:grid-cols-2">
-              {project.gallery.map((image) => (
-                <figure key={image.src}>
-                  <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps(image.src, '(min-width: 1024px) 50vw, 100vw')} alt={image.alt} width="1200" height="900" loading="lazy" decoding="async" />
-                  <figcaption className="border-b border-charcoal/12 py-4 text-sm font-semibold leading-6 text-ink/64">{image.caption}</figcaption>
-                </figure>
+        <section className="bg-paper">
+          <div className="shell py-24 lg:py-32">
+            <div className="grid gap-6 lg:grid-cols-12">
+              {project.gallery.map((image, index) => (
+                <Figure
+                  key={image.src}
+                  src={image.src}
+                  alt={image.alt}
+                  caption={image.caption}
+                  className={index % 2 === 0 ? 'lg:col-span-7' : 'lg:col-span-5 lg:mt-32'}
+                  aspect={index % 2 === 0 ? 'aspect-[4/3]' : 'aspect-[4/5]'}
+                />
               ))}
             </div>
           </div>
         </section>
 
-        <section className="px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">
+        <section className="grain relative bg-night text-bone">
+          <div className="shell grid gap-12 py-24 lg:grid-cols-2 lg:gap-20 lg:py-32">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Finished Details</p>
-              <h2 className="mt-4 text-4xl font-black leading-tight text-charcoal">The complete result matters</h2>
-              <p className="mt-5 text-lg leading-8 text-ink/70">{project.result}</p>
+              <SectionIntro title="The complete result matters" copy={project.result} tone="dark" />
             </div>
-            <div className="divide-y divide-charcoal/12 border-y border-charcoal/12">
-              {project.features.map((feature) => <p key={feature} className="py-5 text-xl font-black text-charcoal">{feature}</p>)}
-            </div>
+            <ul className="border-t hairline-light">
+              {project.features.map((feature, index) => (
+                <li key={feature} className="flex items-baseline gap-6 border-b hairline-light py-6" data-reveal="up" style={{ ['--d' as string]: index }}>
+                  <span className="font-display text-3xl tracking-[-0.02em] lg:text-4xl">{feature}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           {project.testimonial ? (
-            <blockquote className="mx-auto mt-14 max-w-5xl border-y border-charcoal/12 py-10 text-center">
-              <Quote className="mx-auto h-8 w-8 text-muted-green" aria-hidden="true" />
-              <p className="mx-auto mt-5 max-w-4xl text-2xl font-black leading-10 text-charcoal">“{project.testimonial}”</p>
-              <cite className="mt-5 block text-sm font-black not-italic uppercase tracking-[0.14em] text-wood">DecksRXKC customer · Google review</cite>
-            </blockquote>
+            <div className="shell pb-24 lg:pb-32">
+              <blockquote className="border-t hairline-light pt-14" data-reveal="up">
+                <p className="max-w-5xl font-medium text-[clamp(1.9rem,3.6vw,3.4rem)] leading-[1.1] tracking-[-0.03em]"><span className="text-soft-beige">“</span>{project.testimonial}<span className="text-soft-beige">”</span></p>
+                <cite className="mono mt-8 block text-[0.72rem] not-italic uppercase tracking-[0.14em] text-bone/55">DecksRXKC customer — Google review</cite>
+              </blockquote>
+            </div>
           ) : null}
         </section>
 
-        <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-20">
-          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+        <section className="bg-bone">
+          <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Related Services</p>
-              <h2 className="mt-4 text-4xl font-black leading-tight">Plan your complete deck</h2>
+              <SectionIntro title="Plan your complete deck" copy="Tell us what your outdoor space needs — we’ll help you compare the right next step." />
+              <div className="mt-10 flex flex-wrap gap-3" data-reveal="up">
+                <ButtonLink href="/contact">Request a free quote</ButtonLink>
+                <ButtonLink href={`tel:${business.phone}`} variant="outline">Call {business.phoneDisplay}</ButtonLink>
+              </div>
             </div>
-            <div className="divide-y divide-white/14 border-y border-white/14">
-              {services.map((service) => <a key={service.slug} href={getServicePagePath(service)} className="block py-5 text-lg font-black text-white transition hover:text-soft-beige">{service.shortTitle}</a>)}
+            <div className="border-t hairline">
+              {services.map((service) => (
+                <ArrowRow key={service.slug} href={getServicePagePath(service)}>{service.shortTitle}</ArrowRow>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="px-5 py-16 sm:px-8 lg:py-20">
-          <div className="mx-auto flex max-w-7xl flex-col gap-5 border-y border-charcoal/12 py-10 sm:flex-row sm:items-center sm:justify-between">
-            <div><p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Start a Project</p><h2 className="mt-3 text-3xl font-black text-charcoal">Tell us what your outdoor space needs.</h2></div>
-            <ButtonLink href="/contact">Request a Free Quote</ButtonLink>
-          </div>
-        </section>
+        {nextProject ? (
+          <a href={getProjectPagePath(nextProject)} className="group grain relative block overflow-hidden bg-night text-bone" data-cursor="Next">
+            <img className="absolute inset-0 h-full w-full object-cover opacity-40 transition-all duration-[1400ms] ease-[var(--ease-out-expo)] group-hover:scale-105 group-hover:opacity-55" {...getResponsiveImageProps(nextProject.heroImage, '100vw')} alt="" width="1600" height="1200" loading="lazy" decoding="async" />
+            <div className="shell relative flex min-h-[60svh] flex-col justify-end py-16">
+              <p className="mono text-[0.7rem] uppercase tracking-[0.14em] text-bone/60">Next project →</p>
+              <p className="display-lg mt-4 max-w-[14ch]">{nextProject.shortTitle}</p>
+            </div>
+          </a>
+        ) : null}
+
         <SiteFooter />
       </main>
     </>

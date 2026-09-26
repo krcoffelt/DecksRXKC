@@ -1,7 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
-import { ButtonLink } from '../components/ui'
+import { ArrowUpRight } from 'lucide-react'
+import { ButtonLink, CtaBand, FaqList, PageHero, SectionIntro } from '../components/ui'
+import { getResponsiveImageProps } from '../lib/images'
 import { getServicePagePath, servicePages } from '../data/servicePages'
 import { defaultSeoImagePath, getSeoHead, siteUrl } from '../lib/seo'
 
@@ -71,60 +73,67 @@ function ServicesIndex() {
           }),
         }}
       />
-      <main className="min-h-screen bg-warm-white text-ink">
+      <main className="min-h-screen bg-bone text-ink">
         <SiteHeader />
-        <section className="px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-4xl">
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Deck Services</p>
-              <h1 className="mt-4 text-5xl font-black leading-[0.98] tracking-tight text-charcoal sm:text-6xl lg:text-7xl">
-                Outdoor living work built for Kansas City homes
-              </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/72">
-                DecksRXKC handles the core deck projects homeowners ask for most: new builds, replacements, screening, covers, repairs, stairs, and railings.
-              </p>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-ink/72">
-                Start with the problem the outdoor space needs to solve. That may mean correcting an aging structure, creating a better route to the yard, reducing maintenance with Trex or TimberTech, or coordinating a roof and screens as one outdoor room. Each service guide explains the structural, material, access, and finish decisions that belong in a clear project scope.
+        <PageHero
+          title={<>Outdoor living work built for <em className="text-soft-beige">Kansas City</em> homes</>}
+          intro="DecksRXKC handles the core deck projects homeowners ask for most: new builds, replacements, screening, covers, repairs, stairs, and railings."
+          image={defaultSeoImagePath}
+          imageAlt="Composite deck boards and dark railing detail on a Kansas City deck"
+          breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
+          actions={<ButtonLink href="/contact" variant="bronze">Request a free quote</ButtonLink>}
+          meta={[
+            { label: 'Services', value: `${servicePages.length} specialties` },
+            { label: 'Materials', value: 'Trex, TimberTech & wood' },
+            { label: 'Coverage', value: 'Kansas + Missouri' },
+            { label: 'Quotes', value: 'Free, no pressure' },
+          ]}
+        />
+
+        <section className="bg-bone">
+          <div className="shell py-24 lg:py-32">
+            <div className="grid gap-10 lg:grid-cols-[0.3fr_1fr]">
+              <span className="hidden lg:block" />
+              <p className="font-medium text-[clamp(1.8rem,3.2vw,3rem)] leading-[1.1] tracking-[-0.03em]" data-reveal="up">
+                That may mean correcting an aging structure, creating a better route to the yard, reducing maintenance with Trex or TimberTech, or coordinating a roof and screens as one outdoor room. Each service guide explains the structural, material, access, and finish decisions that belong in a clear project scope.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-px bg-charcoal/12 md:grid-cols-2 xl:grid-cols-3">
-              {servicePages.map((service) => (
-                <a key={service.slug} className="group bg-white p-6 transition hover:bg-charcoal hover:text-white sm:p-8" href={getServicePagePath(service)}>
-                  <p className="text-sm font-black uppercase tracking-[0.16em] text-wood transition group-hover:text-soft-beige">
-                    {service.eyebrow}
-                  </p>
-                  <h2 className="mt-4 text-3xl font-black leading-tight text-charcoal transition group-hover:text-white">
-                    {service.shortTitle}
-                  </h2>
-                  <p className="mt-4 text-base leading-7 text-ink/68 transition group-hover:text-white/70">
-                    {service.heroCopy}
-                  </p>
-                </a>
-              ))}
+            <div className="mt-20 grid gap-x-6 gap-y-16 md:grid-cols-12 lg:mt-28">
+              {servicePages.map((service, index) => {
+                const span = ['md:col-span-7', 'md:col-span-5', 'md:col-span-4', 'md:col-span-4', 'md:col-span-4', 'md:col-span-5', 'md:col-span-7'][index % 7]
+                const tall = span.endsWith('7') || span.endsWith('5')
+                return (
+                  <a key={service.slug} className={`group block ${span}`} href={getServicePagePath(service)} data-reveal="up" style={{ ['--d' as string]: index % 3 }}>
+                    <div className={`frame bg-sand ${tall ? 'aspect-[4/3]' : 'aspect-[4/5]'}`}>
+                      <img className="h-full w-full object-cover" {...getResponsiveImageProps(service.image, '(min-width: 768px) 50vw, 100vw')} alt={`${service.shortTitle} by DecksRXKC`} width="1200" height="900" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
+                    </div>
+                    <div className="mt-6 flex items-start justify-between gap-6 border-t hairline pt-5">
+                      <div>
+                        <h2 className="text-[clamp(2rem,3vw,2.9rem)] leading-none transition-colors group-hover:text-wood">{service.shortTitle}</h2>
+                        <p className="mt-4 max-w-xl text-[0.98rem] leading-7 text-ink/62">{service.heroCopy}</p>
+                      </div>
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-ink/15 transition-all duration-500 group-hover:border-ink group-hover:bg-ink group-hover:text-bone">
+                        <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                )
+              })}
             </div>
+          </div>
+        </section>
 
-            <div className="mt-10">
-              <ButtonLink href="/#contact">Request a Free Quote</ButtonLink>
+        <section className="bg-paper">
+          <div className="shell grid gap-12 py-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:py-32">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <SectionIntro title="Choose the right starting point" />
             </div>
+            <FaqList items={serviceFaqs} />
           </div>
         </section>
-        <section className="bg-white px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Kansas City Deck Questions</p>
-              <h2 className="mt-4 text-4xl font-black leading-tight text-charcoal sm:text-5xl">Choose the right starting point</h2>
-            </div>
-            <div className="divide-y divide-charcoal/12 border-y border-charcoal/12">
-              {serviceFaqs.map((faq) => (
-                <article key={faq.question} className="py-6">
-                  <h3 className="text-xl font-black text-charcoal">{faq.question}</h3>
-                  <p className="mt-3 text-base leading-7 text-ink/68">{faq.answer}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+
+        <CtaBand title={<>Not sure where to start? <em className="text-soft-beige">Start here.</em></>} copy="Tell us what feels worn, unsafe, exposed, or underused — we’ll help you sort repair from replacement and build from there." />
         <SiteFooter />
       </main>
     </>

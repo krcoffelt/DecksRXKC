@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { ArrowUpRight } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
-import { ButtonLink } from '../components/ui'
+import { CtaBand, PageHero } from '../components/ui'
 import { getGuidePagePath, guidePages } from '../data/guides'
 import { getSeoHead } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
@@ -13,11 +13,46 @@ export const Route = createFileRoute('/guides/')({
 })
 
 function GuidesIndexPage() {
-  return <main className="min-h-screen bg-warm-white text-ink">
+  const [lead, ...rest] = guidePages
+  return <main className="min-h-screen bg-bone text-ink">
     <SiteHeader />
-    <section className="px-5 py-16 sm:px-8 lg:py-24"><div className="mx-auto max-w-7xl"><p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Planning Library</p><h1 className="mt-4 max-w-5xl text-5xl font-black leading-[0.98] tracking-tight text-charcoal sm:text-6xl lg:text-7xl">Clear deck decisions before construction begins</h1><p className="mt-6 max-w-3xl text-lg leading-8 text-ink/70">Compare scope, materials, maintenance, and long-term use with practical guidance built for Kansas City homeowners.</p></div></section>
-    <section className="px-5 pb-16 sm:px-8 lg:pb-24"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">{guidePages.map((guide) => <a key={guide.slug} href={getGuidePagePath(guide)} className="group"><img className="aspect-[16/10] w-full object-cover" {...getResponsiveImageProps(guide.heroImage, '(min-width: 1024px) 50vw, 100vw')} alt={guide.shortTitle} width="1000" height="625" loading="lazy" decoding="async" /><div className="border-b border-charcoal/12 py-6"><p className="text-xs font-black uppercase tracking-[0.14em] text-muted-green">{guide.eyebrow}</p><h2 className="mt-3 text-3xl font-black leading-tight text-charcoal transition group-hover:text-wood">{guide.title}</h2><p className="mt-4 text-base leading-7 text-ink/68">{guide.intro}</p><span className="mt-5 inline-flex items-center text-sm font-black text-charcoal">Read guide <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" /></span></div></a>)}</div></section>
-    <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-20"><div className="mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Talk It Through</p><h2 className="mt-3 text-4xl font-black">Get guidance for your actual deck.</h2></div><ButtonLink href="/contact" variant="light">Request a Free Quote</ButtonLink></div></section>
+    <PageHero
+      title={<>Clear deck decisions <em className="text-soft-beige">before</em> construction begins</>}
+      intro="Compare scope, materials, maintenance, and long-term use with practical guidance built for Kansas City homeowners."
+      image={lead.heroImage}
+      imageAlt={lead.shortTitle}
+      breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Guides' }]}
+      size="compact"
+    />
+    <section className="bg-bone">
+      <div className="shell py-24 lg:py-32">
+        <a href={getGuidePagePath(lead)} className="group grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+          <div className="frame aspect-[16/10] bg-sand" data-reveal="clip">
+            <img className="h-full w-full object-cover" {...getResponsiveImageProps(lead.heroImage, '(min-width: 1024px) 58vw, 100vw')} alt={lead.shortTitle} width="1200" height="750" loading="eager" decoding="async" />
+          </div>
+          <div data-reveal="up">
+            <h2 className="display-md transition-colors group-hover:text-wood">{lead.title}</h2>
+            <p className="lede mt-6 text-ink/64">{lead.intro}</p>
+            <span className="link-line mt-8 inline-flex items-center gap-2 font-medium">Read guide <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" /></span>
+          </div>
+        </a>
+        <div className="mt-24 border-t hairline lg:mt-32">
+          {rest.map((guide, index) => (
+            <a key={guide.slug} href={getGuidePagePath(guide)} className="group grid items-center gap-6 border-b hairline py-8 md:grid-cols-[1fr_14rem_auto] md:gap-10" data-reveal="up" style={{ ['--d' as string]: index * 0.5 }}>
+              <div>
+                <h2 className="text-[clamp(1.8rem,2.8vw,2.7rem)] leading-[1.02] transition-colors group-hover:text-wood">{guide.title}</h2>
+                <p className="mt-3 max-w-2xl text-[0.95rem] leading-7 text-ink/60">{guide.intro}</p>
+              </div>
+              <div className="frame hidden aspect-[4/3] bg-sand md:block">
+                <img className="h-full w-full object-cover" {...getResponsiveImageProps(guide.heroImage, '224px')} alt="" width="448" height="336" loading="lazy" decoding="async" />
+              </div>
+              <span className="hidden h-11 w-11 items-center justify-center border border-ink/15 transition-all duration-500 group-hover:bg-ink group-hover:text-bone md:flex"><ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+    <CtaBand title={<>Get guidance for <em className="text-soft-beige">your actual deck.</em></>} />
     <SiteFooter />
   </main>
 }

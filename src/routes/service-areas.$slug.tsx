@@ -1,8 +1,8 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { ArrowUpRight, CheckCircle, MapPin } from 'lucide-react'
+import { ArrowUpRight, MapPin } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
-import { ButtonLink } from '../components/ui'
+import { ArrowRow, ButtonLink, CtaBand, FaqList, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
 import { getGuidePagePath, getGuidesBySlugs } from '../data/guides'
 import { getProjectPagePath, getProjectsBySlugs } from '../data/projects'
@@ -52,77 +52,86 @@ function ServiceAreaPage() {
   return (
     <>
       <ServiceAreaStructuredData area={area} faqs={faqs} />
-      <main className="min-h-screen bg-warm-white text-ink">
+      <main className="min-h-screen bg-bone text-ink">
         <SiteHeader />
+        <PageHero
+          title={heroTitle}
+          intro={`DecksRXKC is a deck builder serving ${label} with custom decks, screened-in and covered spaces, repairs, replacements, stairs, and railings.`}
+          image={area.image}
+          imageAlt={`${label} deck project by DecksRXKC`}
+          breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Service Areas', href: '/service-areas' }, { label }]}
+          actions={<><ButtonLink href="/contact" variant="bronze">Request a free quote</ButtonLink><ButtonLink href="/projects" variant="outline">View project work</ButtonLink></>}
+          meta={[
+            { label: 'County', value: area.county },
+            { label: 'State', value: area.state === 'KS' ? 'Kansas' : 'Missouri' },
+            { label: 'Nearby', value: area.nearby.slice(0, 2).join(', ') },
+            { label: 'Popular here', value: area.projectTypes.slice(0, 2).join(' · ') },
+          ]}
+        />
 
-        <section className="relative overflow-hidden bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
-          <img className="absolute inset-0 h-full w-full object-cover opacity-42" {...getResponsiveImageProps(area.image, '100vw')} alt={`${label} deck project by DecksRXKC`} width="1600" height="1200" loading="eager" decoding="async" fetchPriority="high" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(0_0_0_/_0.8),rgb(0_0_0_/_0.44)_56%,rgb(0_0_0_/_0.25))]" />
-          <div className="relative mx-auto max-w-7xl"><div className="max-w-4xl">
-            <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-2 text-xs font-bold text-white/66">
-              <a className="transition hover:text-soft-beige" href="/">Home</a>
-              <span aria-hidden="true">/</span>
-              <a className="transition hover:text-soft-beige" href="/service-areas">Service Areas</a>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page" className="text-white">{label}</span>
-            </nav>
-            <p className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.18em] text-soft-beige"><MapPin className="h-4 w-4" aria-hidden="true" />{label} service area</p>
-            <h1 className="mt-5 text-5xl font-black leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">{heroTitle}</h1>
-            <p className="mt-6 max-w-3xl text-xl font-semibold leading-8 text-white/82">DecksRXKC is a deck builder serving {label} with custom decks, screened-in and covered spaces, repairs, replacements, stairs, and railings.</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row"><ButtonLink href="/contact" variant="light">Request a Free Quote</ButtonLink><ButtonLink href="/projects" variant="outline">View Project Work</ButtonLink></div>
-          </div></div>
-        </section>
-
-        <section className="px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <section className="bg-bone">
+          <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Local Deck Planning</p>
-              <h2 className="mt-4 text-4xl font-black leading-[1.02] tracking-tight text-charcoal sm:text-5xl">Built for {area.city} homes and Kansas City weather</h2>
-              <p className="mt-5 text-lg leading-8 text-ink/72">{area.localNote}</p>
-              {area.priorityContent ? <p className="mt-5 text-lg leading-8 text-ink/72">{area.priorityContent.intro}</p> : null}
-              <div className="mt-8 border-y border-charcoal/12 py-6"><p className="text-sm font-black uppercase tracking-[0.14em] text-muted-green">Nearby communities</p><p className="mt-3 text-xl font-black text-charcoal">{area.nearby.join(' / ')}</p><p className="mt-3 text-base leading-7 text-ink/66">Serving {area.county} and surrounding Kansas City metro communities.</p></div>
+              <SectionIntro title={<>Built for {area.city} homes and <em className="text-wood">Kansas City weather</em></>} />
+              <p className="lede mt-6 text-ink/68" data-reveal="up">{area.localNote}</p>
+              {area.priorityContent ? <p className="mt-5 text-lg leading-8 text-ink/68" data-reveal="up">{area.priorityContent.intro}</p> : null}
+              <div className="mt-10 bg-paper p-6" data-reveal="up">
+                <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-wood">Nearby communities</p>
+                <p className="mt-3 font-display text-2xl leading-snug tracking-[-0.01em]">{area.nearby.join(' / ')}</p>
+                <p className="mt-3 text-[0.95rem] leading-7 text-ink/60">Serving {area.county} and surrounding Kansas City metro communities.</p>
+              </div>
             </div>
-            <div className="divide-y divide-charcoal/12 border-y border-charcoal/12">
-              {focus.map((item) => {
+            <div className="border-t hairline">
+              {focus.map((item, index) => {
                 const service = getServicePage(item.serviceSlug)
-                return <a key={item.serviceSlug} href={service ? getServicePagePath(service) : '/services'} className="group block py-7">
-                  <div className="flex items-start justify-between gap-5"><div><h3 className="text-2xl font-black text-charcoal transition group-hover:text-wood">{item.title} in {label}</h3><p className="mt-3 text-base leading-7 text-ink/70">{item.copy}</p></div><ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted-green" aria-hidden="true" /></div>
-                </a>
+                return (
+                  <a key={item.serviceSlug} href={service ? getServicePagePath(service) : '/services'} className="group flex items-start justify-between gap-6 border-b hairline py-8" data-reveal="up" style={{ ['--d' as string]: index }}>
+                    <div>
+                      <h3 className="font-display text-3xl leading-tight tracking-[-0.02em] transition-colors group-hover:text-wood lg:text-4xl">{item.title} in {label}</h3>
+                      <p className="mt-3 text-base leading-7 text-ink/64">{item.copy}</p>
+                    </div>
+                    <span className="mt-1 flex h-11 w-11 items-center justify-center border border-ink/15 transition-all duration-500 group-hover:bg-ink group-hover:text-bone"><ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" /></span>
+                  </a>
+                )
               })}
             </div>
           </div>
         </section>
 
         {area.priorityContent ? (
-          <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-              <div><p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Planning Priorities</p><h2 className="mt-4 text-4xl font-black leading-tight sm:text-5xl">Decisions that shape a better {area.city} deck</h2></div>
-              <div className="divide-y divide-white/14 border-y border-white/14">{area.priorityContent.planningNotes.map((note) => <p key={note} className="flex gap-4 py-6 text-lg font-bold leading-8 text-white/78"><CheckCircle className="mt-1 h-5 w-5 shrink-0 text-soft-beige" aria-hidden="true" />{note}</p>)}</div>
+          <section className="grain relative bg-night text-bone">
+            <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
+              <SectionIntro title={<>Decisions that shape a better <em className="text-soft-beige">{area.city}</em> deck</>} tone="dark" />
+              <ul className="border-t hairline-light">
+                {area.priorityContent.planningNotes.map((note, index) => (
+                  <li key={note} className="border-b hairline-light py-6" data-reveal="up" style={{ ['--d' as string]: index }}>
+                    <p className="text-lg leading-8 text-bone/78">{note}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
         ) : null}
 
         {area.priorityContent?.decisionGuide ? (
-          <section className="px-5 py-16 sm:px-8 lg:py-24">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">{area.priorityContent.decisionGuide.eyebrow}</p>
-                <h2 className="mt-4 text-4xl font-black leading-[1.04] tracking-tight text-charcoal sm:text-5xl">{area.priorityContent.decisionGuide.title}</h2>
+          <section className="bg-paper">
+            <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
+              <div className="lg:sticky lg:top-28 lg:self-start">
+                <SectionIntro title={area.priorityContent.decisionGuide.title} />
               </div>
               <div>
-                <p className="text-lg leading-8 text-ink/72">{area.priorityContent.decisionGuide.body}</p>
-                <div className="mt-8 grid border-y border-charcoal/12 sm:grid-cols-2">
-                  {area.priorityContent.decisionGuide.points.map((point) => (
-                    <p key={point} className="border-b border-charcoal/12 py-5 pr-5 text-base font-black leading-7 text-charcoal sm:odd:border-r sm:even:pl-5 sm:nth-last-[-n+2]:border-b-0">{point}</p>
+                <p className="lede text-ink/70" data-reveal="up">{area.priorityContent.decisionGuide.body}</p>
+                <div className="mt-10 grid gap-px overflow-hidden border hairline bg-ink/10 sm:grid-cols-2">
+                  {area.priorityContent.decisionGuide.points.map((point, index) => (
+                    <div key={point} className="bg-paper p-6" data-reveal="fade" style={{ ['--d' as string]: index }}>
+                      <p className="text-base leading-7 font-medium">{point}</p>
+                    </div>
                   ))}
                 </div>
                 {guides.length > 0 ? (
-                  <div className="mt-8 divide-y divide-charcoal/12 border-y border-charcoal/12">
+                  <div className="mt-10 border-t hairline">
                     {guides.map((guide) => (
-                      <a key={guide.slug} href={getGuidePagePath(guide)} className="flex items-center justify-between gap-5 py-5 text-base font-black text-muted-green transition hover:text-wood">
-                        Read the guide: {guide.shortTitle}
-                        <ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
-                      </a>
+                      <ArrowRow key={guide.slug} href={getGuidePagePath(guide)}>{guide.shortTitle}</ArrowRow>
                     ))}
                   </div>
                 ) : null}
@@ -132,14 +141,56 @@ function ServiceAreaPage() {
         ) : null}
 
         {projects.length > 0 ? (
-          <section className="bg-white px-5 py-16 sm:px-8 lg:py-24"><div className="mx-auto max-w-7xl"><div className="max-w-4xl"><p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Relevant Project Work</p><h2 className="mt-4 text-4xl font-black leading-tight text-charcoal sm:text-5xl">See similar deck details</h2><p className="mt-4 text-base leading-7 text-ink/66">These Kansas City metro projects show services and details commonly considered for {area.city} homes; they are not presented as projects at a specific address in {area.city}.</p></div><div className="mt-9 grid gap-8 lg:grid-cols-2">{projects.map((project) => <a key={project.slug} href={getProjectPagePath(project)} className="group grid gap-5 sm:grid-cols-[0.9fr_1.1fr]"><img className="h-60 w-full object-cover" {...getResponsiveImageProps(project.heroImage, '(min-width: 1024px) 32vw, 90vw')} alt={project.shortTitle} width="700" height="600" loading="lazy" decoding="async" /><div className="self-end border-b border-charcoal/12 pb-5"><h3 className="text-2xl font-black text-charcoal transition group-hover:text-wood">{project.shortTitle}</h3><p className="mt-3 text-sm leading-6 text-ink/66">{project.summary}</p></div></a>)}</div></div></section>
+          <section className="bg-bone">
+            <div className="shell py-24 lg:py-32">
+              <SectionIntro title="See similar deck details" copy={`These Kansas City metro projects show services and details commonly considered for ${area.city} homes; they are not presented as projects at a specific address in ${area.city}.`} />
+              <div className="mt-14 grid gap-10 lg:grid-cols-2">
+                {projects.map((project, index) => (
+                  <a key={project.slug} href={getProjectPagePath(project)} className="group block" data-cursor="View" data-reveal="up" style={{ ['--d' as string]: index }}>
+                    <div className="frame aspect-[4/3] bg-sand">
+                      <img className="h-full w-full object-cover" {...getResponsiveImageProps(project.heroImage, '(min-width: 1024px) 50vw, 100vw')} alt={project.shortTitle} width="1200" height="900" loading="lazy" decoding="async" />
+                    </div>
+                    <h3 className="mt-5 font-display text-3xl tracking-[-0.02em] transition-colors group-hover:text-wood">{project.shortTitle}</h3>
+                    <p className="mt-2 max-w-lg text-[0.95rem] leading-7 text-ink/62">{project.summary}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
         ) : null}
 
-        <section className="px-5 py-16 sm:px-8 lg:py-24"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]"><div><p className="text-sm font-black uppercase tracking-[0.16em] text-wood">{area.city} Deck Questions</p><h2 className="mt-4 text-4xl font-black leading-tight text-charcoal">Useful answers before you call</h2></div><div className="divide-y divide-charcoal/12 border-y border-charcoal/12">{faqs.map((faq) => <article key={faq.question} className="py-6"><h3 className="text-xl font-black text-charcoal">{faq.question}</h3><p className="mt-3 text-base leading-7 text-ink/68">{faq.answer}</p></article>)}</div></div></section>
+        <section className={projects.length > 0 ? 'bg-paper' : 'bg-bone'}>
+          <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
+            <div className="lg:sticky lg:top-28 lg:self-start"><SectionIntro title="Useful answers before you call" /></div>
+            <FaqList items={faqs} />
+          </div>
+        </section>
 
-        <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-20"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2"><div><p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Nearby Service Areas</p><div className="mt-5 grid gap-3 sm:grid-cols-2">{relatedAreas.map((relatedArea) => <a key={relatedArea.slug} href={getServiceAreaPath(relatedArea)} className="border border-white/14 p-4 font-black text-white/76 transition hover:border-soft-beige hover:text-soft-beige">{getServiceAreaLabel(relatedArea)}</a>)}</div></div><div><p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">All Deck Services</p><div className="mt-5 grid gap-3 sm:grid-cols-2">{servicePages.map((service) => <a key={service.slug} href={getServicePagePath(service)} className="border border-white/14 p-4 font-black text-white/76 transition hover:border-soft-beige hover:text-soft-beige">{service.shortTitle}</a>)}</div></div></div></section>
+        <section className="grain relative bg-graphite text-bone">
+          <div className="shell grid gap-16 py-24 lg:grid-cols-2 lg:py-28">
+            <div>
+              <p className="eyebrow text-soft-beige">Nearby service areas</p>
+              <div className="mt-8 border-t hairline-light">
+                {relatedAreas.map((relatedArea) => (
+                  <ArrowRow key={relatedArea.slug} href={getServiceAreaPath(relatedArea)} tone="dark">{getServiceAreaLabel(relatedArea)}</ArrowRow>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="eyebrow text-soft-beige">All deck services</p>
+              <div className="mt-8 grid gap-2 sm:grid-cols-2">
+                {servicePages.map((service) => (
+                  <a key={service.slug} href={getServicePagePath(service)} className="group flex items-center justify-between gap-3 border border-bone/12 p-5 text-[0.95rem] text-bone/80 transition-all duration-500 hover:border-soft-beige hover:bg-soft-beige hover:text-night">
+                    {service.shortTitle}
+                    <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <section className="px-5 py-16 sm:px-8 lg:py-24"><div className="mx-auto overflow-hidden bg-white"><div className="grid lg:grid-cols-[1fr_0.75fr]"><div className="p-7 sm:p-10 lg:p-12"><p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Free Quote</p><h2 className="mt-4 text-4xl font-black leading-tight text-charcoal sm:text-5xl">Planning a deck project in {label}?</h2><p className="mt-5 max-w-2xl text-lg leading-8 text-ink/72">Tell us what you want to build, repair, replace, cover, or screen in. We will help you compare practical next steps.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><ButtonLink href="/contact">Start Your Quote</ButtonLink><ButtonLink href={`tel:${business.phone}`} variant="ghost">Call {business.phoneDisplay}</ButtonLink></div></div><img className="h-72 w-full object-cover lg:h-full" {...getResponsiveImageProps('/images/optimized/kansas-city-screened-porch-wood-trim-black-screen.jpg', '(min-width: 1024px) 42vw, 100vw')} alt="Screened-in deck built by DecksRXKC" width="1584" height="1258" loading="lazy" decoding="async" /></div></div></section>
+        <CtaBand title={<>Planning a deck project in <em className="text-soft-beige">{label}?</em></>} copy="Tell us what you want to build, repair, replace, cover, or screen in. We will help you compare practical next steps." image="/images/optimized/kansas-city-screened-porch-wood-trim-black-screen.jpg" />
         <SiteFooter />
       </main>
     </>

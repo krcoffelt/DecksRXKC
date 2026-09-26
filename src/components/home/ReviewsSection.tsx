@@ -1,81 +1,114 @@
 import { ArrowUpRight } from 'lucide-react'
-import { googleReviews } from '../../data/siteContent'
+import { useEffect, useState } from 'react'
 import { business } from '../../data/business'
-import { GoogleGLogo, RatingStars, SectionIntro } from '../ui'
+import { googleReviews } from '../../data/siteContent'
+import { GoogleGLogo, RatingStars } from '../ui'
+
+const featured = googleReviews.filter((review) => ['Brandy Sansone', 'Laura Heitshusen', 'Kylee Beyea', 'Matt Panuco'].includes(review.name))
 
 export function ReviewsSection() {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => setIndex((current) => (current + 1) % featured.length), 8000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const rowA = googleReviews.slice(0, 6)
+  const rowB = googleReviews.slice(6)
+
   return (
-    <section id="reviews" className="bg-white px-5 py-20 sm:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
-        <SectionIntro
-          eyebrow="Google Reviews"
-          title="Deck work homeowners are willing to recommend"
-          copy="Real Google feedback from customers who trusted DecksRXKC with decks, fences, repairs, staining, stairs, and outdoor living projects."
-          align="center"
-        />
-
-        <div className="mt-12 flex flex-col gap-6 border-y border-charcoal/10 py-7 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            <div className="flex items-center gap-3">
-              <GoogleGLogo className="h-11 w-11" />
-              <span className="text-2xl font-semibold text-charcoal">Google Rating</span>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-4xl font-black text-charcoal">5.0</span>
-              <RatingStars className="text-3xl" />
-              <span className="text-base font-bold text-ink/70">{business.googleReviewCount} reviews on Google</span>
-            </div>
-          </div>
-          <a
-            className="inline-flex min-h-12 items-center justify-center rounded-full bg-charcoal px-7 text-sm font-black text-white transition hover:bg-muted-green"
-            href={business.googleMapsUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read Reviews on Google
-            <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
+    <section id="reviews" className="grain relative overflow-hidden bg-night py-24 text-bone lg:py-36">
+      <div className="shell">
+        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <a href={business.googleMapsUrl} target="_blank" rel="noreferrer" className="group block" data-reveal="up">
+            <span className="font-display block text-[clamp(9rem,22vw,22rem)] leading-[0.78] tracking-[-0.02em]">
+              5.0
+            </span>
+            <span className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 border-t hairline-light pt-5">
+              <RatingStars className="text-lg" />
+              <span className="flex items-center gap-2 text-sm text-bone/70">
+                <GoogleGLogo className="h-4 w-4" /> {business.googleReviewCount} reviews on Google
+              </span>
+              <span className="link-line mono inline-flex items-center gap-1 text-[0.68rem] uppercase tracking-[0.14em] text-soft-beige">
+                Read them all <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+              </span>
+            </span>
           </a>
-        </div>
 
-        <div className="mt-10 flex snap-x gap-4 overflow-x-auto pb-4" aria-label="DecksRXKC Google review cards">
-          {googleReviews.map((review) => (
-            <ReviewCard key={`${review.name}-${review.date}`} review={review} />
-          ))}
+          <figure className="relative flex flex-col justify-between">
+            <h2 className="display-sm max-w-[22ch] text-bone/50" data-reveal="up">Deck work homeowners are willing to recommend</h2>
+            <div className="mt-10 grid">
+              {featured.map((review, reviewIndex) => (
+                <div
+                  key={review.name}
+                  className={`[grid-area:1/1] transition-all duration-1000 ease-[var(--ease-out-expo)] ${reviewIndex === index ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-6 opacity-0'}`}
+                  aria-hidden={reviewIndex !== index}
+                >
+                  <blockquote className="text-[clamp(1.5rem,2.6vw,2.6rem)] leading-[1.18] font-medium tracking-[-0.025em]">
+                    <span className="accent text-soft-beige">“</span>{review.review}<span className="accent text-soft-beige">”</span>
+                  </blockquote>
+                  <figcaption className="mono mt-8 text-[0.7rem] uppercase tracking-[0.14em] text-bone/55">{review.name} — Google review</figcaption>
+                </div>
+              ))}
+            </div>
+            <div className="mt-10 flex items-center">
+              <div className="flex gap-2">
+                {featured.map((review, reviewIndex) => (
+                  <button
+                    key={review.name}
+                    type="button"
+                    className="group flex h-6 items-center"
+                    aria-label={`Show review from ${review.name}`}
+                    aria-pressed={reviewIndex === index}
+                    onClick={() => setIndex(reviewIndex)}
+                  >
+                    <span className={`block h-px transition-all duration-500 ${reviewIndex === index ? 'w-12 bg-soft-beige' : 'w-6 bg-bone/30 group-hover:bg-bone/60'}`} />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </figure>
         </div>
+      </div>
+
+      <div className="mt-20 flex flex-col gap-4 lg:mt-28" aria-label="More Google reviews">
+        <ReviewRow reviews={rowA} />
+        <ReviewRow reviews={rowB} reverse />
       </div>
     </section>
   )
 }
 
-function ReviewCard({ review }: Readonly<{ review: (typeof googleReviews)[number] }>) {
+function ReviewRow({ reviews, reverse = false }: Readonly<{ reviews: typeof googleReviews; reverse?: boolean }>) {
   return (
-    <article className="flex h-[360px] w-[86vw] shrink-0 snap-start flex-col justify-between border border-charcoal/10 bg-warm-white p-5 sm:w-[390px] sm:p-6">
-      <div>
-        <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-charcoal text-lg font-black text-soft-beige">
-            {getInitials(review.name)}
-          </div>
-          <div className="min-w-0">
-            <h3 className="text-lg font-black text-charcoal">{review.name}</h3>
-            <p className="mt-1 text-sm font-bold text-ink/70">{review.meta}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-3">
-              <RatingStars className="text-lg" />
-              <span className="text-sm font-bold text-ink/70">{review.date}</span>
-            </div>
-          </div>
-        </div>
-        <p className="mt-5 overflow-hidden text-lg font-semibold leading-7 text-charcoal [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:5]">
-          "{review.review}"
-        </p>
+    <div className="group/row relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+      <div
+        className="flex w-max animate-marquee gap-4 group-hover/row:[animation-play-state:paused] motion-reduce:animate-none"
+        style={{ animationDuration: '90s', animationDirection: reverse ? 'reverse' : 'normal' }}
+      >
+        {[0, 1].map((copy) =>
+          reviews.map((review) => (
+            <article
+              key={`${copy}-${review.name}`}
+              aria-hidden={copy === 1}
+              className="flex w-[21rem] shrink-0 flex-col justify-between border border-bone/10 bg-bone/[0.03] p-6 transition-colors duration-500 hover:border-soft-beige/40 sm:w-[26rem]"
+            >
+              <div className="flex items-center justify-between">
+                <RatingStars className="text-xs" />
+                <span className="mono text-[0.62rem] uppercase tracking-[0.12em] text-bone/40">{review.date}</span>
+              </div>
+              <p className="mt-5 overflow-hidden text-[0.98rem] leading-7 text-bone/78 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4]">“{review.review}”</p>
+              <div className="mt-6 flex items-center gap-3 border-t hairline-light pt-4">
+                <span className="font-display flex h-9 w-9 items-center justify-center bg-soft-beige text-base text-night">{getInitials(review.name)}</span>
+                <span className="text-sm font-semibold">{review.name}</span>
+              </div>
+            </article>
+          )),
+        )}
       </div>
-      <div className="mt-6 flex items-center gap-3">
-        <GoogleGLogo className="h-8 w-8" />
-        <div className="text-sm leading-5">
-          <p className="font-bold text-ink/70">Posted on</p>
-          <p className="font-black text-[#185abc]">Google</p>
-        </div>
-      </div>
-    </article>
+    </div>
   )
 }
 

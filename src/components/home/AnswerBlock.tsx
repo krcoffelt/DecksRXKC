@@ -1,25 +1,18 @@
 import { quickAnswers } from '../../data/siteContent'
-import { SectionIntro } from '../ui'
+import { FaqList, SectionIntro } from '../ui'
 
 export function AnswerBlock() {
   return (
-    <section className="bg-charcoal px-5 py-20 text-white sm:px-8 lg:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-          <SectionIntro
-            eyebrow="Quick Answers"
-            title="Deck questions homeowners ask before they call"
-            copy="Short answers for the highest-intent local searches, backed by the same services shown throughout the site."
-            tone="dark"
-          />
-          <div className="divide-y divide-white/14 border-y border-white/14">
-            {quickAnswers.map((item) => (
-              <div key={item.question} className="py-6">
-                <h3 className="text-xl font-black leading-tight text-white">{item.question}</h3>
-                <p className="mt-3 text-base leading-7 text-white/70">{item.answer}</p>
-              </div>
-            ))}
+    <section id="questions" className="relative bg-paper text-ink">
+      <div className="shell py-24 lg:py-36">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <SectionIntro
+              title="Questions homeowners ask before they call"
+              copy="Straight answers about who we are, what we build, and where we work."
+            />
           </div>
+          <FaqList items={quickAnswers} />
         </div>
       </div>
     </section>

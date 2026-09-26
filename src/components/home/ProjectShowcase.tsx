@@ -1,66 +1,78 @@
+import { ArrowUpRight } from 'lucide-react'
 import { getProjectPagePath, projectPages } from '../../data/projects'
+import { getServicePage } from '../../data/servicePages'
 import { getResponsiveImageProps } from '../../lib/images'
-import { SectionIntro } from '../ui'
+import { ButtonLink } from '../ui'
 
 export function ProjectShowcase() {
-  const [featuredProject, ...supportingProjects] = projectPages.slice(0, 3)
-
   return (
-    <section id="our-work" className="bg-charcoal px-5 py-20 text-white sm:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-          <SectionIntro
-            eyebrow="Project Work"
-            title="From old deck to favorite room of the house"
-            copy="The best deck projects solve practical problems first: unsafe stairs, harsh sun, limited space, poor access, or a layout nobody uses."
-            tone="dark"
-          />
-          <div className="border-y border-white/14 py-6">
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Before / After</p>
-            <p className="mt-3 text-2xl font-black leading-tight text-white">
-              Hot, exposed, or aging decks become shaded, safer, and more comfortable outdoor rooms.
-            </p>
+    <section id="our-work" data-hscroll className="grain relative bg-night text-bone">
+      <div className="lg:sticky lg:top-0 lg:flex lg:h-[100svh] lg:flex-col lg:justify-between lg:overflow-hidden">
+        <div className="shell flex items-end justify-between gap-6 pt-24 lg:pt-24">
+          <div>
+            <h2 className="display-md max-w-[16ch]" data-reveal="up">
+              From tired deck to <em className="text-soft-beige">favorite room</em> of the house
+            </h2>
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <a className="group relative min-h-[560px] overflow-hidden bg-black" href={getProjectPagePath(featuredProject)}>
-            <img
-              className="absolute inset-0 h-full w-full object-cover"
-              {...getResponsiveImageProps(featuredProject.heroImage, '(min-width: 1024px) 62vw, 100vw')}
-              alt={featuredProject.shortTitle}
-              width="1600"
-              height="1200"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/86 via-black/20 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-              <h3 className="text-4xl font-black leading-tight">{featuredProject.title}</h3>
-              <p className="mt-3 max-w-xl text-base leading-7 text-white/76">{featuredProject.summary}</p>
+        <div className="no-scrollbar mt-12 overflow-x-auto lg:mt-0 lg:overflow-visible">
+          <div data-hscroll-track className="flex w-max snap-x snap-mandatory items-end gap-5 px-5 pb-6 will-change-transform sm:px-8 lg:snap-none lg:gap-10 lg:px-12 lg:pb-0">
+            {projectPages.map((project, index) => {
+              const service = getServicePage(project.primaryServiceSlug)
+              const tall = index % 2 === 0
+              return (
+                <a
+                  key={project.slug}
+                  href={getProjectPagePath(project)}
+                  data-cursor="View"
+                  className={`group relative block shrink-0 snap-start ${tall ? 'w-[80vw] sm:w-[52vw] lg:w-[30vw]' : 'w-[80vw] sm:w-[60vw] lg:w-[40vw]'}`}
+                >
+                  <div className={`frame bg-graphite ${tall ? 'aspect-[4/5] lg:aspect-auto lg:h-[54svh]' : 'aspect-[4/3] lg:aspect-auto lg:h-[42svh]'}`}>
+                    <img
+                      className="h-full w-full object-cover"
+                      {...getResponsiveImageProps(project.heroImage, '(min-width: 1024px) 40vw, 80vw')}
+                      alt={project.title}
+                      width="1200"
+                      height="1500"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="mono absolute top-4 left-4 bg-night/70 px-2.5 py-1.5 text-[0.64rem] uppercase tracking-[0.14em] text-bone backdrop-blur-md">
+                      {service?.shortTitle ?? 'Deck project'}
+                    </span>
+                  </div>
+                  <div className="mt-5 flex items-start justify-between gap-6 border-t hairline-light pt-4">
+                    <div>
+                      <h3 className="font-display text-[clamp(1.9rem,2.6vw,2.8rem)] leading-[0.92] transition-colors group-hover:text-soft-beige">{project.shortTitle}</h3>
+                    </div>
+                    <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center border border-bone/20 transition-all duration-500 group-hover:border-soft-beige group-hover:bg-soft-beige group-hover:text-night">
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" />
+                    </span>
+                  </div>
+                </a>
+              )
+            })}
+
+            <div className="flex w-[80vw] shrink-0 snap-start flex-col justify-between border border-bone/12 p-8 sm:w-[52vw] lg:h-[54svh] lg:w-[26vw] lg:p-10">
+              <p className="font-display text-[clamp(2.4rem,3vw,3.4rem)] leading-[0.92]">
+                Composite, cedar, covered, screened — <em className="text-soft-beige">see how each one was planned.</em>
+              </p>
+              <div className="mt-10">
+                <ButtonLink href="/projects" variant="bronze">All projects</ButtonLink>
+              </div>
             </div>
-          </a>
-
-          <div className="grid gap-6">
-            {supportingProjects.map((project) => (
-              <a key={project.title} href={getProjectPagePath(project)} className="group grid gap-4 border-b border-white/14 pb-6 last:border-b-0 last:pb-0 sm:grid-cols-[0.9fr_1.1fr] lg:grid-cols-1 xl:grid-cols-[0.9fr_1.1fr]">
-                <img
-                  className="h-48 w-full object-cover"
-                  {...getResponsiveImageProps(project.heroImage, '(min-width: 1280px) 16vw, (min-width: 640px) 42vw, 100vw')}
-                  alt={project.title}
-                  width="1600"
-                  height="1200"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div>
-                  <h3 className="text-2xl font-black leading-tight transition group-hover:text-soft-beige">{project.shortTitle}</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/68">{project.summary}</p>
-                </div>
-              </a>
-            ))}
           </div>
         </div>
+
+        <div className="shell hidden pb-10 lg:block">
+          <div className="flex items-center gap-6">
+            <div className="h-px flex-1 bg-bone/12">
+              <div data-hscroll-progress className="h-px w-full origin-left scale-x-0 bg-soft-beige" />
+            </div>
+          </div>
+        </div>
+        <div className="h-16 lg:hidden" />
       </div>
     </section>
   )

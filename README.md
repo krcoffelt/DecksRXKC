@@ -43,6 +43,17 @@ Optional GA4 measurement uses `VITE_GA_MEASUREMENT_ID`. When configured, the sit
 - `public/images/` contains the local DecksRXKC project photography used throughout the page.
 - `supabase/schema.sql` creates the lead capture table and row-level security policies.
 
+## Design System
+
+The site uses a "built from the footings up" design system (2026 redesign): condensed architectural type, blueprint details, and one copper accent pulled from the DecksRXKC logo.
+
+- **Type** — self-hosted in `public/fonts/` (SIL Open Font License; license texts sit beside the files): Archivo variable (`archivo-variable.woff2`, width + weight axes) sets both the condensed uppercase display type (`font-display`, `display-xl/lg/md/sm`, and every `h1`/`h2`) and body copy; Instrument Serif italic is the accent voice for `<em>` inside headings; Geist Mono carries labels and measurements.
+- **Palette** — charcoal (`night`, `charcoal`, `graphite`), Kansas City limestone (`bone`, `paper`, `sand`), and copper (`soft-beige` for dark backgrounds, `bronze`, `wood` for text on light backgrounds) tokens in `src/styles.css`.
+- **Primitives** — `src/components/ui.tsx` holds `ButtonLink` (sharp, fill-wipe buttons), `CircleLink` (magnetic round CTA), `SectionIntro`, `PageHero` (every inner page's dark hero and single H1), `FaqList`, `NumberedList`, `ArrowRow`, `Figure`, `CtaBand`, and the typographic `Wordmark` used in the header and footer.
+- **Header** — `SiteHeader` samples the background beneath it and switches between light and dark text automatically; no per-section tagging is needed (an explicit `data-header-tone="light|dark"` still wins).
+- **Homepage signatures** — the hero photo window opens to full-bleed on scroll (`.hero-window`, driven by `--progress`), deck boards clear off the photo via a CSS scroll-driven animation (load-time fallback where unsupported), featured services stack as sticky cards, and `src/components/home/Anatomy.tsx` assembles an exploded isometric deck (footings → posts → beams → joists → decking → rails and stairs) as the visitor scrolls.
+- **Motion** — `src/components/motion.tsx` (`MotionController`, mounted once in `__root.tsx`) starts after the page route hydrates (`usePageHydrated`, called from `SiteHeader`) and drives Lenis smooth scrolling (lazy-loaded) plus every scroll and pointer effect through data attributes: `data-reveal`, `data-parallax`, `data-progress`, `data-hscroll` (pinned horizontal gallery), `data-scrub`, `data-count`, `data-velocity` (scroll-reactive marquee), `data-magnetic`, `data-page-progress`, and `data-cursor`. Reveals only hide content when scripting is enabled, and everything respects `prefers-reduced-motion`.
+
 ## Supabase Form Setup
 
 Run `supabase/schema.sql` in the Supabase SQL editor before sending traffic to the form. The quote form writes to `public.quote_requests`.

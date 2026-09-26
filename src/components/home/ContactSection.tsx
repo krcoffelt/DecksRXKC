@@ -1,30 +1,46 @@
-import { Sun } from 'lucide-react'
+import { business } from '../../data/business'
+import { getResponsiveImageProps } from '../../lib/images'
 import { LeadForm } from '../LeadForm'
 
 export function ContactSection() {
   return (
-    <section id="contact" className="bg-warm-white px-5 py-20 sm:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid overflow-hidden border border-charcoal/10 bg-charcoal text-white lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="p-7 sm:p-10 lg:p-12">
-            <div className="flex items-center gap-2 text-soft-beige">
-              <Sun className="h-5 w-5" aria-hidden="true" />
-              <p className="text-sm font-black uppercase tracking-[0.16em]">Free Quote</p>
-            </div>
-            <h2 className="mt-5 max-w-3xl text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl">
-              Ready to build the deck your home has been missing?
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/72">
-              Send the basics and DecksRXKC will help you understand the best options for your space, budget, and timeline.
-            </p>
-            <div className="mt-8 border-y border-white/14 py-6">
-              <p className="text-sm font-black uppercase tracking-[0.14em] text-soft-beige">Simple next step</p>
-              <p className="mt-3 text-xl font-black leading-tight text-white">
-                Tell us what you want to build, repair, replace, cover, or screen in.
-              </p>
-            </div>
-            <p className="mt-6 text-sm font-bold text-white/62">Serving Kansas City and surrounding areas.</p>
+    <section id="contact" className="grain relative isolate overflow-hidden bg-charcoal text-bone">
+      <div className="shell pt-24 lg:pt-36">
+        <h2 className="display-lg" data-reveal="lines">
+          <span className="line-mask" style={{ ['--i' as string]: 0 }}><span>Let’s build what</span></span>
+          <span className="line-mask" style={{ ['--i' as string]: 1 }}><span>your <em className="text-soft-beige">backyard</em> is missing</span></span>
+        </h2>
+      </div>
+
+      <div className="shell grid gap-14 pt-14 pb-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:pt-20 lg:pb-36">
+        <div className="flex flex-col gap-10">
+          <div className="frame crop aspect-[4/3] bg-graphite text-bone" data-reveal="clip">
+            <img
+              data-parallax="0.06"
+              className="h-[114%] w-full -translate-y-[7%] object-cover"
+              {...getResponsiveImageProps('/images/optimized/kansas-city-covered-composite-deck-wide-view.jpg', '(min-width: 1024px) 34vw, 100vw')}
+              alt="Covered composite deck with seating overlooking a backyard pool"
+              width="1200"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
+          <p className="lede text-bone/70">
+            Send the basics — what you want to build, repair, replace, cover, or screen in — and we’ll help you understand the best options for your space, budget, and timeline.
+          </p>
+          <dl className="grid grid-cols-2 border-t hairline-light">
+            <div className="py-5 pr-4">
+              <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/45">Call</dt>
+              <dd className="mt-2"><a className="link-line font-display text-2xl" href={`tel:${business.phone}`}>{business.phoneDisplay}</a></dd>
+            </div>
+            <div className="border-l hairline-light py-5 pl-5">
+              <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/45">Hours</dt>
+              <dd className="mt-2 text-bone/80">Mon – Sat, 8 AM – 5 PM</dd>
+            </div>
+          </dl>
+        </div>
+        <div className="border border-bone/10 bg-bone/[0.025] p-6 sm:p-10 lg:p-12">
           <LeadForm />
         </div>
       </div>

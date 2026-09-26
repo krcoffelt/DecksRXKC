@@ -2,7 +2,10 @@ import { createFileRoute } from '@tanstack/react-router'
 import { SiteFooter } from '../components/SiteFooter'
 import { AnswerBlock } from '../components/home/AnswerBlock'
 import { ContactSection } from '../components/home/ContactSection'
-import { Hero } from '../components/home/Hero'
+import { Hero, heroImagePath } from '../components/home/Hero'
+import { Anatomy } from '../components/home/Anatomy'
+import { Approach, Marquee } from '../components/home/Approach'
+import { Process } from '../components/home/Process'
 import { ProjectShowcase } from '../components/home/ProjectShowcase'
 import { ReviewsSection } from '../components/home/ReviewsSection'
 import { ServiceAreasPreview } from '../components/home/ServiceAreasPreview'
@@ -10,7 +13,7 @@ import { ServicesOverview } from '../components/home/ServicesOverview'
 import { servicePages } from '../data/servicePages'
 import { getBusinessSchema } from '../data/business'
 import { defaultSeoDescription, defaultSeoImage, defaultSeoImagePath, defaultSeoTitle, getSeoHead, siteUrl } from '../lib/seo'
-import { getOptimizedImagePath } from '../lib/images'
+import { getOptimizedImagePath, getResponsiveImageProps } from '../lib/images'
 
 const homepageTitle = defaultSeoTitle
 const homepageDescription = defaultSeoDescription
@@ -32,7 +35,9 @@ export const Route = createFileRoute('/')({
         {
           rel: 'preload',
           as: 'image',
-          href: getOptimizedImagePath(defaultSeoImagePath),
+          href: getOptimizedImagePath(heroImagePath),
+          imageSrcSet: getResponsiveImageProps(heroImagePath).srcSet,
+          imageSizes: '100vw',
           type: 'image/webp',
           fetchPriority: 'high',
         },
@@ -46,13 +51,17 @@ function LandingPage() {
   return (
     <>
       <HomepageStructuredData />
-      <main className="overflow-hidden bg-warm-white text-ink">
+      <main className="bg-bone text-ink">
         <Hero />
+        <Marquee />
+        <Approach />
         <ServicesOverview />
         <ProjectShowcase />
+        <Anatomy />
+        <Process />
+        <ReviewsSection />
         <ServiceAreasPreview />
         <AnswerBlock />
-        <ReviewsSection />
         <ContactSection />
         <SiteFooter />
       </main>

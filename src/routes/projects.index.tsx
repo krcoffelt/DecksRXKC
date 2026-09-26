@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ArrowUpRight, CheckCircle } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
-import { ButtonLink } from '../components/ui'
+import { ArrowRow, ButtonLink, CtaBand, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
 import { getProjectPagePath, projectPages } from '../data/projects'
 import { getServicePage, getServicePagePath } from '../data/servicePages'
@@ -34,46 +34,50 @@ function ProjectsIndexPage() {
   return (
     <>
       <ProjectsStructuredData />
-      <main className="min-h-screen bg-warm-white text-ink">
+      <main className="min-h-screen bg-bone text-ink">
         <SiteHeader />
+        <PageHero
+          title={<>Kansas City deck work, <em className="text-soft-beige">shown in the details</em></>}
+          intro="See how existing conditions, surfaces, railings, stairs, roofs, screens, drainage, and backyard access come together across complete outdoor spaces."
+          image={featured.heroImage}
+          imageAlt={featured.shortTitle}
+          breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Projects' }]}
+          meta={[
+            { label: 'Projects', value: `${projectPages.length} case studies` },
+            { label: 'Location', value: 'Kansas City metro' },
+            { label: 'Materials', value: 'Composite, cedar, pressure-treated' },
+            { label: 'Scope', value: 'Build · Replace · Cover · Screen' },
+          ]}
+        />
 
-        <section className="px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto max-w-7xl">
-            <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs font-bold text-ink/52">
-              <a className="transition hover:text-wood" href="/">Home</a>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page" className="text-charcoal">Projects</span>
-            </nav>
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Project Library</p>
-            <h1 className="mt-4 max-w-5xl text-5xl font-black leading-[0.98] tracking-tight text-charcoal sm:text-6xl lg:text-7xl">Kansas City deck work, shown in the details</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/70">See how existing conditions, surfaces, railings, stairs, roofs, screens, drainage, and backyard access come together across complete outdoor spaces.</p>
-          </div>
-        </section>
-
-        <section className="px-5 pb-16 sm:px-8 lg:pb-24">
-          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-            <a className="group relative min-h-[560px] overflow-hidden bg-charcoal text-white" href={getProjectPagePath(featured)}>
-              <img className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" {...getResponsiveImageProps(featured.heroImage, '(min-width: 1024px) 62vw, 100vw')} alt={featured.shortTitle} width="1400" height="1100" loading="eager" decoding="async" fetchPriority="high" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/26 to-black/8" />
-              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10">
-                <p className="text-xs font-black uppercase tracking-[0.16em] text-soft-beige">Featured project · {featured.location}</p>
-                <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">{featured.title}</h2>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-white/72">{featured.summary}</p>
-                <span className="mt-5 inline-flex items-center text-sm font-black text-white">See the project decisions <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" /></span>
+        <section className="bg-bone">
+          <div className="shell py-24 lg:py-32">
+            <a className="group grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end" href={getProjectPagePath(featured)} data-cursor="View">
+              <div className="frame aspect-[4/3] bg-sand lg:aspect-[16/11]" data-reveal="clip">
+                <img className="h-full w-full object-cover" {...getResponsiveImageProps(featured.heroImage, '(min-width: 1024px) 60vw, 100vw')} alt={featured.shortTitle} width="1400" height="1100" loading="eager" decoding="async" />
+              </div>
+              <div data-reveal="up">
+                <h2 className="display-md transition-colors group-hover:text-wood">{featured.title}</h2>
+                <p className="lede mt-6 text-ink/64">{featured.summary}</p>
+                <span className="link-line mt-8 inline-flex items-center gap-2 text-base font-medium">See the project decisions <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" /></span>
               </div>
             </a>
 
-            <div className="divide-y divide-charcoal/12 border-y border-charcoal/12">
-              {projects.map((project) => {
+            <div className="mt-24 grid gap-x-6 gap-y-16 md:grid-cols-2 lg:mt-32">
+              {projects.map((project, index) => {
                 const service = getServicePage(project.primaryServiceSlug)
                 return (
-                  <a key={project.slug} className="group grid gap-5 py-6 sm:grid-cols-[0.8fr_1.2fr] lg:grid-cols-1 xl:grid-cols-[0.8fr_1.2fr]" href={getProjectPagePath(project)}>
-                    <img className="h-44 w-full object-cover" {...getResponsiveImageProps(project.heroImage, '(min-width: 1280px) 16vw, (min-width: 640px) 40vw, 100vw')} alt={project.shortTitle} width="650" height="520" loading="lazy" decoding="async" />
-                    <div>
-                      <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-green">{service?.shortTitle ?? 'Deck project'} · {project.location}</p>
-                      <h2 className="mt-2 text-2xl font-black leading-tight text-charcoal transition group-hover:text-wood">{project.shortTitle}</h2>
-                      <p className="mt-3 text-sm leading-6 text-ink/64">{project.summary}</p>
-                      <span className="mt-4 inline-flex items-center text-sm font-black text-charcoal">View details <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" /></span>
+                  <a key={project.slug} className={`group block ${index % 2 === 1 ? 'md:mt-24' : ''}`} href={getProjectPagePath(project)} data-cursor="View" data-reveal="up">
+                    <div className="frame aspect-[4/5] bg-sand">
+                      <img className="h-full w-full object-cover" {...getResponsiveImageProps(project.heroImage, '(min-width: 768px) 50vw, 100vw')} alt={project.shortTitle} width="1200" height="1500" loading="lazy" decoding="async" />
+                      <span className="mono absolute top-4 left-4 bg-night/60 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.12em] text-bone backdrop-blur-md">{service?.shortTitle ?? 'Deck project'}</span>
+                    </div>
+                    <div className="mt-6 flex items-start justify-between gap-6">
+                      <div>
+                        <h2 className="text-[clamp(2rem,3vw,2.9rem)] leading-none transition-colors group-hover:text-wood">{project.shortTitle}</h2>
+                        <p className="mt-4 max-w-lg text-[0.98rem] leading-7 text-ink/62">{project.summary}</p>
+                      </div>
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-ink/15 transition-all duration-500 group-hover:bg-ink group-hover:text-bone"><ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" /></span>
                     </div>
                   </a>
                 )
@@ -83,58 +87,42 @@ function ProjectsIndexPage() {
         </section>
 
         {stairProject && stairService ? (
-          <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-24">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.94fr_1.06fr] lg:items-center">
-              <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps(stairProject.heroImage, '(min-width: 1024px) 47vw, 100vw')} alt="Deck stair replacement and dark railing project in the Kansas City metro" width="1200" height="900" loading="lazy" decoding="async" />
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Deck Stairs + Railings</p>
-                <h2 className="mt-4 text-4xl font-black leading-[1.04] tracking-tight sm:text-5xl">Backyard access is part of the whole deck</h2>
-                <p className="mt-6 text-lg leading-8 text-white/74">A useful stair project considers more than new treads. The run, stringers, landing, handrail, guard, deck connection, grade, patios, gates, and normal route through the yard all affect whether repair, full stair replacement, or a different layout makes sense.</p>
-                <div className="mt-8 divide-y divide-white/14 border-y border-white/14">
-                  {['Assess the complete stair and supporting deck', 'Use the landing and direction to improve yard circulation', 'Coordinate rails, transitions, lighting, and finished edges'].map((point) => (
-                    <p key={point} className="flex gap-4 py-5 text-base font-bold leading-7 text-white/78"><CheckCircle className="mt-1 h-5 w-5 shrink-0 text-soft-beige" aria-hidden="true" />{point}</p>
+          <section className="grain relative bg-night text-bone">
+            <div className="grid lg:grid-cols-2">
+              <div className="relative min-h-[26rem] overflow-hidden">
+                <img data-parallax="0.08" className="absolute inset-0 h-[120%] w-full -translate-y-[8%] object-cover" {...getResponsiveImageProps(stairProject.heroImage, '(min-width: 1024px) 50vw, 100vw')} alt="Deck stair replacement and dark railing project in the Kansas City metro" width="1200" height="900" loading="lazy" decoding="async" />
+              </div>
+              <div className="px-5 py-20 sm:px-10 lg:px-16 lg:py-28">
+                <SectionIntro title={<>Backyard access is part of the <em className="text-soft-beige">whole deck</em></>} tone="dark" />
+                <p className="lede mt-6 text-bone/68" data-reveal="up">A useful stair project considers more than new treads. The run, stringers, landing, handrail, guard, deck connection, grade, patios, gates, and normal route through the yard all affect whether repair, full stair replacement, or a different layout makes sense.</p>
+                <ul className="mt-10 border-t hairline-light">
+                  {['Assess the complete stair and supporting deck', 'Use the landing and direction to improve yard circulation', 'Coordinate rails, transitions, lighting, and finished edges'].map((point, index) => (
+                    <li key={point} className="border-b hairline-light py-5 text-bone/80" data-reveal="up" style={{ ['--d' as string]: index }}>
+                      {point}
+                    </li>
                   ))}
-                </div>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <ButtonLink href={getServicePagePath(stairService)} variant="light">Explore Stair Replacement</ButtonLink>
-                  <ButtonLink href={getProjectPagePath(stairProject)} variant="outline">See the Stair Project</ButtonLink>
+                </ul>
+                <div className="mt-10 flex flex-wrap gap-3">
+                  <ButtonLink href={getServicePagePath(stairService)} variant="bronze">Explore stair replacement</ButtonLink>
+                  <ButtonLink href={getProjectPagePath(stairProject)} variant="outline">See the stair project</ButtonLink>
                 </div>
               </div>
             </div>
           </section>
         ) : null}
 
-        <section className="px-5 py-16 sm:px-8 lg:py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-wood">Browse by Project Type</p>
-              <h2 className="mt-4 text-4xl font-black leading-tight text-charcoal sm:text-5xl">Move from project proof to planning guidance</h2>
-              <p className="mt-5 text-lg leading-8 text-ink/68">Use the project library to see the details, then compare the decisions that shape the service itself.</p>
-            </div>
-            <div className="divide-y divide-charcoal/12 border-y border-charcoal/12">
+        <section className="bg-paper">
+          <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
+            <SectionIntro title="Move from project proof to planning guidance" copy="Use the project library to see the details, then compare the decisions that shape the service itself." />
+            <div className="border-t hairline">
               {browseServices.map((service) => (
-                <a key={service.slug} href={getServicePagePath(service)} className="group flex items-start justify-between gap-5 py-6">
-                  <div>
-                    <h3 className="text-2xl font-black text-charcoal transition group-hover:text-wood">{service.shortTitle}</h3>
-                    <p className="mt-2 text-base leading-7 text-ink/66">{service.metaDescription}</p>
-                  </div>
-                  <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted-green" aria-hidden="true" />
-                </a>
+                <ArrowRow key={service.slug} href={getServicePagePath(service)}>{service.shortTitle}</ArrowRow>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-charcoal px-5 py-16 text-white sm:px-8 lg:py-20">
-          <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.16em] text-soft-beige">Your Project</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight">What should your deck solve?</h2>
-              <p className="mt-3 max-w-xl text-base leading-7 text-white/66">Tell us about the space, city, project type, current condition, and the result you want to create.</p>
-            </div>
-            <ButtonLink href="/contact" variant="light">Request a Free Quote</ButtonLink>
-          </div>
-        </section>
+        <CtaBand title={<>What should <em className="text-soft-beige">your deck</em> solve?</>} copy="Tell us about the space, city, project type, current condition, and the result you want to create." />
         <SiteFooter />
       </main>
     </>

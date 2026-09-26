@@ -41,6 +41,7 @@ export function Hero() {
   const [active, setActive] = useState(0)
   const [previous, setPrevious] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
+  const [loadRest, setLoadRest] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
   const go = (index: number) => {
@@ -48,6 +49,17 @@ export function Hero() {
     setPrevious(active)
     setActive(index)
   }
+
+  // Keep the first photo's download uncontested; fetch the rest once the page has loaded.
+  useEffect(() => {
+    const start = () => setLoadRest(true)
+    if (document.readyState === 'complete') {
+      const timer = window.setTimeout(start, 600)
+      return () => window.clearTimeout(timer)
+    }
+    window.addEventListener('load', start, { once: true })
+    return () => window.removeEventListener('load', start)
+  }, [])
 
   // Autoplay only while the hero is on screen, the tab is visible, and motion is welcome.
   useEffect(() => {
@@ -70,25 +82,27 @@ export function Hero() {
   }, [])
 
   useEffect(() => {
-    if (!playing) return
+    if (!playing || !loadRest) return
     const timer = window.setTimeout(() => {
       setPrevious(active)
       setActive((active + 1) % slides.length)
     }, SLIDE_MS)
     return () => window.clearTimeout(timer)
-  }, [active, playing])
+  }, [active, playing, loadRest])
 
   return (
-    <section ref={sectionRef} className="grain relative isolate flex h-[100svh] min-h-[40rem] flex-col overflow-clip bg-night text-bone">
+    <section ref={sectionRef} className="relative flex h-[100svh] min-h-[40rem] flex-col text-bone" data-header-tone="dark">
       <SiteHeader variant="overlay" />
 
+      {/* Backdrop layer: isolated so the header and phone bar can sit above the whole page */}
+      <div className="grain absolute inset-0 isolate overflow-clip bg-night">
       {/* Rotating project photography */}
       <div className="absolute inset-0 -z-20" data-hero-media>
         {slides.map((slide, index) => {
           const state = index === active ? 'is-active z-20' : index === previous ? 'is-previous z-10' : 'is-idle z-0'
           return (
             <div key={slide.src} className={`hero-slide absolute inset-0 overflow-hidden ${state}`} aria-hidden={index !== active}>
-              <img
+              {index === 0 || loadRest ? <img
                 className={`hero-slide-img h-full w-full object-cover ${slide.position} ${index === 0 ? "hero-media" : ""}`}
                 {...getResponsiveImageProps(slide.src, '100vw')}
                 alt={slide.alt}
@@ -97,7 +111,7 @@ export function Hero() {
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
                 fetchPriority={index === 0 ? 'high' : 'low'}
-              />
+              /> : null}
             </div>
           )
         })}
@@ -113,6 +127,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(17_16_14/0.55)_0%,transparent_22%,transparent_40%,rgb(17_16_14/0.9)_100%)]" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(17_16_14/0.5)_0%,transparent_60%)]" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-night/25" aria-hidden="true" />
+      </div>
 
       <div className="shell relative flex flex-1 flex-col justify-end pt-28 pb-5 lg:pb-7">
         <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,25rem)] lg:items-end lg:gap-12">
@@ -165,7 +180,7 @@ export function Hero() {
                 <button
                   key={slide.src}
                   type="button"
-                  className="group flex h-8 items-center"
+                  className="group flex h-11 items-center"
                   aria-label={`Show ${slide.caption}`}
                   aria-pressed={index === active}
                   onClick={() => go(index)}

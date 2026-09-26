@@ -237,7 +237,7 @@ export function Anatomy() {
         </div>
       </div>
 
-      <div ref={stageRef} className="relative h-[380svh] lg:h-[460svh]">
+      <div ref={stageRef} className="relative h-[300svh] lg:h-[460svh]">
         <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
           <div className="blueprint pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_60%_50%,black_30%,transparent_75%)]" aria-hidden="true" />
           <div className="shell relative grid w-full gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:gap-10">

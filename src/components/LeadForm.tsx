@@ -182,7 +182,7 @@ function ChipGroup({ legend, name, options, value, onChange, dark }: Readonly<{ 
           return (
             <label
               key={option}
-              className={`cursor-pointer border px-3.5 py-2 text-[0.88rem] transition-all duration-300 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-soft-beige ${
+              className={`cursor-pointer border px-3.5 py-2.5 text-[0.88rem] transition-all duration-300 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-soft-beige ${
                 checked
                   ? dark ? 'border-soft-beige bg-soft-beige text-night' : 'border-ink bg-ink text-bone'
                   : dark ? 'border-bone/18 text-bone/75 hover:border-bone/50 hover:text-bone' : 'border-ink/15 text-ink/75 hover:border-ink/50 hover:text-ink'

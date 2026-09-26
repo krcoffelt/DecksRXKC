@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Phone } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { business } from '../data/business'
 import { navItems } from '../data/siteContent'
@@ -64,6 +64,7 @@ export function SiteHeader(_props: SiteHeaderProps) {
   const [tone, setTone] = useState<'dark' | 'light'>('dark')
   const [path, setPath] = useState('')
   const [preview, setPreview] = useState('/')
+  const [showBar, setShowBar] = useState(false)
   usePageHydrated()
 
   useEffect(() => {
@@ -79,6 +80,16 @@ export function SiteHeader(_props: SiteHeaderProps) {
       lastY = y
 
       setTone(readToneUnderHeader())
+
+      // Phone call/quote bar: after the first screen, hidden while a form or the footer is in view.
+      const vh = window.innerHeight
+      const inView = (el: Element | null) => {
+        if (!el) return false
+        const rect = el.getBoundingClientRect()
+        return rect.top < vh && rect.bottom > 0
+      }
+      const formVisible = [...document.querySelectorAll('main form')].some(inView)
+      setShowBar(y > vh * 0.75 && !formVisible && !inView(document.querySelector('footer')))
     }
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(read)
@@ -114,7 +125,7 @@ export function SiteHeader(_props: SiteHeaderProps) {
         }`}
       >
         <div className="shell flex h-18 items-center justify-between gap-6 lg:h-20">
-          <a href="/" className="relative z-10 flex shrink-0 items-center" aria-label="DecksRXKC home">
+          <a href="/" className="relative z-10 flex min-h-11 shrink-0 items-center" aria-label="DecksRXKC home">
             <Wordmark className="text-[1.5rem] sm:text-[1.7rem]" />
           </a>
 
@@ -225,6 +236,36 @@ export function SiteHeader(_props: SiteHeaderProps) {
               <a className="mono text-[0.7rem] uppercase tracking-[0.14em] text-soft-beige" href="/contact" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Request a free quote →</a>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-bone/10 bg-night/92 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl transition-transform duration-500 ease-[var(--ease-out-expo)] lg:hidden ${
+          showBar && !menuOpen ? 'translate-y-0' : 'pointer-events-none translate-y-full'
+        }`}
+        aria-hidden={!showBar || menuOpen}
+      >
+        <div className="grid grid-cols-[auto_1fr] gap-2">
+          <a
+            href={`tel:${business.phone}`}
+            tabIndex={showBar ? 0 : -1}
+            className="flex min-h-12 items-center gap-2 border border-bone/20 px-4 text-[0.78rem] font-semibold tracking-[0.1em] text-bone uppercase [font-stretch:80%]"
+            onClick={() => trackEvent('click_to_call', { page_path: path || '/', placement: 'mobile_bar' })}
+          >
+            <Phone className="h-4 w-4 text-soft-beige" aria-hidden="true" />
+            Call
+          </a>
+          <a
+            href="/contact"
+            tabIndex={showBar ? 0 : -1}
+            className="flex min-h-12 items-center justify-between gap-3 bg-soft-beige pr-1.5 pl-4 text-[0.78rem] font-semibold tracking-[0.1em] text-night uppercase [font-stretch:80%]"
+            onClick={() => trackEvent('quote_cta_click', { destination: '/contact', placement: 'mobile_bar' })}
+          >
+            Get a free quote
+            <span className="flex h-9 w-9 items-center justify-center bg-night text-bone">
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </span>
+          </a>
         </div>
       </div>
     </>

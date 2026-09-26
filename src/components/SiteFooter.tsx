@@ -66,10 +66,10 @@ export function SiteFooter() {
           </div>
           <nav aria-label="Footer services">
             <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/40">Services</p>
-            <ul className="mt-6 grid gap-2.5">
+            <ul className="mt-3 grid lg:mt-6 lg:gap-2.5">
               {servicePages.map((service) => (
                 <li key={service.slug}>
-                  <a className="link-line text-[0.95rem] text-bone/75 transition-colors hover:text-bone" href={getServicePagePath(service)}>
+                  <a className="link-line inline-block py-2.5 text-[0.95rem] text-bone/75 lg:py-0 transition-colors hover:text-bone" href={getServicePagePath(service)}>
                     {service.shortTitle}
                   </a>
                 </li>
@@ -78,7 +78,7 @@ export function SiteFooter() {
           </nav>
           <nav aria-label="Footer resources">
             <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/40">Explore</p>
-            <ul className="mt-6 grid gap-2.5">
+            <ul className="mt-3 grid lg:mt-6 lg:gap-2.5">
               {[
                 { label: 'Projects', href: '/projects' },
                 { label: 'Guides', href: '/guides' },
@@ -87,11 +87,11 @@ export function SiteFooter() {
                 { label: 'Contact', href: '/contact' },
               ].map((item) => (
                 <li key={item.href}>
-                  <a className="link-line text-[0.95rem] text-bone/75 transition-colors hover:text-bone" href={item.href}>{item.label}</a>
+                  <a className="link-line inline-block py-2.5 text-[0.95rem] text-bone/75 lg:py-0 transition-colors hover:text-bone" href={item.href}>{item.label}</a>
                 </li>
               ))}
               <li>
-                <a className="link-line inline-flex items-center gap-1 text-[0.95rem] text-bone/75 transition-colors hover:text-bone" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
+                <a className="link-line inline-flex items-center gap-1 py-2.5 text-[0.95rem] text-bone/75 lg:py-0 transition-colors hover:text-bone" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
                   Google Business Profile <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
               </li>
@@ -99,10 +99,10 @@ export function SiteFooter() {
           </nav>
           <nav aria-label="Footer service areas">
             <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/40">Service Areas</p>
-            <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3">
+            <ul className="mt-3 grid grid-cols-2 gap-x-6 sm:grid-cols-3 lg:mt-6 lg:gap-y-2.5">
               {serviceAreaLinks.map((area) => (
                 <li key={area.slug}>
-                  <a className="link-line text-[0.95rem] text-bone/75 transition-colors hover:text-bone" href={getServiceAreaLinkPath(area)}>
+                  <a className="link-line inline-block py-2.5 text-[0.95rem] text-bone/75 lg:py-0 transition-colors hover:text-bone" href={getServiceAreaLinkPath(area)}>
                     {getServiceAreaLinkLabel(area)}
                   </a>
                 </li>
@@ -124,7 +124,7 @@ export function SiteFooter() {
           <a className="transition-colors hover:text-bone" href="https://hometownkc.agency" target="_blank" rel="noreferrer">
             Website by Hometown Marketing Agency
           </a>
-          <a className="mono inline-flex items-center gap-2 text-[0.68rem] uppercase tracking-[0.14em] transition-colors hover:text-bone" href="#top">
+          <a className="mono inline-flex min-h-11 items-center gap-2 text-[0.68rem] uppercase tracking-[0.14em] transition-colors hover:text-bone" href="#top">
             Back to top <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
           </a>
         </div>

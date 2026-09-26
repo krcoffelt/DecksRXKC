@@ -59,7 +59,7 @@ export function ReviewsSection() {
                   <button
                     key={review.name}
                     type="button"
-                    className="group flex h-6 items-center"
+                    className="group flex h-11 items-center px-1"
                     aria-label={`Show review from ${review.name}`}
                     aria-pressed={reviewIndex === index}
                     onClick={() => setIndex(reviewIndex)}

@@ -32,7 +32,7 @@ export function ContactSection() {
           <dl className="grid grid-cols-2 border-t hairline-light">
             <div className="py-5 pr-4">
               <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/45">Call</dt>
-              <dd className="mt-2"><a className="link-line font-display text-2xl" href={`tel:${business.phone}`}>{business.phoneDisplay}</a></dd>
+              <dd className="mt-2"><a className="link-line inline-block py-1.5 font-display text-2xl" href={`tel:${business.phone}`}>{business.phoneDisplay}</a></dd>
             </div>
             <div className="border-l hairline-light py-5 pl-5">
               <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/45">Hours</dt>

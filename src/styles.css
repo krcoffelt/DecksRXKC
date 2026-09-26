@@ -487,3 +487,25 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .anatomy .dims line { stroke: var(--color-soft-beige); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .anatomy .dims text { fill: var(--color-soft-beige); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; }
 .anatomy g { transition: transform 0.12s linear; }
+
+/* ---------------------------------------------------------------------------
+   Phones
+--------------------------------------------------------------------------- */
+
+@media (max-width: 639px) {
+  /* Keep small uppercase labels legible (never below 12px) */
+  .mono.text-\[0\.62rem\], .mono.text-\[0\.64rem\], .mono.text-\[0\.66rem\],
+  .mono.text-\[0\.68rem\], .mono.text-\[0\.7rem\], .eyebrow, .text-\[0\.68rem\], .text-\[0\.66rem\] {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  /* The drawing is small on phones; the step list carries the labels */
+  .anatomy .label, .anatomy .leader, .anatomy .dims text { display: none; }
+}
+
+/* Blend-mode grain is expensive on phone GPUs */
+@media (hover: none), (max-width: 767px) {
+  .grain::after { display: none; }
+}

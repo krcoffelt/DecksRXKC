@@ -293,6 +293,8 @@ function startMotion(cursor: HTMLDivElement | null): () => void {
       smoothVelocity += (velocity - smoothVelocity) * 0.1
       velocity *= 0.9
       document.querySelectorAll<HTMLElement>('[data-velocity]').forEach((track) => {
+        const box = track.getBoundingClientRect()
+        if (box.bottom < -50 || box.top > window.innerHeight + 50) return
         const direction = track.dataset.velocity === 'reverse' ? -1 : 1
         const half = track.scrollWidth / 2
         if (!half) return

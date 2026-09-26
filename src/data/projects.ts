@@ -222,9 +222,7 @@ export function getProjectPage(slug: string) {
   return projectPages.find((project) => project.slug === slug)
 }
 
-export function getProjectPagePath(project: ProjectPage) {
-  return `/projects/${project.slug}`
-}
+export { getProjectPagePath } from './paths'
 
 export function getProjectsBySlugs(slugs: string[]) {
   return slugs.flatMap((slug) => {

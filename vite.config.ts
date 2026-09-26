@@ -5,5 +5,15 @@ import viteReact from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [tanstackStart(), netlify(), viteReact(), tailwindcss()],
+  plugins: [
+    tanstackStart({
+      router: {
+        // Split each route's loader into its own chunk so page content data
+        // is only downloaded by the pages that use it.
+        codeSplittingOptions: {
+          defaultBehavior: [['loader'], ['component'], ['pendingComponent', 'errorComponent', 'notFoundComponent']],
+        },
+      },
+    }),
+    netlify(), viteReact(), tailwindcss()],
 })

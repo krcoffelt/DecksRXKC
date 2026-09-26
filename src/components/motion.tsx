@@ -140,7 +140,19 @@ function startMotion(cursor: HTMLDivElement | null): () => void {
     let lenisInstance: { raf: (time: number) => void; destroy: () => void; on: (event: 'scroll', cb: (lenis: { velocity: number }) => void) => void; scrollTo: (target: string | HTMLElement, options?: { offset?: number }) => void } | null = null
     let lenisFrame = 0
 
-    import('lenis').then(({ default: Lenis }) => {
+    // Smooth scrolling is a mouse/trackpad nicety; touch devices keep native scrolling (and skip the download).
+    const smoothScroll = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    let lastScrollY = window.scrollY
+    const onNativeScroll = () => {
+      if (lenisInstance) return
+      const y = window.scrollY
+      velocity = Math.max(-40, Math.min(40, (y - lastScrollY) * 0.4))
+      lastScrollY = y
+    }
+    window.addEventListener('scroll', onNativeScroll, { passive: true })
+    cleanups.push(() => window.removeEventListener('scroll', onNativeScroll))
+
+    if (smoothScroll) import('lenis').then(({ default: Lenis }) => {
       if (destroyed) return
       const lenis = new Lenis({ duration: 1.15, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) })
       lenisInstance = lenis as unknown as typeof lenisInstance
@@ -165,6 +177,9 @@ function startMotion(cursor: HTMLDivElement | null): () => void {
       event.preventDefault()
       lenisInstance.scrollTo(target, { offset: -24 })
       history.replaceState(null, '', id)
+      // Keep keyboard focus in step with the scroll (skip link, in-page anchors).
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1')
+      target.focus({ preventScroll: true })
     }
     document.addEventListener('click', onAnchorClick)
 
@@ -256,7 +271,7 @@ function startMotion(cursor: HTMLDivElement | null): () => void {
         const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end + rect.height * 0.6)))
         const lit = Math.round(progress * words.length)
         words.forEach((word, index) => {
-          word.style.opacity = index < lit ? '1' : '0.14'
+          word.style.opacity = index < lit ? '1' : '0.5'
         })
       })
     }
@@ -282,34 +297,51 @@ function startMotion(cursor: HTMLDivElement | null): () => void {
     })
 
     // ---- Velocity marquees ---------------------------------------------------
-    // Tracks drift constantly and surge (and lean) with scroll speed.
+    // Tracks drift constantly and surge (and lean) with scroll speed. The loop
+    // only runs while at least one marquee is on screen.
     let marqueeFrame = 0
-    const marquees = new Map<HTMLElement, number>()
+    const marquees = new Map<HTMLElement, { x: number; half: number }>()
+    const visibleTracks = new Set<HTMLElement>()
     let smoothVelocity = 0
-    let lastTime = performance.now()
+    let lastTime = 0
     const marqueeLoop = (now: number) => {
-      const dt = Math.min(64, now - lastTime)
+      const dt = lastTime ? Math.min(64, now - lastTime) : 16
       lastTime = now
       smoothVelocity += (velocity - smoothVelocity) * 0.1
       velocity *= 0.9
-      document.querySelectorAll<HTMLElement>('[data-velocity]').forEach((track) => {
-        const box = track.getBoundingClientRect()
-        if (box.bottom < -50 || box.top > window.innerHeight + 50) return
+      const skew = Math.max(-8, Math.min(8, smoothVelocity * -0.5))
+      visibleTracks.forEach((track) => {
+        const state = marquees.get(track) ?? { x: 0, half: track.scrollWidth / 2 }
+        if (!state.half) state.half = track.scrollWidth / 2
+        if (!state.half) return
         const direction = track.dataset.velocity === 'reverse' ? -1 : 1
-        const half = track.scrollWidth / 2
-        if (!half) return
-        let x = marquees.get(track) ?? 0
-        x -= direction * (0.05 + Math.abs(smoothVelocity) * 0.06) * dt
-        if (x <= -half) x += half
-        if (x > 0) x -= half
-        marquees.set(track, x)
-        const skew = Math.max(-8, Math.min(8, smoothVelocity * -0.5))
-        track.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0) skewX(${skew.toFixed(2)}deg)`
+        state.x -= direction * (0.05 + Math.abs(smoothVelocity) * 0.06) * dt
+        if (state.x <= -state.half) state.x += state.half
+        if (state.x > 0) state.x -= state.half
+        marquees.set(track, state)
+        track.style.transform = `translate3d(${state.x.toFixed(1)}px, 0, 0) skewX(${skew.toFixed(2)}deg)`
       })
-      marqueeFrame = requestAnimationFrame(marqueeLoop)
+      marqueeFrame = visibleTracks.size ? requestAnimationFrame(marqueeLoop) : 0
     }
-    marqueeFrame = requestAnimationFrame(marqueeLoop)
-    cleanups.push(() => cancelAnimationFrame(marqueeFrame))
+    const marqueeObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const track = entry.target as HTMLElement
+        if (entry.isIntersecting) visibleTracks.add(track)
+        else visibleTracks.delete(track)
+      }
+      if (visibleTracks.size && !marqueeFrame) {
+        lastTime = 0
+        marqueeFrame = requestAnimationFrame(marqueeLoop)
+      }
+    }, { rootMargin: '50px 0px' })
+    document.querySelectorAll<HTMLElement>('[data-velocity]').forEach((track) => marqueeObserver.observe(track))
+    const onResizeMarquee = () => marquees.forEach((state, track) => { state.half = track.scrollWidth / 2 })
+    window.addEventListener('resize', onResizeMarquee)
+    cleanups.push(() => {
+      cancelAnimationFrame(marqueeFrame)
+      marqueeObserver.disconnect()
+      window.removeEventListener('resize', onResizeMarquee)
+    })
 
     // ---- Custom cursor + magnetic elements ---------------------------------
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches

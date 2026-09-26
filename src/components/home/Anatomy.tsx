@@ -128,6 +128,21 @@ export function Anatomy() {
   const dimsRef = useRef<SVGGElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
+  // The drawing is ~1,300 SVG shapes; build it only when the section is about a screen away.
+  const [near, setNear] = useState(false)
+
+  useEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setNear(true)
+        observer.disconnect()
+      }
+    }, { rootMargin: '100% 0px' })
+    observer.observe(stage)
+    return () => observer.disconnect()
+  }, [])
 
   const drawing = useMemo(() => {
     let minX = Infinity
@@ -223,7 +238,7 @@ export function Anatomy() {
       window.removeEventListener('resize', onScroll)
       if (frame) cancelAnimationFrame(frame)
     }
-  }, [layers])
+  }, [layers, near])
 
   return (
     <section id="anatomy" className="grain relative bg-night text-bone">
@@ -263,7 +278,7 @@ export function Anatomy() {
             </div>
 
             <svg className="anatomy mx-auto h-[46svh] w-full max-w-full lg:h-[86svh]" viewBox={drawing.viewBox} role="img" aria-label="Exploded isometric drawing of a deck assembling from footings, posts, beams, joists, and decking up to railings and stairs">
-              {drawing.groups.map(({ layer, faces, anchor }, index) => (
+              {near && drawing.groups.map(({ layer, faces, anchor }, index) => (
                 <g
                   key={layer.id}
                   ref={(el) => { groupRefs.current[index] = el }}
@@ -283,12 +298,12 @@ export function Anatomy() {
                   ))}
                 </g>
               ))}
-              <g ref={dimsRef} className="dims">
+              {near ? <g ref={dimsRef} className="dims">
                 <line x1={drawing.dims.a[0]} y1={drawing.dims.a[1]} x2={drawing.dims.b[0]} y2={drawing.dims.b[1]} />
                 <line x1={drawing.dims.c[0]} y1={drawing.dims.c[1]} x2={drawing.dims.e[0]} y2={drawing.dims.e[1]} />
                 <text x={(drawing.dims.a[0] + drawing.dims.b[0]) / 2 + 10} y={(drawing.dims.a[1] + drawing.dims.b[1]) / 2 - 10}>16&apos;-0&quot;</text>
                 <text x={(drawing.dims.c[0] + drawing.dims.e[0]) / 2 - 70} y={(drawing.dims.c[1] + drawing.dims.e[1]) / 2 - 10}>12&apos;-0&quot;</text>
-              </g>
+              </g> : null}
             </svg>
           </div>
         </div>

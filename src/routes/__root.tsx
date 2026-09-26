@@ -28,12 +28,10 @@ export const Route = createRootRoute({
       ],
       links: [
         { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/archivo-variable.woff2', crossOrigin: 'anonymous' },
-        { rel: 'preload', as: 'font', type: 'font/woff', href: '/fonts/instrument-serif-400-italic.woff', crossOrigin: 'anonymous' },
-        {
-          rel: 'icon',
-          type: 'image/png',
-          href: '/images/decksrxkc-full-logo-transparent.png',
-        },
+        { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/instrument-serif-400-italic.woff2', crossOrigin: 'anonymous' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/icon-192.png' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
       ],
     }
   },
@@ -62,6 +60,12 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body>
         <div id="top" aria-hidden="true" />
+        <a
+          href="#main"
+          className="fixed top-3 left-3 z-[100] -translate-y-24 bg-soft-beige px-4 py-3 text-sm font-semibold text-night transition-transform focus:translate-y-0"
+        >
+          Skip to content
+        </a>
         {children}
         <MotionController />
         <Scripts />

@@ -132,7 +132,7 @@ export function SectionIntro({ title, copy, tone = 'light', align = 'left', as: 
 export type Crumb = { label: string; href?: string }
 
 export function Breadcrumbs({ items, tone = 'dark' }: Readonly<{ items: Crumb[]; tone?: 'light' | 'dark' }>) {
-  const muted = tone === 'dark' ? 'text-bone/50 hover:text-bone' : 'text-ink/50 hover:text-ink'
+  const muted = tone === 'dark' ? 'text-bone/60 hover:text-bone' : 'text-ink/65 hover:text-ink'
   const current = tone === 'dark' ? 'text-soft-beige' : 'text-wood'
   return (
     <nav aria-label="Breadcrumb" className="mono flex flex-wrap items-center gap-2 text-[0.68rem] uppercase tracking-[0.14em]">
@@ -184,7 +184,7 @@ export function PageHero({ title, intro, image, imageAlt = '', breadcrumbs, acti
           <dl className="hero-fade mt-12 grid grid-cols-2 border-t hairline-light sm:grid-cols-4" style={{ ['--i' as string]: 4 }}>
             {meta.map((item, index) => (
               <div key={item.label} className={`border-b hairline-light py-5 pr-4 sm:border-b-0 ${index > 0 ? 'sm:border-l sm:pl-5' : ''} ${index % 2 === 1 ? 'border-l pl-4 sm:pl-5' : ''}`}>
-                <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/45">{item.label}</dt>
+                <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/60">{item.label}</dt>
                 <dd className="mt-2 text-[0.95rem] text-bone/88">{item.value}</dd>
               </div>
             ))}
@@ -202,9 +202,8 @@ export function PageHero({ title, intro, image, imageAlt = '', breadcrumbs, acti
             alt={imageAlt}
             width="1600"
             height="1200"
-            loading="eager"
+            loading="lazy"
             decoding="async"
-            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(17_16_14/0.35),transparent_30%,transparent_70%,rgb(17_16_14/0.5))]" />
           <p className="mono absolute right-5 bottom-5 text-[0.66rem] uppercase tracking-[0.14em] text-bone/70 sm:right-8 lg:right-12">DecksRXKC · Kansas City</p>
@@ -256,7 +255,7 @@ export function ArrowRow({ href, children, meta, tone = 'light' }: Readonly<{ hr
   return (
     <a href={href} className={`group relative flex items-center justify-between gap-6 overflow-hidden border-b py-6 transition-colors duration-500 ${dark ? 'hairline-light text-bone hover:text-soft-beige' : 'hairline text-ink hover:text-wood'}`}>
       <span className="flex flex-col gap-1">
-        {meta ? <span className={`mono text-[0.66rem] uppercase tracking-[0.14em] ${dark ? 'text-bone/40' : 'text-ink/40'}`}>{meta}</span> : null}
+        {meta ? <span className={`mono text-[0.66rem] uppercase tracking-[0.14em] ${dark ? 'text-bone/60' : 'text-ink/65'}`}>{meta}</span> : null}
         <span className="text-xl font-medium tracking-[-0.01em] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-2 sm:text-2xl">{children}</span>
       </span>
       <span className={`flex h-11 w-11 shrink-0 items-center justify-center border transition-all duration-500 ${dark ? 'border-bone/20 group-hover:border-soft-beige group-hover:bg-soft-beige group-hover:text-night' : 'border-ink/15 group-hover:border-ink group-hover:bg-ink group-hover:text-bone'}`}>
@@ -300,7 +299,7 @@ export function Figure({ src, alt, caption, className = '', aspect = 'aspect-[4/
         <img className="h-full w-full object-cover" {...getResponsiveImageProps(src, sizes)} alt={alt} width="1200" height="900" loading={loading} decoding="async" />
       </div>
       {caption ? (
-        <figcaption className="mt-4 border-t hairline pt-4 text-sm leading-6 text-ink/60">{caption}</figcaption>
+        <figcaption className="mt-4 border-t hairline pt-4 text-sm leading-6 text-ink/65">{caption}</figcaption>
       ) : null}
     </figure>
   )

@@ -46,7 +46,7 @@ export function SiteFooter() {
 
         <div className="mt-20 grid gap-12 border-t hairline-light pt-12 md:grid-cols-2 lg:mt-28 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1.6fr]">
           <div>
-            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/40">Talk to the builder</p>
+            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/60">Talk to the builder</p>
             <a
               className="group mt-6 flex items-center gap-3 font-display text-[clamp(2.2rem,3.4vw,3.2rem)] leading-none transition-colors hover:text-soft-beige"
               href={`tel:${business.phone}`}
@@ -55,7 +55,7 @@ export function SiteFooter() {
               {business.phoneDisplay}
               <ArrowUpRight className="h-6 w-6 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" />
             </a>
-            <p className="mono mt-5 text-[0.7rem] uppercase leading-6 tracking-[0.12em] text-bone/50">
+            <p className="mono mt-5 text-[0.7rem] uppercase leading-6 tracking-[0.12em] text-bone/60">
               Mon – Sat · 8 AM – 5 PM
               <br />
               <span className="inline-flex items-center gap-2" aria-live="polite">
@@ -65,7 +65,7 @@ export function SiteFooter() {
             </p>
           </div>
           <nav aria-label="Footer services">
-            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/40">Services</p>
+            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/60">Services</p>
             <ul className="mt-3 grid lg:mt-6 lg:gap-2.5">
               {servicePages.map((service) => (
                 <li key={service.slug}>
@@ -77,7 +77,7 @@ export function SiteFooter() {
             </ul>
           </nav>
           <nav aria-label="Footer resources">
-            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/40">Explore</p>
+            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/60">Explore</p>
             <ul className="mt-3 grid lg:mt-6 lg:gap-2.5">
               {[
                 { label: 'Projects', href: '/projects' },
@@ -98,7 +98,7 @@ export function SiteFooter() {
             </ul>
           </nav>
           <nav aria-label="Footer service areas">
-            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/40">Service Areas</p>
+            <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-bone/60">Service Areas</p>
             <ul className="mt-3 grid grid-cols-2 gap-x-6 sm:grid-cols-3 lg:mt-6 lg:gap-y-2.5">
               {serviceAreaLinks.map((area) => (
                 <li key={area.slug}>
@@ -118,7 +118,7 @@ export function SiteFooter() {
         </p>
       </div>
 
-      <div className="shell flex flex-col gap-3 border-t hairline-light py-7 text-[0.8rem] text-bone/50 sm:flex-row sm:items-center sm:justify-between">
+      <div className="shell flex flex-col gap-3 border-t hairline-light py-7 text-[0.8rem] text-bone/60 sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} DecksRXKC. Serving the Kansas City metro.</p>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <a className="transition-colors hover:text-bone" href="https://hometownkc.agency" target="_blank" rel="noreferrer">

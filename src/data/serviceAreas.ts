@@ -714,10 +714,4 @@ export function getServiceArea(slug: string) {
   return serviceAreas.find((area) => area.slug === slug)
 }
 
-export function getServiceAreaPath(area: ServiceArea) {
-  return `/service-areas/${area.slug}`
-}
-
-export function getServiceAreaLabel(area: ServiceArea) {
-  return `${area.city}, ${area.state}`
-}
+export { getServiceAreaLabel, getServiceAreaPath } from './paths'

@@ -3,9 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { business } from '../../data/business'
 import { getResponsiveImageProps } from '../../lib/images'
 import { SiteHeader } from '../SiteHeader'
+import { heroImagePath } from '../../lib/heroImage'
 import { ButtonLink, GoogleGLogo, RatingStars } from '../ui'
-
-export const heroImagePath = '/images/kansas-city-custom-wood-deck-railing-project.jpg'
 
 const slides = [
   {
@@ -124,9 +123,9 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(17_16_14/0.55)_0%,transparent_22%,transparent_40%,rgb(17_16_14/0.9)_100%)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(17_16_14/0.55)_0%,transparent_22%,transparent_35%,rgb(17_16_14/0.92)_100%)]" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(17_16_14/0.5)_0%,transparent_60%)]" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-night/25" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-night/40" aria-hidden="true" />
       </div>
 
       <div className="shell relative flex flex-1 flex-col justify-end pt-28 pb-5 lg:pb-7">
@@ -137,7 +136,7 @@ export function Hero() {
             <span className="line-mask" style={{ ['--i' as string]: 2 }}><span>City Homes</span></span>
           </h1>
           <div className="lg:pb-3">
-            <p className="hero-fade text-[1.02rem] leading-7 text-bone/80" style={{ ['--i' as string]: 1 }}>
+            <p className="hero-fade text-[1.02rem] leading-7 text-bone/90" style={{ ['--i' as string]: 1 }}>
               DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings, and outdoor living
               spaces across the Kansas City metro — planned for summer nights, family dinners, and every season in between.
             </p>
@@ -160,7 +159,7 @@ export function Hero() {
               </span>
               <span className="mt-1 text-[0.82rem] text-bone/65 transition-colors group-hover:text-bone">{business.googleReviewCount} reviews on Google</span>
             </span>
-            <ArrowUpRight className="hidden h-4 w-4 text-bone/50 transition-transform duration-500 group-hover:rotate-45 group-hover:text-bone sm:block" aria-hidden="true" />
+            <ArrowUpRight className="hidden h-4 w-4 text-bone/60 transition-transform duration-500 group-hover:rotate-45 group-hover:text-bone sm:block" aria-hidden="true" />
           </a>
 
           <div className="flex items-center gap-6">

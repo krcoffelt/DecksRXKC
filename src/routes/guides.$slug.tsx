@@ -4,9 +4,10 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, ButtonLink, CtaBand, FaqList, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
-import { getGuidePage, getGuidePagePath, guidePages, type GuidePage } from '../data/guides'
-import { getProjectPagePath, getProjectsBySlugs } from '../data/projects'
-import { getServicePagePath, getServicesBySlugs } from '../data/servicePages'
+import { getGuidePage, guidePages, type GuidePage } from '../data/guides'
+import { getProjectsBySlugs } from '../data/projects'
+import { getServicesBySlugs } from '../data/servicePages'
+import { getGuidePagePath, getProjectPagePath, getServicePagePath } from '../data/paths'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
 
 export const Route = createFileRoute('/guides/$slug')({
@@ -24,7 +25,7 @@ function GuideDetailPage() {
   const readingMinutes = Math.max(3, Math.round(wordCount / 220))
   return <>
     <GuideStructuredData guide={guide} />
-    <main className="min-h-screen bg-bone text-ink">
+    <main id="main" className="min-h-screen bg-bone text-ink">
       <div className="fixed inset-x-0 top-0 z-[60] h-0.5 bg-transparent" aria-hidden="true"><div data-page-progress className="h-full origin-left scale-x-0 bg-soft-beige" /></div>
       <SiteHeader />
       <PageHero
@@ -57,7 +58,7 @@ function GuideDetailPage() {
       <div className="bg-bone">
         <div className="shell grid gap-12 py-20 lg:grid-cols-[16rem_1fr] lg:gap-20 lg:py-28">
           <nav aria-label="Table of contents" className="lg:sticky lg:top-28 lg:self-start">
-            <p className="mono text-[0.7rem] uppercase tracking-[0.14em] text-ink/45">In this guide</p>
+            <p className="mono text-[0.7rem] uppercase tracking-[0.14em] text-ink/65">In this guide</p>
             <ol className="mt-5 border-t hairline">
               {guide.sections.map((section, index) => (
                 <li key={section.heading} className="border-b hairline">
@@ -85,7 +86,7 @@ function GuideDetailPage() {
                   </ul>
                 ) : null}
                 {section.sourceIds?.length ? (
-                  <p className="mono mt-6 text-[0.72rem] leading-6 uppercase tracking-[0.08em] text-ink/50">Sources: {section.sourceIds.map((sourceId, sourceIndex) => { const source = sourcesById.get(sourceId); return source ? <span key={source.id}>{sourceIndex > 0 ? ' · ' : ''}<a className="text-wood underline decoration-wood/35 underline-offset-4 transition hover:text-ink" href={source.url} target="_blank" rel="noreferrer">{source.publisher}</a></span> : null })}</p>
+                  <p className="mono mt-6 text-[0.72rem] leading-6 uppercase tracking-[0.08em] text-ink/65">Sources: {section.sourceIds.map((sourceId, sourceIndex) => { const source = sourcesById.get(sourceId); return source ? <span key={source.id}>{sourceIndex > 0 ? ' · ' : ''}<a className="text-wood underline decoration-wood/35 underline-offset-4 transition hover:text-ink" href={source.url} target="_blank" rel="noreferrer">{source.publisher}</a></span> : null })}</p>
                 ) : null}
               </section>
             ))}
@@ -158,5 +159,3 @@ function GuideStructuredData({ guide }: Readonly<{ guide: GuidePage }>) {
     ] },
   ] }) }} />
 }
-
-export function getStaticPaths() { return guidePages.map((guide) => ({ params: { slug: guide.slug } })) }

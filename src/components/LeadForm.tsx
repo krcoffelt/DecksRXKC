@@ -38,15 +38,21 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
     event.preventDefault()
     setErrorMessage('')
 
-    const supabase = getSupabaseClient()
-
-    if (!isSupabaseConfigured || !supabase) {
+    if (!isSupabaseConfigured) {
       setSubmitState('error')
       setErrorMessage('Supabase is not configured yet. Add the VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.')
       return
     }
 
     setSubmitState('submitting')
+
+    const supabase = await getSupabaseClient().catch(() => null)
+
+    if (!supabase) {
+      setSubmitState('error')
+      setErrorMessage('The form could not connect. Please try again or call us.')
+      return
+    }
 
     const { error } = await supabase.from('quote_requests').insert({
       name: form.name.trim(),
@@ -79,7 +85,7 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
     dark ? 'border-bone/20 text-bone focus:border-soft-beige' : 'border-ink/20 text-ink focus:border-wood'
   }`
   const labelClass = `pointer-events-none absolute top-7 left-0 origin-left text-lg transition-all duration-300 peer-focus:top-0 peer-focus:text-[0.7rem] peer-focus:tracking-[0.14em] peer-focus:uppercase peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:tracking-[0.14em] peer-[:not(:placeholder-shown)]:uppercase ${
-    dark ? 'text-bone/50 peer-focus:text-soft-beige' : 'text-ink/50 peer-focus:text-wood'
+    dark ? 'text-bone/60 peer-focus:text-soft-beige' : 'text-ink/65 peer-focus:text-wood'
   }`
 
   return (
@@ -152,7 +158,7 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
           </span>
         </button>
         <a
-          className={`mono text-xs uppercase tracking-[0.12em] transition-colors ${dark ? 'text-bone/60 hover:text-bone' : 'text-ink/60 hover:text-ink'}`}
+          className={`mono text-xs uppercase tracking-[0.12em] transition-colors ${dark ? 'text-bone/60 hover:text-bone' : 'text-ink/65 hover:text-ink'}`}
           href={`tel:${business.phone}`}
           onClick={() => trackEvent('click_to_call', { page_path: typeof window === 'undefined' ? '/' : window.location.pathname })}
         >
@@ -175,7 +181,7 @@ function FloatingField({ label, labelClass, children }: Readonly<{ label: string
 function ChipGroup({ legend, name, options, value, onChange, dark }: Readonly<{ legend: string; name: string; options: string[]; value: string; onChange: (value: string) => void; dark: boolean }>) {
   return (
     <fieldset className="mt-10">
-      <legend className={`mono text-[0.68rem] uppercase tracking-[0.14em] ${dark ? 'text-bone/50' : 'text-ink/50'}`}>{legend}</legend>
+      <legend className={`mono text-[0.68rem] uppercase tracking-[0.14em] ${dark ? 'text-bone/60' : 'text-ink/65'}`}>{legend}</legend>
       <div className="mt-4 flex flex-wrap gap-2">
         {options.map((option) => {
           const checked = option === value

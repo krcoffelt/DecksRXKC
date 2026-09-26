@@ -38,7 +38,7 @@ export function ReviewsSection() {
           </a>
 
           <figure className="relative flex flex-col justify-between">
-            <h2 className="display-sm max-w-[22ch] text-bone/50" data-reveal="up">Deck work homeowners are willing to recommend</h2>
+            <h2 className="display-sm max-w-[22ch] text-bone/60" data-reveal="up">Deck work homeowners are willing to recommend</h2>
             <div className="mt-10 grid">
               {featured.map((review, reviewIndex) => (
                 <div
@@ -97,7 +97,7 @@ function ReviewRow({ reviews, reverse = false }: Readonly<{ reviews: typeof goog
             >
               <div className="flex items-center justify-between">
                 <RatingStars className="text-xs" />
-                <span className="mono text-[0.62rem] uppercase tracking-[0.12em] text-bone/40">{review.date}</span>
+                <span className="mono text-[0.62rem] uppercase tracking-[0.12em] text-bone/60">{review.date}</span>
               </div>
               <p className="mt-5 overflow-hidden text-[0.98rem] leading-7 text-bone/78 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4]">“{review.review}”</p>
               <div className="mt-6 flex items-center gap-3 border-t hairline-light pt-4">

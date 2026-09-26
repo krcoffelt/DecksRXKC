@@ -3,8 +3,9 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowUpRight } from 'lucide-react'
 import { ButtonLink, CtaBand, FaqList, PageHero, SectionIntro } from '../components/ui'
+import { getServicePagePath } from '../data/paths'
 import { getResponsiveImageProps } from '../lib/images'
-import { getServicePagePath, servicePages } from '../data/servicePages'
+import { servicePages } from '../data/servicePages'
 import { defaultSeoImagePath, getSeoHead, siteUrl } from '../lib/seo'
 
 const serviceFaqs = [
@@ -73,7 +74,7 @@ function ServicesIndex() {
           }),
         }}
       />
-      <main className="min-h-screen bg-bone text-ink">
+      <main id="main" className="min-h-screen bg-bone text-ink">
         <SiteHeader />
         <PageHero
           title={<>Outdoor living work built for <em className="text-soft-beige">Kansas City</em> homes</>}
@@ -106,7 +107,7 @@ function ServicesIndex() {
                 return (
                   <a key={service.slug} className={`group block ${span}`} href={getServicePagePath(service)} data-reveal="up" style={{ ['--d' as string]: index % 3 }}>
                     <div className={`frame bg-sand ${tall ? 'aspect-[4/3]' : 'aspect-[4/5]'}`}>
-                      <img className="h-full w-full object-cover" {...getResponsiveImageProps(service.image, '(min-width: 768px) 50vw, 100vw')} alt={`${service.shortTitle} by DecksRXKC`} width="1200" height="900" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
+                      <img className="h-full w-full object-cover" {...getResponsiveImageProps(service.image, '(min-width: 768px) 50vw, 100vw')} alt={`${service.shortTitle} by DecksRXKC`} width="1200" height="900" loading="lazy" decoding="async" />
                     </div>
                     <div className="mt-6 flex items-start justify-between gap-6 border-t hairline pt-5">
                       <div>

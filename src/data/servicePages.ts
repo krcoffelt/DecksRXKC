@@ -487,9 +487,7 @@ export function getServicePage(slug: string) {
   return servicePages.find((service) => service.slug === slug)
 }
 
-export function getServicePagePath(service: ServicePage) {
-  return `/services/${service.slug}`
-}
+export { getServicePagePath } from './paths'
 
 export function getServicesBySlugs(slugs: string[]) {
   return slugs.flatMap((slug) => {

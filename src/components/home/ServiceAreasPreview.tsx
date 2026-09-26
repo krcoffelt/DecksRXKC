@@ -41,7 +41,7 @@ function StateColumn({ state, code, areas, align = 'left' }: Readonly<{ state: s
       </span>
       <div className="relative flex items-baseline justify-between border-b border-ink pb-4" data-reveal="fade">
         <p className="font-display text-4xl">{state}</p>
-        <p className="mono text-[0.68rem] text-ink/45">{areas.length} communities</p>
+        <p className="mono text-[0.68rem] text-ink/65">{areas.length} communities</p>
       </div>
       <ul className="relative">
         {areas.map((area, index) => (

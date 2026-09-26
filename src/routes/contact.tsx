@@ -16,7 +16,7 @@ export const Route = createFileRoute('/contact')({
 function ContactPage() {
   return <>
     <ContactStructuredData />
-    <main className="min-h-screen bg-night text-bone">
+    <main id="main" className="min-h-screen bg-night text-bone">
     <SiteHeader />
     <section className="grain relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_85%_0%,rgb(184_116_59/0.18),transparent_55%)]" />

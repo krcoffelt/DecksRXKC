@@ -31,11 +31,11 @@ export function ContactSection() {
           </p>
           <dl className="grid grid-cols-2 border-t hairline-light">
             <div className="py-5 pr-4">
-              <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/45">Call</dt>
+              <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/60">Call</dt>
               <dd className="mt-2"><a className="link-line inline-block py-1.5 font-display text-2xl" href={`tel:${business.phone}`}>{business.phoneDisplay}</a></dd>
             </div>
             <div className="border-l hairline-light py-5 pl-5">
-              <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/45">Hours</dt>
+              <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/60">Hours</dt>
               <dd className="mt-2 text-bone/80">Mon – Sat, 8 AM – 5 PM</dd>
             </div>
           </dl>

@@ -2,7 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { SiteFooter } from '../components/SiteFooter'
 import { AnswerBlock } from '../components/home/AnswerBlock'
 import { ContactSection } from '../components/home/ContactSection'
-import { Hero, heroImagePath } from '../components/home/Hero'
+import { Hero } from '../components/home/Hero'
+import { heroImagePath } from '../lib/heroImage'
 import { Anatomy } from '../components/home/Anatomy'
 import { Approach, Marquee } from '../components/home/Approach'
 import { Process } from '../components/home/Process'
@@ -51,7 +52,7 @@ function LandingPage() {
   return (
     <>
       <HomepageStructuredData />
-      <main className="bg-bone text-ink">
+      <main id="main" className="bg-bone text-ink">
         <Hero />
         <Marquee />
         <Approach />

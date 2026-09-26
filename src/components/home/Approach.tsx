@@ -74,7 +74,7 @@ export function Approach() {
 function Stat({ label, value, index }: Readonly<{ label: string; value: ReactNode; index: number }>) {
   return (
     <div className={`flex flex-col-reverse justify-end border-b hairline py-7 pr-4 ${index % 2 === 1 ? 'border-l pl-5' : ''} ${index > 0 ? 'lg:border-l lg:pl-6' : ''}`} data-reveal="up" style={{ ['--d' as string]: index }}>
-      <dt className="mono mt-4 text-[0.66rem] uppercase tracking-[0.14em] text-ink/50">{label}</dt>
+      <dt className="mono mt-4 text-[0.66rem] uppercase tracking-[0.14em] text-ink/65">{label}</dt>
       <dd className="font-display text-[clamp(3.6rem,6.4vw,6.6rem)] leading-[0.82]">{value}</dd>
     </div>
   )

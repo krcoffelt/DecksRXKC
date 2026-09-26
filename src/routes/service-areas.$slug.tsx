@@ -4,10 +4,11 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, ButtonLink, CtaBand, FaqList, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
-import { getGuidePagePath, getGuidesBySlugs } from '../data/guides'
-import { getProjectPagePath, getProjectsBySlugs } from '../data/projects'
-import { getServiceArea, getServiceAreaLabel, getServiceAreaPath, serviceAreas, type ServiceArea } from '../data/serviceAreas'
-import { getServicePage, getServicePagePath, servicePages } from '../data/servicePages'
+import { getGuidesBySlugs } from '../data/guides'
+import { getProjectsBySlugs } from '../data/projects'
+import { getServiceArea, serviceAreas, type ServiceArea } from '../data/serviceAreas'
+import { getServicePage, servicePages } from '../data/servicePages'
+import { getGuidePagePath, getProjectPagePath, getServiceAreaLabel, getServiceAreaPath, getServicePagePath } from '../data/paths'
 import { absoluteUrl, defaultSeoImagePath, getSeoHead, siteUrl } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
 
@@ -52,7 +53,7 @@ function ServiceAreaPage() {
   return (
     <>
       <ServiceAreaStructuredData area={area} faqs={faqs} />
-      <main className="min-h-screen bg-bone text-ink">
+      <main id="main" className="min-h-screen bg-bone text-ink">
         <SiteHeader />
         <PageHero
           title={heroTitle}
@@ -78,7 +79,7 @@ function ServiceAreaPage() {
               <div className="mt-10 bg-paper p-6" data-reveal="up">
                 <p className="mono text-[0.68rem] uppercase tracking-[0.14em] text-wood">Nearby communities</p>
                 <p className="mt-3 font-display text-2xl leading-snug tracking-[-0.01em]">{area.nearby.join(' / ')}</p>
-                <p className="mt-3 text-[0.95rem] leading-7 text-ink/60">Serving {area.county} and surrounding Kansas City metro communities.</p>
+                <p className="mt-3 text-[0.95rem] leading-7 text-ink/65">Serving {area.county} and surrounding Kansas City metro communities.</p>
               </div>
             </div>
             <div className="border-t hairline">
@@ -228,8 +229,4 @@ function getRelatedServiceAreas(area: ServiceArea) {
   const sameState = serviceAreas.filter((candidate) => candidate.slug !== area.slug && candidate.state === area.state && !sameCounty.includes(candidate))
   const otherAreas = serviceAreas.filter((candidate) => candidate.slug !== area.slug && !sameCounty.includes(candidate) && !sameState.includes(candidate))
   return [...sameCounty, ...sameState, ...otherAreas].slice(0, 4)
-}
-
-export function getStaticPaths() {
-  return serviceAreas.map((area) => ({ params: { slug: area.slug } }))
 }

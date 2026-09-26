@@ -6,7 +6,7 @@ import { getResponsiveImageProps } from '../../lib/images'
 import { ButtonLink, SectionIntro } from '../ui'
 
 const cardTones = [
-  { card: 'bg-paper text-ink', muted: 'text-ink/60', rule: 'hairline', accent: 'text-wood', button: 'dark' as const },
+  { card: 'bg-paper text-ink', muted: 'text-ink/65', rule: 'hairline', accent: 'text-wood', button: 'dark' as const },
   { card: 'bg-night text-bone', muted: 'text-bone/60', rule: 'hairline-light', accent: 'text-soft-beige', button: 'bronze' as const },
   { card: 'bg-sand text-ink', muted: 'text-ink/65', rule: 'hairline', accent: 'text-wood', button: 'dark' as const },
   { card: 'bg-graphite text-bone', muted: 'text-bone/60', rule: 'hairline-light', accent: 'text-soft-beige', button: 'bronze' as const },

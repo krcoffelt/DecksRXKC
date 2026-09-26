@@ -3,9 +3,10 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, CtaBand, Figure, NumberedList, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
-import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
-import { getServicePagePath, servicePages } from '../data/servicePages'
+import { serviceAreas } from '../data/serviceAreas'
+import { servicePages } from '../data/servicePages'
 import { googleReviews, processSteps } from '../data/siteContent'
+import { getServiceAreaLabel, getServiceAreaPath, getServicePagePath } from '../data/paths'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
 
 const aboutDescription = 'Meet DecksRXKC and learn how the team plans custom decks, repairs, replacements, screened rooms, stairs, and railings across the Kansas City metro.'
@@ -28,7 +29,7 @@ function AboutPage() {
   return (
     <>
       <AboutStructuredData />
-      <main className="min-h-screen bg-bone text-ink">
+      <main id="main" className="min-h-screen bg-bone text-ink">
         <SiteHeader />
         <PageHero
           title={<>Practical deck planning. <em className="text-soft-beige">Craft you notice</em> in the details.</>}

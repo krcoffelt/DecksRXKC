@@ -4,17 +4,11 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, ButtonLink, CtaBand, FaqList, NumberedList, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
-import { getGuidesBySlugs, getGuidePagePath } from '../data/guides'
-import { getProjectPagePath, getProjectsBySlugs } from '../data/projects'
-import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
-import {
-  getServiceIcon,
-  getServicePage,
-  getServicePagePath,
-  getServicesBySlugs,
-  servicePages,
-  type ServicePage,
-} from '../data/servicePages'
+import { getGuidesBySlugs } from '../data/guides'
+import { getProjectsBySlugs } from '../data/projects'
+import { serviceAreas } from '../data/serviceAreas'
+import { getServiceIcon, getServicePage, getServicesBySlugs, servicePages, type ServicePage } from '../data/servicePages'
+import { getGuidePagePath, getProjectPagePath, getServiceAreaLabel, getServiceAreaPath, getServicePagePath } from '../data/paths'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
 
@@ -55,7 +49,7 @@ function ServiceDetailPage() {
   return (
     <>
       <ServiceStructuredData service={service} />
-      <main className="min-h-screen bg-bone text-ink">
+      <main id="main" className="min-h-screen bg-bone text-ink">
         <SiteHeader />
         <PageHero
           title={service.title}
@@ -284,8 +278,4 @@ function ServiceStructuredData({ service }: Readonly<{ service: ServicePage }>) 
       }}
     />
   )
-}
-
-export function getStaticPaths() {
-  return servicePages.map((service) => ({ params: { slug: service.slug } }))
 }

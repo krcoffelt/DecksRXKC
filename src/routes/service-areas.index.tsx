@@ -3,7 +3,8 @@ import { ArrowUpRight } from 'lucide-react'
 import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
 import { CtaBand, PageHero } from '../components/ui'
-import { getServiceAreaLabel, getServiceAreaPath, serviceAreas } from '../data/serviceAreas'
+import { serviceAreas } from '../data/serviceAreas'
+import { getServiceAreaLabel, getServiceAreaPath } from '../data/paths'
 import { defaultSeoImagePath, getSeoHead } from '../lib/seo'
 
 const serviceAreasTitle = 'DecksRXKC Service Areas | Kansas City Deck Builders'
@@ -22,7 +23,7 @@ export const Route = createFileRoute('/service-areas/')({
 
 function ServiceAreasIndex() {
   return (
-    <main className="min-h-screen bg-bone text-ink">
+    <main id="main" className="min-h-screen bg-bone text-ink">
       <SiteHeader />
       <PageHero
         title={<>Deck builders serving <em className="text-soft-beige">both sides</em> of Kansas City</>}
@@ -50,7 +51,7 @@ function ServiceAreasIndex() {
               <div key={state} className="mt-20 lg:mt-28">
                 <div className="flex items-baseline justify-between border-b border-ink pb-4" data-reveal="fade">
                   <h2 className="text-[clamp(2.2rem,4vw,3.6rem)] leading-none">{state === 'KS' ? 'Kansas' : 'Missouri'}</h2>
-                  <p className="mono text-xs text-ink/45">{areas.length} communities</p>
+                  <p className="mono text-xs text-ink/65">{areas.length} communities</p>
                 </div>
                 <div className="grid md:grid-cols-2 xl:grid-cols-3">
                   {areas.map((area, index) => (
@@ -60,7 +61,7 @@ function ServiceAreasIndex() {
                       </div>
                       <div>
                         <h3 className="font-display text-4xl leading-none tracking-[-0.02em]">{getServiceAreaLabel(area)}</h3>
-                        <p className="mt-4 text-[0.92rem] leading-6 text-ink/60 transition-colors group-hover:text-bone/65">{area.localNote}</p>
+                        <p className="mt-4 text-[0.92rem] leading-6 text-ink/65 transition-colors group-hover:text-bone/65">{area.localNote}</p>
                       </div>
                     </a>
                   ))}

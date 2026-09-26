@@ -65,6 +65,8 @@ export function SiteHeader(_props: SiteHeaderProps) {
   const [path, setPath] = useState('')
   const [preview, setPreview] = useState('/')
   const [showBar, setShowBar] = useState(false)
+  // Menu preview photos are only fetched once the menu is about to be used.
+  const [menuPrimed, setMenuPrimed] = useState(false)
   usePageHydrated()
 
   useEffect(() => {
@@ -168,7 +170,12 @@ export function SiteHeader(_props: SiteHeaderProps) {
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="site-menu"
-              onClick={() => setMenuOpen((open) => !open)}
+              onPointerEnter={() => setMenuPrimed(true)}
+              onFocus={() => setMenuPrimed(true)}
+              onClick={() => {
+                setMenuPrimed(true)
+                setMenuOpen((open) => !open)
+              }}
             >
               <span className="hidden sm:inline">{menuOpen ? 'Close' : 'Menu'}</span>
               <span className="relative block h-2.5 w-5" aria-hidden="true">
@@ -214,7 +221,7 @@ export function SiteHeader(_props: SiteHeaderProps) {
 
           <div className={`hidden flex-col justify-center transition-opacity delay-500 duration-700 md:flex ${menuOpen ? 'opacity-100' : 'opacity-0'}`}>
             <div className="relative aspect-[4/5] overflow-hidden bg-graphite">
-              {Object.entries(menuImages).map(([href, src]) => (
+              {menuPrimed && Object.entries(menuImages).map(([href, src]) => (
                 <img
                   key={href}
                   className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-1000 ease-[var(--ease-out-expo)] ${preview === href ? 'scale-100 opacity-100' : 'scale-110 opacity-0'}`}
@@ -230,7 +237,7 @@ export function SiteHeader(_props: SiteHeaderProps) {
           </div>
 
           <div className={`flex flex-col gap-6 border-t border-bone/10 pt-6 transition-opacity delay-500 duration-700 sm:flex-row sm:items-end sm:justify-between md:col-span-2 ${menuOpen ? 'opacity-100' : 'opacity-0'}`}>
-            <p className="mono max-w-[18rem] text-[0.68rem] leading-5 uppercase tracking-[0.14em] text-bone/50">Custom decks, covered &amp; screened rooms · Kansas City, KS + MO</p>
+            <p className="mono max-w-[18rem] text-[0.68rem] leading-5 uppercase tracking-[0.14em] text-bone/60">Custom decks, covered &amp; screened rooms · Kansas City, KS + MO</p>
             <div className="flex flex-col gap-2 sm:items-end">
               <a className="font-display text-4xl" href={`tel:${business.phone}`} tabIndex={menuOpen ? 0 : -1}>{business.phoneDisplay}</a>
               <a className="mono text-[0.7rem] uppercase tracking-[0.14em] text-soft-beige" href="/contact" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Request a free quote →</a>

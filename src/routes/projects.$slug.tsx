@@ -4,8 +4,9 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, ButtonLink, Figure, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
-import { getProjectPage, getProjectPagePath, projectPages, type ProjectPage } from '../data/projects'
-import { getServicePage, getServicePagePath } from '../data/servicePages'
+import { getProjectPage, projectPages, type ProjectPage } from '../data/projects'
+import { getServicePage } from '../data/servicePages'
+import { getProjectPagePath, getServicePagePath } from '../data/paths'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
 
@@ -35,7 +36,7 @@ function ProjectDetailPage() {
   return (
     <>
       <ProjectStructuredData project={project} />
-      <main className="min-h-screen bg-bone text-ink">
+      <main id="main" className="min-h-screen bg-bone text-ink">
         <SiteHeader />
         <PageHero
           title={project.title}
@@ -153,8 +154,4 @@ function ProjectStructuredData({ project }: Readonly<{ project: ProjectPage }>) 
       ] },
     ],
   }) }} />
-}
-
-export function getStaticPaths() {
-  return projectPages.map((project) => ({ params: { slug: project.slug } }))
 }

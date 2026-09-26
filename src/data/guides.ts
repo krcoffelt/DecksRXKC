@@ -805,9 +805,7 @@ export function getGuidePage(slug: string) {
   return guidePages.find((guide) => guide.slug === slug)
 }
 
-export function getGuidePagePath(guide: GuidePage) {
-  return `/guides/${guide.slug}`
-}
+export { getGuidePagePath } from './paths'
 
 export function getGuidesBySlugs(slugs: string[]) {
   return slugs.flatMap((slug) => {

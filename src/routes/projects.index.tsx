@@ -4,8 +4,9 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, ButtonLink, CtaBand, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
-import { getProjectPagePath, projectPages } from '../data/projects'
-import { getServicePage, getServicePagePath } from '../data/servicePages'
+import { projectPages } from '../data/projects'
+import { getServicePage } from '../data/servicePages'
+import { getProjectPagePath, getServicePagePath } from '../data/paths'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
 
@@ -23,7 +24,7 @@ export const Route = createFileRoute('/projects/')({
     title: 'Kansas City Deck Projects | DecksRXKC',
     description: projectsDescription,
     path: '/projects',
-    image: projectPages[0].heroImage,
+    image: '/images/optimized/kansas-city-elevated-composite-deck-cable-railing-stairs.jpg',
   }),
   component: ProjectsIndexPage,
 })
@@ -34,7 +35,7 @@ function ProjectsIndexPage() {
   return (
     <>
       <ProjectsStructuredData />
-      <main className="min-h-screen bg-bone text-ink">
+      <main id="main" className="min-h-screen bg-bone text-ink">
         <SiteHeader />
         <PageHero
           title={<>Kansas City deck work, <em className="text-soft-beige">shown in the details</em></>}
@@ -54,7 +55,7 @@ function ProjectsIndexPage() {
           <div className="shell py-24 lg:py-32">
             <a className="group grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end" href={getProjectPagePath(featured)} data-cursor="View">
               <div className="frame aspect-[4/3] bg-sand lg:aspect-[16/11]" data-reveal="clip">
-                <img className="h-full w-full object-cover" {...getResponsiveImageProps(featured.heroImage, '(min-width: 1024px) 60vw, 100vw')} alt={featured.shortTitle} width="1400" height="1100" loading="eager" decoding="async" />
+                <img className="h-full w-full object-cover" {...getResponsiveImageProps(featured.heroImage, '(min-width: 1024px) 60vw, 100vw')} alt={featured.shortTitle} width="1400" height="1100" loading="lazy" decoding="async" />
               </div>
               <div data-reveal="up">
                 <h2 className="display-md transition-colors group-hover:text-wood">{featured.title}</h2>

@@ -165,6 +165,11 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
           Or call {business.phoneDisplay}
         </a>
       </div>
+      <p className={`mt-5 text-sm leading-6 ${dark ? 'text-bone/60' : 'text-ink/65'}`}>
+        We use your details to respond about your project. Read our{' '}
+        <a href="/privacy-policy" className="underline underline-offset-4">Privacy Policy</a>{' '}
+        and <a href="/terms-and-conditions" className="underline underline-offset-4">Terms and Conditions</a>.
+      </p>
     </form>
   )
 }

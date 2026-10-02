@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as ServiceAreasRouteImport } from './routes/service-areas'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as GuidesRouteImport } from './routes/guides'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -24,6 +26,11 @@ import { Route as ServiceAreasSlugRouteImport } from './routes/service-areas.$sl
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServiceAreasRoute = ServiceAreasRouteImport.update({
   id: '/service-areas',
   path: '/service-areas',
@@ -32,6 +39,11 @@ const ServiceAreasRoute = ServiceAreasRouteImport.update({
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesRoute = GuidesRouteImport.update({
@@ -100,8 +112,10 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/guides': typeof GuidesRouteWithChildren
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRouteWithChildren
   '/service-areas': typeof ServiceAreasRouteWithChildren
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/service-areas/$slug': typeof ServiceAreasSlugRoute
@@ -115,6 +129,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/service-areas/$slug': typeof ServiceAreasSlugRoute
@@ -130,8 +146,10 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/guides': typeof GuidesRouteWithChildren
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRouteWithChildren
   '/service-areas': typeof ServiceAreasRouteWithChildren
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/service-areas/$slug': typeof ServiceAreasSlugRoute
@@ -148,8 +166,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/guides'
+    | '/privacy-policy'
     | '/projects'
     | '/service-areas'
+    | '/terms-and-conditions'
     | '/guides/$slug'
     | '/projects/$slug'
     | '/service-areas/$slug'
@@ -163,6 +183,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/privacy-policy'
+    | '/terms-and-conditions'
     | '/guides/$slug'
     | '/projects/$slug'
     | '/service-areas/$slug'
@@ -177,8 +199,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/guides'
+    | '/privacy-policy'
     | '/projects'
     | '/service-areas'
+    | '/terms-and-conditions'
     | '/guides/$slug'
     | '/projects/$slug'
     | '/service-areas/$slug'
@@ -194,14 +218,23 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   GuidesRoute: typeof GuidesRouteWithChildren
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProjectsRoute: typeof ProjectsRouteWithChildren
   ServiceAreasRoute: typeof ServiceAreasRouteWithChildren
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/service-areas': {
       id: '/service-areas'
       path: '/service-areas'
@@ -214,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides': {
@@ -349,8 +389,10 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   GuidesRoute: GuidesRouteWithChildren,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProjectsRoute: ProjectsRouteWithChildren,
   ServiceAreasRoute: ServiceAreasRouteWithChildren,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }

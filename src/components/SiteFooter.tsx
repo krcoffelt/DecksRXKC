@@ -121,6 +121,8 @@ export function SiteFooter() {
       <div className="shell flex flex-col gap-3 border-t hairline-light py-7 text-[0.8rem] text-bone/60 sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} DecksRXKC. Serving the Kansas City metro.</p>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <a className="inline-flex min-h-11 items-center transition-colors hover:text-bone" href="/privacy-policy">Privacy Policy</a>
+          <a className="inline-flex min-h-11 items-center transition-colors hover:text-bone" href="/terms-and-conditions">Terms and Conditions</a>
           <a className="transition-colors hover:text-bone" href="https://hometownkc.agency" target="_blank" rel="noreferrer">
             Website by Hometown Marketing Agency
           </a>

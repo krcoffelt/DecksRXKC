@@ -32,6 +32,8 @@ const urls = [
   ...readSlugs(serviceAreaFile).map((slug) => page(`/service-areas/${slug}`, serviceAreaFile, 'monthly', '0.76')),
   page('/about', 'src/routes/about.tsx', 'yearly', '0.65'),
   page('/contact', 'src/routes/contact.tsx', 'yearly', '0.75'),
+  page('/privacy-policy', 'src/routes/privacy-policy.tsx', 'yearly', '0.3'),
+  page('/terms-and-conditions', 'src/routes/terms-and-conditions.tsx', 'yearly', '0.3'),
 ]
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

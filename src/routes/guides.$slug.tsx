@@ -5,6 +5,7 @@ import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, ButtonLink, CtaBand, FaqList, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
 import { getGuidePage, guidePages, type GuidePage } from '../data/guides'
+import { getResponsiveImageProps } from '../lib/images'
 import { getProjectsBySlugs } from '../data/projects'
 import { getServicesBySlugs } from '../data/servicePages'
 import { getGuidePagePath, getProjectPagePath, getServicePagePath } from '../data/paths'
@@ -21,7 +22,7 @@ function GuideDetailPage() {
   const services = getServicesBySlugs(guide.relatedServiceSlugs)
   const projects = getProjectsBySlugs(guide.relatedProjectSlugs)
   const sourcesById = new Map(guide.sources.map((source) => [source.id, source]))
-  const wordCount = guide.sections.reduce((total, section) => total + [section.body, ...(section.paragraphs ?? []), ...(section.points ?? [])].join(' ').split(/\s+/).length, 0)
+  const wordCount = guide.sections.reduce((total, section) => total + [section.body, ...(section.paragraphs ?? []), ...(section.points ?? [])].join(' ').replace(inlineLinkPattern, '$1').split(/\s+/).length, 0)
   const readingMinutes = Math.max(3, Math.round(wordCount / 220))
   return <>
     <GuideStructuredData guide={guide} />
@@ -74,16 +75,22 @@ function GuideDetailPage() {
             {guide.sections.map((section, index) => (
               <section id={sectionId(section.heading)} key={section.heading} className="scroll-mt-28 border-t hairline pt-10 pb-14 first:border-t-0 first:pt-0">
                 <h2 className="display-sm">{section.heading}</h2>
-                <p className="mt-6 text-lg leading-8 text-ink/75">{section.body}</p>
-                {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-5 text-lg leading-8 text-ink/75">{paragraph}</p>)}
+                <p className="mt-6 text-lg leading-8 text-ink/75"><RichText text={section.body} /></p>
+                {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-5 text-lg leading-8 text-ink/75"><RichText text={paragraph} /></p>)}
                 {section.points ? (
                   <ul className="mt-8 grid gap-2">
                     {section.points.map((point) => (
                       <li key={point} className="flex gap-4 bg-paper px-5 py-4 text-base leading-7">
-                        <Check className="mt-1 h-4 w-4 shrink-0 text-wood" aria-hidden="true" />{point}
+                        <Check className="mt-1 h-4 w-4 shrink-0 text-wood" aria-hidden="true" /><span><RichText text={point} /></span>
                       </li>
                     ))}
                   </ul>
+                ) : null}
+                {section.image ? (
+                  <figure className="mt-10">
+                    <img className="aspect-[4/3] w-full object-cover" {...getResponsiveImageProps(section.image.src, '(min-width: 1024px) 48rem, 100vw')} alt={section.image.alt} width="1600" height="1200" loading="lazy" decoding="async" />
+                    {section.image.caption ? <figcaption className="mono mt-3 text-[0.72rem] leading-6 uppercase tracking-[0.08em] text-ink/65">{section.image.caption}</figcaption> : null}
+                  </figure>
                 ) : null}
                 {section.sourceIds?.length ? (
                   <p className="mono mt-6 text-[0.72rem] leading-6 uppercase tracking-[0.08em] text-ink/65">Sources: {section.sourceIds.map((sourceId, sourceIndex) => { const source = sourcesById.get(sourceId); return source ? <span key={source.id}>{sourceIndex > 0 ? ' · ' : ''}<a className="text-wood underline decoration-wood/35 underline-offset-4 transition hover:text-ink" href={source.url} target="_blank" rel="noreferrer">{source.publisher}</a></span> : null })}</p>
@@ -141,6 +148,21 @@ function GuideDetailPage() {
       <SiteFooter />
     </main>
   </>
+}
+
+const inlineLinkPattern = /\[([^\]]+)\]\(([^)\s]+)\)/g
+
+/** Renders guide copy, turning `[label](/path)` into in-text links. */
+function RichText({ text }: Readonly<{ text: string }>) {
+  const parts = text.split(inlineLinkPattern)
+  if (parts.length === 1) return <>{text}</>
+  return <>{parts.map((part, index) => {
+    if (index % 3 === 0) return part
+    if (index % 3 === 2) return null
+    const href = parts[index + 1]
+    const external = !href.startsWith('/')
+    return <a key={index} className="text-wood underline decoration-wood/35 underline-offset-4 transition hover:text-ink" href={href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>{part}</a>
+  })}</>
 }
 
 function sectionId(heading: string) {

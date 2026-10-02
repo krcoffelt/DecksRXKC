@@ -4,6 +4,7 @@ export type GuideSection = {
   paragraphs?: string[]
   points?: string[]
   sourceIds?: string[]
+  image?: { src: string; alt: string; caption?: string }
 }
 
 export type GuideSource = {
@@ -48,7 +49,7 @@ export const guidePages: GuidePage[] = [
       {
         heading: 'Start below the deck surface',
         body:
-          'A weathered board can be replaced. Widespread movement, soft structural components, connection concerns, or repeated failures may point to a larger issue. An assessment should look at the frame, posts, beams, stairs, rails, and visible connections—not only the decking.',
+          'A weathered board can be replaced. Widespread movement, soft structural components, connection concerns, or repeated failures may point to a larger issue. An assessment should look at the frame, posts, beams, stairs, rails, and visible connections—not only the decking. Our [fall deck repair checklist](/guides/signs-your-deck-needs-repair-kansas-city) walks through what to look for.',
         points: ['Is the concern isolated or repeated?', 'Does the deck move under normal use?', 'Are stairs and rails secure?', 'Can the supporting frame reasonably serve the planned upgrade?'],
         sourceIds: ['awc-dca6', 'irc-existing-structures'],
       },
@@ -798,6 +799,230 @@ export const guidePages: GuidePage[] = [
     relatedProjectSlugs: ['ground-up-deck-replacement', 'covered-deck-outdoor-room'],
     publishedAt: '2026-09-03',
     updatedAt: '2026-09-03',
+  },
+  {
+    slug: 'signs-your-deck-needs-repair-kansas-city',
+    title: '9 Signs Your Deck Needs Repair Before a Kansas City Winter',
+    shortTitle: 'Signs Your Deck Needs Repair',
+    metaTitle: 'Signs Your Deck Needs Repair Before Winter | DecksRXKC',
+    metaDescription:
+      'A 20-minute fall walk-around for Kansas City decks: how to spot rot, ledger trouble, loose railings, rusted hardware, and stairs that need repair before winter.',
+    eyebrow: 'Fall deck repair checklist',
+    intro:
+      'Grab a flashlight and a screwdriver. In about twenty minutes you can tell whether your deck just looks tired or actually needs repair before freeze-thaw season starts working on it.',
+    answer:
+      'The signs that a deck needs repair are soft or spongy wood, a loose or poorly attached ledger where the deck meets the house, rusted or popped fasteners, railings that move when you push them, bouncy or uneven stairs, leaning or heaving posts, side-to-side sway, and water that sits on or under the deck. Gray, splintery boards on their own are usually a finish problem, not a structural one.',
+    heroImage: '/images/kansas-city-fall-deck-leaves-weathered-boards.jpg',
+    sections: [
+      {
+        heading: 'Why October is the month to look',
+        body:
+          'Here is a number worth sitting with: the North American Deck and Railing Association estimates there are about 40 million decks in the U.S., and roughly half of them are more than 25 years old. Kansas City is not an exception. It may be a concentrated example of it.',
+        paragraphs: [
+          'Olathe roughly doubled in size between 1990 and 2010, from about 63,000 residents to nearly 126,000. Lee’s Summit, Overland Park, Lenexa, and Shawnee grew through the same stretch. A lot of those houses got a pressure-treated deck the week they closed, and plenty of those decks are still the original. If your home was built in that wave, your deck may be 20 to 35 years old and has never had anyone look underneath it.',
+          'Fall is the right time to do that looking. The leaves are coming down so you can see the framing, the ground is dry enough to crawl under the deck, and you still have a few weeks before Kansas City winter does what it does best: swing above and below freezing over and over. Water that gets into a crack in October freezes, expands, thaws, and goes deeper by March. A small problem you catch now tends to be a smaller bill than the same problem in April.',
+          'You do not need special tools. Bring a flashlight, a flat-head screwdriver, your phone for photos, and about twenty minutes. Work through the nine checks below in order, starting where the deck meets the house.',
+        ],
+        points: ['Flashlight for under the deck and behind the stairs', 'Flat-head screwdriver for probing wood', 'Phone camera to photograph anything that worries you', 'A second person to push on rails while you watch the posts'],
+        sourceIds: ['nadra-aging-decks', 'census-olathe-growth', 'nws-repair-normals'],
+      },
+      {
+        heading: '1. Wood that gives under a screwdriver',
+        body:
+          'Press the tip of a screwdriver into the wood at a shallow angle. Sound wood resists and leaves a small dent. Rotten wood lets the tip sink in with little effort, or the fibers pull out short and crumbly instead of in long splinters. That difference is the most useful test a homeowner can do.',
+        paragraphs: [
+          'Rot starts where water sits and does not dry out, so skip the middle of the sunny boards and go straight to the usual suspects: board ends and butt joints, the tops of posts, the bottoms of stair stringers where they meet the ground, the rim joist behind any fascia, and anywhere a planter, grill mat, or outdoor rug has been parked all summer.',
+          'One soft board near a downspout is usually a straightforward [deck repair](/services/deck-repair). Soft spots in joists, beams, or posts are a different conversation, because those are the parts holding everything else up.',
+        ],
+        points: ['Board ends and seams', 'Tops of posts and where beams sit on them', 'Bottom of stair stringers', 'Under planters, rugs, and grill mats'],
+      },
+      {
+        heading: '2. Trouble where the deck meets the house',
+        body:
+          'If you only check one thing, check the ledger, the board that attaches the deck to your house. An attached deck depends on that connection, and when decks fail, this is one of the places the industry tells homeowners to look hardest.',
+        paragraphs: [
+          'From underneath, look for bolts or lag screws running through the ledger into the house framing. Current prescriptive guidance does not allow a ledger to be hung on nails alone, but plenty of older decks were built that way. A row of nail heads and no bolts is worth a professional look.',
+          'Then look for evidence of water. Metal flashing should keep rain from running behind the ledger and into the house. Dark staining on the ledger or rim, soft wood where the two meet, a gap that has opened between the deck and the siding, or water marks on the basement wall behind the deck are all signs that water has been getting in. That can damage the house framing as well as the deck.',
+        ],
+        points: ['Bolts or lag screws, not just nails', 'Flashing above the ledger', 'No gap opening between deck and house', 'No staining or soft wood at the connection'],
+        sourceIds: ['nadra-aging-decks', 'awc-repair-dca6'],
+      },
+      {
+        heading: '3. Rust, popped nails, and tired hardware',
+        body:
+          'Look closely at the metal: joist hangers, post bases, bolts, screws, and nails. Surface discoloration is common. Flaking, swelling, or hardware that has visibly thinned is not. Nail heads that have backed out of the boards are another clue that the wood has been moving through a lot of wet and dry cycles.',
+        paragraphs: [
+          'There is a bit of history behind this one. According to the EPA, manufacturers stopped making arsenic-based CCA-treated wood for homeowner uses in December 2003, after it had been the standard for residential decks for decades. Deck lumber since then has been treated with copper-based alternatives, and current deck construction guidance calls for hot-dip galvanized or stainless steel hardware in treated lumber. A deck built or patched with whatever screws were in the garage can show corrosion faster than you would expect.',
+          'If your deck predates 2004, it was very likely built with CCA-treated lumber. The EPA does not call for tearing it out, but it does recommend a dust mask when cutting it, never burning the scraps, and washing your hands after working on it.',
+        ],
+        sourceIds: ['epa-cca', 'awc-repair-dca6'],
+      },
+      {
+        heading: '4. A railing that moves when you lean on it',
+        body:
+          'Have someone push firmly outward on the top rail at each post while you watch. A little flex in a long run is normal. A post that rocks, pulls away from the rim, or moves the boards around it is not. Railings are the part of a deck people trust without thinking about it, which is exactly why they deserve a hard push once a year.',
+        paragraphs: [
+          'Measure the height and the gaps while you are there. Model building codes generally require guards on decks more than 30 inches above grade, at least 36 inches tall, with openings small enough that a 4-inch sphere cannot pass through. Many older decks were built under different rules. If you have young kids or grandkids visiting, those numbers matter more than the age of the deck.',
+          'Loose posts are sometimes a hardware fix. Sometimes they are a symptom of rot in the rim joist the post is bolted to. Our [stairs and railings](/services/stairs-and-railings) work usually starts by figuring out which one it is.',
+        ],
+        points: ['Push each post: no rocking or pulling away', 'Top rail at least 36 inches where required', 'Openings smaller than 4 inches', 'Graspable handrail on stairs'],
+        sourceIds: ['awc-repair-dca6'],
+      },
+      {
+        heading: '5. Stairs that bounce, lean, or trip you',
+        body:
+          'Walk the stairs slowly and pay attention. Do they flex in the middle? Does one step feel taller than the rest? Stair stringers often sit right on the ground or a small pad, which makes the bottom of them one of the first places a deck rots.',
+        paragraphs: [
+          'Uneven step heights are a bigger deal than they sound. Your feet learn the rhythm of a staircase after two steps, so one riser that is noticeably different from the others is how people miss a step, especially carrying a tray of food at dusk. Check whether the stairs are lit too. Lighting is part of NADRA’s safety checklist for a reason.',
+          'Stairs are also the most common partial rebuild we see. Our [stair and railing upgrade project](/projects/deck-stair-and-railing-upgrade) shows how much a new stair and landing can change a deck that was otherwise in decent shape.',
+        ],
+        sourceIds: ['nadra-aging-decks'],
+        image: {
+          src: '/images/kansas-city-black-railing-deck-stairs-backyard.jpg',
+          alt: 'Elevated backyard deck with new stairs, a landing, and black metal railings on a Kansas City area home',
+          caption: 'New stairs, landing, and railings on an elevated DecksRXKC deck',
+        },
+      },
+      {
+        heading: '6. Posts that lean, sink, or sit in the dirt',
+        body:
+          'Sight down each row of posts. They should be plumb and sitting on a concrete footing or a metal post base, not buried directly in soil. Wood posts set in dirt or concrete holes were common on older decks, and that buried section is where they rot first, out of sight.',
+        paragraphs: [
+          'Kansas City clay holds water and moves as it freezes and thaws. Look for a post that has lifted off its base, a footing that has tilted, or a beam that no longer sits squarely on the posts below it. If one corner of the deck is lower than it was last year, that is not something to wait out over winter.',
+        ],
+        points: ['Posts plumb, not leaning', 'Posts on footings or metal bases, not buried', 'No gap between post top and beam', 'No corner that has dropped'],
+      },
+      {
+        heading: '7. Sway when people move around',
+        body:
+          'Stand on an elevated deck with a couple of people and shift your weight side to side. A deck that sways or shimmies laterally is telling you something, even if it feels solid when you stand still. Older elevated decks often lack the diagonal bracing or lateral connections that newer guidance calls for.',
+        paragraphs: [
+          'This one is worth taking seriously before you host a crowd. Decks tend to get stressed most when they are fullest, and the holidays put a lot of people on decks for the grill, the fire pit, and the group photo.',
+        ],
+      },
+      {
+        heading: '8. Water that does not leave',
+        body:
+          'After the next rain, look at where water goes. It should run off the boards, drip through the gaps, and drain away from the house and the posts. Puddles on the surface, green or black growth in shady corners, and soggy soil under the deck that never dries out all shorten the life of the wood.',
+        paragraphs: [
+          'Fall makes this worse. Oak and maple leaves pack into the gaps between boards, hold water against the edges, and turn into a mat by December. A gutter or downspout that empties onto the deck, or right next to a footing, keeps the same spot soaked all season. Many water problems are cheap to fix now and expensive to ignore.',
+        ],
+        points: ['Clear packed leaves from board gaps', 'Redirect downspouts away from the deck and footings', 'Move planters and rugs before winter', 'Look for a damp shady corner that never dries'],
+      },
+      {
+        heading: '9. Ugly versus unsafe: when gray boards are fine',
+        body:
+          'Not everything that looks bad is a repair. Gray, faded, or lightly splintering wood is usually the finish wearing off. That is a cleaning and staining job, or a good reason to start thinking about new decking, but it is not a structural emergency.',
+        paragraphs: [
+          'The question to ask about each thing you found is simple: is this about how the deck looks, or about what holds it up? Cosmetic wear on the surface boards can wait for spring. Soft framing, a questionable ledger, loose rails, rotten stair stringers, and leaning posts should not.',
+          'If the boards are worn out but the frame underneath is sound, resurfacing with new decking can make sense. Our [composite vs. wood decking guide](/guides/composite-vs-wood-decking-kansas-city) and [composite deck cost guide](/guides/composite-deck-cost-kansas-city) cover what that choice looks like in Kansas City.',
+        ],
+      },
+      {
+        heading: 'What to do before the first freeze',
+        body:
+          'Whether or not you found anything, a few small things this fall will help your deck get through the winter.',
+        paragraphs: [
+          'Sweep the leaves and clear the gaps. Move planters, rugs, and furniture that trap moisture. Point downspouts away from the deck. Photograph anything that worried you so you can tell whether it changes by spring.',
+          'When snow comes, use a plastic shovel on composite decking. Trex says metal shovels can damage composite surfaces and that calcium chloride or rock salt can be used to melt ice, with prompt rinsing on some older product lines. If you have a different brand, check that manufacturer’s care instructions before using any ice melt.',
+          'If you are thinking about building rather than repairing, our [fall deck building guide](/guides/build-deck-in-fall-kansas-city) covers what is realistic to build now and what is better planned now for spring.',
+        ],
+        points: ['Sweep leaves and clear board gaps', 'Move moisture-trapping planters and rugs', 'Redirect downspouts', 'Plastic shovel only on composite', 'Photograph concerns to compare in spring'],
+        sourceIds: ['trex-winter-care'],
+      },
+      {
+        heading: 'Repair, resurface, or replace?',
+        body:
+          'Once you know what you are dealing with, the decision usually falls into one of three paths, and our [repair or replace guide](/guides/repair-or-replace-your-deck) goes deeper on each.',
+        paragraphs: [
+          'Isolated problems on a sound frame, such as a few rotten boards, one loose post, or a set of tired stairs, are usually a focused repair. Worn-out surface boards on a solid frame may be a resurfacing job. When you find the same problem in several places, or the ledger, posts, and framing are all questionable, [deck replacement](/services/deck-replacement) is often the better use of money than repairing the same deck one piece at a time.',
+          'An honest contractor should be able to show you what they found and explain why they are recommending one path over another. If a quote jumps straight to replacing everything without walking you through the frame, ask why.',
+        ],
+        points: ['Isolated issue, sound frame: repair', 'Worn surface, sound frame: resurface', 'Repeated problems in the structure: replace'],
+      },
+      {
+        heading: 'Get a second set of eyes on it',
+        body:
+          'A homeowner walk-around is a good start, but it is not a substitute for someone who has pulled apart a lot of old decks. If anything on this list made you pause, especially at the ledger, the posts, or the railings, it is worth having it looked at before winter.',
+        paragraphs: [
+          'DecksRXKC does [deck repair across Kansas City](/services/deck-repair), from [Olathe](/service-areas/olathe-ks) and [Overland Park](/service-areas/overland-park-ks) to [Lee’s Summit](/service-areas/lees-summit-mo) and the Northland. Send us a few of the photos you took and tell us what worried you. We will tell you plainly whether it looks like a repair, a resurface, or something bigger. You can [request a quote here](/contact).',
+        ],
+      },
+    ],
+    sources: [
+      {
+        id: 'nadra-aging-decks',
+        title: 'NADRA Provides Deck Safety Resources for Consumers and Pros',
+        publisher: 'North American Deck and Railing Association',
+        url: 'https://www.nadra.org/blog/nadra-provides-deck-safety-resources-for-consumers-and-pros',
+      },
+      {
+        id: 'census-olathe-growth',
+        title: 'QuickFacts: Olathe city, Kansas',
+        publisher: 'U.S. Census Bureau',
+        url: 'https://www.census.gov/quickfacts/fact/table/olathecitykansas/POP010210',
+      },
+      {
+        id: 'nws-repair-normals',
+        title: 'Kansas City Climate Normals',
+        publisher: 'National Weather Service',
+        url: 'https://www.weather.gov/eax/eaxclinormals',
+      },
+      {
+        id: 'awc-repair-dca6',
+        title: 'Prescriptive Residential Wood Deck Construction Guide (DCA 6)',
+        publisher: 'American Wood Council',
+        url: 'https://awc.org/resources/dca-6-english-2015-prescriptive-residential-wood-deck-construction-guide/',
+      },
+      {
+        id: 'epa-cca',
+        title: 'Chromated Arsenicals (CCA)',
+        publisher: 'U.S. Environmental Protection Agency',
+        url: 'https://www.epa.gov/ingredients-used-pesticide-products/chromated-arsenicals-cca',
+      },
+      {
+        id: 'trex-winter-care',
+        title: 'Tips to Care for Composite Decking in the Winter',
+        publisher: 'Trex',
+        url: 'https://www.trex.com/deck-ideas/let-it-snow-tips-for-wintertime-care/',
+      },
+    ],
+    faqs: [
+      {
+        question: 'How do I know if my deck needs repair?',
+        answer:
+          'Probe the wood with a screwdriver for soft spots, check that the ledger is bolted to the house and flashed, push on every railing post, walk the stairs for bounce or uneven steps, and look for leaning posts, rusted hardware, and standing water. Soft framing, a loose ledger, or moving rails need attention.',
+      },
+      {
+        question: 'How long does a wood deck last in Kansas City?',
+        answer:
+          'It depends on the lumber, the hardware, how well water drains, and how it has been maintained. Many Kansas City decks built in the 1990s and 2000s are still standing, but age is a good reason to check the framing, ledger, and posts rather than judging by the surface boards.',
+      },
+      {
+        question: 'Is a gray, splintery deck unsafe?',
+        answer:
+          'Not by itself. Gray, weathered boards usually mean the finish has worn off. Safety concerns come from soft or rotten framing, a poorly attached ledger, loose railings, failing stairs, and leaning or sinking posts.',
+      },
+      {
+        question: 'Can deck repairs be done in fall or winter?',
+        answer:
+          'Many can. Board, railing, and stair repairs are often practical in fall and on mild winter days. Footing or concrete work depends on ground and weather conditions. Fixing safety issues before winter keeps freeze-thaw cycles from making them worse.',
+      },
+      {
+        question: 'Should I repair or replace my old deck?',
+        answer:
+          'Repair isolated problems on a sound frame. Consider resurfacing when the boards are worn but the frame is solid. When problems repeat across the ledger, posts, and framing, replacement is often the better investment.',
+      },
+      {
+        question: 'Where does DecksRXKC do deck repair?',
+        answer:
+          'DecksRXKC repairs decks across the Kansas City metro, including Olathe, Overland Park, Lenexa, Shawnee, Leawood, Prairie Village, Lee’s Summit, Blue Springs, Liberty, Parkville, and Kansas City on both sides of the state line.',
+      },
+    ],
+    relatedServiceSlugs: ['deck-repair', 'stairs-and-railings', 'deck-replacement'],
+    relatedProjectSlugs: ['deck-stair-and-railing-upgrade', 'ground-up-deck-replacement'],
+    publishedAt: '2026-10-06',
+    updatedAt: '2026-10-06',
   },
 ]
 

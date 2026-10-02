@@ -1021,8 +1021,8 @@ export const guidePages: GuidePage[] = [
     ],
     relatedServiceSlugs: ['deck-repair', 'stairs-and-railings', 'deck-replacement'],
     relatedProjectSlugs: ['deck-stair-and-railing-upgrade', 'ground-up-deck-replacement'],
-    publishedAt: '2026-10-06',
-    updatedAt: '2026-10-06',
+    publishedAt: '2026-10-02',
+    updatedAt: '2026-10-02',
   },
 ]
 

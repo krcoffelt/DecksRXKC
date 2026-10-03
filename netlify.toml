@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  VITE_GOOGLE_ADS_ID = "AW-18079934013"
+  VITE_GOOGLE_ADS_CONVERSION_LABEL = "ywkVCJ3Xo44dEL3Ml61D"
 
 [[redirects]]
   from = "http://www.decksrxkc.com/*"

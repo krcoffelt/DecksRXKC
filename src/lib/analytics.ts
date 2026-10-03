@@ -16,3 +16,17 @@ export function trackEvent(event: AnalyticsEvent, parameters: Record<string, str
 
   window.gtag('event', event, parameters)
 }
+
+export const googleAdsId = import.meta.env.VITE_GOOGLE_ADS_ID?.trim()
+const googleAdsConversionLabel = import.meta.env.VITE_GOOGLE_ADS_CONVERSION_LABEL?.trim()
+export const googleTagId = googleAdsId || gaMeasurementId
+
+export function trackQuoteConversion(transactionId: string) {
+  if (typeof window === 'undefined' || !window.gtag || !googleAdsId || !googleAdsConversionLabel) return
+  window.gtag('event', 'conversion', {
+    send_to: `${googleAdsId}/${googleAdsConversionLabel}`,
+    value: 1,
+    currency: 'USD',
+    transaction_id: transactionId,
+  })
+}

@@ -3,8 +3,7 @@ import { useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
 import { business } from '../data/business'
 import { projectTypes, timelines } from '../data/siteContent'
-import { getSupabaseClient, isSupabaseConfigured } from '../lib/supabase'
-import { trackEvent } from '../lib/analytics'
+import { trackEvent, trackQuoteConversion } from '../lib/analytics'
 
 const initialLeadForm = {
   name: '',
@@ -38,43 +37,40 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
     event.preventDefault()
     setErrorMessage('')
 
-    if (!isSupabaseConfigured) {
-      setSubmitState('error')
-      setErrorMessage('Supabase is not configured yet. Add the VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.')
-      return
-    }
-
     setSubmitState('submitting')
-
-    const supabase = await getSupabaseClient().catch(() => null)
-
-    if (!supabase) {
-      setSubmitState('error')
-      setErrorMessage('The form could not connect. Please try again or call us.')
-      return
-    }
-
-    const { error } = await supabase.from('quote_requests').insert({
+    const submittedForm = event.currentTarget
+    const transactionId = crypto.randomUUID()
+    const payload = new URLSearchParams({
+      'form-name': 'deck-quote',
+      'bot-field': String(new FormData(submittedForm).get('bot-field') || ''),
+      subject: 'New DecksRXKC Quote Request',
       name: form.name.trim(),
       phone: form.phone.trim(),
-      email: form.email.trim() || null,
+      email: form.email.trim(),
       city: form.city.trim(),
       project_type: form.projectType,
       timeline: form.timeline,
-      message: form.message.trim() || null,
+      message: form.message.trim(),
       source: 'decksrxkc-landing-page',
-      user_agent: typeof navigator === 'undefined' ? null : navigator.userAgent,
-      page_path: typeof window === 'undefined' ? '/' : window.location.pathname,
+      page_path: window.location.pathname,
+      submission_id: transactionId,
     })
-
-    if (error) {
+    try {
+      const response = await fetch('/__forms.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload.toString(),
+      })
+      if (!response.ok) throw new Error('Quote submission failed')
+    } catch {
       setSubmitState('error')
-      setErrorMessage(error.message)
+      setErrorMessage('Your request could not be sent. Please try again or call us.')
       return
     }
 
     setForm(initialLeadForm)
     setSubmitState('success')
+    trackQuoteConversion(transactionId)
     trackEvent('generate_lead', {
       project_type: form.projectType,
       city: form.city.trim(),
@@ -89,7 +85,11 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
   }`
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
+    <form className={className} name="deck-quote" method="POST" action="/__forms.html" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+      <input type="hidden" name="form-name" value="deck-quote" />
+      <div hidden aria-hidden="true">
+        <label>Leave this field empty <input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
+      </div>
       <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
         <FloatingField label="Your name" labelClass={labelClass}>
           <input className={fieldClass} name="name" value={form.name} onChange={(event) => updateField('name', event.target.value)} placeholder="Your name" autoComplete="name" required />

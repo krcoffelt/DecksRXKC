@@ -6,7 +6,7 @@ import {
   createRootRoute,
 } from '@tanstack/react-router'
 import { defaultSeoDescription, defaultSeoImagePath, defaultSeoTitle, getSeoHead } from '../lib/seo'
-import { gaMeasurementId } from '../lib/analytics'
+import { gaMeasurementId, googleAdsId, googleTagId } from '../lib/analytics'
 import { MotionController } from '../components/motion'
 import '../styles.css'
 
@@ -51,10 +51,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html lang="en">
       <head>
         <HeadContent />
-        {gaMeasurementId ? (
+        {googleTagId ? (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} />
-            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config','${gaMeasurementId}',{anonymize_ip:true});` }} />
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`} />
+            <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());${googleAdsId ? `gtag('config',${JSON.stringify(googleAdsId)});` : ''}${gaMeasurementId ? `gtag('config',${JSON.stringify(gaMeasurementId)},{anonymize_ip:true});` : ''}` }} />
           </>
         ) : null}
       </head>

@@ -13,7 +13,7 @@ function PrivacyPage() {
     { title: 'Who this policy covers', content: <p>This policy describes information handling for DecksRXKC at decksrxkc.com and inquiries submitted to our business through advertising forms. For privacy questions, call <a href={`tel:${business.phone}`}>{business.phoneDisplay}</a> or use our <a href="/contact">contact form</a>.</p> },
     { title: 'Information we collect', content: <>
       <p>When you request a quote, the website form collects your name, phone number, city, project type, and preferred timeline. Email and project notes are optional. We also receive information you choose to share when discussing a project, such as its address or existing condition.</p>
-      <p>The quote form stores the page where the request was submitted and browser information with your inquiry. Website hosting and third-party services may receive technical information such as your IP address, browser, device, referring page, and visit time.</p>
+      <p>The quote form stores the page where the request was submitted and a submission identifier with your inquiry. Website hosting and third-party services may receive technical information such as your IP address, browser, device, referring page, and visit time.</p>
       <p>If you submit a Google-hosted lead form for DecksRXKC, we receive the information you submit through that form. Google also handles your submission under its own <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">privacy policy</a>.</p>
       <p>Please do not include payment-card details, government identification numbers, medical information, or other sensitive personal information in a quote request.</p>
     </> },
@@ -25,7 +25,7 @@ function PrivacyPage() {
       <li>Measure website and advertising performance when measurement tools are enabled.</li>
     </ul> },
     { title: 'Service providers and disclosures', content: <>
-      <p>The website is hosted through Netlify, and website quote requests are stored using Supabase. Providers helping operate our website, manage inquiries, or measure advertising may process information needed to provide those services. Google processes information associated with its advertising, maps, and analytics services under its own policies.</p>
+      <p>The website is hosted through Netlify, and website quote requests are collected and stored using Netlify Forms. New inquiries may also be delivered to our business by email. Providers helping operate our website, manage inquiries, or measure advertising may process information needed to provide those services. Google processes information associated with its advertising, maps, and analytics services under its own policies.</p>
       <p>Information may also be disclosed when required by law or when necessary to address fraud, security issues, or protect legal rights. This policy does not cover the independent practices of third-party websites or services.</p>
     </> },
     { title: 'Cookies, analytics, and advertising', content: <>
@@ -35,7 +35,7 @@ function PrivacyPage() {
     </> },
     { title: 'Storage and security', content: <>
       <p>Inquiry and project records may be retained to respond to requests, support ongoing work, maintain business records, or meet legal obligations. Retention depends on the purpose of the record; submitting a form does not schedule automatic deletion.</p>
-      <p>The website uses HTTPS, and the quote database uses access controls. No internet transmission or storage system can be guaranteed completely secure. Service providers may process information in the United States or other locations where they operate.</p>
+      <p>The website uses HTTPS, and access to quote submissions is restricted to authorized account users. No internet transmission or storage system can be guaranteed completely secure. Service providers may process information in the United States or other locations where they operate.</p>
     </> },
     { title: 'Your choices and requests', content: <>
       <p>You can choose not to submit a form, leave optional fields blank, or call us instead. To request access to, correction of, or deletion of inquiry information, or to ask us to stop contacting you, call {business.phoneDisplay} or use our <a href="/contact">contact form</a>. We may need to verify your identity before acting on a request. Applicable legal requirements or records needed for an ongoing project may affect what can be deleted.</p>

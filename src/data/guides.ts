@@ -35,6 +35,184 @@ export type GuidePage = {
 
 export const guidePages: GuidePage[] = [
   {
+    slug: 'replace-wood-deck-boards-with-composite',
+    title: 'Can You Replace Wood Deck Boards With Composite on the Existing Frame?',
+    shortTitle: 'Wood-to-Composite Deck Resurfacing',
+    metaTitle: 'Replace Wood Deck Boards With Composite? | DecksRXKC',
+    metaDescription:
+      'Can your existing deck frame support composite boards? Learn what to check before resurfacing, from framing and fasteners to stairs, rails, and drainage.',
+    eyebrow: 'Deck resurfacing planning guide',
+    intro:
+      'You can sometimes replace wood deck boards with composite on the existing frame. For Kansas City homeowners, the first step is assessing the structure and the requirements of the proposed decking system.',
+    answer:
+      'Yes, if an on-site assessment finds the existing frame suitable for reuse and the selected composite decking. The review needs to cover footings, posts, beams, joists, house connections, drainage, stairs, and railing attachments. Remove the old surface boards, resolve framing concerns, and confirm product-specific installation requirements before installing the new surface.',
+    heroImage: '/images/kansas-city-composite-deck-board-railing-detail.jpg',
+    sections: [
+      {
+        heading: 'What resurfacing keeps—and what it replaces',
+        body:
+          'Deck resurfacing, sometimes called reboarding, replaces the walking surface while retaining suitable supporting structure. It can also include fascia, stair treads, railing work, and specific framing corrections. Keeping the same footprint is a starting preference; it does not establish that every component underneath can stay.',
+        paragraphs: [
+          'TimberTech’s composite installation guide explicitly describes removing existing deck boards and installing new boards on a code-compliant substructure. It prohibits installing its composite boards over the old deck boards. That distinction matters when a proposal describes an overlay rather than removal and assessment.',
+          'Think of this as a scope question before a color decision. Ask which parts are proposed for reuse, which parts need further investigation, and which will be replaced. For available materials and complete installation planning, start with our [Kansas City composite deck service](/services/composite-decks).',
+        ],
+        sourceIds: ['timbertech-resurface-install'],
+      },
+      {
+        heading: 'Assess the entire frame before choosing boards',
+        body:
+          'A useful assessment follows the structure from the ground to the surface: footings, posts, beams, joists, and their connections. At an attached deck, include the ledger and its connection to the house. Member sizes, spans, bearing, hardware, and the proposed loads belong in that review—not just the appearance of the lumber.',
+        paragraphs: [
+          'The American Wood Council’s DCA 6 illustrates why these parts work as a system. It is a reference for conventional wood-deck construction within defined limits, based on the 2015 IRC; it does not certify an existing deck or replace the requirements adopted by your local authority.',
+          'Ask what can actually be verified on the first visit. Footing dimensions, concealed house connections, and the tops of joists may need records or further exposure. A good planning conversation identifies those unknowns rather than treating a clean-looking underside as a complete structural answer.',
+        ],
+        sourceIds: ['awc-resurface-frame'],
+      },
+      {
+        heading: 'Plan a second review after the boards come off',
+        body:
+          'Old surface boards can obscure the places you most want to inspect. NADRA’s consumer checklist highlights decay, damp areas, loose or corroded fasteners, flashing, stairs, and railings. It also makes clear that a homeowner checklist does not establish code compliance. Have concerns evaluated by a knowledgeable professional.',
+        paragraphs: [
+          'For the proposal, ask for a clear pause after removal: who reviews the exposed frame, how findings are documented, and how additional work is approved before it is covered again. Photos of the exposed conditions can make that conversation easier, especially when you cannot be home during the work.',
+          'Agree on the decision point in advance. A small, defined correction may fit the resurfacing plan; more extensive deterioration or unresolved support concerns may change it. If you need the broader decision framework, our [repair-or-replace guide](/guides/repair-or-replace-your-deck) explains those paths. Here, the question is whether the retained base supports the proposed new surface.',
+        ],
+        sourceIds: ['nadra-resurface-checklist'],
+      },
+      {
+        heading: 'Match joist spacing to the exact decking system',
+        body:
+          'There is no single joist-spacing answer for every composite deck. Select the board line, profile, application, and board direction, then check the applicable manufacturer instructions. The TimberTech composite guide distinguishes straight and angled layouts and gives separate stair requirements. A spacing used for the old wood boards is not automatic approval for the new product.',
+        paragraphs: [
+          'Ask the contractor to show the relevant instructions alongside the proposed layout. Are the boards running perpendicular to the joists, diagonally, or around a border? Where do board ends land? Does the plan call for added support? Those questions should be answered before the material order is finalized.',
+          'For example, a homeowner may want diagonal boards after seeing a finished deck photo. The useful comparison is the complete scope for a straight layout versus the desired diagonal layout, including any required framing changes. Comparing only the price of the boards misses the installation question.',
+        ],
+        sourceIds: ['timbertech-resurface-install'],
+      },
+      {
+        heading: 'Resolve uneven framing, borders, and seams',
+        body:
+          'A sound frame still needs preparation for the finish you expect. TimberTech explains that uneven joist tops can show through as a wavy surface. Its framing guidance also ties blocking needs to the chosen decking, fasteners, railing, and board pattern. Ask for a plan for the whole surface, including the edges.',
+        paragraphs: [
+          'Picture framing is the border that runs around the field boards. TimberTech’s picture-frame guidance shows additional support beneath that border and the adjoining infill boards. It is a framing detail as well as an appearance choice.',
+          'Before approving the layout, ask to see where seams and borders will fall relative to the doorway, stairs, and main view from the yard. A simple drawing can settle preferences early. Request separate descriptions of necessary corrections and optional finish details so you can make informed choices without losing track of the base scope.',
+        ],
+        sourceIds: ['timbertech-resurface-joists', 'timbertech-resurface-border'],
+        image: {
+          src: '/images/kansas-city-composite-deck-cable-railing-stairs.jpg',
+          alt: 'Composite deck surface with black cable railing and stairs leading to the yard',
+          caption: 'Use completed deck details to discuss the desired finish; a finished photo does not verify whether an existing frame can be reused.',
+        },
+      },
+      {
+        heading: 'Include fasteners, drainage, and access below',
+        body:
+          'The installation plan should name compatible fasteners and address board gaps, airflow, and water movement. TimberTech’s composite guide provides fastening, gapping, and ventilation directions. These are product-specific details; a clip or screw used on another deck is not enough evidence that it fits this one.',
+        paragraphs: [
+          'At the house, ask how existing flashing and water damage will be evaluated. At the outside edge, ask how fascia and any skirting will be handled. TimberTech’s framing guidance discusses flashing and joist tape as water-management measures. Tape is a protective detail for suitable framing, not a repair for decayed wood.',
+          'Tell the contractor how you use the space below the deck. Do you need access to a hose bib, equipment, storage, or a drainage system? Put those needs on the scope before choosing the visible finish. Ask what access will remain for future maintenance and what cleaning instructions you should keep after the project is complete.',
+        ],
+        sourceIds: ['timbertech-resurface-install', 'timbertech-resurface-joists'],
+      },
+      {
+        heading: 'Check stairs and railing compatibility separately',
+        body:
+          'Keeping the deck frame does not automatically mean keeping every stair and railing component. Include stringers, landings, handrails, guards, and post attachments in the assessment. The proposed stair surface needs its own product-specific support and fastening review. Ask how the finished board thickness affects the stair and doorway transitions.',
+        paragraphs: [
+          'If the plan keeps existing railing, ask whether it can be removed and reinstalled where necessary, how the attachments will be assessed, and what repairs or replacement are included. If you want a new railing system, select it early enough for its attachment and blocking requirements to be considered with the frame.',
+          'Our [stairs and railings service](/services/stairs-and-railings) covers those coordinated upgrades. For a visual discussion, see the [elevated composite deck and stairs project](/projects/elevated-composite-deck-and-stairs). It illustrates a finished surface, stair, and railing combination; it should not be read as evidence that your existing structure has the same conditions.',
+        ],
+        sourceIds: ['awc-resurface-frame', 'nadra-resurface-checklist'],
+      },
+      {
+        heading: 'Compare complete resurfacing proposals',
+        body:
+          'A useful resurfacing quote explains the retained structure and the new work together. Ask for the exact board line, surface layout, fastening approach, demolition, disposal, framing preparation, stairs, railings, fascia, and cleanup. Separate known work from allowances or exclusions tied to concealed conditions.',
+        paragraphs: [
+          'Rather than assuming that reusing a frame guarantees a particular saving, compare the assessed scope. One proposal may include stair and railing changes while another includes only the deck surface. Our [composite deck cost guide](/guides/composite-deck-cost-kansas-city) explains the wider cost drivers. If the assessment changes the project substantially, discuss the [deck replacement scope](/services/deck-replacement) before proceeding.',
+          'For your Kansas City metro address, establish who confirms local permit and inspection requirements and whether plans or further structural review are needed. Do not assume a surface replacement is exempt. Also request the actual product warranty documents and the contractor’s written workmanship terms; ask how reused components are addressed. Keep those responsibilities explicit in the proposal.',
+        ],
+        points: [
+          'What has been inspected, and what remains concealed?',
+          'Which framing changes are included for the selected board layout?',
+          'What happens if removal reveals additional damage?',
+          'Who confirms local requirements and coordinates any required inspections?',
+          'Which components and responsibilities are covered by each written warranty?',
+        ],
+      },
+      {
+        heading: 'Prepare for an on-site resurfacing assessment',
+        body:
+          'Bring the deck’s approximate age, available plans or permit records, repair history, and your goals for the finished space. Explain whether the footprint and stairs work for you, what you hope to maintain, and whether a future roof or enclosure is part of the plan. Those future changes deserve their own assessment.',
+        paragraphs: [
+          'Photos can help start the conversation: include the full deck, stairs, railing, house connection, and accessible underside. Take them from a safe location without removing structural parts. If an area feels unstable or shows a concerning defect, avoid using it and arrange an evaluation rather than testing it yourself.',
+          'For DecksRXKC homeowners across the metro, including [Overland Park](/service-areas/overland-park-ks), the practical next step is a site-specific scope. [Request a composite resurfacing assessment](/contact) and describe what you want to change. Start with what can reasonably be retained, then choose the boards and details that fit the confirmed plan.',
+        ],
+      },
+    ],
+    sources: [
+      {
+        id: 'timbertech-resurface-install',
+        title: 'Composite Decking Installation & Maintenance Guide',
+        publisher: 'TimberTech',
+        url: 'https://assets.timbertech.com/content/dam/document-library/TimberTech/installation-guides/decking/TimberTech-Composite-Installation-Guide-ENG.pdf',
+      },
+      {
+        id: 'awc-resurface-frame',
+        title: 'DCA 6: Prescriptive Residential Wood Deck Construction Guide (2015 IRC basis)',
+        publisher: 'American Wood Council',
+        url: 'https://awc.org/resources/dca-6-english-2015-prescriptive-residential-wood-deck-construction-guide/',
+      },
+      {
+        id: 'nadra-resurface-checklist',
+        title: 'Check Your Deck Consumer Checklist',
+        publisher: 'North American Deck and Railing Association',
+        url: 'https://www.nadra.org/wp-content/uploads/2023/05/NADRA_DSM_Checklist.pdf',
+      },
+      {
+        id: 'timbertech-resurface-joists',
+        title: 'Deck Joist Spacing & Blocking',
+        publisher: 'TimberTech',
+        url: 'https://www.timbertech.com/resources/deck-building/deck-joist-spacing/',
+      },
+      {
+        id: 'timbertech-resurface-border',
+        title: 'How to Picture Frame a Deck',
+        publisher: 'TimberTech',
+        url: 'https://www.timbertech.com/resources/deck-building/how-to-picture-frame-a-deck/',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I replace wood deck boards with composite without replacing the frame?',
+        answer: 'Sometimes. Have the supporting structure assessed on site, including its condition, connections, layout, and suitability for the selected decking. Confirm concealed conditions after the old boards are removed before finalizing reuse.',
+      },
+      {
+        question: 'Can composite decking go directly over old wood deck boards?',
+        answer: 'The TimberTech composite installation guide prohibits installing its boards on top of existing deck boards. Resurfacing means removing the old surface and using suitable supporting framing. Check the current instructions for the exact product selected.',
+      },
+      {
+        question: 'Will my existing joist spacing work for composite decking?',
+        answer: 'It depends on the selected board line, profile, application, and layout. Have the contractor compare the measured framing with the current product instructions. Diagonal boards, borders, and stairs can require different support details.',
+      },
+      {
+        question: 'Can I keep my existing stairs and railing when resurfacing?',
+        answer: 'Possibly, but assess them separately. Review stair support, finished transitions, railing condition, post attachments, and compatibility with the proposed decking and fastening plan. Include any removal, reinstallation, or replacement in the written scope.',
+      },
+      {
+        question: 'Does resurfacing require a permit in the Kansas City metro?',
+        answer: 'Confirm requirements for the property address and proposed work with the local building authority. Establish who handles any required plans, permits, and inspections before work starts; do not assume that retaining the footprint makes the work exempt.',
+      },
+      {
+        question: 'Is resurfacing always less expensive than rebuilding?',
+        answer: 'Reusing suitable components may reduce some work, but the assessed scope determines the comparison. Removal, framing corrections, additional support, stairs, railing, and concealed damage can change the proposal. Compare complete written scopes before deciding.',
+      },
+    ],
+    relatedServiceSlugs: ['composite-decks', 'deck-replacement', 'stairs-and-railings'],
+    relatedProjectSlugs: ['elevated-composite-deck-and-stairs'],
+    publishedAt: '2026-10-16',
+    updatedAt: '2026-10-16',
+  },
+  {
     slug: 'repair-or-replace-your-deck',
     title: 'Should You Repair or Replace Your Deck?',
     shortTitle: 'Repair or Replace Your Deck?',

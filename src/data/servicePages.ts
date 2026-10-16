@@ -281,7 +281,7 @@ export const servicePages: ServicePage[] = [
     ],
     relatedServiceSlugs: ['custom-decks', 'deck-replacement', 'stairs-and-railings'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs', 'covered-deck-outdoor-room'],
-    relatedGuideSlugs: ['composite-deck-cost-kansas-city', 'trex-vs-timbertech-kansas-city', 'composite-vs-wood-decking-kansas-city'],
+    relatedGuideSlugs: ['replace-wood-deck-boards-with-composite', 'composite-deck-cost-kansas-city', 'trex-vs-timbertech-kansas-city', 'composite-vs-wood-decking-kansas-city'],
     publishedAt: contentDate,
     updatedAt: contentDate,
   },

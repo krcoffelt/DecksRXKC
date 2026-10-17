@@ -34,7 +34,7 @@ test('Google Ads click is retained, direct has no claimed referral, search uses 
   a = await visit({ referrer: 'https://www.google.com/search?q=private' })
   const lead = a.getLeadAttribution()
   assert.equal(lead.traffic_medium, 'organic')
-  assert.equal(lead.referrer, 'www.google.com')
+  assert.equal(lead.entry_referrer, 'www.google.com')
   assert.ok(!JSON.stringify(lead).includes('private'))
 })
 test('blocked storage does not lose the journey or prevent a lead', async () => {
@@ -58,7 +58,7 @@ test('journey is bounded, consecutive duplicates omitted, same-site referrer exc
   for (let i = 0; i < 30; i++) { window.location.pathname = `/page-${i}`; a.captureVisit(); a.captureVisit() }
   const lead = a.getLeadAttribution()
   assert.equal(lead.page_journey.split(' → ').length, 20)
-  assert.equal(lead.referrer, '')
+  assert.equal(lead.entry_referrer, '(direct or unavailable)')
 })
 test('server rendering requires no browser globals', async () => {
   const a = await visit()

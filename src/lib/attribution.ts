@@ -37,7 +37,7 @@ export function getLeadAttribution(): Record<string, string> {
   const searchSource = /(^|\.)google\.[a-z.]+$/.test(visit.referrer) ? 'google' : /(^|\.)bing\.com$/.test(visit.referrer) ? 'bing' : /(^|\.)duckduckgo\.com$/.test(visit.referrer) ? 'duckduckgo' : ''
   return {
     landing_page: visit.landing,
-    referrer: visit.referrer,
+    entry_referrer: visit.referrer || '(direct or unavailable)',
     traffic_source: c.utm_source || (paidGoogle ? 'google' : c.msclkid ? 'bing' : c.fbclid ? 'facebook' : searchSource || visit.referrer || '(direct)'),
     traffic_medium: c.utm_medium || (paidGoogle || c.msclkid ? 'cpc' : c.fbclid ? 'social' : c.utm_source ? '(not set)' : searchSource ? 'organic' : visit.referrer ? 'referral' : '(none)'),
     ...c,

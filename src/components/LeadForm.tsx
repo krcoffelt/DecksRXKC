@@ -4,6 +4,7 @@ import type { FormEvent, ReactNode } from 'react'
 import { business } from '../data/business'
 import { projectTypes, timelines } from '../data/siteContent'
 import { trackEvent, trackQuoteConversion } from '../lib/analytics'
+import { getLeadAttribution } from '../lib/attribution'
 
 const initialLeadForm = {
   name: '',
@@ -54,6 +55,7 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
       source: 'decksrxkc-landing-page',
       page_path: window.location.pathname,
       submission_id: transactionId,
+      ...getLeadAttribution(),
     })
     try {
       const response = await fetch('/__forms.html', {
@@ -73,7 +75,7 @@ export function LeadForm({ tone = 'dark', className = '' }: LeadFormProps) {
     trackQuoteConversion(transactionId)
     trackEvent('generate_lead', {
       project_type: form.projectType,
-      city: form.city.trim(),
+      lead_reference: transactionId,
     })
   }
 

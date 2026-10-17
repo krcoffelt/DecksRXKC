@@ -14,7 +14,7 @@ export function trackEvent(event: AnalyticsEvent, parameters: Record<string, str
     return
   }
 
-  window.gtag('event', event, parameters)
+  window.gtag('event', event, { ...parameters, send_to: gaMeasurementId })
 }
 
 export const googleAdsId = import.meta.env.VITE_GOOGLE_ADS_ID?.trim()

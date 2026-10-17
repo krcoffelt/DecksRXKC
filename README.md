@@ -28,6 +28,12 @@ The production build outputs client assets to `dist/client` and the server bundl
 
 Optional GA4 measurement uses `VITE_GA_MEASUREMENT_ID`. When configured, the site records `quote_cta_click`, `click_to_call`, and `generate_lead`; when omitted, analytics safely remains inactive.
 
+Production Google Analytics: account **Kyle Coffelt**, property **DecksRXKC** (`559399755`), web stream **DecksRXKC Website** (`16149388008`), measurement ID `G-9ZMJHY5TRD`. The production Netlify build variable `VITE_GA_MEASUREMENT_ID` enables it. Enhanced measurement handles initial and client-side history page views; do not add another manual page-view listener. `generate_lead` fires after a successful Netlify response and includes the random `lead_reference` matching the form's `submission_id`; names, phone numbers, email addresses, and project notes are not sent as analytics event parameters. Phone clicks measure clicks, not completed calls.
+
+New quote submissions also store the tab's landing page, external referrer hostname, UTM campaign fields, ad click IDs when present, visit start, and up to 20 visited page paths. This uses session storage with an in-memory fallback; a new campaign or 30 minutes of inactivity starts a new visit. Query parameters outside the campaign allowlist are excluded, and page history contains paths only. Traffic source/medium are best-effort labels: missing referrers do not prove a visitor typed the URL, and a Facebook click ID does not establish a paid ad. This cannot reconstruct older leads, cross-device activity, or visits blocked by browser privacy tools.
+
+Run attribution checks with `node --experimental-strip-types --test tests/attribution.test.mjs` (Node 22+), then `npm run typecheck` and `npm run build`.
+
 ## Project Structure
 
 - `src/routes/index.tsx` composes the homepage and homepage structured data.

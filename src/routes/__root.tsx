@@ -1,13 +1,16 @@
 import type { ReactNode } from 'react'
+import { useEffect } from 'react'
 import {
   HeadContent,
   Outlet,
   Scripts,
   createRootRoute,
+  useLocation,
 } from '@tanstack/react-router'
 import { defaultSeoDescription, defaultSeoImagePath, defaultSeoTitle, getSeoHead } from '../lib/seo'
 import { gaMeasurementId, googleAdsId, googleTagId } from '../lib/analytics'
 import { MotionController } from '../components/motion'
+import { captureVisit } from '../lib/attribution'
 import '../styles.css'
 
 export const Route = createRootRoute({
@@ -39,6 +42,8 @@ export const Route = createRootRoute({
 })
 
 function RootComponent() {
+  const location = useLocation()
+  useEffect(() => { captureVisit() }, [location.href])
   return (
     <RootDocument>
       <Outlet />

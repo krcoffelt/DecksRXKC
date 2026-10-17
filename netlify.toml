@@ -7,6 +7,9 @@
   VITE_GOOGLE_ADS_ID = "AW-18079934013"
   VITE_GOOGLE_ADS_CONVERSION_LABEL = "ywkVCJ3Xo44dEL3Ml61D"
 
+[context.production.environment]
+  VITE_GA_MEASUREMENT_ID = "G-9ZMJHY5TRD"
+
 [[redirects]]
   from = "http://www.decksrxkc.com/*"
   to = "https://decksrxkc.com/:splat"

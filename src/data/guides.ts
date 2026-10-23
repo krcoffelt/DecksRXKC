@@ -35,6 +35,117 @@ export type GuidePage = {
 
 export const guidePages: GuidePage[] = [
   {
+    slug: 'winter-deck-care-kansas-city',
+    title: 'Winter Deck Care in Kansas City: Snow, Ice, and Cleanup',
+    shortTitle: 'Winter Deck Care',
+    metaTitle: 'Winter Deck Care in Kansas City | DecksRXKC',
+    metaDescription:
+      'Prepare your Kansas City deck for winter with practical cleanup, snow removal, and ice-melt guidance, including different care rules for Trex and TimberTech.',
+    eyebrow: 'Seasonal deck care guide',
+    intro:
+      'Before the first icy morning, make a plan for the deck you actually own: identify its materials, clear the fall debris, and choose tools and ice melt that match the manufacturer’s instructions.',
+    answer:
+      'Winter deck care starts with knowing your decking product. Clear leaves, keep your route to the yard accessible, and follow the applicable care guide for snow tools, cleaners, and ice melt. Trex and TimberTech give different advice about rock salt, so a product you use on the driveway is not automatically suitable for the deck.',
+    heroImage: '/images/kansas-city-composite-deck-board-railing-detail.jpg',
+    sections: [
+      {
+        heading: 'Start with the board brand and product line',
+        body:
+          '“Composite deck” is not a complete care specification. Find the invoice, material order, warranty paperwork, or installer’s records and identify the brand and collection. Trex distinguishes current products from early-generation decking; TimberTech also separates its current Composite, Advanced PVC, and specialty products in its cleaning guidance.',
+        paragraphs: [
+          'Save the applicable care guide on your phone and put a copy with your home records. If the product is unknown, ask the installer or manufacturer for help identifying it before buying chemicals. A photograph may help start that conversation, but appearance alone should not decide which instructions apply.',
+          'For a deck with several materials, make a short list: surface boards, railing, stair treads, and any wood trim. Each may need a different approach. Our [composite-versus-wood guide](/guides/composite-vs-wood-decking-kansas-city) explains the broader maintenance differences if you are planning a future upgrade.',
+        ],
+        sourceIds: ['trex-winter-care', 'timbertech-winter-care'],
+      },
+      {
+        heading: 'Clear the leaves before they disappear under snow',
+        body:
+          'Begin with a simple cleanup while the deck is dry and accessible. Move portable furniture as needed, gather leaves and loose debris, and look at the areas that were hidden underneath. Include the stair landings and the corner beside the back door, where debris is easy to overlook.',
+        paragraphs: [
+          'Trex recommends a hose or broom for removing debris. For washing, use the cleaner, brush, and rinsing directions specified for your particular boards. Schedule wet cleaning when conditions allow the surface and access route to dry without freezing.',
+          'Use this visit to decide what stays outside. Store seasonal items according to their own care instructions and leave room for the route you will use through winter. A clear path from the door to the stairs is more useful than a perfectly arranged furniture group you have to squeeze around every morning.',
+        ],
+        sourceIds: ['trex-winter-care'],
+      },
+      {
+        heading: 'Choose the snow tool before the first storm',
+        body:
+          'Trex permits a plastic shovel for snow removal. TimberTech warns against both metal shovels and plastic shovels with a metal leading edge. Check the blade of the shovel you already own; a plastic scoop may still have a metal strip along its bottom.',
+        paragraphs: [
+          'Set aside an appropriate tool for the deck and store it where you can reach it without first crossing an icy surface. Tell anyone helping with snow removal which tool belongs there. That includes a hired service: put the deck instructions in the work request instead of assuming the driveway equipment will suit every surface.',
+          'Do not treat these tool recommendations as a reason to force a blade beneath bonded ice. Stop when clearing would require aggressive scraping or when footing is unsafe, and use the applicable product guidance to plan the next step.',
+        ],
+        sourceIds: ['trex-winter-care', 'timbertech-winter-care'],
+      },
+      {
+        heading: 'Check ice melt by brand, not by habit',
+        body:
+          'The manufacturers differ here. Trex’s care page allows calcium chloride or rock salt for snow and ice. TimberTech says most calcium-chloride products can be used, but directs owners to avoid rock salt and abrasive ice melts. Follow the guidance for the exact decking you have and the ice-melt label.',
+        paragraphs: [
+          'Keep the packaging so you can identify the ingredients later. If a blend or additive is unclear, ask the decking manufacturer before using it. A bag described as suitable for concrete does not answer whether it belongs on your deck, railing, or stair components.',
+          'TimberTech notes that ice melt can leave residue and advises cleaning it away when temperatures safely permit. Plan that follow-up along with the initial application. Avoid rinsing if the water will freeze on the deck or on the path below.',
+        ],
+        sourceIds: ['trex-winter-care', 'timbertech-winter-care'],
+      },
+      {
+        heading: 'Give a wood deck its own care plan',
+        body:
+          'If your deck is wood, set aside the composite instructions and identify the existing coating or finish. Look up the finish manufacturer’s cleaning and application requirements before deciding whether late-season work is practical. A free afternoon does not establish that the temperature, surface moisture, or drying window is suitable.',
+        paragraphs: [
+          'Keep the label or product record from any previous staining work. If you do not know what was applied, discuss that uncertainty with the person proposing the next treatment. Ask what preparation is included, how weather affects the work, and what happens if conditions change before the coating has dried.',
+          'Cleaning and refinishing also need a separate decision from structural repairs. If a board, stair, or railing concerns you, use our [repair-or-replace guide](/guides/repair-or-replace-your-deck) to prepare for an assessment before arranging finish work.',
+        ],
+      },
+      {
+        heading: 'Pay attention to the route you use every day',
+        body:
+          'Walk through your winter routine on a dry day. Which door do you use with the dog? Where do you carry groceries? Does the route include a shaded landing or a step that is hard to see after dark? Make those locations part of your cleanup and access plan.',
+        paragraphs: [
+          'After rain or a thaw, note where water collects or drips onto that route. Photograph recurring trouble from a safe location and record whether it comes from above, crosses the surface, or gathers at the bottom of the stairs. Those observations give a contractor a more useful starting point than “the deck gets icy.”',
+          'Do not climb onto an icy deck to investigate. If stairs or railings also need attention, include them in a [stairs and railings assessment](/services/stairs-and-railings) so the access problem and the repair scope can be discussed together.',
+        ],
+      },
+      {
+        heading: 'Keep maintenance separate from structural questions',
+        body:
+          'A clean deck is easier to look at, but cleaning does not establish its load capacity or condition. This guide does not provide a safe snow-depth limit for your deck. If you are concerned about snow accumulation, movement, damaged supports, or a changing connection to the house, keep people away and seek an assessment from a qualified professional.',
+        paragraphs: [
+          'Avoid going underneath a suspect deck to get a closer picture. Share existing records, the approximate age of the structure, and observations you can make safely. Our [deck repair service](/services/deck-repair) is a starting point for discussing existing problems and the appropriate next evaluation.',
+        ],
+      },
+      {
+        heading: 'Keep a short winter deck checklist',
+        body:
+          'A useful plan should be easy for everyone in the household to follow. Keep the material information, approved care products, and any unresolved concerns together so you do not have to reconstruct the decisions during a storm.',
+        points: [
+          'Before winter: identify the boards, save the care guide, clear debris, and organize the access route.',
+          'Before buying supplies: check the shovel edge and confirm ice-melt compatibility for the exact product.',
+          'After a storm: assess access from a safe location and follow the applicable snow-removal guidance.',
+          'When conditions permit: remove residue as directed and record recurring drainage or access problems.',
+        ],
+        paragraphs: [
+          'If winter preparation reveals a larger project, [request a free quote](/contact). Tell DecksRXKC what you have, what you have noticed, and how you want to use the space. Photos and material records help make that first conversation specific to your deck.',
+        ],
+      },
+    ],
+    sources: [
+      { id: 'trex-winter-care', title: 'How to Clean a Trex Deck: Product Care, Ice, and Snow', publisher: 'Trex', url: 'https://www.trex.com/customer-support/trex-owners/care-and-cleaning/' },
+      { id: 'timbertech-winter-care', title: 'Care & Cleaning Guide: Decking and Railing', publisher: 'TimberTech', url: 'https://www.timbertech.com/resources/care-cleaning/' },
+    ],
+    faqs: [
+      { question: 'Can I use rock salt on a composite deck?', answer: 'It depends on the product. Trex’s care page allows rock salt or calcium chloride, while TimberTech advises avoiding rock salt and abrasive ice melts. Identify your boards and follow their applicable care guide before using a deicer.' },
+      { question: 'What shovel should I use on composite decking?', answer: 'Trex permits a plastic shovel. TimberTech warns against metal shovels and plastic shovels with metal leading edges. Check your exact product instructions and the tool’s blade before clearing snow.' },
+      { question: 'Does winter care replace a deck inspection?', answer: 'No. Cleaning and snow removal do not establish whether the framing, connections, stairs, or railings are sound. Keep people away from a deck with suspected structural problems and arrange a qualified assessment.' },
+      { question: 'Can I stain my wood deck just before winter?', answer: 'Check the stain manufacturer’s surface preparation, temperature, moisture, and drying requirements. Plan around those conditions rather than a calendar deadline, and resolve repair concerns before finish work.' },
+      { question: 'What should I send when asking about winter deck problems?', answer: 'Share the decking brand if known, approximate deck age, existing project records, and photos taken from a safe location. Describe where water or ice recurs and whether the concern involves the surface, stairs, railing, or supporting structure.' },
+    ],
+    relatedServiceSlugs: ['deck-repair', 'stairs-and-railings', 'composite-decks'],
+    relatedProjectSlugs: ['elevated-composite-deck-and-stairs'],
+    publishedAt: '2026-10-23',
+    updatedAt: '2026-10-23',
+  },
+  {
     slug: 'replace-wood-deck-boards-with-composite',
     title: 'Can You Replace Wood Deck Boards With Composite on the Existing Frame?',
     shortTitle: 'Wood-to-Composite Deck Resurfacing',

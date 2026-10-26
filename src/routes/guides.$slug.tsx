@@ -4,7 +4,7 @@ import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { ArrowRow, ButtonLink, CtaBand, FaqList, PageHero, SectionIntro } from '../components/ui'
 import { business } from '../data/business'
-import { getGuidePage, guidePages, type GuidePage } from '../data/guides'
+import { getGuidePage, getGuidesBySlugs, guidePages, type GuidePage } from '../data/guides'
 import { getResponsiveImageProps } from '../lib/images'
 import { getProjectsBySlugs } from '../data/projects'
 import { getServicesBySlugs } from '../data/servicePages'
@@ -19,6 +19,7 @@ export const Route = createFileRoute('/guides/$slug')({
 
 function GuideDetailPage() {
   const guide = Route.useLoaderData()
+  const relatedGuides = getGuidesBySlugs(guide.relatedGuideSlugs)
   const services = getServicesBySlugs(guide.relatedServiceSlugs)
   const projects = getProjectsBySlugs(guide.relatedProjectSlugs)
   const sourcesById = new Map(guide.sources.map((source) => [source.id, source]))
@@ -141,6 +142,18 @@ function GuideDetailPage() {
         <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-32">
           <div className="lg:sticky lg:top-28 lg:self-start"><SectionIntro title="Apply the guide to your deck" /></div>
           <FaqList items={guide.faqs} />
+        </div>
+      </section>
+
+      <section className="bg-paper" aria-labelledby="related-guides-heading">
+        <div className="shell grid gap-12 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:py-28">
+          <div>
+            <p className="eyebrow text-wood">Keep planning</p>
+            <h2 id="related-guides-heading" className="display-md mt-6">Related deck guides</h2>
+          </div>
+          <div className="border-t hairline">
+            {relatedGuides.map((related) => <ArrowRow key={related.slug} href={getGuidePagePath(related)}>{related.shortTitle}</ArrowRow>)}
+          </div>
         </div>
       </section>
 

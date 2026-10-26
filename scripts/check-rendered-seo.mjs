@@ -118,6 +118,10 @@ async function checkPage(sitemapUrl) {
     }
 
     if (path.startsWith('/guides/')) {
+      const relatedSection = html.match(/<section[^>]+aria-labelledby="related-guides-heading"[^>]*>([\s\S]*?)<\/section>/i)?.[1] ?? ''
+      const relatedPaths = [...relatedSection.matchAll(/href="(\/guides\/[^"#?]+)"/g)].map((match) => match[1])
+      if (new Set(relatedPaths).size !== 3 || relatedPaths.includes(path)) errors.push('expected three distinct related guides without a self-link')
+
       assertMatch(html, /<h2[^>]*>Verify the guidance<\/h2>/i, 'missing visible primary-source section', errors)
       assertMatch(html, /"citation":\["https:\/\//i, 'missing Article citation URLs in JSON-LD', errors)
       assertMatch(html, /href="https:\/\/(?:awc\.org|codes\.iccsafe\.org|www\.trex\.com|www\.timbertech\.com|www\.weather\.gov)\//i, 'missing authoritative outbound citation link', errors)

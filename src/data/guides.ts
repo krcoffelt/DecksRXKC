@@ -27,6 +27,7 @@ export type GuidePage = {
   sections: GuideSection[]
   sources: GuideSource[]
   faqs: Array<{ question: string; answer: string }>
+  relatedGuideSlugs: string[]
   relatedServiceSlugs: string[]
   relatedProjectSlugs: string[]
   publishedAt: string
@@ -140,6 +141,7 @@ export const guidePages: GuidePage[] = [
       { question: 'Can I stain my wood deck just before winter?', answer: 'Check the stain manufacturer’s surface preparation, temperature, moisture, and drying requirements. Plan around those conditions rather than a calendar deadline, and resolve repair concerns before finish work.' },
       { question: 'What should I send when asking about winter deck problems?', answer: 'Share the decking brand if known, approximate deck age, existing project records, and photos taken from a safe location. Describe where water or ice recurs and whether the concern involves the surface, stairs, railing, or supporting structure.' },
     ],
+    relatedGuideSlugs: ['build-deck-in-fall-kansas-city', 'signs-your-deck-needs-repair-kansas-city', 'trex-vs-timbertech-kansas-city'],
     relatedServiceSlugs: ['deck-repair', 'stairs-and-railings', 'composite-decks'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs'],
     publishedAt: '2026-10-23',
@@ -318,6 +320,7 @@ export const guidePages: GuidePage[] = [
         answer: 'Reusing suitable components may reduce some work, but the assessed scope determines the comparison. Removal, framing corrections, additional support, stairs, railing, and concealed damage can change the proposal. Compare complete written scopes before deciding.',
       },
     ],
+    relatedGuideSlugs: ['repair-or-replace-your-deck', 'trex-vs-timbertech-kansas-city', 'composite-deck-cost-kansas-city'],
     relatedServiceSlugs: ['composite-decks', 'deck-replacement', 'stairs-and-railings'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs'],
     publishedAt: '2026-10-16',
@@ -390,6 +393,7 @@ export const guidePages: GuidePage[] = [
           'Yes, when that footprint still works. Homeowners can also use a replacement project to reconsider stairs, circulation, entertaining space, and material choices.',
       },
     ],
+    relatedGuideSlugs: ['signs-your-deck-needs-repair-kansas-city', 'replace-wood-deck-boards-with-composite', 'winter-deck-care-kansas-city'],
     relatedServiceSlugs: ['deck-repair', 'deck-replacement', 'stairs-and-railings'],
     relatedProjectSlugs: ['ground-up-deck-replacement', 'deck-stair-and-railing-upgrade'],
     publishedAt: '2026-07-31',
@@ -481,6 +485,7 @@ export const guidePages: GuidePage[] = [
           'Yes. DecksRXKC can discuss Trex and TimberTech options alongside wood decking so the material decision fits the project and maintenance goals.',
       },
     ],
+    relatedGuideSlugs: ['trex-vs-timbertech-kansas-city', 'replace-wood-deck-boards-with-composite', 'winter-deck-care-kansas-city'],
     relatedServiceSlugs: ['composite-decks', 'custom-decks', 'deck-replacement'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs', 'ground-up-deck-replacement'],
     publishedAt: '2026-07-31',
@@ -570,6 +575,7 @@ export const guidePages: GuidePage[] = [
       { question: 'Do I need a permit for a screened-in deck in Kansas City?', answer: 'Often, but requirements depend on the exact city and project scope. A roof, enclosure, structural alteration, or electrical work may trigger review. Confirm current requirements with the authority serving the property.' },
       { question: 'Is a screened-in deck the same as a screened-in porch?', answer: 'Homeowners often use the terms interchangeably. The important distinction is the actual scope: an existing covered platform being screened, a deck receiving a new roof and enclosure, or a new room built from the ground up.' },
     ],
+    relatedGuideSlugs: ['add-roof-over-existing-deck', 'choose-deck-builder-kansas-city', 'build-deck-in-fall-kansas-city'],
     relatedServiceSlugs: ['screened-in-decks', 'covered-decks', 'deck-replacement'],
     relatedProjectSlugs: ['screened-in-deck-addition', 'covered-deck-outdoor-room'],
     publishedAt: '2026-08-28',
@@ -656,6 +662,7 @@ export const guidePages: GuidePage[] = [
       { question: 'Is Trex or TimberTech more expensive?', answer: 'Both brands offer several product lines, so price depends on the specific collections and complete installed details being compared. Compare like-for-like samples, requirements, railing, fascia, and warranty terms.' },
       { question: 'How do I get an accurate composite deck estimate?', answer: 'Request an on-site assessment and a written scope naming the product line, structural work, stairs, rails, fascia, demolition, access assumptions, approvals, cleanup, exclusions, and change process.' },
     ],
+    relatedGuideSlugs: ['trex-vs-timbertech-kansas-city', 'replace-wood-deck-boards-with-composite', 'composite-vs-wood-decking-kansas-city'],
     relatedServiceSlugs: ['composite-decks', 'deck-replacement', 'custom-decks'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs', 'ground-up-deck-replacement'],
     publishedAt: '2026-08-28',
@@ -744,6 +751,7 @@ export const guidePages: GuidePage[] = [
       { question: 'Do I need a permit to put a roof over a deck?', answer: 'A roof commonly triggers permit and plan review, but requirements vary by jurisdiction and scope. Confirm current rules with the city or county serving the property.' },
       { question: 'How much does adding a roof to a deck cost?', answer: 'The cost depends on structural work, roof size and form, connection, roofing, drainage, ceiling, electrical features, access, finishes, and whether the deck also needs repair or replacement. An on-site scope is needed for a useful estimate.' },
     ],
+    relatedGuideSlugs: ['can-you-screen-in-an-existing-deck', 'choose-deck-builder-kansas-city', 'build-deck-in-fall-kansas-city'],
     relatedServiceSlugs: ['covered-decks', 'screened-in-decks', 'deck-replacement'],
     relatedProjectSlugs: ['covered-deck-outdoor-room', 'screened-in-deck-addition'],
     publishedAt: '2026-08-28',
@@ -834,6 +842,7 @@ export const guidePages: GuidePage[] = [
       { question: 'How long does composite decking last?', answer: 'Service life depends on the exact product, installation, exposure, use, and care. Review the current product warranty and maintenance instructions, but do not treat warranty length as a guaranteed service-life prediction.' },
       { question: 'Does DecksRXKC install both Trex and TimberTech?', answer: 'Yes. DecksRXKC can compare available Trex and TimberTech options alongside the complete structure, railing, stairs, fascia, and outdoor-room plan.' },
     ],
+    relatedGuideSlugs: ['composite-vs-wood-decking-kansas-city', 'composite-deck-cost-kansas-city', 'winter-deck-care-kansas-city'],
     relatedServiceSlugs: ['composite-decks', 'custom-decks', 'deck-replacement'],
     relatedProjectSlugs: ['elevated-composite-deck-and-stairs', 'covered-deck-outdoor-room'],
     publishedAt: '2026-08-28',
@@ -936,6 +945,7 @@ export const guidePages: GuidePage[] = [
       { question: 'What should I ask a composite or covered-deck contractor?', answer: 'For composite, ask about the exact collection, frame compatibility, fasteners, seams, fascia, stairs, care, and warranty documents. For covers, ask about supports, roof connection, water management, ceiling, electrical work, and future screening.' },
       { question: 'Is the lowest deck estimate the best value?', answer: 'Not necessarily. A lower estimate may reflect an efficient approach, but it may also omit structure, finishes, approvals, cleanup, or risk carried elsewhere. Compare the complete outcome and written assumptions.' },
     ],
+    relatedGuideSlugs: ['repair-or-replace-your-deck', 'composite-deck-cost-kansas-city', 'build-deck-in-fall-kansas-city'],
     relatedServiceSlugs: ['custom-decks', 'composite-decks', 'covered-decks'],
     relatedProjectSlugs: ['ground-up-deck-replacement', 'covered-deck-outdoor-room'],
     publishedAt: '2026-08-28',
@@ -1084,6 +1094,7 @@ export const guidePages: GuidePage[] = [
           'Many do, but requirements depend on the exact jurisdiction, deck height and location, structural scope, roof or enclosure, electrical work, and other property conditions. Confirm current requirements with the city or county serving the property.',
       },
     ],
+    relatedGuideSlugs: ['winter-deck-care-kansas-city', 'signs-your-deck-needs-repair-kansas-city', 'choose-deck-builder-kansas-city'],
     relatedServiceSlugs: ['custom-decks', 'composite-decks', 'covered-decks'],
     relatedProjectSlugs: ['ground-up-deck-replacement', 'covered-deck-outdoor-room'],
     publishedAt: '2026-09-03',
@@ -1308,6 +1319,7 @@ export const guidePages: GuidePage[] = [
           'DecksRXKC repairs decks across the Kansas City metro, including Olathe, Overland Park, Lenexa, Shawnee, Leawood, Prairie Village, Lee’s Summit, Blue Springs, Liberty, Parkville, and Kansas City on both sides of the state line.',
       },
     ],
+    relatedGuideSlugs: ['repair-or-replace-your-deck', 'replace-wood-deck-boards-with-composite', 'winter-deck-care-kansas-city'],
     relatedServiceSlugs: ['deck-repair', 'stairs-and-railings', 'deck-replacement'],
     relatedProjectSlugs: ['deck-stair-and-railing-upgrade', 'ground-up-deck-replacement'],
     publishedAt: '2026-10-02',

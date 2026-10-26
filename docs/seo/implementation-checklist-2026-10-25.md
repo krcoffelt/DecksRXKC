@@ -36,3 +36,7 @@ Scope: October 24 audit and October 25 SE Ranking companion, DecksRX KC only. Re
 ## Release record
 
 Only explicit source, sitemap, SEO check and audit-document paths are staged. The final exact main SHA, Netlify deployment ID/state and production SEO checks are recorded after publication in `release-verification-2026-10-25.txt` alongside this checklist in both the original project and implementation checkout. That local receipt intentionally follows the commit it verifies.
+
+## October 26 follow-up
+
+Completed an additional supported pass: three curated related-guide links on every article, accurate image width descriptors, and intermediate 800px WebP candidates. Fresh mobile Lighthouse baselines and validation details are in `followup-2026-10-26.txt`; final deployment measurements are in the local `followup-release-verification-2026-10-26.txt`. Business-fact and external-listing deferrals above still apply.

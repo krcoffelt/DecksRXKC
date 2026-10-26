@@ -1,4 +1,6 @@
-export function getOptimizedImagePath(path: string, width?: 640 | 1200) {
+import responsiveImages from '../data/responsiveImages.json'
+
+export function getOptimizedImagePath(path: string, width?: 640 | 800 | 1200) {
   const optimizedPath = path.replace(/\.(?:jpe?g|png)$/i, width ? `-${width}.webp` : '.webp')
   return optimizedPath === path ? path : optimizedPath
 }
@@ -7,9 +9,11 @@ export function getResponsiveImageProps(
   path: string,
   sizes = '100vw',
 ) {
+  const src = getOptimizedImagePath(path)
+  const candidates = (responsiveImages as Record<string, Array<{ src: string; width: number }>>)[src]
   return {
-    src: getOptimizedImagePath(path),
-    srcSet: `${getOptimizedImagePath(path, 640)} 640w, ${getOptimizedImagePath(path, 1200)} 1200w, ${getOptimizedImagePath(path)} 1800w`,
+    src,
+    srcSet: candidates?.map((image) => `${image.src} ${image.width}w`).join(', '),
     sizes,
   }
 }
@@ -31,6 +35,6 @@ const imageDescriptions: Record<string, string> = {
 }
 
 export function getImageDescription(path: string) {
-  const name = path.split('/').pop()?.replace(/(?:-640|-1200)?\.(?:webp|jpe?g|png)$/i, '') ?? ''
+  const name = path.split('/').pop()?.replace(/(?:-640|-800|-1200)?\.(?:webp|jpe?g|png)$/i, '') ?? ''
   return imageDescriptions[name] ?? 'Deck project details'
 }

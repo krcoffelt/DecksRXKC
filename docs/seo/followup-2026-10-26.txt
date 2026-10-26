@@ -1,0 +1,31 @@
+DecksRX KC — supported SEO follow-up, October 26, 2026
+
+Completed after the initial October 25 release:
+1. Added three curated related-guide links to each of the 11 existing articles (33 links). Winter care, resurfacing, Trex/TimberTech comparisons and fall planning now connect to relevant guides. No new services, cities, credentials or project locations were asserted.
+2. Corrected responsive image width descriptors. Existing largest images range from 1200 to 1800px; previously all were declared 1800w. The manifest now records actual encoded widths and deduplicates equal-width candidates.
+3. Added 26 800px WebP derivatives between the existing 640px and 1200px options. Original source and existing derivatives are preserved. This lets common phone/DPR combinations choose an intermediate file instead of 1200px. Across the full image inventory, 800px alternatives total 1,671,068 fewer bytes than their 1200px alternatives; this is an inventory comparison, not per-page savings.
+4. Added a repeatable image-generation tool and extended the SEO regression check to require three distinct related-guide links per article, with no self-links.
+
+Image authoring:
+- scripts/generate-responsive-images.mjs uses sharp from the authoring environment (or SHARP_MODULE_PATH pointing to its module directory). No new project dependency or runtime package was added.
+- Derivatives retain the source aspect ratio and use WebP quality 80, from JPEG originals where present and existing full-sized WebP otherwise.
+- src/data/responsiveImages.json lists 101 distinct candidates across 26 photos. All candidate paths and widths were independently decoded and verified during QA.
+- Future photo additions should include responsive derivatives and regenerate the manifest. Unknown images fall back to src without fabricated width descriptors.
+
+Verification:
+- npm run typecheck
+- npm run build
+- npm run check:seo: all 49 sitemap URLs, 10 intent mappings, 404/redirect/schema tests, and the new three-related-guide check on every article
+- node --experimental-strip-types --test tests/*.test.mjs: 6/6 attribution tests
+- git diff --check
+- Browser checks: homepage, winter guide, materials comparison guide and Overland Park page at 320/390/768/1440px: 16 passes, no overflow/broken visible images/page errors
+- Mobile related-guide section and sample 800px photo visual review
+- Phone DPR image selection checked separately
+
+Fresh pre-change mobile Lighthouse 12.8.2 lab evidence, production URLs:
+- Homepage: performance 94, accessibility 100, best practices 79, SEO 100; FCP 1.9s, LCP 2.7s, TBT 90ms, CLS 0.
+- Overland Park: performance 74, accessibility 100, best practices 79, SEO 100; LCP 6.7s.
+These are single runs under simulated mobile throttling, not field Core Web Vitals and not comparable proof of improvement over the original audit's environment. Third-party Google script/cookie findings remain. No GA4/Ads timing or behavior was changed to improve a score.
+Raw lab JSON and browser screenshots remain local under output/; post-publication measurements and exact SHA/deploy state are recorded in followup-release-verification-2026-10-26.txt after release.
+
+Remaining fact-dependent or externally restricted work is unchanged: verified address/owner/credentials/warranty, confirmed new services and city/project evidence, GBP/listings, reviews/outreach and backlinks. No ACS Painting work, tracking settings, billing or external listing changes.

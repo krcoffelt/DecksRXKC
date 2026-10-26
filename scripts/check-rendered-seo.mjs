@@ -33,7 +33,7 @@ const priorityQueryMappings = [
 ]
 
 const results = await Promise.all(sitemapUrls.map(checkPage))
-const sitewideErrors = auditSitewide(results)
+const sitewideErrors = [...auditSitewide(results), ...await auditRouting()]
 const failures = results.filter((result) => result.errors.length > 0)
 
 if (failures.length > 0 || sitewideErrors.length > 0) {
@@ -103,6 +103,17 @@ async function checkPage(sitemapUrl) {
         if (!html.includes(`href="${href}"`)) {
           errors.push(`missing homepage link to ${href}`)
         }
+      }
+    }
+
+    if (path === '/guides' || path === '/service-areas') {
+      const scripts = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+      const collection = scripts.map((match) => JSON.parse(match[1])).find((schema) => schema['@type'] === 'CollectionPage')
+      const prefix = `${path}/`
+      const expected = sitemapUrls.filter((url) => new URL(url).pathname.startsWith(prefix))
+      const listed = collection?.mainEntity?.itemListElement ?? []
+      if (listed.length !== expected.length || expected.some((url) => !listed.some((item) => item.url === url))) {
+        errors.push('collection schema must list every published child page')
       }
     }
 
@@ -206,4 +217,29 @@ function decodeHtml(value) {
     .replaceAll('&#39;', "'")
     .replaceAll('&lt;', '<')
     .replaceAll('&gt;', '>')
+}
+
+// A 404 must not inherit homepage indexability, including loader failures.
+async function auditRouting() {
+  const errors = []
+  const request = (path, method = 'GET') => builtApp
+    ? builtApp.fetch(new Request(`http://localhost${path}`, { method }))
+    : fetch(`${baseUrl}${path}`, { method, redirect: 'manual' })
+  for (const path of ['/seo-check-missing', '/services/seo-check-missing', '/projects/seo-check-missing', '/guides/seo-check-missing', '/service-areas/seo-check-missing', '/services/custom-decks/seo-check-missing', '/about/seo-check-missing', '/contact/seo-check-missing', '/guides/winter-deck-care-kansas-city/seo-check-missing', '/projects/elevated-composite-deck-and-stairs/seo-check-missing', '/service-areas/overland-park-ks/seo-check-missing']) {
+    const response = await request(path)
+    const html = await response.text()
+    if (response.status !== 404) errors.push(`${path}: expected HTTP 404`)
+    assertMatch(html, /<title>Page Not Found \| DecksRX KC<\/title>/, `${path}: missing 404 title`, errors)
+    assertMatch(html, /name="robots" content="noindex, follow"/, `${path}: missing noindex`, errors)
+    if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${path}: expected one H1`)
+  }
+  for (const path of ['/services/', '/guides/', '/projects/', '/service-areas/', '/about/', '/contact/', '/privacy-policy/', '/terms-and-conditions/', '/services/custom-decks/', '/guides/winter-deck-care-kansas-city/']) {
+    for (const method of ['GET', 'HEAD']) {
+      const response = await request(`${path}?utm_source=seo-check&campaign=fall`, method)
+      if (response.status !== 301) errors.push(`${method} ${path}: expected permanent 301`)
+      const target = new URL(response.headers.get('location') || '/', 'https://decksrxkc.com')
+      if (target.pathname !== path.slice(0, -1) || target.search !== '?utm_source=seo-check&campaign=fall') errors.push(`${method} ${path}: redirect lost path/query`)
+    }
+  }
+  return errors
 }

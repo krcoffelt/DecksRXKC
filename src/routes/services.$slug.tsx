@@ -9,7 +9,7 @@ import { getProjectsBySlugs } from '../data/projects'
 import { serviceAreas } from '../data/serviceAreas'
 import { getServiceIcon, getServicePage, getServicesBySlugs, servicePages, type ServicePage } from '../data/servicePages'
 import { getGuidePagePath, getProjectPagePath, getServiceAreaLabel, getServiceAreaPath, getServicePagePath } from '../data/paths'
-import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
+import { absoluteUrl, getNotFoundHead, getSeoHead, siteUrl } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
 
 export const Route = createFileRoute('/services/$slug')({
@@ -22,10 +22,11 @@ export const Route = createFileRoute('/services/$slug')({
 
     return service
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, matches }) => {
+    if (!loaderData) return getNotFoundHead()
     const service = loaderData as ServicePage
 
-    return getSeoHead({
+    return getSeoHead({ matches,
       title: service.metaTitle,
       description: service.metaDescription,
       path: getServicePagePath(service),

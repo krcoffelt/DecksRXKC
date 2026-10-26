@@ -9,7 +9,7 @@ import { getProjectsBySlugs } from '../data/projects'
 import { getServiceArea, serviceAreas, type ServiceArea } from '../data/serviceAreas'
 import { getServicePage, servicePages } from '../data/servicePages'
 import { getGuidePagePath, getProjectPagePath, getServiceAreaLabel, getServiceAreaPath, getServicePagePath } from '../data/paths'
-import { absoluteUrl, defaultSeoImagePath, getSeoHead, siteUrl } from '../lib/seo'
+import { absoluteUrl, defaultSeoImagePath, getNotFoundHead, getSeoHead, siteUrl } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
 
 export const Route = createFileRoute('/service-areas/$slug')({
@@ -18,10 +18,11 @@ export const Route = createFileRoute('/service-areas/$slug')({
     if (!area) throw notFound()
     return area
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, matches }) => {
+    if (!loaderData) return getNotFoundHead()
     const area = loaderData as ServiceArea
     const label = getServiceAreaLabel(area)
-    return getSeoHead({
+    return getSeoHead({ matches,
       title: area.metaTitle ?? `Deck Builder in ${label} | DecksRXKC`,
       description: area.metaDescription ?? getServiceAreaDescription(label),
       path: getServiceAreaPath(area),

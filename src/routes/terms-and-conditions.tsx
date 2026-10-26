@@ -4,7 +4,7 @@ import { business } from '../data/business'
 import { getSeoHead } from '../lib/seo'
 
 export const Route = createFileRoute('/terms-and-conditions')({
-  head: () => getSeoHead({ title: 'Terms and Conditions | DecksRXKC', description: 'Terms for using the DecksRXKC website, requesting a deck quote, viewing project information, and contacting our Kansas City team.', path: '/terms-and-conditions' }),
+  head: ({ matches }) => getSeoHead({ matches, title: 'Terms and Conditions | DecksRXKC', description: 'Terms for using the DecksRXKC website, requesting a deck quote, viewing project information, and contacting our Kansas City team.', path: '/terms-and-conditions' }),
   component: TermsPage,
 })
 

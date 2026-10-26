@@ -4,7 +4,7 @@ import { business } from '../data/business'
 import { getSeoHead } from '../lib/seo'
 
 export const Route = createFileRoute('/privacy-policy')({
-  head: () => getSeoHead({ title: 'Privacy Policy | DecksRXKC', description: 'How DecksRXKC handles quote requests, contact information, website usage data, and advertising inquiries, and how to contact us about privacy.', path: '/privacy-policy' }),
+  head: ({ matches }) => getSeoHead({ matches, title: 'Privacy Policy | DecksRXKC', description: 'How DecksRXKC handles quote requests, contact information, website usage data, and advertising inquiries, and how to contact us about privacy.', path: '/privacy-policy' }),
   component: PrivacyPage,
 })
 

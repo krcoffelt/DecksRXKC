@@ -9,11 +9,11 @@ import { getResponsiveImageProps } from '../lib/images'
 import { getProjectsBySlugs } from '../data/projects'
 import { getServicesBySlugs } from '../data/servicePages'
 import { getGuidePagePath, getProjectPagePath, getServicePagePath } from '../data/paths'
-import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
+import { absoluteUrl, getNotFoundHead, getSeoHead, siteUrl } from '../lib/seo'
 
 export const Route = createFileRoute('/guides/$slug')({
   loader: ({ params }) => { const guide = getGuidePage(params.slug); if (!guide) throw notFound(); return guide },
-  head: ({ loaderData }) => { const guide = loaderData as GuidePage; return getSeoHead({ title: guide.metaTitle, description: guide.metaDescription, path: getGuidePagePath(guide), image: guide.heroImage, type: 'article' }) },
+  head: ({ loaderData, matches }) => { if (!loaderData) return getNotFoundHead(); const guide = loaderData as GuidePage; return getSeoHead({ matches, title: guide.metaTitle, description: guide.metaDescription, path: getGuidePagePath(guide), image: guide.heroImage, type: 'article' }) },
   component: GuideDetailPage,
 })
 

@@ -1,4 +1,4 @@
-import { readFileSync, statSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 
 const siteUrl = 'https://decksrxkc.com'
 
@@ -7,12 +7,10 @@ function readSlugs(filePath) {
   return [...source.matchAll(/^\s+slug:\s*'([^']+)'/gm)].map((match) => match[1])
 }
 
-function modifiedDate(filePath) {
-  return statSync(filePath).mtime.toISOString().slice(0, 10)
-}
-
-function page(path, sourceFile, changefreq, priority) {
-  return { path, lastmod: modifiedDate(sourceFile), changefreq, priority }
+// Filesystem mtimes describe checkout/build time, not content changes. Omit
+// optional lastmod until every page has a maintained editorial date.
+function page(path, _sourceFile, changefreq, priority) {
+  return { path, changefreq, priority }
 }
 
 const serviceAreaFile = 'src/data/serviceAreas.ts'
@@ -40,7 +38,6 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((url) => `  <url>
     <loc>${siteUrl}${url.path}</loc>
-    <lastmod>${url.lastmod}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`).join('\n')}

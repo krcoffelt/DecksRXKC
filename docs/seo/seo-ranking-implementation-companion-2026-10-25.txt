@@ -1,0 +1,58 @@
+SE Ranking implementation companion
+Snapshot: October 25, 2026. Retrieved October 26 around 03:20 UTC.
+This is supplemental provider data, not a replacement for the original emailed audit.
+
+Scope and interpretation
+All four projects target Kansas City, Missouri, United States, English. Google USA (global engine 200) is desktop; Google Mobile USA (1540) is mobile. Positions are organic provider-reported snapshots, not independently verified live SERPs. Pos 0 means not found within configured top 100, not zero traffic or proof of deindexing. Each project has two engine assignments per unique keyword. All configured target URL links are null; reported landing_pages are observed URLs with observation dates, sometimes historical. Do not infer cannibalization solely from a URL list. Volumes are provider estimates, not established city-level demand; 0 is not proof of no demand. No settings, keyword lists, checks, credits, or plans were changed.
+
+ACS Painting
+Project 13012211; desktop site engine 443629, mobile 443632. 50 unique keywords. Top 10: 1 desktop, 1 mobile. Not found top 100: 49 per device.
+Only ranked term: acs painting kc (keyword 20199025), #2 desktop/#1 mobile, observed https://acspaintingkc.com/.
+Representative not-found local commercial terms: painters kansas city (20198923, reported volume 390), painting contractors kansas city (20198932, 260), exterior painting kansas city (20198965, 140), cabinet painting kansas city (20198977, 50), painters north kansas city (20198995, 10).
+Implementation priority: verify crawl/indexability and existing/new route migration before adding broad content. Preserve brand landing page. Use audit's broken-link and performance evidence, reverified against current code/live site. These rankings do not prove an outage, deindexing, or PHP vulnerability.
+
+Noble Hardwoods
+Project 12284888; desktop site engine 152446, mobile 152452. 129 unique keywords. Top 10: 63 desktop/60 mobile. Top 20: 80/81. Not found top100: 43/43.
+Near-page-one opportunities, desktop/mobile:
+- hardwood floor refinishing Kansas City, keyword 7495864: 13/14, volume 170; observed homepage https://www.noblehardwoods.co/.
+- hardwood floor installation Kansas City, 7495867: 13/14, volume 50; observed homepage.
+- stair railing installation Kansas City, 7495939: 11/11, volume 10; observed /hardwood-stairs-railings-kansas-city.
+- hardwood stair refinishing Kansas City, 8452093: 12/9; observed homepage.
+- hardwood floor installation Leawood KS, 7495957: 10/10; observed homepage.
+- custom hardwood floors Leawood KS, 8452078: 6/22; observed homepage, device disparity not automatically a defect.
+Implementation priority: strengthen contextual links and intent alignment for existing refinishing/installation/stairs/Leawood pages rather than creating duplicates. Stairs already has strong terms (hardwood stairs Kansas City 7495936 is 1/1); preserve it. Review animation/headings and facts from the audit separately. External citation corrections require appropriate access/confirmed facts.
+
+DecksRX KC
+Project 12491597; desktop site engine 183781, mobile 183784. 100 unique keywords. Top10: 4/2. Top20: 12/11. Not found top100: 55/51.
+- custom decks kansas city, 9134533: 13/13; observed homepage.
+- covered deck installation kansas city, 9134632: 16/15; observed homepage.
+- covered deck contractors kansas city, 9134629: 4/18; observed homepage.
+- deck stairs replacement kansas city, 9134620: 5/5; observed homepage.
+- deck stairs contractor kansas city, 9134617: 25/12; desktop latest observed /service-areas/kansas-city-mo, mobile homepage.
+- deck repair kansas city, 9134545: 26/25, volume 110; observed /service-areas/kansas-city-mo.
+- screened in deck kansas city, 9134644: 34/37; observed /services/screened-in-decks.
+- deck builders olathe, 9134713: 36/36, volume 50; observed /service-areas/olathe-ks.
+- deck builders kansas city, 9134515, and deck builder kansas city, 9134518: not found top100 on either device, reported volume 390 each.
+Implementation priority: improve existing pages' service-intent and contextual internal links for custom/covered decks and repairs, retaining strong stairs content; reinforce the Kansas City entity consistently without fabricated location/offices/reviews. Do not interpret historical landing URLs for currently not-found terms as current ranking URLs.
+
+Kidds Cleanup
+Project 12051626; desktop site engine 102310, mobile 102313. 50 unique keywords. Top10: 16/17. Top20: 33/31. Not found top100: 8/8.
+- junk removal shawnee ks, 4930465: 11/12, volume40; /junk-removal/shawnee-ks.
+- junk removal olathe, 4930459: 14/14, volume70; /junk-removal/olathe.
+- junk removal overland park, 4930453: 27/26, volume210; /junk-removal/overland-park.
+- junk removal lenexa, 4930471: 25/25, volume30; /junk-removal/lenexa.
+- bulk trash pickup kansas city, 4930381: 10/10, volume390; /services/bulk-trash-pickup.
+- water extraction kansas city, 4930447: 11/9, volume10; /services/water-extraction.
+- estate cleanout kansas city, 4930393: 21/21; latest observed /services/estate-cleanouts.
+- garage demolition kansas city, 4930342: 1/1; /services/garage-demolition. Preserve.
+- junk removal kansas city, 4930357, and junk removal near me, 4930360: not found top100 both devices.
+No tracked keyword contains dumpster or Kansas City KS in the returned 50-keyword inventory, so this snapshot does not measure the report's dumpster/KCK opportunities.
+Implementation priority: use existing Shawnee/Olathe/bulk-trash pages as near-page-one opportunities and improve their service-cluster links. Verify business name/address/hours before any consistency edit. Audit proposals for KCK/dumpster/KCMO pages require current-route and actual-service checks to avoid duplicate or unsupported pages.
+
+Data sources
+Connected SE Ranking project list, search engines, keyword inventory, and getKeywordStats for October 25.
+Exact read-only project views:
+ACS: https://online.seranking.com/guest.html?site_id=13012211&hv=0&hash=10253aaf&sections%5B0%5D=rankings&sections%5B1%5D=analytics&sections%5B2%5D=competitors
+Noble: https://online.seranking.com/guest.html?site_id=12284888&hv=0&hash=7ec9ad71&sections%5B0%5D=rankings&sections%5B1%5D=analytics&sections%5B2%5D=competitors
+DecksRX: https://online.seranking.com/guest.html?site_id=12491597&hv=0&hash=57f165c1&sections%5B0%5D=rankings&sections%5B1%5D=analytics&sections%5B2%5D=competitors
+Kidds: https://online.seranking.com/guest.html?site_id=12051626&hv=0&hash=7998954b&sections%5B0%5D=rankings&sections%5B1%5D=analytics&sections%5B2%5D=competitors

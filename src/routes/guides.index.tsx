@@ -1,3 +1,4 @@
+import { CollectionSchema } from '../components/CollectionSchema'
 import { createFileRoute } from '@tanstack/react-router'
 import { ArrowUpRight } from 'lucide-react'
 import { SiteFooter } from '../components/SiteFooter'
@@ -6,16 +7,17 @@ import { CtaBand, PageHero } from '../components/ui'
 import { guidePages } from '../data/guides'
 import { getGuidePagePath } from '../data/paths'
 import { getSeoHead } from '../lib/seo'
-import { getResponsiveImageProps } from '../lib/images'
+import { getImageDescription, getResponsiveImageProps } from '../lib/images'
 
 export const Route = createFileRoute('/guides/')({
-  head: () => getSeoHead({ title: 'Deck Planning Guides | DecksRXKC', description: 'Practical Kansas City guides for deck repair, replacement, composite materials, wood decking, stairs, and outdoor planning.', path: '/guides', image: '/images/kansas-city-deck-stairs-railing-skirt.jpg' }),
+  head: ({ matches }) => getSeoHead({ matches, title: 'Deck Planning Guides | DecksRXKC', description: 'Practical Kansas City guides for deck repair, replacement, composite materials, wood decking, stairs, and outdoor planning.', path: '/guides', image: '/images/kansas-city-deck-stairs-railing-skirt.jpg' }),
   component: GuidesIndexPage,
 })
 
 function GuidesIndexPage() {
   const [lead, ...rest] = guidePages
   return <main id="main" className="min-h-screen bg-bone text-ink">
+    <CollectionSchema name="Deck Planning Guides" path="/guides" items={guidePages.map((guide) => ({ name: guide.title, path: getGuidePagePath(guide) }))} />
     <SiteHeader />
     <PageHero
       title={<>Clear deck decisions <em className="text-soft-beige">before</em> construction begins</>}
@@ -45,7 +47,7 @@ function GuidesIndexPage() {
                 <p className="mt-3 max-w-2xl text-[0.95rem] leading-7 text-ink/65">{guide.intro}</p>
               </div>
               <div className="frame hidden aspect-[4/3] bg-sand md:block">
-                <img className="h-full w-full object-cover" {...getResponsiveImageProps(guide.heroImage, '224px')} alt="" width="448" height="336" loading="lazy" decoding="async" />
+                <img className="h-full w-full object-cover" {...getResponsiveImageProps(guide.heroImage, '224px')} alt={getImageDescription(guide.heroImage)} width="448" height="336" loading="lazy" decoding="async" />
               </div>
               <span className="hidden h-11 w-11 items-center justify-center border border-ink/15 transition-all duration-500 group-hover:bg-ink group-hover:text-bone md:flex"><ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" /></span>
             </a>

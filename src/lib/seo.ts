@@ -1,12 +1,13 @@
 export const siteUrl = 'https://decksrxkc.com'
 
-export const defaultSeoTitle = 'DecksRXKC | Custom Decks & Screened-In Decks in Kansas City'
+export const defaultSeoTitle = 'Kansas City Deck Builder | Custom & Covered Decks | DecksRX KC'
 export const defaultSeoDescription =
   'DecksRXKC builds custom decks, screened-in decks, covered decks, stairs, railings, and outdoor living spaces for Kansas City homeowners.'
 export const defaultSeoImagePath = '/images/optimized/kansas-city-composite-covered-deck-railing-detail.jpg'
 export const defaultSeoImage = `${siteUrl}${defaultSeoImagePath}`
 
 type SeoHeadOptions = {
+  matches?: ReadonlyArray<{ globalNotFound?: boolean; status?: string }>
   title: string
   description: string
   path?: string
@@ -23,12 +24,14 @@ export function absoluteUrl(pathOrUrl: string) {
 }
 
 export function getSeoHead({
+  matches,
   title,
   description,
   path = '/',
   image = defaultSeoImage,
   type = 'website',
 }: SeoHeadOptions) {
+  if (matches?.some((match) => match.globalNotFound || match.status === 'notFound')) return getNotFoundHead()
   const canonicalUrl = absoluteUrl(path)
   const imageUrl = absoluteUrl(image)
 
@@ -54,4 +57,12 @@ export function getSeoHead({
       },
     ],
   }
+}
+
+export function getNotFoundHead() {
+  return { links: [], meta: [
+    { title: 'Page Not Found | DecksRX KC' },
+    { name: 'description', content: 'This page could not be found. Explore DecksRX KC deck services and planning guides.' },
+    { name: 'robots', content: 'noindex, follow' },
+  ] }
 }

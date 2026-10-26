@@ -131,9 +131,9 @@ export function Hero() {
       <div className="shell relative flex flex-1 flex-col justify-end pt-28 pb-5 lg:pb-7">
         <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,25rem)] lg:items-end lg:gap-12">
           <h1 className="hero-lines hero-title">
-            <span className="line-mask" style={{ ['--i' as string]: 0 }}><span>Custom Decks</span></span>
-            <span className="line-mask" style={{ ['--i' as string]: 1 }}><span><em className="pr-[0.06em] text-soft-beige">built for</em> Kansas</span></span>
-            <span className="line-mask" style={{ ['--i' as string]: 2 }}><span>City Homes</span></span>
+            <span className="line-mask" style={{ ['--i' as string]: 0 }}><span>Kansas City</span></span>
+            <span className="line-mask" style={{ ['--i' as string]: 1 }}><span><em className="pr-[0.06em] text-soft-beige">Deck Builder</em></span></span>
+            <span className="line-mask" style={{ ['--i' as string]: 2 }}><span>for Your Home</span></span>
           </h1>
           <div className="lg:pb-3">
             <p className="hero-fade text-[1.02rem] leading-7 text-bone/90" style={{ ['--i' as string]: 1 }}>

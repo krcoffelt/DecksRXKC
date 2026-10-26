@@ -21,8 +21,8 @@ const homepageDescription = defaultSeoDescription
 const homepageImage = defaultSeoImage
 
 export const Route = createFileRoute('/')({
-  head: () => {
-    const seo = getSeoHead({
+  head: ({ matches }) => {
+    const seo = getSeoHead({ matches,
       title: homepageTitle,
       description: homepageDescription,
       path: '/',

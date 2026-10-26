@@ -1,3 +1,4 @@
+import { CollectionSchema } from '../components/CollectionSchema'
 import { createFileRoute } from '@tanstack/react-router'
 import { ArrowUpRight } from 'lucide-react'
 import { SiteHeader } from '../components/SiteHeader'
@@ -12,7 +13,7 @@ const serviceAreasDescription =
   "Find DecksRXKC deck builders serving Overland Park, Lee's Summit, Shawnee, Olathe, Leawood, Kansas City, and nearby suburbs."
 
 export const Route = createFileRoute('/service-areas/')({
-  head: () => getSeoHead({
+  head: ({ matches }) => getSeoHead({ matches,
     title: serviceAreasTitle,
     description: serviceAreasDescription,
     path: '/service-areas',
@@ -24,6 +25,7 @@ export const Route = createFileRoute('/service-areas/')({
 function ServiceAreasIndex() {
   return (
     <main id="main" className="min-h-screen bg-bone text-ink">
+      <CollectionSchema name="DecksRX KC Service Areas" path="/service-areas" items={serviceAreas.map((area) => ({ name: getServiceAreaLabel(area), path: getServiceAreaPath(area) }))} />
       <SiteHeader />
       <PageHero
         title={<>Deck builders serving <em className="text-soft-beige">both sides</em> of Kansas City</>}

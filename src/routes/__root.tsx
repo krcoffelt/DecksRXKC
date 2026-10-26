@@ -7,15 +7,17 @@ import {
   createRootRoute,
   useLocation,
 } from '@tanstack/react-router'
-import { defaultSeoDescription, defaultSeoImagePath, defaultSeoTitle, getSeoHead } from '../lib/seo'
+import { defaultSeoDescription, defaultSeoImagePath, defaultSeoTitle, getNotFoundHead, getSeoHead } from '../lib/seo'
 import { gaMeasurementId, googleAdsId, googleTagId } from '../lib/analytics'
 import { MotionController } from '../components/motion'
 import { captureVisit } from '../lib/attribution'
+import { SiteHeader } from '../components/SiteHeader'
+import { SiteFooter } from '../components/SiteFooter'
 import '../styles.css'
 
 export const Route = createRootRoute({
-  head: () => {
-    const seo = getSeoHead({
+  head: ({ match, matches }) => {
+    const seo = match.globalNotFound || match.status === 'notFound' ? getNotFoundHead() : getSeoHead({ matches,
       title: defaultSeoTitle,
       description: defaultSeoDescription,
       path: '/',
@@ -39,6 +41,7 @@ export const Route = createRootRoute({
     }
   },
   component: RootComponent,
+  notFoundComponent: NotFoundPage,
 })
 
 function RootComponent() {
@@ -77,4 +80,18 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </body>
     </html>
   )
+}
+
+function NotFoundPage() {
+  return <main id="main" className="min-h-screen bg-bone text-ink" data-header-tone="light">
+    <SiteHeader />
+    <section className="shell py-28">
+      <p className="eyebrow">404</p>
+      <h1 className="display-md mt-6">Page not found</h1>
+      <p className="lede mt-6">This page may have moved. Explore our deck services or return to the homepage.</p>
+      <a href="/" className="link-line mt-8 inline-block">Return to DecksRX KC</a>
+      <a href="/services" className="link-line mt-8 ml-8 inline-block">Explore deck services</a>
+    </section>
+    <SiteFooter />
+  </main>
 }

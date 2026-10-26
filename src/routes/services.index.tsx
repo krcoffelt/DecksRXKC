@@ -32,7 +32,7 @@ const servicesDescription =
   'Explore DecksRXKC services for custom decks, screened-in decks, covered decks, composite decks, deck repair, and deck replacement.'
 
 export const Route = createFileRoute('/services/')({
-  head: () => getSeoHead({
+  head: ({ matches }) => getSeoHead({ matches,
     title: servicesTitle,
     description: servicesDescription,
     path: '/services',

@@ -7,7 +7,7 @@ import { business } from '../data/business'
 import { getProjectPage, projectPages, type ProjectPage } from '../data/projects'
 import { getServicePage } from '../data/servicePages'
 import { getProjectPagePath, getServicePagePath } from '../data/paths'
-import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
+import { absoluteUrl, getNotFoundHead, getSeoHead, siteUrl } from '../lib/seo'
 import { getResponsiveImageProps } from '../lib/images'
 
 export const Route = createFileRoute('/projects/$slug')({
@@ -16,9 +16,10 @@ export const Route = createFileRoute('/projects/$slug')({
     if (!project) throw notFound()
     return project
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, matches }) => {
+    if (!loaderData) return getNotFoundHead()
     const project = loaderData as ProjectPage
-    return getSeoHead({ title: project.metaTitle, description: project.metaDescription, path: getProjectPagePath(project), image: project.heroImage })
+    return getSeoHead({ matches, title: project.metaTitle, description: project.metaDescription, path: getProjectPagePath(project), image: project.heroImage })
   },
   component: ProjectDetailPage,
 })

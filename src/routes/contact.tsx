@@ -9,7 +9,7 @@ import { trackEvent } from '../lib/analytics'
 import { absoluteUrl, getSeoHead, siteUrl } from '../lib/seo'
 
 export const Route = createFileRoute('/contact')({
-  head: () => getSeoHead({ title: 'Request a Free Deck Quote | DecksRXKC', description: 'Tell DecksRXKC about your Kansas City deck build, repair, replacement, stairs, railings, covered deck, or screened-in project.', path: '/contact' }),
+  head: ({ matches }) => getSeoHead({ matches, title: 'Request a Free Deck Quote | DecksRXKC', description: 'Tell DecksRXKC about your Kansas City deck build, repair, replacement, stairs, railings, covered deck, or screened-in project.', path: '/contact' }),
   component: ContactPage,
 })
 

@@ -2,7 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { useRef, useState } from 'react'
 import type { PointerEvent } from 'react'
 import { featuredServicePages, getServicePagePath, servicePages } from '../../data/servicePages'
-import { getResponsiveImageProps } from '../../lib/images'
+import { getImageDescription, getResponsiveImageProps } from '../../lib/images'
 import { ButtonLink, SectionIntro } from '../ui'
 
 const cardTones = [
@@ -58,11 +58,11 @@ export function ServicesOverview() {
                   </ButtonLink>
                 </div>
               </div>
-              <a href={getServicePagePath(service)} className="frame relative order-first min-h-[18rem] lg:order-none lg:min-h-full" data-cursor="View" tabIndex={-1} aria-hidden="true">
+              <a href={getServicePagePath(service)} className="frame relative order-first min-h-[18rem] lg:order-none lg:min-h-full" data-cursor="View" tabIndex={-1}>
                 <img
                   className="absolute inset-0 h-full w-full object-cover"
                   {...getResponsiveImageProps(service.image, '(min-width: 1024px) 50vw, 100vw')}
-                  alt=""
+                  alt={getImageDescription(service.image)}
                   width="1200"
                   height="1000"
                   loading="lazy"

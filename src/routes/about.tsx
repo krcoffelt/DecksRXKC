@@ -16,7 +16,7 @@ const featuredServices = servicePages.filter((service) => ['custom-decks', 'deck
 const featuredAreas = serviceAreas.filter((area) => ['kansas-city-mo', 'leawood-ks', 'raymore-mo'].includes(area.slug))
 
 export const Route = createFileRoute('/about')({
-  head: () => getSeoHead({
+  head: ({ matches }) => getSeoHead({ matches,
     title: 'About DecksRXKC | Kansas City Deck Craft & Process',
     description: aboutDescription,
     path: '/about',

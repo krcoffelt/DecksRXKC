@@ -20,7 +20,7 @@ const browseServices = ['composite-decks', 'screened-in-decks', 'covered-decks',
   })
 
 export const Route = createFileRoute('/projects/')({
-  head: () => getSeoHead({
+  head: ({ matches }) => getSeoHead({ matches,
     title: 'Kansas City Deck Projects | DecksRXKC',
     description: projectsDescription,
     path: '/projects',

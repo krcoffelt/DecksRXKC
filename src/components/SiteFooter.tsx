@@ -55,6 +55,9 @@ export function SiteFooter() {
               {business.phoneDisplay}
               <ArrowUpRight className="h-6 w-6 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" />
             </a>
+            <a className="link-line mt-5 inline-block break-all py-2 text-base text-bone/80 transition-colors hover:text-soft-beige" href={`mailto:${business.email}`}>
+              {business.email}
+            </a>
             <p className="mono mt-5 text-[0.7rem] uppercase leading-6 tracking-[0.12em] text-bone/60">
               Mon – Sat · 8 AM – 5 PM
               <br />

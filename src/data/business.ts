@@ -9,6 +9,7 @@ export const business = {
   entityId: 'https://decksrxkc.com/#business',
   phone: '+19132056531',
   phoneDisplay: '(913) 205-6531',
+  email: 'charlie@decksrxkc.com',
   region: 'Kansas City metropolitan area',
   logo: 'https://decksrxkc.com/images/decksrxkc-full-logo-transparent.png',
   googleMapsUrl: `https://www.google.com/maps/search/?api=1&query=DecksRX%20KC&query_place_id=${googlePlaceId}`,
@@ -27,6 +28,7 @@ export function getBusinessSchema() {
     alternateName: business.name,
     url: business.url,
     telephone: business.phone,
+    email: business.email,
     description: business.description,
     image: `${business.url}/images/optimized/kansas-city-composite-covered-deck-railing-detail.jpg`,
     logo: {
@@ -46,6 +48,7 @@ export function getBusinessSchema() {
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: business.phone,
+      email: business.email,
       contactType: 'customer service',
       areaServed: ['US-KS', 'US-MO'],
       availableLanguage: 'English',

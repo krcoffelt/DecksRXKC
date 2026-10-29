@@ -38,6 +38,10 @@ export function ContactSection() {
               <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/60">Hours</dt>
               <dd className="mt-2 text-bone/80">Mon – Sat, 8 AM – 5 PM</dd>
             </div>
+            <div className="col-span-2 border-t hairline-light py-5">
+              <dt className="mono text-[0.66rem] uppercase tracking-[0.14em] text-bone/60">Email</dt>
+              <dd className="mt-2"><a className="link-line inline-block break-all py-1.5 text-lg" href={`mailto:${business.email}`}>{business.email}</a></dd>
+            </div>
           </dl>
         </div>
         <div className="border border-bone/10 bg-bone/[0.025] p-6 sm:p-10 lg:p-12">

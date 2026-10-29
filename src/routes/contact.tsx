@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
+import { ArrowUpRight, Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { LeadForm } from '../components/LeadForm'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
@@ -30,6 +30,10 @@ function ContactPage() {
             <a className="group flex items-center justify-between gap-4 border-b hairline-light py-6 transition-colors hover:text-soft-beige" href={`tel:${business.phone}`} onClick={() => trackEvent('click_to_call', { page_path: '/contact' })}>
               <span className="flex items-center gap-4"><Phone className="h-5 w-5 text-soft-beige" aria-hidden="true" /><span className="font-display text-3xl tracking-[-0.02em]">{business.phoneDisplay}</span></span>
               <ArrowUpRight className="h-5 w-5 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" />
+            </a>
+            <a className="group flex items-center justify-between gap-4 border-b hairline-light py-6 transition-colors hover:text-soft-beige" href={`mailto:${business.email}`}>
+              <span className="flex min-w-0 items-center gap-4"><Mail className="h-5 w-5 shrink-0 text-soft-beige" aria-hidden="true" /><span className="break-all text-lg">{business.email}</span></span>
+              <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" />
             </a>
             <a className="group flex items-center justify-between gap-4 border-b hairline-light py-6 transition-colors hover:text-soft-beige" href={business.googleMapsUrl} target="_blank" rel="noreferrer">
               <span className="flex items-center gap-4"><MapPin className="h-5 w-5 text-soft-beige" aria-hidden="true" />View our Google profile and service area</span>
